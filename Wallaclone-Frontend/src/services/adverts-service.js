@@ -1,4 +1,4 @@
-import { client } from '../../api/client'
+import { client } from '../api/client.js'
 
 /*
 Servicio de comunicación con la API: funciones que interactúan con los endpoints del back
