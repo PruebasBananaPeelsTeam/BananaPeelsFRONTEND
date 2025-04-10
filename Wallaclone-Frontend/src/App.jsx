@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router'
-import Example from './components/example'
 import AdvertsPage from './pages/adverts/advertsPage'
+import RegisterPage from './pages/auth/registerPage'
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Example />} />
       <Route path="/adverts" element={<AdvertsPage />} />
+      <Route path="/register" element={<RegisterPage />} />
     </Routes>
   )
 }
