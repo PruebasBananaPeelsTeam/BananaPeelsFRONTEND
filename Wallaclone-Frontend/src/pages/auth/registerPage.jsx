@@ -2,7 +2,7 @@ import { register } from '../../services/auth-service'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FormField from '../../components/shared/formField'
-import { isApiClientError } from '../../api/client'
+
 
 function RegisterPage() {
   const [email, setEmail] = useState('')
