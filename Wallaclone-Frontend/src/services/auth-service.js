@@ -11,3 +11,9 @@ export const login = async (credentials, rememberMe) => {
 
   setAuthorizationHeader(accessToken)
 }
+
+export const register = async (userData) => {
+  const response = await client.post('/api/register', userData)
+  const { message, user } = response.data
+  return { message, user }
+}
