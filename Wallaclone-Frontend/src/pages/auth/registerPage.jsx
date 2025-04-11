@@ -2,6 +2,7 @@ import { register } from '../../services/auth-service'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FormField from '../../components/shared/formField'
+import Button from '../../components/shared/button'
 
 function RegisterPage() {
   const [email, setEmail] = useState('')
@@ -81,13 +82,13 @@ function RegisterPage() {
           />
         </div>
 
-        <button
+        <Button
           type="submit"
           disabled={isLoading || !email || !password || !username}
-          className="w-full bg-[rgb(223,184,13)] text-white font-semibold py-2 rounded-xl hover:bg-yellow-600 transition disabled:opacity-50"
+          
         >
           {isLoading ? 'Registrando...' : 'Registrar'}
-        </button>
+        </Button>
       </form>
     </div>
   )

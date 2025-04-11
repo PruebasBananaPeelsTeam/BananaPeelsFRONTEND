@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import Button from '../shared/button'
 
 export default function Header() {
   return (
@@ -29,10 +30,10 @@ export default function Header() {
           </NavLink>
         </div>
 
-        {/* Botón provisional */}
-        <button className="bg-[rgb(223,184,13)] text-white py-2 px-4 rounded-lg font-semibold hover:bg-yellow-600 transition">
+        
+        <Button >
           Log In
-        </button>
+        </Button>
       </nav>
     </header>
   )
