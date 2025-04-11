@@ -1,11 +1,18 @@
-import { Routes, Route } from 'react-router'
-import AdvertsPage from './pages/adverts/advertsPage'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import RegisterPage from './pages/auth/registerPage'
+import Layout from './components/layout/layout'
 
 function App() {
   return (
     <Routes>
-      <Route path="/adverts" element={<AdvertsPage />} />
+      <Route
+        path="/"
+        element={
+          <Layout>
+            <Outlet />
+          </Layout>
+        }
+      ></Route>
       <Route path="/register" element={<RegisterPage />} />
     </Routes>
   )
