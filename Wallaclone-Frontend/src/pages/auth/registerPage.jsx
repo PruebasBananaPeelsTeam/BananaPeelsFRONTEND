@@ -2,7 +2,7 @@ import { register } from '../../services/auth-service'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FormField from '../../components/shared/formField'
-
+import Button from '../../components/shared/button'
 
 function RegisterPage() {
   const [email, setEmail] = useState('')
@@ -47,42 +47,50 @@ function RegisterPage() {
   }
 
   return (
-    <>
-      <h1>Register</h1>
+    <div className="min-h-screen flex items-center justify-center bg-[rgb(245,245,220)]">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md space-y-6"
+      >
+        <h1 className="text-center text-2xl font-bold text-[rgb(223,184,13)] font-serif">
+          Register
+        </h1>
 
-      <form onSubmit={handleSubmit}>
-        <FormField
-          label="Email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
+        <div className="space-y-4">
+          <FormField
+            label="Email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
 
-        <FormField
-          label="Password"
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
+          <FormField
+            label="Password"
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
 
-        <FormField
-          label="Username"
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
+          <FormField
+            label="Username"
+            type="text"
+            name="username"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
 
-        <button
+        <Button
           type="submit"
           disabled={isLoading || !email || !password || !username}
+          
         >
           {isLoading ? 'Registrando...' : 'Registrar'}
-        </button>
+        </Button>
       </form>
-    </>
+    </div>
   )
 }
 
