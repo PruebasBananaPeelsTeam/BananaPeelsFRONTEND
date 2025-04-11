@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getAdvertList } from '../../services/adverts-service.js'
 import Advert from './Advert.jsx'
+import Layout from '../../components/layout/layout.jsx'
 
 function AdvertsPage() {
   const [adverts, setAdverts] = useState([])
@@ -27,14 +28,15 @@ function AdvertsPage() {
   }
   const { results } = adverts
   return (
-    
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
-      {results.length > 0 ? (
-        results.map((advert) => <Advert key={advert._id} advert={advert} />)
-      ) : (
-        <p>No adverts available</p>
-      )}
-    </div>
+    <Layout>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
+        {results.length > 0 ? (
+          results.map((advert) => <Advert key={advert._id} advert={advert} />)
+        ) : (
+          <p>No adverts available</p>
+        )}
+      </div>
+    </Layout>
   )
 }
 

@@ -6,6 +6,7 @@ export default function Header() {
     <header className="bg-white shadow-md">
       <nav className="flex items-center justify-between py-4 px-6">
         <div className="flex space-x-6">
+          <h1>BananaPeels</h1>
           <NavLink
             to="/adverts/new"
             className={({ isActive }) =>

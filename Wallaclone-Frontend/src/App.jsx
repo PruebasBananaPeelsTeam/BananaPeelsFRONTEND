@@ -1,4 +1,5 @@
 import { Routes, Route, Outlet } from 'react-router-dom'
+import AdvertsPage from './pages/adverts/AdvertsPage'
 import RegisterPage from './pages/auth/registerPage'
 import Layout from './components/layout/layout'
 
@@ -13,6 +14,7 @@ function App() {
           </Layout>
         }
       ></Route>
+      <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
     </Routes>
   )
