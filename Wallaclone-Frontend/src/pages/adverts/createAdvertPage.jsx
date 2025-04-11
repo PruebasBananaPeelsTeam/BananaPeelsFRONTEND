@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createAdvert } from '../../services/adverts-service.js';
-import FormField from '../../components/shared/formField.jsx';
-import Button from '../../components/shared/button.jsx';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { createAdvert } from '../../services/adverts-service.js'
+import FormField from '../../components/shared/formField.jsx'
+import Button from '../../components/shared/button.jsx'
 
 const CreateAdvertPage = () => {
   const [formData, setFormData] = useState({
@@ -11,27 +11,27 @@ const CreateAdvertPage = () => {
     price: '',
     type: 'sell',
     image: null,
-  });
+  })
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value, files } = e.target
     if (files) {
-      setFormData((prev) => ({ ...prev, [name]: files[0] }));
+      setFormData((prev) => ({ ...prev, [name]: files[0] }))
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({ ...prev, [name]: value }))
     }
-  };
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(false);
+    e.preventDefault()
+    setError(null)
+    setSuccess(false)
 
     // Validación básica
     if (
@@ -40,41 +40,49 @@ const CreateAdvertPage = () => {
       Number(formData.price) <= 0 ||
       !formData.image
     ) {
-      setError('Por favor, rellena todos los campos correctamente.');
-      return;
+      setError('Por favor, rellena todos los campos correctamente.')
+      return
     }
 
-    const dataToSend = new FormData();
+    const dataToSend = new FormData()
     for (const key in formData) {
-      dataToSend.append(key, formData[key]);
+      dataToSend.append(key, formData[key])
     }
 
     try {
-      setLoading(true);
-      await createAdvert(dataToSend);
-      setSuccess(true);
+      setLoading(true)
+      await createAdvert(dataToSend)
+      setSuccess(true)
       setFormData({
         name: '',
         description: '',
         price: '',
         type: 'sell',
         image: null,
-      });
+      })
       // navigate('/adverts'); // descomentar cuando hagamos merge
     } catch (err) {
-      console.error(err);
-      setError('Error creando el anuncio. Inténtalo de nuevo.');
+      console.error(err)
+      setError('Error creando el anuncio. Inténtalo de nuevo.')
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-      <h2 className="text-2xl font-bold mb-4 text-center">Crear nuevo anuncio</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        Crear nuevo anuncio
+      </h2>
       {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
-      {success && <p className="text-green-600 text-sm mb-3">¡Anuncio creado con éxito!</p>}
-      {loading && <p className="text-blue-600 text-sm mb-3">Enviando anuncio...</p>}
+      {success && (
+        <p className="text-green-600 text-sm mb-3">
+          ¡Anuncio creado con éxito!
+        </p>
+      )}
+      {loading && (
+        <p className="text-blue-600 text-sm mb-3">Enviando anuncio...</p>
+      )}
       <form onSubmit={handleSubmit} className="space-y-4">
         <FormField
           label="Nombre del producto"
@@ -132,7 +140,7 @@ const CreateAdvertPage = () => {
         </Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default CreateAdvertPage;
+export default CreateAdvertPage
