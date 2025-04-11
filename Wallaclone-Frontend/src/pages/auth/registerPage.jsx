@@ -47,43 +47,52 @@ function RegisterPage() {
   }
 
   return (
-    <>
-      <h1>Register</h1>
+    <div className="min-h-screen flex items-center justify-center bg-[rgb(245,245,220)]">
+      <form 
+        onSubmit={handleSubmit}
+        className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md space-y-6"
+      >
+        <h1 className="text-center text-2xl font-bold text-[rgb(223,184,13)] font-serif">
+          Register
+        </h1>
 
-      <form onSubmit={handleSubmit}>
-        <FormField
-          label="Email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-
-        <FormField
-          label="Password"
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        <FormField
-          label="Username"
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-
+        <div className="space-y-4">
+          <FormField
+            label="Email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+    
+          <FormField
+            label="Password"
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+    
+          <FormField
+            label="Username"
+            type="text"
+            name="username"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+  
         <button
           type="submit"
           disabled={isLoading || !email || !password || !username}
+          className="w-full bg-[rgb(223,184,13)] text-white font-semibold py-2 rounded-xl hover:bg-yellow-600 transition disabled:opacity-50"
         >
           {isLoading ? 'Registrando...' : 'Registrar'}
         </button>
       </form>
-    </>
+    </div>
   )
 }
+
 
 export default RegisterPage
