@@ -1,10 +1,9 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
 export default function Header() {
   return (
     <header className="bg-white shadow-md">
       <nav className="flex items-center justify-between py-4 px-6">
-       
         <div className="flex space-x-6">
           <NavLink
             to="/adverts/new"
@@ -36,5 +35,5 @@ export default function Header() {
         </button>
       </nav>
     </header>
-  );
+  )
 }

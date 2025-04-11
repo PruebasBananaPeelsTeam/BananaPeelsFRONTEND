@@ -1,5 +1,5 @@
-import Header from './header';
-import Footer from './footer';
+import Header from './header'
+import Footer from './footer'
 
 export default function Layout({ children }) {
   return (
@@ -8,5 +8,5 @@ export default function Layout({ children }) {
       <main className="flex-1 bg-[rgb(245,245,220)] py-8">{children}</main>
       <Footer />
     </div>
-  );
+  )
 }

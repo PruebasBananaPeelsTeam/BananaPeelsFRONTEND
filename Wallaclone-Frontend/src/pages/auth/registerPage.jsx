@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FormField from '../../components/shared/formField'
 
-
 function RegisterPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -48,7 +47,7 @@ function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[rgb(245,245,220)]">
-      <form 
+      <form
         onSubmit={handleSubmit}
         className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md space-y-6"
       >
@@ -64,7 +63,7 @@ function RegisterPage() {
             value={email}
             onChange={handleEmailChange}
           />
-    
+
           <FormField
             label="Password"
             type="password"
@@ -72,7 +71,7 @@ function RegisterPage() {
             value={password}
             onChange={handlePasswordChange}
           />
-    
+
           <FormField
             label="Username"
             type="text"
@@ -81,7 +80,7 @@ function RegisterPage() {
             onChange={handleUsernameChange}
           />
         </div>
-  
+
         <button
           type="submit"
           disabled={isLoading || !email || !password || !username}
@@ -93,6 +92,5 @@ function RegisterPage() {
     </div>
   )
 }
-
 
 export default RegisterPage
