@@ -26,7 +26,7 @@ function LoginPage() {
       })
       console.log(`input´s value are ${email} - ${password}`)
       localStorage.setItem('accessToken', userData.accessToken)
-      navigate('/adverts')
+      navigate('/')
     } catch (error) {
       console.error('Login failed', error)
     }
