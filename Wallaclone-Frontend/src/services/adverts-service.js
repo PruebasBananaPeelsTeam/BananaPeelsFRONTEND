@@ -21,10 +21,7 @@ export const createAdvert = async (advert) => {
 }
 
 export const getTags = async () => {
-  const response = await client.get('/api/tags')
-  if (!response.ok) {
-    throw new Error ('Error fetching tags')
-  }
-  const data = await response.json()
-  return data.results || data
-}
+  const response = await client.get('/api/tags');
+  return response.data.results || response.data;
+};
+

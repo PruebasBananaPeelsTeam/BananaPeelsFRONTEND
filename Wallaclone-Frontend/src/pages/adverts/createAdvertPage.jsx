@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createAdvert } from '../../services/adverts-service.js'
+import { createAdvert, getTags } from '../../services/adverts-service.js'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 
@@ -11,17 +11,33 @@ const CreateAdvertPage = () => {
     price: '',
     type: 'sell',
     image: null,
+    tags: [],
   })
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(false)
   const [imagePreview, setImagePreview] = useState(null) //previsualizar imagen antes de subirla
+  const [tagsList, setTagsList] = useState([]); 
+
 
   // Validaciones individuales por campo
   const [errors, setErrors] = useState({})
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const tags = await getTags()
+        console.log('tags recibidos', tags)
+        setTagsList(tags)
+      } catch (err) {
+        console.error('Error fetching tags:', err)
+      }
+    }
+    fetchTags()
+  }, [])
 
   const handleChange = (e) => {
     const { name, value, files } = e.target
@@ -76,6 +92,7 @@ const CreateAdvertPage = () => {
         price: '',
         type: 'sell',
         image: null,
+        tags: [],
       })
 
       // Redirección pendiente de merge
@@ -149,6 +166,30 @@ const CreateAdvertPage = () => {
               <option value="wanted">Se busca</option>
             </select>
           </label>
+        </div>
+        <div className="flex flex-col w-full">
+          <p className="text-sm font-medium text-gray-700 mb-2">Categorías</p>
+          <div className="flex flex-wrap gap-4">
+            {tagsList.map((tag) => (
+              <label key={tag} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  name="tags"
+                  value={tag}
+                  checked={formData.tags?.includes(tag)}
+                  onChange={(e) => {
+                    const checked = e.target.checked
+                    setFormData((prev) => {
+                      const tags = new Set(prev.tags || [])
+                      checked ? tags.add(tag) : tags.delete(tag)
+                      return { ...prev, tags: [...tags] }
+                    })
+                  }}
+                />
+                <span className="capitalize">{tag}</span>
+              </label>
+            ))}
+          </div>
         </div>
 
         <div className="flex flex-col w-full">
