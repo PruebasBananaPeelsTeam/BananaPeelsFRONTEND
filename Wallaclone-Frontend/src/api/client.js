@@ -26,19 +26,22 @@ client.interceptors.response.use(undefined, (error) => {
         error.response.data?.message ??
         error.response.statusText ??
         clientError.message
+        console.log("client error", clientError.message)
 
       const errorCode = error.code
       const errorStatus = error.response.status
-
       if (errorCode === 'ERR_NETWORK') {
         clientError.code = 'NETWORK_ERROR'
       }
+      console.log("status code", errorStatus)
 
       if (typeof errorStatus === 'number') {
         if (errorStatus === 401) {
           clientError.code = 'UNAUTHORIZED'
         } else if (errorStatus === 404) {
           clientError.code = 'NOT_FOUND'
+        }else if (errorStatus === 429) {
+          clientError.code = 'EASY! You are too quick!'
         } else if (errorStatus >= 500) {
           clientError.code = 'SERVER_ERROR'
         }

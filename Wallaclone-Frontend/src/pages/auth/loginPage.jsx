@@ -45,7 +45,7 @@ function LoginPage() {
       if (isApiClientError(error)) {
         setError(error)
       }
-      console.error('Login failed', error)
+      console.error(error)
     }
   }
   return (
