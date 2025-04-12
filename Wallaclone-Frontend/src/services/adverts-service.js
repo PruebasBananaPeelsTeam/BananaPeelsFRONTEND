@@ -7,10 +7,15 @@ Servicio de comunicación con la API: funciones que interactúan con los endpoin
 //URL del endpoint
 const advertsUrl = '/api/adverts'
 
-export const getAdvertList = async () => {
-  const response = await client.get(advertsUrl)
-  return response.data
-}
+export const getAdvertList = async (page = 1, limit = 10) => {
+  const response = await client.get(advertsUrl, {
+    params: {
+      page,
+      limit,
+    },
+  });
+  return response.data;
+};
 
 export const createAdvert = async (advert) => {
   const response = await client.post(advertsUrl, advert, {
