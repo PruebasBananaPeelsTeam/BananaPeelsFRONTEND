@@ -1,41 +1,15 @@
-import { NavLink } from 'react-router-dom'
-import Button from '../shared/button'
+import Burger from '../shared/burguer.jsx'
 
 export default function Header() {
+  
   return (
-    <header className="bg-white shadow-md">
-      <nav className="flex items-center justify-between py-4 px-6">
-        <div className="flex space-x-6">
-          <h1>BananaPeels</h1>
-          <NavLink
-            to="/adverts/new"
-            className={({ isActive }) =>
-              isActive
-                ? 'text-[rgb(223,184,13)] font-semibold'
-                : 'text-gray-700 hover:text-[rgb(223,184,13)]'
-            }
-          >
-            New Advert
-          </NavLink>
-
-          <NavLink
-            to="/adverts"
-            className={({ isActive }) =>
-              isActive
-                ? 'text-[rgb(223,184,13)] font-semibold'
-                : 'text-gray-700 hover:text-[rgb(223,184,13)]'
-            }
-            end
-          >
-            Adverts List
-          </NavLink>
+    <header className="bg-gradient-to-l from-yellow-600 via-orange-500 to-red-800 p-4">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <div className="text-[20px] font-extrabold bg-gradient-to-r from-yellow-400 via-green-400 to-orange-400 text-transparent bg-clip-text drop-shadow-2xl">
+          <p>BananaPeels</p>
         </div>
-
-        
-        <Button >
-          Log In
-        </Button>
-      </nav>
+        <Burger />
+      </div>
     </header>
   )
 }
