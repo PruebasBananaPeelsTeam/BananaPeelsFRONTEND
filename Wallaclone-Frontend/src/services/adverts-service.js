@@ -21,7 +21,6 @@ export const createAdvert = async (advert) => {
 }
 
 export const getTags = async () => {
-  const response = await client.get('/api/tags');
-  return response.data.results || response.data;
-};
-
+  const response = await client.get('/api/tags')
+  return response.data.results || response.data
+}

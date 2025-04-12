@@ -17,11 +17,8 @@ const CreateAdvertPage = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(false)
-  const [imagePreview, setImagePreview] = useState(null) //previsualizar imagen antes de subirla
-  const [tagsList, setTagsList] = useState([]); 
-
-
-  // Validaciones individuales por campo
+  const [imagePreview, setImagePreview] = useState(null)
+  const [tagsList, setTagsList] = useState([])
   const [errors, setErrors] = useState({})
 
   const navigate = useNavigate()
@@ -50,16 +47,13 @@ const CreateAdvertPage = () => {
     }
   }
 
-  // Validación completa del formulario
   const validateForm = () => {
     const newErrors = {}
 
     if (!formData.name.trim()) newErrors.name = 'El nombre es obligatorio.'
-    if (!formData.description.trim())
-      newErrors.description = 'La descripción es obligatoria.'
-    if (!formData.price || Number(formData.price) <= 0)
-      newErrors.price = 'El precio debe ser mayor que 0.'
-    /*if (!formData.image) newErrors.image = 'Debes subir una imagen.' opcional validacion de imagen */
+    if (!formData.description.trim()) newErrors.description = 'La descripción es obligatoria.'
+    if (!formData.price || Number(formData.price) <= 0) newErrors.price = 'El precio debe ser mayor que 0.'
+    if (formData.tags.length === 0) newErrors.tags = 'Debes seleccionar al menos una categoría.'
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -85,7 +79,6 @@ const CreateAdvertPage = () => {
       await createAdvert(dataToSend)
       setSuccess(true)
 
-      // Reinicia el formulario tras éxito
       setFormData({
         name: '',
         description: '',
@@ -94,8 +87,7 @@ const CreateAdvertPage = () => {
         image: null,
         tags: [],
       })
-
-      // Redirección pendiente de merge
+      setImagePreview(null)
       // navigate('/adverts')
     } catch (err) {
       console.error(err)
@@ -107,51 +99,18 @@ const CreateAdvertPage = () => {
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        Crear nuevo anuncio
-      </h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Crear nuevo anuncio</h2>
 
-      {/* Feedback al usuario */}
       {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
-      {success && (
-        <p className="text-green-600 text-sm mb-3">
-          ¡Anuncio creado con éxito!
-        </p>
-      )}
-      {loading && (
-        <p className="text-blue-600 text-sm mb-3">Enviando anuncio...</p>
-      )}
+      {success && <p className="text-green-600 text-sm mb-3">¡Anuncio creado con éxito!</p>}
+      {loading && <p className="text-blue-600 text-sm mb-3">Enviando anuncio...</p>}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <FormField
-          label="Nombre del producto"
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          error={errors.name}
-        />
+        <FormField label="Nombre del producto" type="text" name="name" value={formData.name} onChange={handleChange} required error={errors.name} />
 
-        <FormField
-          label="Descripción"
-          type="text"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-          error={errors.description}
-        />
+        <FormField label="Descripción" type="text" name="description" value={formData.description} onChange={handleChange} required error={errors.description} />
 
-        <FormField
-          label="Precio (€)"
-          type="number"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-          error={errors.price}
-        />
+        <FormField label="Precio (€)" type="number" name="price" value={formData.price} onChange={handleChange} required error={errors.price} />
 
         <div className="flex flex-col w-full">
           <label className="text-sm font-medium text-gray-700 mb-2">
@@ -167,6 +126,7 @@ const CreateAdvertPage = () => {
             </select>
           </label>
         </div>
+
         <div className="flex flex-col w-full">
           <p className="text-sm font-medium text-gray-700 mb-2">Categorías</p>
           <div className="flex flex-wrap gap-4">
@@ -176,11 +136,11 @@ const CreateAdvertPage = () => {
                   type="checkbox"
                   name="tags"
                   value={tag}
-                  checked={formData.tags?.includes(tag)}
+                  checked={formData.tags.includes(tag)}
                   onChange={(e) => {
                     const checked = e.target.checked
                     setFormData((prev) => {
-                      const tags = new Set(prev.tags || [])
+                      const tags = new Set(prev.tags)
                       checked ? tags.add(tag) : tags.delete(tag)
                       return { ...prev, tags: [...tags] }
                     })
@@ -190,6 +150,9 @@ const CreateAdvertPage = () => {
               </label>
             ))}
           </div>
+          {errors.tags && (
+            <p className="text-red-500 text-sm mt-1">{errors.tags}</p>
+          )}
         </div>
 
         <div className="flex flex-col w-full">
@@ -207,6 +170,7 @@ const CreateAdvertPage = () => {
             <p className="text-red-500 text-sm">{errors.image}</p>
           )}
         </div>
+
         {imagePreview && (
           <div className="mt-2">
             <p className="text-sm text-gray-500 mb-1">Vista previa:</p>
