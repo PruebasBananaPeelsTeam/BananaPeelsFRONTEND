@@ -5,7 +5,6 @@ import LoginPage from './pages/auth/loginPage.jsx'
 import RegisterPage from './pages/auth/resgisterPage.jsx'
 import AdvertsPage from './pages/adverts/advertsPage.jsx'
 
-
 function App() {
   return (
     <Routes>
@@ -15,7 +14,7 @@ function App() {
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/adverts/new" element={<CreateAdvertPage />} />
     </Routes>
-  );
+  )
 }
 
-export default App;
+export default App
