@@ -1,11 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { login } from '../../services/auth-service.js'
 import { useNavigate, Link } from 'react-router-dom'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import { isApiClientError } from '../../api/client'
 import '../../styles/formsErrorPopUp.css'
-
 
 function LoginPage() {
   const [email, setEmail] = useState('')
@@ -20,6 +19,16 @@ function LoginPage() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
+
+  // error Timer
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null)
+      }, 3500)
+      return () => clearTimeout(timer)
+    }
+  },null)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -69,9 +78,12 @@ function LoginPage() {
 
           {/* errors pop up */}
           {error && (
-            <div className='position: relative'>
-              <div className="forms-Errors-Pop-up" onClick={() => setError(null)}>
-              {error.message}
+            <div className="position: relative">
+              <div
+                className="forms-Errors-Pop-up"
+                onClick={() => setError(null)}
+              >
+                {error.message}
               </div>
             </div>
           )}
