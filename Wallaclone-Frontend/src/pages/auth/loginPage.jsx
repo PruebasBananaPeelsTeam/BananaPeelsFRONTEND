@@ -1,36 +1,33 @@
-import { useState } from 'react'
-import { login } from '../../services/auth-service.js'
-import { useNavigate, Link } from 'react-router-dom'
-import FormField from '../../components/shared/formField.jsx'
-import Button from '../../components/shared/button.jsx'
+import { useState } from 'react';
+import { login } from '../../services/auth-service.js';
+import { useNavigate, Link } from 'react-router-dom';
+import FormField from '../../components/shared/formField.jsx';
+import Button from '../../components/shared/button.jsx';
 
 function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
+    setEmail(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
+    setPassword(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     try {
-      const userData = await login({
-        email,
-        password,
-      })
-      console.log(`input´s value are ${email} - ${password}`)
-      localStorage.setItem('accessToken', userData.accessToken)
-      navigate('/adverts')
+      await login({ email, password }); // ✅ login ya guarda el token y configura axios
+      console.log(`input´s value are ${email} - ${password}`);
+      navigate('/adverts');
     } catch (error) {
-      console.error('Login failed', error)
+      console.error('Login failed', error);
     }
-  }
+  };
+
   return (
     <>
       <div className="flex items-center justify-center min-h-screen">
@@ -69,9 +66,7 @@ function LoginPage() {
           <p className="text-center">Welcome to Wallaclone</p>
           <p className="text-center">Please log in to access your .</p>
           <div className="flex items-center text-xs justify-around p-4">
-            <p className="flex items-center h-full">
-              don´t have an account yet?
-            </p>
+            <p className="flex items-center h-full">don´t have an account yet?</p>
             <Link
               className="text-yellow-500 bg-[radial-gradient(circle,_var(--tw-gradient-stops))] px-4 py-3  shadow-lg transition duration-300 ease-in-out hover:scale-105 hover:brightness-210 rounded-4xl p-1.5 flex items-center h-full"
               to={'/register'}
@@ -82,7 +77,7 @@ function LoginPage() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

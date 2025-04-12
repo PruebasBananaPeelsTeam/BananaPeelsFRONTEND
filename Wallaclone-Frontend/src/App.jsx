@@ -5,6 +5,7 @@ import LoginPage from './pages/auth/loginPage.jsx'
 import RegisterPage from './pages/auth/resgisterPage.jsx'
 import AdvertsPage from './pages/adverts/advertsPage.jsx'
 
+
 function App() {
   return (
     <Routes>
