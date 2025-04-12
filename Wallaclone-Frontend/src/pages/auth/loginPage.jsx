@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import { isApiClientError } from '../../api/client'
-import '../../styles/formsErrorPopUp.css'
+import FromErrorPopup from '../../components/shared/formErrorPopup.jsx'
 
 function LoginPage() {
   const [email, setEmail] = useState('')
@@ -25,10 +25,10 @@ function LoginPage() {
     if (error) {
       const timer = setTimeout(() => {
         setError(null)
-      }, 3500)
+      }, 4000)
       return () => clearTimeout(timer)
     }
-  },null)
+  },[error])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -77,16 +77,8 @@ function LoginPage() {
           </Button>
 
           {/* errors pop up */}
-          {error && (
-            <div className="position: relative">
-              <div
-                className="forms-Errors-Pop-up"
-                onClick={() => setError(null)}
-              >
-                {error.message}
-              </div>
-            </div>
-          )}
+          <FromErrorPopup error={error} onClose={() => setError(null)} />
+
         </form>
 
         {/* welcomming card */}
