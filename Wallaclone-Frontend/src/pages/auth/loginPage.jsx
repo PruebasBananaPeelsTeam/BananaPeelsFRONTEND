@@ -3,11 +3,15 @@ import { login } from '../../services/auth-service.js'
 import { useNavigate, Link } from 'react-router-dom'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
+import { isApiClientError } from '../../api/client'
+import '../../styles/formsErrorPopUp.css'
+
 
 function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  const [error, setError] = useState(null)
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
@@ -25,20 +29,21 @@ function LoginPage() {
         password,
       })
       console.log(`input´s value are ${email} - ${password}`)
+      // remember me ?
       localStorage.setItem('accessToken', userData.accessToken)
       navigate('/')
     } catch (error) {
+      if (isApiClientError(error)) {
+        setError(error)
+      }
       console.error('Login failed', error)
     }
   }
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-gradient-to-r from-yellow-800 to-orange-800 p-3 rounded-l-2xl space-y-4"
-        >
-          <h1 className="font-bold text-2xl text-center">Sign up !</h1>
+      <div className="flex items-center justify-center min-h-screen ">
+        <form onSubmit={handleSubmit} className="">
+          <h1 className="">Sign up !</h1>
 
           <FormField
             label="Email"
@@ -61,10 +66,19 @@ function LoginPage() {
           <Button type="submit" className="">
             LogIn
           </Button>
+
+          {/* errors pop up */}
+          {error && (
+            <div className='position: relative'>
+              <div className="forms-Errors-Pop-up" onClick={() => setError(null)}>
+              {error.message}
+              </div>
+            </div>
+          )}
         </form>
 
-        {/* Tarjeta de bienvenida */}
-        <div className="bg-gradient-to-r from-orange-800 to-yellow-800 p-3 rounded-r-4xl space-y-4 w-[200px] flex flex-col justify-center">
+        {/* welcomming card */}
+        <div className="">
           <h1 className="font-bold text-2xl text-center">HELLOOOO!</h1>
           <p className="text-center">Welcome to Wallaclone</p>
           <p className="text-center">Please log in to access your .</p>
