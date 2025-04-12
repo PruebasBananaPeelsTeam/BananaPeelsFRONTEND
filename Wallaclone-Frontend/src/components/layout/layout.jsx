@@ -2,6 +2,7 @@ import Header from './header'
 import Footer from './footer'
 import Banner from './banner'
 import Tag from './Tag'
+import AdvertsPage from '../../pages/adverts/AdvertsPage'
 
 export default function Layout({ children }) {
   return (

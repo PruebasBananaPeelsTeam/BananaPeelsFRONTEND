@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getAdvertList } from '../../services/adverts-service.js'
 import Advert from './Advert.jsx'
-import Layout from '../../components/layout/layout.jsx'
 import Button from '../../components/shared/button.jsx'
 
 function AdvertsPage() {
@@ -52,7 +51,7 @@ function AdvertsPage() {
   }
 
   return (
-    <Layout>
+    <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
         {results.length > 0 ? (
           results.map((advert) => <Advert key={advert._id} advert={advert} />)
@@ -77,7 +76,7 @@ function AdvertsPage() {
           Next
         </Button>
       </div>
-    </Layout>
+    </>
   )
 }
 

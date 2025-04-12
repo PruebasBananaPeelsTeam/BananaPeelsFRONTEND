@@ -32,7 +32,7 @@ export default function Burger() {
 
       {/* Menú en pantallas grandes */}
       <nav className="hidden md:flex gap-6">
-        <Link to="/adverts" className="text-white hover:text-yellow-300">Adverts</Link>
+        <Link to="/" className="text-white hover:text-yellow-300">Adverts</Link>
         <Link to="/login" className="text-white hover:text-yellow-300">Login</Link>
         <Link to="/register" className="text-white hover:text-yellow-300">Register</Link>
       </nav>
@@ -41,7 +41,7 @@ export default function Burger() {
       {isOpen && (
         <div className="md:hidden mt-1 flex justify-end">
           <nav className="flex flex-col items-end space-y-1">
-            <Link to="/adverts" onClick={closeMenu} className="text-white hover:text-yellow-300">Adverts</Link>
+            <Link to="/" onClick={closeMenu} className="text-white hover:text-yellow-300">Adverts</Link>
             <Link to="/login" onClick={closeMenu} className="text-white hover:text-yellow-300">Login</Link>
             <Link to="/register" onClick={closeMenu} className="text-white hover:text-yellow-300">Register</Link>
           </nav>

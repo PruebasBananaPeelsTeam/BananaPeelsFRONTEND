@@ -16,7 +16,9 @@ function App() {
             <Outlet />
           </Layout>
         }
-      ></Route>
+      >
+      <Route index element={<AdvertsPage />} />  
+      </Route>
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="*" element={<NotFoundPage />} />
