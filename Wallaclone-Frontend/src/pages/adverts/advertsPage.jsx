@@ -49,6 +49,7 @@ function AdvertsPage() {
       setCurrentPage(currentPage - 1)
     }
   }
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
@@ -61,13 +62,17 @@ function AdvertsPage() {
 
       {/* Paginación */}
       <div className="flex justify-center mt-4">
-        <Button onClick={goToPreviousPage} disabled={currentPage === 1}>
+        <Button
+          onClick={goToPreviousPage}
+          disabled={currentPage === 1}
+        >
           Previous
         </Button>
-        <span className="mx-4">
-          Page {currentPage} of {totalPages}
-        </span>
-        <Button onClick={goToNextPage} disabled={currentPage === totalPages}>
+        <span className="mx-4">Page {currentPage} of {totalPages}</span>
+        <Button
+          onClick={goToNextPage}
+          disabled={currentPage === totalPages}
+        >
           Next
         </Button>
       </div>
