@@ -28,7 +28,7 @@ function LoginPage() {
       }, 4000)
       return () => clearTimeout(timer)
     }
-  },[error])
+  }, [error])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -78,7 +78,6 @@ function LoginPage() {
 
           {/* errors pop up */}
           <FromErrorPopup error={error} onClose={() => setError(null)} />
-
         </form>
 
         {/* welcomming card */}

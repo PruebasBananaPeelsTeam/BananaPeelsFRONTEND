@@ -8,12 +8,12 @@ export const login = async (credentials) => {
     localStorage.setItem('auth', accessToken)
   }
 
-export const register = async (userData) => {
-  const response = await client.post('/api/register', userData)
-  const { message, user } = response.data
-  return { message, user }
+  setAuthorizationHeader(accessToken)
   return { accessToken }
 }
+
+localStorage.setItem('auth', tokenJWT)
+setAuthorizationHeader(tokenJWT)
 
 export const register = async (userData) => {
   const response = await client.post('/api/register', userData)

@@ -12,9 +12,9 @@ export const getAdvertList = async (page = 1, limit = 10) => {
       page,
       limit,
     },
-  });
-  return response.data;
-};
+  })
+  return response.data
+}
 
 export const createAdvert = async (advert) => {
   const response = await client.post(advertsUrl, advert, {

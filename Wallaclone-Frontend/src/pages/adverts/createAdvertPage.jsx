@@ -51,9 +51,12 @@ const CreateAdvertPage = () => {
     const newErrors = {}
 
     if (!formData.name.trim()) newErrors.name = 'El nombre es obligatorio.'
-    if (!formData.description.trim()) newErrors.description = 'La descripción es obligatoria.'
-    if (!formData.price || Number(formData.price) <= 0) newErrors.price = 'El precio debe ser mayor que 0.'
-    if (formData.tags.length === 0) newErrors.tags = 'Debes seleccionar al menos una categoría.'
+    if (!formData.description.trim())
+      newErrors.description = 'La descripción es obligatoria.'
+    if (!formData.price || Number(formData.price) <= 0)
+      newErrors.price = 'El precio debe ser mayor que 0.'
+    if (formData.tags.length === 0)
+      newErrors.tags = 'Debes seleccionar al menos una categoría.'
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -99,18 +102,50 @@ const CreateAdvertPage = () => {
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-      <h2 className="text-2xl font-bold mb-4 text-center">Crear nuevo anuncio</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        Crear nuevo anuncio
+      </h2>
 
       {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
-      {success && <p className="text-green-600 text-sm mb-3">¡Anuncio creado con éxito!</p>}
-      {loading && <p className="text-blue-600 text-sm mb-3">Enviando anuncio...</p>}
+      {success && (
+        <p className="text-green-600 text-sm mb-3">
+          ¡Anuncio creado con éxito!
+        </p>
+      )}
+      {loading && (
+        <p className="text-blue-600 text-sm mb-3">Enviando anuncio...</p>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <FormField label="Nombre del producto" type="text" name="name" value={formData.name} onChange={handleChange} required error={errors.name} />
+        <FormField
+          label="Nombre del producto"
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          error={errors.name}
+        />
 
-        <FormField label="Descripción" type="text" name="description" value={formData.description} onChange={handleChange} required error={errors.description} />
+        <FormField
+          label="Descripción"
+          type="text"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          required
+          error={errors.description}
+        />
 
-        <FormField label="Precio (€)" type="number" name="price" value={formData.price} onChange={handleChange} required error={errors.price} />
+        <FormField
+          label="Precio (€)"
+          type="number"
+          name="price"
+          value={formData.price}
+          onChange={handleChange}
+          required
+          error={errors.price}
+        />
 
         <div className="flex flex-col w-full">
           <label className="text-sm font-medium text-gray-700 mb-2">
