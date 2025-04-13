@@ -1,5 +1,4 @@
-import { client } from '../api/client.js'
-
+import { client } from '../api/client'
 /*
 Servicio de comunicación con la API: funciones que interactúan con los endpoints del back
 */
@@ -24,4 +23,9 @@ export const createAdvert = async (advert) => {
     },
   })
   return response.data
+}
+
+export const getTags = async () => {
+  const response = await client.get('/api/tags')
+  return response.data.results || response.data
 }

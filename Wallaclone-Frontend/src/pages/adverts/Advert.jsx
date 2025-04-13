@@ -38,4 +38,3 @@ const Advert = ({ advert }) => {
 }
 
 export default Advert
-
