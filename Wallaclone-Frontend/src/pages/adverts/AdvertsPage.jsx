@@ -62,17 +62,13 @@ function AdvertsPage() {
 
       {/* Paginación */}
       <div className="flex justify-center mt-4">
-        <Button
-          onClick={goToPreviousPage}
-          disabled={currentPage === 1}
-        >
+        <Button onClick={goToPreviousPage} disabled={currentPage === 1}>
           Previous
         </Button>
-        <span className="mx-4">Page {currentPage} of {totalPages}</span>
-        <Button
-          onClick={goToNextPage}
-          disabled={currentPage === totalPages}
-        >
+        <span className="mx-4">
+          Page {currentPage} of {totalPages}
+        </span>
+        <Button onClick={goToNextPage} disabled={currentPage === totalPages}>
           Next
         </Button>
       </div>

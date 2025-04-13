@@ -7,17 +7,12 @@ import { isApiClientError } from '../../api/client'
 import FromErrorPopup from '../../components/shared/formErrorPopup.jsx'
 
 function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [input, setInput] = useState({ email: '', password: '' })
   const navigate = useNavigate()
   const [error, setError] = useState(null)
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
+  const handleInputChange = (event) => {
+    setInput({ ...input, [event.target.name]: event.target.value })
   }
 
   // error Timer
@@ -28,16 +23,16 @@ function LoginPage() {
       }, 4000)
       return () => clearTimeout(timer)
     }
-  },[error])
+  }, [error])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
       const userData = await login({
-        email,
-        password,
+        email: input.email,
+        password: input.password,
       })
-      console.log(`input´s value are ${email} - ${password}`)
+      console.log(`input´s value are ${input.email} - ${input.password}`)
       // remember me ?
       localStorage.setItem('accessToken', userData.accessToken)
       navigate('/')
@@ -52,7 +47,7 @@ function LoginPage() {
     <>
       <div className="flex items-center justify-center min-h-screen ">
         <form onSubmit={handleSubmit} className="">
-          <h1 className="">Sign up !</h1>
+          <h1 className="font-bold text-3xl text-center">Sign up !</h1>
 
           <FormField
             label="Email"
@@ -60,8 +55,8 @@ function LoginPage() {
             id="email"
             name="email"
             required
-            value={email}
-            onChange={handleEmailChange}
+            value={input.email}
+            onChange={handleInputChange}
           />
           <FormField
             label="Password"
@@ -69,29 +64,32 @@ function LoginPage() {
             id="password"
             name="password"
             required
-            value={password}
-            onChange={handlePasswordChange}
+            value={input.password}
+            onChange={handleInputChange}
           />
-          <Button type="submit" className="">
-            LogIn
-          </Button>
+          <div className="flex items-center justify-around">
+            <Button type="submit" className="">
+              LogIn
+            </Button>
+          </div>
 
           {/* errors pop up */}
           <FromErrorPopup error={error} onClose={() => setError(null)} />
-
         </form>
 
         {/* welcomming card */}
-        <div className="">
-          <h1 className="font-bold text-2xl text-center">HELLOOOO!</h1>
-          <p className="text-center">Welcome to Wallaclone</p>
-          <p className="text-center">Please log in to access your .</p>
-          <div className="flex items-center text-xs justify-around p-4">
-            <p className="flex items-center h-full">
-              don´t have an account yet?
+        <div className="m-5">
+          <h2 className="font-bold text-2xl text-center">Hi!</h2>
+          <p className="text-center mt-2">Welcome to Wallaclone!</p>
+          <p className="text-center mt-2">
+            Please log in to access your account.
+          </p>
+          <div className="flex items-center flex-col text-xs justify-around p-4 mt-5">
+            <p className="flex items-center h-full text-siz mb-1.5">
+              👇Don´t have an account yet?👇
             </p>
             <Link
-              className="text-yellow-500 bg-[radial-gradient(circle,_var(--tw-gradient-stops))] px-4 py-3  shadow-lg transition duration-300 ease-in-out hover:scale-105 hover:brightness-210 rounded-4xl p-1.5 flex items-center h-full"
+              className="cursor-pointer px-4 py-2 bg-[rgb(223,184,13)] text-white font-semibold  rounded-xl hover:bg-yellow-600 transition disabled:opacity-50"
               to={'/register'}
             >
               Register

@@ -85,7 +85,6 @@ function RegisterPage() {
         <Button
           type="submit"
           disabled={isLoading || !email || !password || !username}
-          
         >
           {isLoading ? 'Registrando...' : 'Registrar'}
         </Button>
