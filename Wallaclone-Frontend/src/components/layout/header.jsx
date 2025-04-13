@@ -1,7 +1,6 @@
 import Burger from '../shared/burguer.jsx'
 
 export default function Header() {
-  
   return (
     <header className="bg-gradient-to-l from-yellow-600 via-orange-500 to-red-800 p-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">

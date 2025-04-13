@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Burger() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
+  const toggleMenu = () => setIsOpen(!isOpen)
+  const closeMenu = () => setIsOpen(false)
 
   return (
     <div className="w-full md:w-auto">
@@ -32,21 +32,45 @@ export default function Burger() {
 
       {/* Menú en pantallas grandes */}
       <nav className="hidden md:flex gap-6">
-        <Link to="/" className="text-white hover:text-yellow-300">Adverts</Link>
-        <Link to="/login" className="text-white hover:text-yellow-300">Login</Link>
-        <Link to="/register" className="text-white hover:text-yellow-300">Register</Link>
+        <Link to="/" className="text-white hover:text-yellow-300">
+          Adverts
+        </Link>
+        <Link to="/login" className="text-white hover:text-yellow-300">
+          Login
+        </Link>
+        <Link to="/register" className="text-white hover:text-yellow-300">
+          Register
+        </Link>
       </nav>
 
       {/* Menú desplegable en móviles */}
       {isOpen && (
         <div className="md:hidden mt-1 flex justify-end">
           <nav className="flex flex-col items-end space-y-1">
-            <Link to="/" onClick={closeMenu} className="text-white hover:text-yellow-300">Adverts</Link>
-            <Link to="/login" onClick={closeMenu} className="text-white hover:text-yellow-300">Login</Link>
-            <Link to="/register" onClick={closeMenu} className="text-white hover:text-yellow-300">Register</Link>
+            <Link
+              to="/"
+              onClick={closeMenu}
+              className="text-white hover:text-yellow-300"
+            >
+              Adverts
+            </Link>
+            <Link
+              to="/login"
+              onClick={closeMenu}
+              className="text-white hover:text-yellow-300"
+            >
+              Login
+            </Link>
+            <Link
+              to="/register"
+              onClick={closeMenu}
+              className="text-white hover:text-yellow-300"
+            >
+              Register
+            </Link>
           </nav>
         </div>
       )}
     </div>
-  );
+  )
 }

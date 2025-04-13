@@ -28,7 +28,7 @@ function LoginPage() {
       }, 4000)
       return () => clearTimeout(timer)
     }
-  },[error])
+  }, [error])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -39,7 +39,7 @@ function LoginPage() {
       })
       console.log(`input´s value are ${email} - ${password}`)
       // remember me ?
-      localStorage.setItem('accessToken', userData.accessToken)
+      localStorage.setItem('auth', userData.tokenJWT)
       navigate('/')
     } catch (error) {
       if (isApiClientError(error)) {
@@ -78,7 +78,6 @@ function LoginPage() {
 
           {/* errors pop up */}
           <FromErrorPopup error={error} onClose={() => setError(null)} />
-
         </form>
 
         {/* welcomming card */}
