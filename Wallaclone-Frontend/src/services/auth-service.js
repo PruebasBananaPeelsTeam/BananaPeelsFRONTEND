@@ -2,19 +2,14 @@ import { client, setAuthorizationHeader } from '../api/client.js'
 
 export const login = async (credentials) => {
   const response = await client.post('/api/login', credentials)
-  const { tokenJWT: accessToken } = response.data
+  const { tokenJWT } = response.data // 👈 tu backend devuelve "tokenJWT"
 
-  if (rememberMe) {
-    localStorage.setItem('auth', accessToken)
-  }
+  localStorage.setItem('auth', tokenJWT) 
+  setAuthorizationHeader(tokenJWT) 
 
-  setAuthorizationHeader(accessToken)
-  return { accessToken }
+  return response.data
 }
-
-localStorage.setItem('auth', tokenJWT)
-setAuthorizationHeader(tokenJWT)
-
+  
 export const register = async (userData) => {
   const response = await client.post('/api/register', userData)
   const { message, user } = response.data
