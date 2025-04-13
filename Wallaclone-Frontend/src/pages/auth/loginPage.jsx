@@ -34,7 +34,7 @@ function LoginPage() {
       })
       console.log(`input´s value are ${input.email} - ${input.password}`)
       // remember me ?
-      localStorage.setItem('accessToken', userData.accessToken)
+      localStorage.setItem('auth', userData.tokenJWT)
       navigate('/')
     } catch (error) {
       if (isApiClientError(error)) {
