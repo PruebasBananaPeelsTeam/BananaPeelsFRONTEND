@@ -44,6 +44,8 @@ client.interceptors.response.use(undefined, (error) => {
           clientError.code = 'EASY! You are too quick!'
         } else if (errorStatus >= 500) {
           clientError.code = 'SERVER_ERROR'
+        } else if (errorStatus === 409) {
+          clientError.code = 'Email is already in use'
         }
       }
     }

@@ -4,10 +4,10 @@ import { useNavigate, Link } from 'react-router-dom'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import { isApiClientError } from '../../api/client'
-import FromErrorPopup from '../../components/shared/formErrorPopup.jsx'
+import FromErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 
 function LoginPage() {
-  const [input, setInput] = useState({ email: '', password: '' })
+  const [input, setInput] = useState({ username: '', password: '' })
   const navigate = useNavigate()
   const [error, setError] = useState(null)
 
@@ -29,10 +29,10 @@ function LoginPage() {
     event.preventDefault()
     try {
       const userData = await login({
-        email: input.email,
+        username: input.username,
         password: input.password,
       })
-      console.log(`input´s value are ${input.email} - ${input.password}`)
+      console.log(`input´s value are ${input.username} - ${input.password}`)
       // remember me ?
       localStorage.setItem('auth', userData.tokenJWT)
       navigate('/')
@@ -50,12 +50,12 @@ function LoginPage() {
           <h1 className="font-bold text-3xl text-center">Sign up !</h1>
 
           <FormField
-            label="Email"
-            type="email"
-            id="email"
-            name="email"
+            label="User Name"
+            type="username"
+            id="username"
+            name="username"
             required
-            value={input.email}
+            value={input.username}
             onChange={handleInputChange}
           />
           <FormField

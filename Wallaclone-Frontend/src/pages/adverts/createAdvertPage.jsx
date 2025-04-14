@@ -73,8 +73,17 @@ const CreateAdvertPage = () => {
     }
 
     const dataToSend = new FormData()
-    for (const key in formData) {
-      dataToSend.append(key, formData[key])
+    dataToSend.append('name', formData.name)
+    dataToSend.append('description', formData.description)
+    dataToSend.append('price', formData.price)
+    dataToSend.append('type', formData.type)
+
+    formData.tags.forEach(tag => {
+      dataToSend.append('tags', tag)
+    })
+
+    if (formData.image) {
+      dataToSend.append('image', formData.image)
     }
 
     try {
