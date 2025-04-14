@@ -1,9 +1,11 @@
 import { register } from '../../services/auth-service'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { isApiClientError } from '../../api/client'
 import FormField from '../../components/shared/formField'
 import Button from '../../components/shared/button'
 import FormErrorPopup from '../../components/shared/formErrorPopup'
+
 
 function RegisterPage() {
   const [input, setInput] = useState({email: '', password: '', username: ''})
@@ -16,10 +18,20 @@ function RegisterPage() {
     setInput({ ...input, [event.target.name]: event.target.value })
   }
 
+   // error Timer
+    useEffect(() => {
+      if (error) {
+        const timer = setTimeout(() => {
+          setError(null)
+        }, 4000)
+        return () => clearTimeout(timer)
+      }
+    }, [error])
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     setIsLoading(true)
-    setError('')
+    setError(null)
 
     try {
       const { message, user } = await register({
@@ -29,8 +41,23 @@ function RegisterPage() {
       })
 
       navigate('/login')
+
     } catch (err) {
-      setError(err.message)
+
+      if (isApiClientError(err)){
+        setError({
+          code: err.code,
+          message: err.message
+        })
+
+      } else {
+        //Not api error
+        setError({
+          code: 'UNKNOWN_ERROR',
+          message: 'An unexpected error occurred during registration.'
+      })
+      }
+      console.error(err)
     } finally {
       setIsLoading(false)
     }
@@ -78,6 +105,10 @@ function RegisterPage() {
         >
           {isLoading ? 'Registering...' : 'Register'}
         </Button>
+
+        {/* errors pop up */}
+        {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
+
       </form>
     </div>
   )
