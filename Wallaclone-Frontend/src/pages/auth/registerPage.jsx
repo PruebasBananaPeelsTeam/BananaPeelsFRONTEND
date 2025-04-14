@@ -3,26 +3,17 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FormField from '../../components/shared/formField'
 import Button from '../../components/shared/button'
+import FormErrorPopup from '../../components/shared/formErrorPopup'
 
 function RegisterPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [username, setUsername] = useState('')
-  const [error, setError] = useState('')
+  const [input, setInput] = useState({email: '', password: '', username: ''})
+  const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value)
+  const handleInputChange = (event) => {
+    setInput({ ...input, [event.target.name]: event.target.value })
   }
 
   const handleSubmit = async (event) => {
@@ -31,11 +22,10 @@ function RegisterPage() {
     setError('')
 
     try {
-      //user register
       const { message, user } = await register({
-        email,
-        password,
-        username,
+        email: input.email,
+        password: input.password,
+        username: input.username,
       })
 
       navigate('/login')
@@ -61,32 +51,32 @@ function RegisterPage() {
             label="Email"
             type="email"
             name="email"
-            value={email}
-            onChange={handleEmailChange}
+            value={input.email}
+            onChange={handleInputChange}
           />
 
           <FormField
             label="Password"
             type="password"
             name="password"
-            value={password}
-            onChange={handlePasswordChange}
+            value={input.password}
+            onChange={handleInputChange}
           />
 
           <FormField
             label="Username"
             type="text"
             name="username"
-            value={username}
-            onChange={handleUsernameChange}
+            value={input.username}
+            onChange={handleInputChange}
           />
         </div>
 
         <Button
           type="submit"
-          disabled={isLoading || !email || !password || !username}
+          disabled={isLoading || !input.email || !input.password || !input.username}
         >
-          {isLoading ? 'Registrando...' : 'Registrar'}
+          {isLoading ? 'Registering...' : 'Register'}
         </Button>
       </form>
     </div>
