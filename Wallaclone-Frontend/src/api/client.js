@@ -45,7 +45,9 @@ client.interceptors.response.use(undefined, (error) => {
         } else if (errorStatus >= 500) {
           clientError.code = 'SERVER_ERROR'
         } else if (errorStatus === 409) {
-          clientError.code = 'Email is already in use'
+          clientError.code = error.response.data?.message ?? 'CONFLICT'
+        } else if (errorStatus === 400) {
+          clientError.code = 'VALIDATION_ERROR';
         }
       }
     }
