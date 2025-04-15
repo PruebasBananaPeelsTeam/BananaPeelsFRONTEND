@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { isApiClientError } from '../../api/client'
 import FormField from '../../components/shared/formField'
 import Button from '../../components/shared/button'
-import FormErrorPopup from '../../components/shared/formErrorPopup'
+import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 
 function RegisterPage() {
   const [input, setInput] = useState({ email: '', password: '', username: '' })
