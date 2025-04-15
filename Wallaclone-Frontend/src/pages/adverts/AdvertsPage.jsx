@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getAdvertList } from '../../services/adverts-service.js'
 import Advert from './Advert.jsx'
 import Button from '../../components/shared/button.jsx'
+import Loader from '../../components/shared/loader.jsx'
 
 function AdvertsPage() {
   // Estado para los anuncios, carga, y paginación
@@ -31,7 +32,7 @@ function AdvertsPage() {
   }, [currentPage]) // Se ejecuta cada vez que cambie la página
 
   if (loading) {
-    return <div>Loading...</div> // O puedes mostrar un spinner de carga aquí.
+    return <Loader /> // O puedes mostrar un spinner de carga aquí.
   }
 
   const { results } = adverts
