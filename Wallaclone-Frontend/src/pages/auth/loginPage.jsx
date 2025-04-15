@@ -38,7 +38,14 @@ function LoginPage() {
       navigate('/')
     } catch (error) {
       if (isApiClientError(error)) {
-        setError(error)
+        let message = error.message
+        if (input.username.includes('@')) {
+          message +=
+            ' It looks like you entered an email. Please use your username instead.'
+        }
+        const customError = new Error(message)
+        customError.code = error.code
+        setError(customError)
       }
       console.error(error)
     }
