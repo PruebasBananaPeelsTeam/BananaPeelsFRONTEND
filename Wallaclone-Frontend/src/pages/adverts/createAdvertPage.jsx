@@ -78,7 +78,7 @@ const CreateAdvertPage = () => {
     dataToSend.append('price', formData.price)
     dataToSend.append('type', formData.type)
 
-    formData.tags.forEach(tag => {
+    formData.tags.forEach((tag) => {
       dataToSend.append('tags', tag)
     })
 
@@ -100,7 +100,7 @@ const CreateAdvertPage = () => {
         tags: [],
       })
       setImagePreview(null)
-      // navigate('/adverts')
+      navigate('/adverts')
     } catch (err) {
       console.error(err)
       setError('Error creando el anuncio. Inténtalo de nuevo.')

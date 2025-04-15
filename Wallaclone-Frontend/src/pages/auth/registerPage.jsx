@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import { isApiClientError } from '../../api/client'
 import FormField from '../../components/shared/formField'
 import Button from '../../components/shared/button'
-import FormErrorPopup from '../../components/shared/formErrorPopup'
-
+import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 
 function RegisterPage() {
-  const [input, setInput] = useState({email: '', password: '', username: ''})
+  const [input, setInput] = useState({ email: '', password: '', username: '' })
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -18,15 +17,15 @@ function RegisterPage() {
     setInput({ ...input, [event.target.name]: event.target.value })
   }
 
-   // error Timer
-    useEffect(() => {
-      if (error) {
-        const timer = setTimeout(() => {
-          setError(null)
-        }, 4000)
-        return () => clearTimeout(timer)
-      }
-    }, [error])
+  // error Timer
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null)
+      }, 4000)
+      return () => clearTimeout(timer)
+    }
+  }, [error])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -41,21 +40,18 @@ function RegisterPage() {
       })
 
       navigate('/login')
-
     } catch (err) {
-
-      if (isApiClientError(err)){
+      if (isApiClientError(err)) {
         setError({
           code: err.code,
-          message: err.message
+          message: err.message,
         })
-
       } else {
         //Not api error
         setError({
           code: 'UNKNOWN_ERROR',
-          message: 'An unexpected error occurred during registration.'
-      })
+          message: 'An unexpected error occurred during registration.',
+        })
       }
       console.error(err)
     } finally {
@@ -101,14 +97,17 @@ function RegisterPage() {
 
         <Button
           type="submit"
-          disabled={isLoading || !input.email || !input.password || !input.username}
+          disabled={
+            isLoading || !input.email || !input.password || !input.username
+          }
         >
           {isLoading ? 'Registering...' : 'Register'}
         </Button>
 
         {/* errors pop up */}
-        {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
-
+        {error && (
+          <FormErrorPopup error={error} onClose={() => setError(null)} />
+        )}
       </form>
     </div>
   )
