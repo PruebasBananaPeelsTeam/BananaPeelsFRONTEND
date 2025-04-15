@@ -41,6 +41,9 @@ export default function Burger() {
         <Link to="/register" className="text-white hover:text-yellow-300">
           Register
         </Link>
+        <Link to="/adverts/new" className="text-white hover:text-yellow-300">
+          New Advert
+        </Link>
       </nav>
 
       {/* Menú desplegable en móviles */}
@@ -67,6 +70,13 @@ export default function Burger() {
               className="text-white hover:text-yellow-300"
             >
               Register
+            </Link>
+            <Link
+              to="/adverts/new"
+              onClick={closeMenu}
+              className="text-white hover:text-yellow-300"
+            >
+              New Advert
             </Link>
           </nav>
         </div>

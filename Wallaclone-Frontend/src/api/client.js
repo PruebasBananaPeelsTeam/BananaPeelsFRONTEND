@@ -47,7 +47,7 @@ client.interceptors.response.use(undefined, (error) => {
         } else if (errorStatus === 409) {
           clientError.code = error.response.data?.message ?? 'CONFLICT'
         } else if (errorStatus === 400) {
-          clientError.code = 'VALIDATION_ERROR';
+          clientError.code = 'VALIDATION_ERROR'
         }
       }
     }

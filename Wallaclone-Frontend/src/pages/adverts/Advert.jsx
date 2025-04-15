@@ -6,10 +6,10 @@ const Advert = ({ advert }) => {
   const baseURL = import.meta.env.VITE_API_URL
 
   const imageUrl = image
-  ? image.startsWith('http://') || image.startsWith('https://') 
-    ? image  
-    : `${baseURL}/images/${image}` 
-  : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
+    ? image.startsWith('http://') || image.startsWith('https://')
+      ? image
+      : `${baseURL}/images/${image}`
+    : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
 
   return (
     <Link to={`/adverts/${_id}`}>
