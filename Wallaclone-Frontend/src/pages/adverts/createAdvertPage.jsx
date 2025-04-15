@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { createAdvert, getTags } from '../../services/adverts-service.js'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
+import Loader from '../../components/shared/loader.jsx'
 
 const CreateAdvertPage = () => {
   const [formData, setFormData] = useState({
@@ -227,8 +228,9 @@ const CreateAdvertPage = () => {
         )}
 
         <Button type="submit" disabled={loading}>
-          {loading ? 'Publicando...' : 'Publicar anuncio'}
-        </Button>
+          Submit
+          {loading && <Loader/> }
+        </Button> 
       </form>
     </div>
   )
