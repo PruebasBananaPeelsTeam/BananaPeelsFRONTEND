@@ -4,12 +4,14 @@ import { useNavigate, Link } from 'react-router-dom'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import { isApiClientError } from '../../api/client'
-import FromErrorPopup from '../../components/shared/formErrorPopUp.jsx'
+import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
+import Loader from '../../components/shared/loader.jsx'
 
 function LoginPage() {
-  const [input, setInput] = useState({ username: '', password: '' })
   const navigate = useNavigate()
+  const [input, setInput] = useState({ username: '', password: '' })
   const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleInputChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value })
@@ -27,6 +29,7 @@ function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    setIsLoading(true)
     try {
       const userData = await login({
         username: input.username,
@@ -34,7 +37,6 @@ function LoginPage() {
       })
       console.log(`input´s value are ${input.username} - ${input.password}`)
       // remember me ?
-      localStorage.setItem('auth', userData.tokenJWT)
       navigate('/')
     } catch (error) {
       if (isApiClientError(error)) {
@@ -48,17 +50,19 @@ function LoginPage() {
         setError(customError)
       }
       console.error(error)
+    } finally {
+      setIsLoading(false)
     }
   }
   return (
     <>
       <div className="flex items-center justify-center min-h-screen ">
         <form onSubmit={handleSubmit} className="">
-          <h1 className="font-bold text-3xl text-center">Sign up !</h1>
+          <h1 className="font-bold text-3xl text-center">Sign In !</h1>
 
           <FormField
             label="User Name"
-            type="username"
+            type="text"
             id="username"
             name="username"
             required
@@ -75,13 +79,13 @@ function LoginPage() {
             onChange={handleInputChange}
           />
           <div className="flex items-center justify-around">
-            <Button type="submit" className="">
+            <Button type="submit" className="" disabled={isLoading}>
               LogIn
+              {isLoading && <Loader/>}
             </Button>
           </div>
-
           {/* errors pop up */}
-          <FromErrorPopup error={error} onClose={() => setError(null)} />
+          <FormErrorPopup error={error} onClose={() => setError(null)} />
         </form>
 
         {/* welcomming card */}
