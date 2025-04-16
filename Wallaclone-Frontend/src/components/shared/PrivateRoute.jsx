@@ -1,5 +1,6 @@
 import { useAuth } from "../../context/AuthContext";
 import { Navigate } from "react-router-dom";
+import ProtectedAccessModal from "./ProtectedAccessModal";
 
 const PrivateRoute = ({ children }) => {
     const { isAuthenticated } = useAuth()
@@ -7,7 +8,7 @@ const PrivateRoute = ({ children }) => {
     console.log('¿Está autenticado?', isAuthenticated);
 
     if (!isAuthenticated) {
-        return <Navigate to='/login' replace />
+        return <ProtectedAccessModal />
     }
 
     return children
