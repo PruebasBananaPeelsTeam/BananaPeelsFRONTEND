@@ -38,9 +38,13 @@ function LoginPage() {
         username: input.username,
         password: input.password,
       })
-      authLogin(userData.token) // codigo tocado para usar el contexto Auth
+      console.log('Datos devueltos por el login:', userData)
+      const token = userData.tokenJWT
+      authLogin(token) // codigo tocado para usar el contexto Auth
+      console.log('TOKEN GUARDADO:', userData.tokenJWT)
       console.log(`input´s value are ${input.username} - ${input.password}`)
       // remember me ?
+      //window.location.href = '/'; // ✅ fuerza actualización de contexto
       navigate('/')
     } catch (error) {
       if (isApiClientError(error)) {

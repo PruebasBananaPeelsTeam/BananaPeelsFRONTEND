@@ -5,6 +5,7 @@ import Layout from './components/layout/layout'
 import NotFoundPage from './components/shared/notFoundPage'
 import CreateAdvertPage from './pages/adverts/createAdvertPage.jsx'
 import AdvertsPage from './pages/adverts/AdvertsPage.jsx'
+import PrivateRoute from './components/shared/PrivateRoute.jsx'
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
       >
         <Route index element={<AdvertsPage />} />
       </Route>
-      <Route path="/adverts/new" element={<CreateAdvertPage />} />
+      <Route path="/adverts/new" element={ <PrivateRoute>  <CreateAdvertPage /> </PrivateRoute> } />
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="*" element={<NotFoundPage />} />
