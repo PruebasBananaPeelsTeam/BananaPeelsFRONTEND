@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { deleteAdvert, getAdvertDetail } from './service-adverts'; //Crear en service el delete
+import { getAdvertDetail } from './service-adverts'; //Crear en service el delete
 import Page from '../../components/layout/Page'; //Crear en layout
 import { isApiClientError } from '../../api/client';
 //Revisar si nos hace falta un ConfirmationDialog para confirmar la eliminacion cuando la hagamos
@@ -13,10 +13,17 @@ function AdvertDetailPage() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (params.advertId) {
-          getAdvertDetail(params.advertId)
-            .then((advert) => setAdvert(advert))
+        if (params.advertId && params.slug) {
+          setLoading(true);
+
+          getAdvertDetail(params.advertId, params.slug)
+            .then((advert) => {
+                setAdvert(advert)
+                setLoading(false);
+            })
+
             .catch((error) => {
+              setLoading(false);
               if (isApiClientError(error)) {
                 if (error.code === 'NOT_FOUND') {
                   navigate('/404');
@@ -24,11 +31,11 @@ function AdvertDetailPage() {
               }
             });
         }
-      }, [params.advertId, navigate]);
+      }, [params.advertId, params.slug, navigate]);
 
 
     return (
-        <Page title="Advert Detail">
+        <div title="Advert Detail">
         {advert ? (
           <div className="advert-details">
             <h2>{advert.name}</h2>
@@ -66,7 +73,7 @@ function AdvertDetailPage() {
         <p>Loading advert details...</p>
 
       )}
-    </Page>
+    </div>
   );
     
 }
