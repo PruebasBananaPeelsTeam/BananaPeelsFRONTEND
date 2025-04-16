@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAdvertDetail } from './service-adverts'; //Crear en service el delete
-import Page from '../../components/layout/Page'; //Crear en layout
+import { getAdvertDetail } from '../../services/adverts-service'
 import { isApiClientError } from '../../api/client';
 //Revisar si nos hace falta un ConfirmationDialog para confirmar la eliminacion cuando la hagamos
 
@@ -77,3 +76,5 @@ function AdvertDetailPage() {
   );
     
 }
+
+export default AdvertDetailPage
