@@ -6,6 +6,7 @@ import NotFoundPage from './components/shared/notFoundPage'
 import CreateAdvertPage from './pages/adverts/createAdvertPage.jsx'
 import AdvertsPage from './pages/adverts/AdvertsPage.jsx'
 
+
 function App() {
   return (
     <Routes>
