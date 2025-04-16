@@ -1,6 +1,8 @@
 import Burger from '../shared/burguer.jsx'
+import Logout from '../shared/logoutButton.jsx'
 
 export default function Header() {
+  const haveAuth = localStorage.getItem('auth')
   return (
     <header className="bg-gradient-to-l from-yellow-600 via-orange-500 to-red-800 p-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -8,6 +10,7 @@ export default function Header() {
           <p>BananaPeels</p>
         </div>
         <Burger />
+        {haveAuth && <Logout />}
       </div>
     </header>
   )
