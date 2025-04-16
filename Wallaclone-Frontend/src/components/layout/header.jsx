@@ -1,5 +1,5 @@
 import Burger from '../shared/burguer.jsx'
-import Logout from '../shared/logoutButton.jsx'
+import Logout from '../shared/logout.jsx'
 
 export default function Header() {
   const haveAuth = localStorage.getItem('auth')
