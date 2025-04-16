@@ -34,6 +34,7 @@ function AdvertDetailPage() {
 
 
     return (
+        
         <div title="Advert Detail">
         {advert ? (
           <div className="advert-details">
