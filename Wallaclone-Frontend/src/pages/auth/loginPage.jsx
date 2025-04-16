@@ -91,30 +91,28 @@ function LoginPage() {
 
         {/* welcomming card */}
         <InfoCard
-         title={
-          <h2 className="font-bold text-3xl mt-1.5 text-center">Hi!</h2>
-        }
-        subtitle={
-          <p className="text-center text-2xl mt-4">Welcome to Wallaclone!</p>
-        }
-        message={
-          <p className="text-center text-2xl mt-4 p-2">
-            Please log in to access your account.
-          </p>
-        }
-        footerText={
-          <p className="text-center text-2xl items-center h-full mb-4">
-            👇Don’t have an account yet?👇
-          </p>
-        }
-        linkText={
-          <span className="cursor-pointer px-4 py-2 bg-[rgb(223,184,13)] text-white font-semibold rounded-xl hover:bg-yellow-600 transition disabled:opacity-50">
-            Register
-          </span>
-        }
-        linkTo="/register"
-        className="text-center text-2xl justify-around p-4 m-5"
-      />
+          title={<h2 className="font-bold text-3xl mt-1.5 text-center">Hi!</h2>}
+          subtitle={
+            <p className="text-center text-2xl mt-4">Welcome to Wallaclone!</p>
+          }
+          message={
+            <p className="text-center text-2xl mt-4 p-2">
+              Please log in to access your account.
+            </p>
+          }
+          footerText={
+            <p className="text-center text-2xl items-center h-full mb-4">
+              👇Don’t have an account yet?👇
+            </p>
+          }
+          linkText={
+            <span className="cursor-pointer px-4 py-2 bg-[rgb(223,184,13)] text-white font-semibold rounded-xl hover:bg-yellow-600 transition disabled:opacity-50">
+              Register
+            </span>
+          }
+          linkTo="/register"
+          className="text-center text-2xl justify-around p-4 m-5"
+        />
       </div>
     </>
   )

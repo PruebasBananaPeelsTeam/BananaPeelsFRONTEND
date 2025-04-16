@@ -1,59 +1,65 @@
-import { useEffect, useState } from 'react'
-import { getAdvertList } from '../../services/adverts-service.js'
-import Advert from './Advert.jsx'
-import Button from '../../components/shared/button.jsx'
+import { useEffect, useState } from 'react';
+import { getAdvertList } from '../../services/adverts-service.js';
+import Advert from './Advert.jsx';
+import Button from '../../components/shared/button.jsx';
+import { useSearchParams } from 'react-router-dom'; // Importa useSearchParams
 
 function AdvertsPage() {
-  // Estado para los anuncios, carga, y paginación
-  const [adverts, setAdverts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1) // Página actual
-  const [totalPages, setTotalPages] = useState(1) // Total de páginas
-
-  const limit = 10 // Anuncios por página
+  const [adverts, setAdverts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchParams] = useSearchParams(); // Obtén los parámetros de búsqueda
+  const limit = 10;
 
   useEffect(() => {
     const fetchAdverts = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
-        // Pasamos la página actual y el límite
-        const response = await getAdvertList(currentPage, limit)
-        console.log(response)
-        setAdverts(response)
-        setTotalPages(response.totalPages)
+        // Construye el objeto de filtros a partir de los parámetros de búsqueda
+        const filters = {};
+        for (const [key, value] of searchParams.entries()) {
+          filters[key] = value;
+        }
+
+        // Pasa la página actual, el límite y los filtros
+        const response = await getAdvertList(currentPage, limit, filters);
+        console.log(response);
+        setAdverts(response);
+        setTotalPages(response.totalPages);
       } catch (error) {
-        console.error('Error fetching adverts:', error)
+        console.error('Error fetching adverts:', error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-    fetchAdverts()
-  }, [currentPage]) // Se ejecuta cada vez que cambie la página
+    };
+
+    fetchAdverts();
+    // El useEffect se ejecutará cuando cambie currentPage o los searchParams
+  }, [currentPage, searchParams]);
 
   if (loading) {
-    return <div>Loading...</div> // O puedes mostrar un spinner de carga aquí.
+    return <div>Loading...</div>
   }
 
-  const { results } = adverts
+  const { results } = adverts;
 
-  // Función para cambiar a la siguiente página
   const goToNextPage = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1)
+      setCurrentPage(currentPage + 1);
     }
-  }
+  };
 
-  // Función para cambiar a la página anterior
   const goToPreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1)
+      setCurrentPage(currentPage - 1);
     }
-  }
+  };
 
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
-        {results.length > 0 ? (
+        {results?.length > 0 ? ( // Añadido optional chaining para evitar errores si results es undefined
           results.map((advert) => <Advert key={advert._id} advert={advert} />)
         ) : (
           <p>No adverts available</p>
@@ -73,7 +79,7 @@ function AdvertsPage() {
         </Button>
       </div>
     </>
-  )
+  );
 }
 
-export default AdvertsPage
+export default AdvertsPage;

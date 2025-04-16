@@ -1,4 +1,5 @@
 import Burger from '../shared/burguer.jsx'
+import SearchBar from '../shared/SearchBar.jsx'
 
 export default function Header() {
   return (
