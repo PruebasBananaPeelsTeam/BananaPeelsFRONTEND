@@ -6,6 +6,8 @@ import NotFoundPage from './components/shared/notFoundPage'
 import CreateAdvertPage from './pages/adverts/createAdvertPage.jsx'
 import AdvertsPage from './pages/adverts/AdvertsPage.jsx'
 import AdvertDetailPage from './pages/adverts/AdvertDetailPage.jsx'
+import PrivateRoute from './components/shared/PrivateRoute.jsx'
+
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
       >
         <Route index element={<AdvertsPage />} />
       </Route>
-      <Route path="/adverts/new" element={<CreateAdvertPage />} />
+      <Route path="/adverts/new" element={ <PrivateRoute>  <CreateAdvertPage /> </PrivateRoute> } />
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />

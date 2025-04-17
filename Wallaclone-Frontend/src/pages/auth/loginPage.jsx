@@ -7,9 +7,11 @@ import { isApiClientError } from '../../api/client'
 import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import { InfoCard } from '../../components/shared/infoCard.jsx'
+import { useAuth } from '../../context/AuthContext.jsx'
 
 function LoginPage() {
   const navigate = useNavigate()
+  const { login: authLogin } = useAuth() //Codigo tocado para usar el contexto Auth
   const [input, setInput] = useState({ username: '', password: '' })
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -39,8 +41,13 @@ function LoginPage() {
         username: input.username,
         password: input.password,
       })
+      console.log('Datos devueltos por el login:', userData)
+      const token = userData.tokenJWT
+      authLogin(token) // codigo tocado para usar el contexto Auth
+      console.log('TOKEN GUARDADO:', userData.tokenJWT)
       console.log(`input´s value are ${input.username} - ${input.password}`)
       // remember me ?
+      
       navigate('/')
     } catch (error) {
       if (isApiClientError(error)) {
