@@ -2,10 +2,10 @@ import { useLocation } from 'react-router-dom';
 import Burger from '../shared/burguer.jsx';
 import SearchBar from '../shared/SearchBar.jsx';
 import Logout from '../shared/logout.jsx';
+import { useAuth } from '../../context/AuthContext.jsx' 
 
 export default function Header() {
-  const location = useLocation();
-  const haveAuth = localStorage.getItem('auth');
+const { isAuthenticated} = useAuth()
 
   return (
     <header className="bg-gradient-to-l from-yellow-600 via-orange-500 to-red-800 py-1 px-4">
@@ -15,7 +15,7 @@ export default function Header() {
         </div>
         {location.pathname === '/' && <SearchBar />}
         <Burger />
-        {haveAuth && <Logout />}
+        {isAuthenticated && <Logout />}
       </div>
     </header>
   );
