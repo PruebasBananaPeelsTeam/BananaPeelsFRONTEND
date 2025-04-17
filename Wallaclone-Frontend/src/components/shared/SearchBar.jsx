@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { getTags } from '../../services/adverts-service';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
@@ -7,25 +6,10 @@ function SearchBar() {
     name: '',
     priceMin: '',
     priceMax: '',
-    tag: '',
   });
 
-  const [tags, setTags] = useState([]);
-  const [loading, setLoading] = useState(false); // Estado para controlar la carga del botón
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchTags = async () => {
-      try {
-        const tagsFromAPI = await getTags();
-        setTags(tagsFromAPI);
-      } catch (error) {
-        console.error('Error loading tags:', error);
-      }
-    };
-
-    fetchTags();
-  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -37,45 +21,41 @@ function SearchBar() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true); // Iniciar carga
+    setLoading(true);
 
     const queryParams = new URLSearchParams();
-
-    // Solo agregar los filtros que tengan valor
     if (filters.name) queryParams.append('name', filters.name);
     if (filters.priceMin) queryParams.append('priceMin', filters.priceMin);
     if (filters.priceMax) queryParams.append('priceMax', filters.priceMax);
-    if (filters.tag) queryParams.append('tag', filters.tag);
 
-    // Navegar a la página con los filtros aplicados
     try {
       await navigate(`/?${queryParams.toString()}`);
     } catch (error) {
       console.error('Error navigating:', error);
     } finally {
-      setLoading(false); // Detener carga
+      setLoading(false);
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-wrap md:flex-nowrap items-center gap-2 bg-white p-2 rounded-2xl shadow-md max-w-screen-md w-full mx-auto"
+      className="flex flex-col md:flex-row items-center gap-2 bg-white p-4 rounded-2xl shadow-md max-w-3xl py-1 md:py-2 mx-auto"
     >
       <input
         type="text"
         name="name"
         value={filters.name}
         onChange={handleChange}
-        placeholder="🔍 Search..."
-        className="flex-1 min-w-[120px] p-2 border rounded-xl placeholder-orange-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-300"
+        placeholder="🔍 Buscar..."
+        className="flex-1 p-2 border rounded-xl placeholder-orange-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-300"
       />
       <input
         type="number"
         name="priceMin"
         value={filters.priceMin}
         onChange={handleChange}
-        placeholder="Min price"
+        placeholder="Precio mínimo"
         className="w-24 p-2 border rounded-xl placeholder-orange-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-300"
       />
       <input
@@ -83,35 +63,17 @@ function SearchBar() {
         name="priceMax"
         value={filters.priceMax}
         onChange={handleChange}
-        placeholder="Max price"
+        placeholder="Precio máximo"
         className="w-24 p-2 border rounded-xl placeholder-orange-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-300"
       />
-      <select
-        name="tag"
-        value={filters.tag}
-        onChange={handleChange}
-        className="p-2 border rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-300"
-      >
-        <option value="">All tags</option>
-        {tags.map((tag) => (
-          <option key={tag} value={tag}>
-            {tag}
-          </option>
-        ))}
-      </select>
-
       <button
         type="submit"
         className={`p-2 px-4 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition duration-200 ${
           loading ? 'bg-orange-300 cursor-not-allowed' : ''
         }`}
-        disabled={loading} // Deshabilita el botón cuando está enviando
+        disabled={loading}
       >
-        {loading ? (
-          <span className="animate-spin">🔄</span> // Icono de carga
-        ) : (
-          'Search'
-        )}
+        {loading ? <span className="animate-spin">🔄</span> : 'Buscar'}
       </button>
     </form>
   );
