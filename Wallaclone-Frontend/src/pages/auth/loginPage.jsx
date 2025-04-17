@@ -44,7 +44,7 @@ function LoginPage() {
       console.log('TOKEN GUARDADO:', userData.tokenJWT)
       console.log(`input´s value are ${input.username} - ${input.password}`)
       // remember me ?
-      //window.location.href = '/'; // ✅ fuerza actualización de contexto
+      
       navigate('/')
     } catch (error) {
       if (isApiClientError(error)) {
