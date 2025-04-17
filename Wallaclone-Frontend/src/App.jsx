@@ -22,7 +22,7 @@ function App() {
         <Route index element={<AdvertsPage />} />
       </Route>
       <Route path="/adverts/new" element={<CreateAdvertPage />} />
-      <Route path="/adverts" element={<AdvertsPage />} />
+      <Route path="/" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />
       <Route path="*" element={<NotFoundPage />} />

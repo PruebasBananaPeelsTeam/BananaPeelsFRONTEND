@@ -49,7 +49,7 @@ function SearchBar() {
 
     // Navegar a la página con los filtros aplicados
     try {
-      await navigate(`/adverts?${queryParams.toString()}`);
+      await navigate(`/?${queryParams.toString()}`);
     } catch (error) {
       console.error('Error navigating:', error);
     } finally {
