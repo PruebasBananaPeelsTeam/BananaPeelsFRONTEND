@@ -33,49 +33,56 @@ function AdvertDetailPage() {
       }, [params.advertId, params.slug, navigate]);
 
 
-    return (
-        
-        <div title="Advert Detail">
-        {advert ? (
-          <div className="advert-details">
-            <h2>{advert.name}</h2>
-  
-            {advert.image && <img src={advert.image} alt={advert.name} />}
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-[rgb(245,245,220)]">
+          <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-xl space-y-6">
+            {loading ? (
+              <p className="text-blue-600 text-center">Loading...</p>
+            ) : advert ? (
+              <div>
+                <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
+                  {advert.name}
+                </h2>
+      
+                {advert.image && (
+                  <img
+                    src={advert.image}
+                    alt={advert.name}
+                    className="w-full max-h-64 object-cover rounded-xl mb-4"
+                  />
+                )}
+      
+                <p>
+                  <strong>Descripción:</strong> {advert.description}
+                </p>
+      
+                <p>
+                  <strong>Precio:</strong> {advert.price} €
+                </p>
+      
+                <p>
+                  <strong>Tipo:</strong>{' '}
+                  {advert.type === 'sell' ? 'En venta' : 'Se busca'}
+                </p>
+      
+                <p>
+                  <strong>Categorías:</strong> {advert.tags.join(', ')}
+                </p>
+      
+                <p>
+                  <strong>Vendedor:</strong> {advert.owner?.username || advert.owner}
+                </p>
 
-            <p>
-            <strong>Description:</strong> {advert.description}
-          </p>
+                
 
-          <p>
-            <strong>Price:</strong> {advert.price} €
-          </p>
-
-          <p>
-            <strong>Type:</strong> {advert.type === 'sell' ? 'SALE' : 'BUY'}
-          </p>
-
-          <p>
-            <strong>Tags:</strong> {advert.tags.join(', ')}
-          </p>
-
-          <p>
-            <strong>Owner:</strong> {advert.owner.username || advert.owner}
-          </p>
-
-          {/* <button onClick={handleDelete} disabled={loading}>
-            {loading ? 'Deleting...' : 'Delete Advert'}
-          </button> */}
-
+                
+              </div>
+            ) : (
+              <p className="text-red-600">No se encontró el anuncio.</p>
+            )}
+          </div>
         </div>
-
-      ) : (
-
-        <p>Loading advert details...</p>
-
-      )}
-    </div>
-  );
-    
+      )
 }
 
 export default AdvertDetailPage
