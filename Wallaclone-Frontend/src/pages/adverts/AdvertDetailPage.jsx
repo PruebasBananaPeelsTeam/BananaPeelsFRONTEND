@@ -37,50 +37,49 @@ function AdvertDetailPage() {
 
       return (
         <Page>
-          <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-xl space-y-6 mx-auto">
-            {loading ? (
-              <p className="text-blue-600 text-center">Loading...</p>
-            ) : advert ? (
-              <div>
-                <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
-                  {advert.name}
-                </h2>
+          {loading ? (
+            <p className="text-blue-600 text-center">Loading...</p>
+          ) : advert ? (
+            <>
+              <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
+                {advert.name}
+              </h2>
       
-                {advert.image && (
-                  <img
-                    src={advert.image}
-                    alt={advert.name}
-                    className="w-full max-h-64 object-cover rounded-xl mb-4"
-                  />
-                )}
+              {advert.image && (
+                <img
+                  src={advert.image}
+                  alt={advert.name}
+                  className="w-full max-h-64 object-cover rounded-xl mb-4"
+                />
+              )}
       
-                <p>
-                  <strong>Descripción:</strong> {advert.description}
-                </p>
+              <p>
+                <strong>Descripción:</strong> {advert.description}
+              </p>
       
-                <p>
-                  <strong>Precio:</strong> {advert.price} €
-                </p>
+              <p>
+                <strong>Precio:</strong> {advert.price} €
+              </p>
       
-                <p>
-                  <strong>Tipo:</strong>{' '}
-                  {advert.type === 'sell' ? 'En venta' : 'Se busca'}
-                </p>
+              <p>
+                <strong>Tipo:</strong>{' '}
+                {advert.type === 'sell' ? 'En venta' : 'Se busca'}
+              </p>
       
-                <p>
-                  <strong>Categorías:</strong> {advert.tags.join(', ')}
-                </p>
+              <p>
+                <strong>Categorías:</strong> {advert.tags.join(', ')}
+              </p>
       
-                <p>
-                  <strong>Vendedor:</strong> {advert.owner?.username || advert.owner}
-                </p>
-              </div>
-            ) : (
-              <p className="text-red-600">No se encontró el anuncio.</p>
-            )}
-          </div>
+              <p>
+                <strong>Vendedor:</strong> {advert.owner?.username || advert.owner}
+              </p>
+            </>
+          ) : (
+            <p className="text-red-600">No se encontró el anuncio.</p>
+          )}
         </Page>
       );
+      
       
 }
 
