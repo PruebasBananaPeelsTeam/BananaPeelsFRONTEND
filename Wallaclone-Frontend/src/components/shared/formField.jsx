@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormField = ({ label, ...props }) => {
+const FormField = React.memo(function FormField({ label, ...props }) {
   return (
     <div className="flex flex-col w-full">
       <label className="text-sm font-medium text-gray-700 mb-2">
@@ -13,6 +13,6 @@ const FormField = ({ label, ...props }) => {
       </label>
     </div>
   )
-}
+})
 
 export default FormField

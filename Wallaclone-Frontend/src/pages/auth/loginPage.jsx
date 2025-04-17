@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { login } from '../../services/auth-service.js'
 import { useNavigate } from 'react-router-dom'
 import FormField from '../../components/shared/formField.jsx'
@@ -14,9 +14,12 @@ function LoginPage() {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleInputChange = (event) => {
-    setInput({ ...input, [event.target.name]: event.target.value })
-  }
+  const handleInputChange = useCallback((event) => {
+    setInput((prevInput) => ({
+      ...prevInput,
+      [event.target.name]: event.target.value,
+    }));
+  }, [])
 
   // error Timer
   useEffect(() => {
