@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { login } from '../../services/auth-service.js'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import { isApiClientError } from '../../api/client'
 import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 import Loader from '../../components/shared/loader.jsx'
+import { InfoCard } from '../../components/shared/infoCard.jsx'
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -13,9 +14,12 @@ function LoginPage() {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleInputChange = (event) => {
-    setInput({ ...input, [event.target.name]: event.target.value })
-  }
+  const handleInputChange = useCallback((event) => {
+    setInput((prevInput) => ({
+      ...prevInput,
+      [event.target.name]: event.target.value,
+    }));
+  }, [])
 
   // error Timer
   useEffect(() => {
@@ -81,7 +85,7 @@ function LoginPage() {
           <div className="flex items-center justify-around">
             <Button type="submit" className="" disabled={isLoading}>
               LogIn
-              {isLoading && <Loader/>}
+              {isLoading && <Loader />}
             </Button>
           </div>
           {/* errors pop up */}
@@ -89,24 +93,31 @@ function LoginPage() {
         </form>
 
         {/* welcomming card */}
-        <div className="m-5">
-          <h2 className="font-bold text-2xl text-center">Hi!</h2>
-          <p className="text-center mt-2">Welcome to Wallaclone!</p>
-          <p className="text-center mt-2">
+        <InfoCard
+         title={
+          <h2 className="font-bold text-3xl mt-1.5 text-center">Hi!</h2>
+        }
+        subtitle={
+          <p className="text-center text-2xl mt-4">Welcome to Wallaclone!</p>
+        }
+        message={
+          <p className="text-center text-2xl mt-4 p-2">
             Please log in to access your account.
           </p>
-          <div className="flex items-center flex-col text-xs justify-around p-4 mt-5">
-            <p className="flex items-center h-full text-siz mb-1.5">
-              👇Don´t have an account yet?👇
-            </p>
-            <Link
-              className="cursor-pointer px-4 py-2 bg-[rgb(223,184,13)] text-white font-semibold  rounded-xl hover:bg-yellow-600 transition disabled:opacity-50"
-              to={'/register'}
-            >
-              Register
-            </Link>
-          </div>
-        </div>
+        }
+        footerText={
+          <p className="text-center text-2xl items-center h-full mb-4">
+            👇Don’t have an account yet?👇
+          </p>
+        }
+        linkText={
+          <span className="cursor-pointer px-4 py-2 bg-[rgb(223,184,13)] text-white font-semibold rounded-xl hover:bg-yellow-600 transition disabled:opacity-50">
+            Register
+          </span>
+        }
+        linkTo="/register"
+        className="text-center text-2xl justify-around p-4 m-5"
+      />
       </div>
     </>
   )
