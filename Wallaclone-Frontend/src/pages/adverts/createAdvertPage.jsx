@@ -4,6 +4,7 @@ import { createAdvert, getTags } from '../../services/adverts-service.js'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import Loader from '../../components/shared/loader.jsx'
+import Page from '../../components/layout/page.jsx'
 
 const CreateAdvertPage = () => {
   const [formData, setFormData] = useState({
@@ -111,6 +112,7 @@ const CreateAdvertPage = () => {
   }
 
   return (
+    <Page>
     <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
       <h2 className="text-2xl font-bold mb-4 text-center">
         Crear nuevo anuncio
@@ -233,6 +235,7 @@ const CreateAdvertPage = () => {
         </Button> 
       </form>
     </div>
+    </Page>
   )
 }
 
