@@ -5,6 +5,7 @@ import { isApiClientError } from '../../api/client'
 import FormField from '../../components/shared/formField'
 import Button from '../../components/shared/button'
 import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
+import Loader from '../../components/shared/loader.jsx'
 
 function RegisterPage() {
   const [input, setInput] = useState({ email: '', password: '', username: '' })
@@ -99,9 +100,8 @@ function RegisterPage() {
           type="submit"
           disabled={
             isLoading || !input.email || !input.password || !input.username
-          }
-        >
-          {isLoading ? 'Registering...' : 'Register'}
+          }>REGISTER
+          {isLoading && <Loader/>}
         </Button>
 
         {/* errors pop up */}
