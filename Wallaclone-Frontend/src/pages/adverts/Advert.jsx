@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
+import { slugify } from '../../utils/slugify';
 
 const Advert = ({ advert }) => {
   const { _id, name, description, price, type, image, owner } = advert
+
+  const slug = slugify(name);
 
   const baseURL = import.meta.env.VITE_API_URL
 
@@ -12,13 +15,13 @@ const Advert = ({ advert }) => {
     : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
 
   return (
-    <Link to={`/adverts/${_id}`}>
+    <Link to={`/adverts/${_id}/${slug}`}>
       <article className="advert cursor-pointer">
         <div className="advert-details">
           <div>
             <img
               src={imageUrl}
-              alt=""
+              alt={name}
               className="w-full h-50 object-cover mb-3"
             />
           </div>

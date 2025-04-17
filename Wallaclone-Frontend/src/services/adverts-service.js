@@ -30,3 +30,9 @@ export const getTags = async () => {
   const response = await client.get('/api/tags')
   return response.data.results || response.data
 }
+
+export const getAdvertDetail = async (advertId, slug = "") => {
+  const url = `${advertsUrl}/${advertId}/${slug}`;
+  const response = await client.get(url)
+  return response.data.result
+}
