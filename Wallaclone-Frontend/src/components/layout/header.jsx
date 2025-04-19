@@ -1,9 +1,9 @@
 import Burger from '../shared/burguer.jsx'
 import Logout from '../shared/logout.jsx'
-import { useAuth } from '../../context/AuthContext.jsx' 
+import { useAuth } from '../../context/AuthContext.jsx'
 
 export default function Header() {
-const { isAuthenticated} = useAuth()
+  const { isAuthenticated } = useAuth()
 
   return (
     <header className="bg-gradient-to-l from-yellow-600 via-orange-500 to-red-800 p-4">

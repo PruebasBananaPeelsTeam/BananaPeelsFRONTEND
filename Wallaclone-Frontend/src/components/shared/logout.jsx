@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../context/AuthContext.jsx' 
+import React, { useState } from 'react'
+import { useAuth } from '../../context/AuthContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import LogoutButton from '../shared/logoutButton.jsx'
 import ConfirmationModalCard from './confirmationModalCard.jsx'
@@ -19,7 +19,7 @@ function Logout() {
       <LogoutButton onClick={() => setShowModal(true)} />
       {showModal && (
         <ConfirmationModalCard
-          message={"Sure you want to leave?"}
+          message={'Sure you want to leave?'}
           onConfirm={handleLogout}
           onCancel={() => setShowModal(false)}
         />

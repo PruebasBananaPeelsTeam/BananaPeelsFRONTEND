@@ -7,9 +7,7 @@ import { setAuthorizationHeader } from './api/client.js'
 import { AuthProvider } from './context/AuthContext.jsx'
 import storage from './utils/storage.js'
 
-
-
-const token = storage.get('token') 
+const token = storage.get('token')
 if (token) {
   setAuthorizationHeader(token)
 }

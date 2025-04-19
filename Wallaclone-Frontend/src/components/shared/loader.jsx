@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const Loader = () => {
   return (
@@ -17,12 +17,12 @@ const Loader = () => {
         </div>
       </div>
     </StyledWrapper>
-  );
+  )
 }
 
 const StyledWrapper = styled.div`
-    /* color used to softly clip top and bottom of the .words container */
-   .card {
+  /* color used to softly clip top and bottom of the .words container */
+  .card {
     --bg-color: #212121;
     background-color: var(--bg-color);
     padding: 0.4rem 0.8rem;
@@ -31,7 +31,7 @@ const StyledWrapper = styled.div`
 
   .loader {
     color: rgb(124, 124, 124);
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 10px;
     box-sizing: content-box;
@@ -47,7 +47,7 @@ const StyledWrapper = styled.div`
   }
 
   .words::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -100,6 +100,6 @@ const StyledWrapper = styled.div`
       transform: translateY(-400%);
     }
   }
-`;
+`
 
-export default Loader;
+export default Loader
