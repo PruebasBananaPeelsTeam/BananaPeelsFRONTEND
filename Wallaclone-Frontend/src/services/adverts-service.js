@@ -36,7 +36,8 @@ export const getAdvertDetail = async (advertId, slug = '') => {
   return response.data.result
 }
 
-export const getMyAdverts = async (id) => {
-  const response = await client.get('/api/myAdverts', id)
+export const getMyAdverts = async () => {
+  const response = await client.get('/api/myAdverts');
   return response.data.results
 }
+
