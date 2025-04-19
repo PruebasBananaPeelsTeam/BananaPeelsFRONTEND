@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Burger from '../shared/burguer.jsx'
 import Logout from '../shared/logout.jsx'
 import { useAuth } from '../../context/AuthContext.jsx'
@@ -13,6 +14,7 @@ export default function Header() {
         </div>
         <Burger />
         {isAuthenticated && <Logout />}
+        
       </div>
     </header>
   )

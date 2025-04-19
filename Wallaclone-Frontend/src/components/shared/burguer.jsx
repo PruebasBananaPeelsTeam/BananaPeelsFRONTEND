@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 export default function Burger() {
   const [isOpen, setIsOpen] = useState(false)
+  const { isAuthenticated } = useAuth()
 
   const toggleMenu = () => setIsOpen(!isOpen)
   const closeMenu = () => setIsOpen(false)
@@ -35,15 +37,26 @@ export default function Burger() {
         <Link to="/" className="text-white hover:text-yellow-300">
           Adverts
         </Link>
-        <Link to="/login" className="text-white hover:text-yellow-300">
-          Login
-        </Link>
-        <Link to="/register" className="text-white hover:text-yellow-300">
-          Register
-        </Link>
+
+        {!isAuthenticated && (
+          <>
+            <Link to="/login" className="text-white hover:text-yellow-300">
+              Login
+            </Link>
+            <Link to="/register" className="text-white hover:text-yellow-300">
+              Register
+            </Link>
+          </>
+        )}
+
         <Link to="/adverts/new" className="text-white hover:text-yellow-300">
           New Advert
         </Link>
+        {isAuthenticated && (
+          <Link to="/myAdverts" className="text-white hover:text-yellow-300">
+            My Adverts
+          </Link>
+        )}
       </nav>
 
       {/* Menú desplegable en móviles */}
@@ -57,20 +70,27 @@ export default function Burger() {
             >
               Adverts
             </Link>
-            <Link
-              to="/login"
-              onClick={closeMenu}
-              className="text-white hover:text-yellow-300"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              onClick={closeMenu}
-              className="text-white hover:text-yellow-300"
-            >
-              Register
-            </Link>
+
+            {!isAuthenticated && (
+              <>
+
+              <Link
+                to="/login"
+                onClick={closeMenu}
+                className="text-white hover:text-yellow-300"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                onClick={closeMenu}
+                className="text-white hover:text-yellow-300"
+              >
+                Register
+              </Link>
+            </>
+          )}
+
             <Link
               to="/adverts/new"
               onClick={closeMenu}
@@ -78,6 +98,11 @@ export default function Burger() {
             >
               New Advert
             </Link>
+            {isAuthenticated && (
+              <Link to="/myAdverts" onClick={closeMenu} className="text-white hover:text-yellow-300">
+                My Adverts
+              </Link>
+            )}
           </nav>
         </div>
       )}
