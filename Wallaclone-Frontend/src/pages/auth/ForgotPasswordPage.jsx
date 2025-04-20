@@ -20,11 +20,11 @@ function ForgotPasswordPage() {
 
     try {
       const response = await client.post('/api/auth/forgot-password', { email })
-      setSuccessMessage(response.data.meesage)
+      setSuccessMessage(response.data.message)
     } catch (err) {
       setError({
         code: err.code || 'ERROR',
-        message: err.meesage || 'An error occurred. Please try again later.',
+        message: err.message || 'An error occurred. Please try again later.',
       })
     } finally {
       setLoading(false)
@@ -59,3 +59,5 @@ function ForgotPasswordPage() {
     </Page>
   )
 }
+
+export default ForgotPasswordPage
