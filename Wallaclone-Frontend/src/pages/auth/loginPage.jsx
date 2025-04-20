@@ -99,6 +99,18 @@ function LoginPage() {
           <FormErrorPopup error={error} onClose={() => setError(null)} />
         </form>
 
+        {/* forgot password */}
+        <div className="flex items-center justify-center mt-4">
+          <p className="text-center text-2xl">
+            <a
+              href="/forgot-password"
+              className="text-blue-500 hover:underline"
+            >
+              Forgot your password?
+            </a>
+          </p>
+        </div>
+
         {/* welcomming card */}
         <InfoCard
           title={<h2 className="font-bold text-3xl mt-1.5 text-center">Hi!</h2>}
