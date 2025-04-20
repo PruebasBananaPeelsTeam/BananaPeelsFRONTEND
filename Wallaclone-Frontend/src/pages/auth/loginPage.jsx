@@ -8,6 +8,7 @@ import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import { InfoCard } from '../../components/shared/infoCard.jsx'
 import { useAuth } from '../../context/AuthContext.jsx'
+import { Link } from 'react-router-dom'
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -100,16 +101,12 @@ function LoginPage() {
         </form>
 
         {/* forgot password */}
-        <div className="flex items-center justify-center mt-4">
-          <p className="text-center text-2xl">
-            <a
-              href="/forgot-password"
-              className="text-blue-500 hover:underline"
-            >
-              Forgot your password?
-            </a>
-          </p>
-        </div>
+        <Link
+  to="/forgot-password"
+  className="text-sm text-blue-600 hover:underline text-center block"
+>
+  ¿Olvidaste tu contraseña?
+</Link>
 
         {/* welcomming card */}
         <InfoCard
