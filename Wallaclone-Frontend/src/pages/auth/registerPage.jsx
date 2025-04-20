@@ -100,8 +100,10 @@ function RegisterPage() {
           type="submit"
           disabled={
             isLoading || !input.email || !input.password || !input.username
-          }>REGISTER
-          {isLoading && <Loader/>}
+          }
+        >
+          REGISTER
+          {isLoading && <Loader />}
         </Button>
 
         {/* errors pop up */}
