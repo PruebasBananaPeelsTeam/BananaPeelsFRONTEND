@@ -1,7 +1,7 @@
 import Header from './header'
 import Footer from './footer'
 import Banner from './banner'
-import Tag from './Tag'
+import Tag from './tag'
 import AdvertsPage from '../../pages/adverts/AdvertsPage'
 import SearchBar from '../shared/SearchBar'
 
