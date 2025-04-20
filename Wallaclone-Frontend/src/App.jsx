@@ -8,6 +8,7 @@ import AdvertsPage from './pages/adverts/AdvertsPage.jsx'
 import AdvertDetailPage from './pages/adverts/AdvertDetailPage.jsx'
 import PrivateRoute from './components/shared/PrivateRoute.jsx'
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage.jsx'
+import ResetPasswordPage from './pages/auth/resetPasswordPage.jsx'
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         }
       />
       <Route path='/forgot-password' element={<ForgotPasswordPage />}></Route>
+      <Route path='/reset-password/:token' element={<ResetPasswordPage />}></Route>
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />
