@@ -33,7 +33,7 @@ export const getTags = async () => {
 export const getAdvertDetail = async (advertId, slug = '') => {
   const url = `${advertsUrl}/${advertId}/${slug}`
   const response = await client.get(url)
-  return response.data.result
+  return response.data.results
 }
 
 export const getMyAdverts = async () => {
