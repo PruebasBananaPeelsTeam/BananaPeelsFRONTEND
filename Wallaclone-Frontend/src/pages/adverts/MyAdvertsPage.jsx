@@ -3,6 +3,7 @@ import {getMyAdverts} from '../../services/adverts-service.js'
 import Advert from './Advert.jsx'
 import { isApiClientError } from '../../api/client'
 import Page from '../../components/layout/page'
+import Loader from '../../components/shared/loader.jsx'
 
 
 function MyAdvertsPage() {
@@ -34,7 +35,7 @@ function MyAdvertsPage() {
       }, []);
     
       if (loading) {
-        return <div>Loading adverts...</div>;
+        return <Loader/>;
       }
     
       if (error) {
