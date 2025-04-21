@@ -1,7 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import { getAdvertDetail } from '../../services/adverts-service'
 import { isApiClientError } from '../../api/client'
 import Page from '../../components/layout/page'
