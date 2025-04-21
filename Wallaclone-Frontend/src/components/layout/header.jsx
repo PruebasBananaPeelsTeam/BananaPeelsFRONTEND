@@ -13,7 +13,6 @@ const { isAuthenticated} = useAuth()
         <div className="text-[20px] font-extrabold bg-gradient-to-r from-yellow-400 via-green-400 to-orange-400 text-transparent bg-clip-text drop-shadow-2xl">
           <p>BananaPeels</p>
         </div>
-        {location.pathname === '/' && <SearchBar />}
         <Burger />
         {isAuthenticated && <Logout />}
       </div>

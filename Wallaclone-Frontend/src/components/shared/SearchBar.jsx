@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../shared/button.jsx';
+import FormErrorPopup from '../shared/formErrorPopUp.jsx';
 
 function SearchBar() {
   const [filters, setFilters] = useState({
@@ -8,8 +10,23 @@ function SearchBar() {
     priceMax: '',
   });
 
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null)
+      }, 4000)
+      return () => clearTimeout(timer)
+    }
+  }, [error])
+
+  const handleResetFilters = () => {
+    setFilters({ name: '', priceMin: '', priceMax: '' });
+    setError(null);
+    navigate('/');
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -19,63 +36,89 @@ function SearchBar() {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
+
+    const min = Number(filters.priceMin);
+    const max = Number(filters.priceMax);
+
+    // ✅ Validations
+    if (min && max && min > max) {
+      setError({
+        code: 'INVALID_PRICE_RANGE',
+        message: 'The minimum price cannot be greater than the maximum.',
+      });
+      return;
+    }
+
+    if (!filters.name && !filters.priceMin && !filters.priceMax) {
+      setError({
+        code: 'EMPTY_FILTERS',
+        message: 'You must complete at least one filter.',
+      });
+      return;
+    }
+
 
     const queryParams = new URLSearchParams();
     if (filters.name) queryParams.append('name', filters.name);
     if (filters.priceMin) queryParams.append('priceMin', filters.priceMin);
     if (filters.priceMax) queryParams.append('priceMax', filters.priceMax);
 
-    try {
-      await navigate(`/?${queryParams.toString()}`);
-    } catch (error) {
-      console.error('Error navigating:', error);
-    } finally {
-      setLoading(false);
-    }
+    navigate(`/?${queryParams.toString()}`);
+
+    setTimeout(() => {
+      const element = document.getElementById('adverts-list');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 300);
+
+    setFilters({ name: '', priceMin: '', priceMax: '' });
+    setError(null); // clear error when doing valid search
   };
 
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col md:flex-row items-center gap-2 bg-white p-4 rounded-2xl shadow-md max-w-3xl py-1 md:py-2 mx-auto"
-    >
-      <input
-        type="text"
-        name="name"
-        value={filters.name}
-        onChange={handleChange}
-        placeholder="🔍 Buscar..."
-        className="flex-1 p-2 border rounded-xl placeholder-orange-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-300"
-      />
-      <input
-        type="number"
-        name="priceMin"
-        value={filters.priceMin}
-        onChange={handleChange}
-        placeholder="Precio mínimo"
-        className="w-24 p-2 border rounded-xl placeholder-orange-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-300"
-      />
-      <input
-        type="number"
-        name="priceMax"
-        value={filters.priceMax}
-        onChange={handleChange}
-        placeholder="Precio máximo"
-        className="w-24 p-2 border rounded-xl placeholder-orange-500 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-300"
-      />
-      <button
-        type="submit"
-        className={`p-2 px-4 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition duration-200 ${
-          loading ? 'bg-orange-300 cursor-not-allowed' : ''
-        }`}
-        disabled={loading}
+    <div className='flex items-center flex-col'>
+      {error && (
+        <FormErrorPopup error={error} onClose={() => setError(null)} />
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-wrap items-center justify-center gap-2 bg-white p-2 rounded-md shadow max-w-xl mx-auto mt-5"
       >
-        {loading ? <span className="animate-spin">🔄</span> : 'Buscar'}
-      </button>
-    </form>
+        <input
+          type="text"
+          name="name"
+          value={filters.name}
+          onChange={handleChange}
+          placeholder="🔍"
+          className="w-32 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+        />
+        <input
+          type="number"
+          name="priceMin"
+          value={filters.priceMin}
+          onChange={handleChange}
+          placeholder="Min €"
+          className="w-20 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+        />
+        <input
+          type="number"
+          name="priceMax"
+          value={filters.priceMax}
+          onChange={handleChange}
+          placeholder="Max €"
+          className="w-20 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+        />
+        <Button type="submit">Search</Button>
+        <Button type="button" onClick={handleResetFilters}>
+          Reset
+        </Button>
+      </form>
+    </div>
   );
 }
 
