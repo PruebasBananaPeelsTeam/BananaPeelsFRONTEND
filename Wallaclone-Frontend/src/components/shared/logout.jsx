@@ -19,7 +19,7 @@ function Logout() {
       <LogoutButton onClick={() => setShowModal(true)} />
       {showModal && (
         <ConfirmationModalCard
-          message={"Sure you want to leave?"}
+          message={'Sure you want to leave?'}
           onConfirm={handleLogout}
           onCancel={() => setShowModal(false)}
         />

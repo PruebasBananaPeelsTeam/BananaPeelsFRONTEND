@@ -1,4 +1,8 @@
-import { client, setAuthorizationHeader, removeAuthorizationHeader } from '../api/client.js'
+import {
+  client,
+  setAuthorizationHeader,
+  removeAuthorizationHeader,
+} from '../api/client.js'
 
 export const login = async (credentials) => {
   const response = await client.post('/api/login', credentials)

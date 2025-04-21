@@ -15,7 +15,7 @@ export function InfoCard({
     <div className={className} {...props}>
       {title}
       {subtitle}
-      {message }
+      {message}
       <div>
         {footerText}
         {linkText && linkTo && <Link to={linkTo}>{linkText}</Link>}
