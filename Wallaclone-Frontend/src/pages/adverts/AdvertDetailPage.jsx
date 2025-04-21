@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { getAdvertDetail } from '../../services/adverts-service'
 import { isApiClientError } from '../../api/client'
 import Page from '../../components/layout/page'
+import Loader from '../../components/shared/loader'
 
 function AdvertDetailPage() {
   const params = useParams()
@@ -34,7 +35,7 @@ function AdvertDetailPage() {
   return (
     <Page>
       {loading ? (
-        <p className="text-blue-600 text-center">Loading...</p>
+        <Loader/>
       ) : advert ? (
         <>
           <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
