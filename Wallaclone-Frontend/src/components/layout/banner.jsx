@@ -1,6 +1,6 @@
 export default function Banner() {
   return (
-    <section className="relative w-full mb-6 mt-16">
+    <section className="relative w-full mb-6 mt-6">
       {' '}
       {/* Agregamos mt-16 para dar espacio arriba */}
       <div className="flex justify-center items-center space-x-4">
