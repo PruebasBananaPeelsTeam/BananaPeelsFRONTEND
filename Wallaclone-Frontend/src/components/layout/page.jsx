@@ -1,5 +1,5 @@
-import Header from './header';
-import Footer from './footer';
+import Header from './header'
+import Footer from './footer'
 
 export default function Page({ title, children }) {
   return (
@@ -19,5 +19,5 @@ export default function Page({ title, children }) {
 
       <Footer />
     </div>
-  );
+  )
 }

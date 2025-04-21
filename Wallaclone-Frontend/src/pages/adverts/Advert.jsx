@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import { slugify } from '../../utils/slugify';
+import { slugify } from '../../utils/slugify'
 
 const Advert = ({ advert }) => {
   const { _id, name, description, price, type, image, owner } = advert
 
-  const slug = slugify(name);
+  const slug = slugify(name)
 
   const baseURL = import.meta.env.VITE_API_URL
 
