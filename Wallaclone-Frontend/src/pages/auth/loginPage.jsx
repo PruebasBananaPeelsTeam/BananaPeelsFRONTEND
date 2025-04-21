@@ -8,6 +8,7 @@ import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import { InfoCard } from '../../components/shared/infoCard.jsx'
 import { useAuth } from '../../context/AuthContext.jsx'
+import { Link } from 'react-router-dom'
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -98,6 +99,14 @@ function LoginPage() {
           {/* errors pop up */}
           <FormErrorPopup error={error} onClose={() => setError(null)} />
         </form>
+
+        {/* forgot password */}
+        <Link
+  to="/forgot-password"
+  className="text-sm text-blue-600 hover:underline text-center block"
+>
+  ¿Olvidaste tu contraseña?
+</Link>
 
         {/* welcomming card */}
         <InfoCard

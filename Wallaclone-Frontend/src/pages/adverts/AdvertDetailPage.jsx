@@ -81,4 +81,3 @@ function AdvertDetailPage() {
 }
 
 export default AdvertDetailPage
-
