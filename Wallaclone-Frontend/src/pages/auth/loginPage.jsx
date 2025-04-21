@@ -47,7 +47,7 @@ function LoginPage() {
       console.log('TOKEN GUARDADO:', userData.tokenJWT)
       console.log(`input´s value are ${input.username} - ${input.password}`)
       // remember me ?
-      
+
       navigate('/')
     } catch (error) {
       if (isApiClientError(error)) {

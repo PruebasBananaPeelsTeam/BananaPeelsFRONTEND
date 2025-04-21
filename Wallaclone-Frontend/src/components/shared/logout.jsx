@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../context/AuthContext.jsx' 
+import React, { useState } from 'react'
+import { useAuth } from '../../context/AuthContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import LogoutButton from '../shared/logoutButton.jsx'
 import ConfirmationModalCard from './confirmationModalCard.jsx'
