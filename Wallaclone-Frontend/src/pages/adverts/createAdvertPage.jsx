@@ -102,7 +102,7 @@ const CreateAdvertPage = () => {
         tags: [],
       })
       setImagePreview(null)
-      navigate('/adverts')
+      navigate('/')
     } catch (err) {
       console.error(err)
       setError('Error creando el anuncio. Inténtalo de nuevo.')
