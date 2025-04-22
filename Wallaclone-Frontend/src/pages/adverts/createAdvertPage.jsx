@@ -228,7 +228,7 @@ const CreateAdvertPage = () => {
           )}
 
           <Button type="submit" disabled={loading}>
-            {loading && <Loader />}
+            {loading && <Loader />}Submit
           </Button>
         </form>
       </div>
