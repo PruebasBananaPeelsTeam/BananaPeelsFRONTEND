@@ -38,17 +38,16 @@ export const getAdvertDetail = async (advertId, slug = '') => {
 }
 
 export const getMyAdverts = async () => {
-  const response = await client.get('/api/myAdverts');
+  const response = await client.get('/api/myAdverts')
   return response.data.results
 }
 
 export const updateAdvert = async (advertId, updatedData) => {
   const url = `${advertsUrl}/${advertId}`
-  const response = await client.put(url, updatedData,{
+  const response = await client.put(url, updatedData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   })
   return response.data.results
 }
-

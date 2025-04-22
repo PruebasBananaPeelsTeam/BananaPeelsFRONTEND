@@ -35,7 +35,7 @@ function AdvertDetailPage() {
   return (
     <Page>
       {loading ? (
-        <Loader/>
+        <Loader />
       ) : advert ? (
         <>
           <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">

@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { getTags } from '../../services/adverts-service.js';
-import FormErrorPopup from './formErrorPopUp.jsx';
+import { useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { getTags } from '../../services/adverts-service.js'
+import FormErrorPopup from './formErrorPopUp.jsx'
 
 const tagImages = {
   lifestyle: '/images/Decoracion.png',
@@ -13,15 +13,14 @@ const tagImages = {
   garden: '/images/Menaje.png',
   clothes: '/images/Textil.png',
   sports: '/images/Textil.png',
-};
+}
 
 function TagFilter() {
-  const [tags, setTags] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const location = useLocation();
-
+  const [tags, setTags] = useState([])
+  const [selectedTags, setSelectedTags] = useState([])
+  const [error, setError] = useState(null)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   // 🔁 Cargar todos los tags disponibles
   useEffect(() => {
@@ -31,39 +30,37 @@ function TagFilter() {
         setError({
           code: 'TAGS_FETCH_ERROR',
           message: 'Could not load tags. Please try again later.',
-        });
-      });
-  }, []);
+        })
+      })
+  }, [])
 
   const handleTagClick = (clickedTag) => {
-    let updated;
+    let updated
 
     if (selectedTags.includes(clickedTag)) {
-      updated = selectedTags.filter((tag) => tag !== clickedTag);
+      updated = selectedTags.filter((tag) => tag !== clickedTag)
     } else {
-      updated = [...selectedTags, clickedTag];
+      updated = [...selectedTags, clickedTag]
     }
 
-    setSelectedTags(updated);
+    setSelectedTags(updated)
 
-    const searchParams = new URLSearchParams();
-    updated.forEach((tag) => searchParams.append('tag', tag));
+    const searchParams = new URLSearchParams()
+    updated.forEach((tag) => searchParams.append('tag', tag))
 
-    navigate(`/?${searchParams.toString()}`);
+    navigate(`/?${searchParams.toString()}`)
 
     setTimeout(() => {
-      const element = document.getElementById('adverts-list');
+      const element = document.getElementById('adverts-list')
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: 'smooth' })
       }
-    }, 300);
-  };
+    }, 300)
+  }
 
   return (
     <>
-      {error && (
-        <FormErrorPopup error={error} onClose={() => setError(null)} />
-      )}
+      {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
 
       <div className="flex flex-wrap justify-center gap-4 p-4">
         {tags.map((tag) => (
@@ -80,7 +77,7 @@ function TagFilter() {
         ))}
       </div>
     </>
-  );
+  )
 }
 
-export default TagFilter;
+export default TagFilter

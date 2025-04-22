@@ -1,23 +1,27 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getAdvertDetail, updateAdvert, getTags } from '../../services/adverts-service.js'
+import {
+  getAdvertDetail,
+  updateAdvert,
+  getTags,
+} from '../../services/adverts-service.js'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import Page from '../../components/layout/page.jsx'
 
 function UpdateAdvertPage() {
-    const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        price: '',
-        type: 'sell',  
-        image: null,
-        tags: [],
-      })
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    price: '',
+    type: 'sell',
+    image: null,
+    tags: [],
+  })
 
-  const { advertId } = useParams() 
-  const [tagsList, setTagsList] = useState([]) 
+  const { advertId } = useParams()
+  const [tagsList, setTagsList] = useState([])
   const [imagePreview, setImagePreview] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -28,19 +32,18 @@ function UpdateAdvertPage() {
     const fetchAdvertDetails = async () => {
       setLoading(true)
       setError(null)
-      
-      try {
-        const advertDetails = await getAdvertDetail(advertId)  
-        setFormData({
-            name: advertDetails.name,
-            description: advertDetails.description,
-            price: advertDetails.price,
-            type: advertDetails.type,
-            image: null,
-            tags: advertDetails.tags,
-          })
-        setImagePreview(advertDetails.image) 
 
+      try {
+        const advertDetails = await getAdvertDetail(advertId)
+        setFormData({
+          name: advertDetails.name,
+          description: advertDetails.description,
+          price: advertDetails.price,
+          type: advertDetails.type,
+          image: null,
+          tags: advertDetails.tags,
+        })
+        setImagePreview(advertDetails.image)
       } catch (err) {
         setError('Error loading the advert')
       } finally {
@@ -65,7 +68,6 @@ function UpdateAdvertPage() {
     fetchTags()
   }, [])
 
-
   // Manejar los cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value, files } = e.target
@@ -82,16 +84,19 @@ function UpdateAdvertPage() {
   const validateForm = () => {
     const errors = {}
     if (!formData.name.trim()) errors.name = 'Name is required.'
-    if (!formData.description.trim()) errors.description = 'Description is required.'
-    if (!formData.price || formData.price <= 0) errors.price = 'Price must be greater than 0.'
-    if (formData.tags.length === 0) errors.tags = 'You must select at least one category.'
+    if (!formData.description.trim())
+      errors.description = 'Description is required.'
+    if (!formData.price || formData.price <= 0)
+      errors.price = 'Price must be greater than 0.'
+    if (formData.tags.length === 0)
+      errors.tags = 'You must select at least one category.'
     return errors
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError(null)
-    
+
     // Validar el formulario
     const validationErrors = validateForm()
     if (Object.keys(validationErrors).length > 0) {
@@ -105,7 +110,7 @@ function UpdateAdvertPage() {
     dataToSend.append('description', formData.description)
     dataToSend.append('price', formData.price)
     dataToSend.append('type', formData.type)
-    
+
     formData.tags.forEach((tag) => {
       dataToSend.append('tags', tag)
     })
@@ -116,8 +121,8 @@ function UpdateAdvertPage() {
 
     try {
       setLoading(true)
-      await updateAdvert(advertId, dataToSend)  
-      navigate(`/adverts/${advertId}`)  
+      await updateAdvert(advertId, dataToSend)
+      navigate(`/adverts/${advertId}`)
     } catch (err) {
       setError(err.response?.data?.message || 'Error updating the advert.')
     } finally {
@@ -131,11 +136,13 @@ function UpdateAdvertPage() {
   return (
     <Page>
       <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-        <h2 className="text-2xl font-bold mb-4 text-center">Actualizar anuncio</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          Update Advert
+        </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField
-            label="Nombre del producto"
+            label="Product"
             type="text"
             name="name"
             value={formData.name}
@@ -143,7 +150,7 @@ function UpdateAdvertPage() {
             required
           />
           <FormField
-            label="Descripción"
+            label="Description"
             type="text"
             name="description"
             value={formData.description}
@@ -151,29 +158,31 @@ function UpdateAdvertPage() {
             required
           />
           <FormField
-            label="Precio (€)"
+            label="Price (€)"
             type="number"
             name="price"
             value={formData.price}
             onChange={handleChange}
             required
           />
-          
+
           <div className="flex flex-col w-full">
-            <label className="text-sm font-medium text-gray-700 mb-2">Tipo</label>
+            <label className="text-sm font-medium text-gray-700 mb-2">
+              Type
+            </label>
             <select
               name="type"
               value={formData.type}
               onChange={handleChange}
               className="flex w-full border border-gray-300 rounded-xl px-4 py-2"
             >
-              <option value="sell">En venta</option>
-              <option value="wanted">Se busca</option>
+              <option value="sell">On sale</option>
+              <option value="wanted">Wanted</option>
             </select>
           </div>
 
           <div className="flex flex-col w-full">
-            <p className="text-sm font-medium text-gray-700 mb-2">Categorías</p>
+            <p className="text-sm font-medium text-gray-700 mb-2">Tags</p>
             <div className="flex flex-wrap gap-4">
               {/*  listado de tags disponibles */}
               {tagsList.map((tag) => (
@@ -199,7 +208,9 @@ function UpdateAdvertPage() {
           </div>
 
           <div className="flex flex-col w-full">
-            <label className="text-sm font-medium text-gray-700 mb-2">Imagen</label>
+            <label className="text-sm font-medium text-gray-700 mb-2">
+              Image
+            </label>
             <input
               type="file"
               name="image"
@@ -211,7 +222,7 @@ function UpdateAdvertPage() {
 
           {imagePreview && (
             <div className="mt-2">
-              <p className="text-sm text-gray-500 mb-1">Vista previa:</p>
+              <p className="text-sm text-gray-500 mb-1">Preview:</p>
               <img
                 src={imagePreview}
                 alt="Vista previa"
@@ -221,7 +232,7 @@ function UpdateAdvertPage() {
           )}
 
           <Button type="submit" disabled={loading}>
-            {loading ? 'Actualizando...' : 'Actualizar anuncio'}
+            {loading ? 'Updating...' : 'Update advert'}
           </Button>
         </form>
       </div>
@@ -230,4 +241,3 @@ function UpdateAdvertPage() {
 }
 
 export default UpdateAdvertPage
-
