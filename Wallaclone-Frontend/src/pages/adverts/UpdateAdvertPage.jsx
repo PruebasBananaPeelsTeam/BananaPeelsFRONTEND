@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getAdvertDetail, updateAdvert } from '../../services/adverts-service.js'//crear updateAdvert
+import { getAdvertDetail, updateAdvert, getTags } from '../../services/adverts-service.js'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import Loader from '../../components/shared/loader.jsx'
@@ -23,7 +23,7 @@ function UpdateAdvertPage() {
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
-  // Cargar los detalles del anuncio
+  // Fetch advert details
   useEffect(() => {
     const fetchAdvertDetails = async () => {
       setLoading(true)
@@ -32,13 +32,13 @@ function UpdateAdvertPage() {
       try {
         const advertDetails = await getAdvertDetail(advertId)  
         setFormData({
-          ...formData,
-          name: advertDetails.name,
-          description: advertDetails.description,
-          price: advertDetails.price,
-          type: advertDetails.type,
-          tags: advertDetails.tags,
-        })
+            name: advertDetails.name,
+            description: advertDetails.description,
+            price: advertDetails.price,
+            type: advertDetails.type,
+            image: null,
+            tags: advertDetails.tags,
+          })
         setImagePreview(advertDetails.image) 
 
       } catch (err) {
@@ -50,6 +50,21 @@ function UpdateAdvertPage() {
 
     fetchAdvertDetails()
   }, [advertId])
+
+  // Fetch available tags
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const tags = await getTags()
+        setTagsList(tags)
+      } catch (err) {
+        console.error('Error loading tags', err)
+      }
+    }
+
+    fetchTags()
+  }, [])
+
 
   // Manejar los cambios en los campos del formulario
   const handleChange = (e) => {
@@ -80,7 +95,7 @@ function UpdateAdvertPage() {
     // Validar el formulario
     const validationErrors = validateForm()
     if (Object.keys(validationErrors).length > 0) {
-      setError('Please correct before proceeding')
+      setError('Please correct the errors before proceeding.')
       return
     }
 
@@ -104,7 +119,7 @@ function UpdateAdvertPage() {
       await updateAdvert(advertId, dataToSend)  
       navigate(`/adverts/${advertId}`)  
     } catch (err) {
-      setError('Error updating the advert.')
+      setError(err.response?.data?.message || 'Error updating the advert.')
     } finally {
       setLoading(false)
     }

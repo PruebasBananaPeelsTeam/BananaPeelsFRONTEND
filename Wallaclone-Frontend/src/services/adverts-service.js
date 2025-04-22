@@ -42,3 +42,13 @@ export const getMyAdverts = async () => {
   return response.data.results
 }
 
+export const updateAdvert = async (advertId, updatedData) => {
+  const url = `${advertsUrl}/${advertId}`
+  const response = await client.put(url, updatedData,{
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+  return response.data.results
+}
+
