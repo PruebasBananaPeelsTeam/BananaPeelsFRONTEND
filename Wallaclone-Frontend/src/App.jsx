@@ -10,6 +10,7 @@ import MyAdvertsPage from './pages/adverts/MyAdvertsPage.jsx';
 import PrivateRoute from './components/shared/PrivateRoute.jsx'
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage.jsx'
 import ResetPasswordPage from './pages/auth/resetPasswordPage.jsx'
+import UpdateAdvertPage from './pages/adverts/UpdateAdvertPage.jsx'
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />
+      <Route path='/adverts/:advertId/update' element={UpdateAdvertPage} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
