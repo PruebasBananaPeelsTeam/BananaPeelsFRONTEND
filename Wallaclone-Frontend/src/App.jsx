@@ -6,7 +6,7 @@ import NotFoundPage from './components/shared/notFoundPage'
 import CreateAdvertPage from './pages/adverts/createAdvertPage.jsx'
 import AdvertsPage from './pages/adverts/AdvertsPage.jsx'
 import AdvertDetailPage from './pages/adverts/AdvertDetailPage.jsx'
-import MyAdvertsPage from './pages/adverts/MyAdvertsPage.jsx';
+import MyAdvertsPage from './pages/adverts/MyAdvertsPage.jsx'
 import PrivateRoute from './components/shared/PrivateRoute.jsx'
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage.jsx'
 import ResetPasswordPage from './pages/auth/resetPasswordPage.jsx'
@@ -34,7 +34,7 @@ function App() {
           </PrivateRoute>
         }
       />
-      
+
       <Route
         path="/myAdverts"
         element={
@@ -44,8 +44,11 @@ function App() {
         }
       />
 
-      <Route path='/forgot-password' element={<ForgotPasswordPage />}></Route>
-      <Route path='/reset-password/:token' element={<ResetPasswordPage />}></Route>
+      <Route path="/forgot-password" element={<ForgotPasswordPage />}></Route>
+      <Route
+        path="/reset-password/:token"
+        element={<ResetPasswordPage />}
+      ></Route>
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />

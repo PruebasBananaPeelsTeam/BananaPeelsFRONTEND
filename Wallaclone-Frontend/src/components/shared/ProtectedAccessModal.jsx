@@ -10,7 +10,8 @@ const ProtectedAccessModal = () => {
           Restricted Access
         </h2>
         <p className="mb-6 text-center text-gray-700">
-          This section is reserved for registered users. Please log in to continue or go back to the home page.
+          This section is reserved for registered users. Please log in to
+          continue or go back to the home page.
         </p>
         <div className="flex justify-center gap-4">
           <button

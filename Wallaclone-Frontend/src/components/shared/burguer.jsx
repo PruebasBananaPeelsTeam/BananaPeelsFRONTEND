@@ -73,23 +73,22 @@ export default function Burger() {
 
             {!isAuthenticated && (
               <>
-
-              <Link
-                to="/login"
-                onClick={closeMenu}
-                className="text-white hover:text-yellow-300"
-              >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                onClick={closeMenu}
-                className="text-white hover:text-yellow-300"
-              >
-                Register
-              </Link>
-            </>
-          )}
+                <Link
+                  to="/login"
+                  onClick={closeMenu}
+                  className="text-white hover:text-yellow-300"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={closeMenu}
+                  className="text-white hover:text-yellow-300"
+                >
+                  Register
+                </Link>
+              </>
+            )}
 
             <Link
               to="/adverts/new"
@@ -99,7 +98,11 @@ export default function Burger() {
               New Advert
             </Link>
             {isAuthenticated && (
-              <Link to="/myAdverts" onClick={closeMenu} className="text-white hover:text-yellow-300">
+              <Link
+                to="/myAdverts"
+                onClick={closeMenu}
+                className="text-white hover:text-yellow-300"
+              >
                 My Adverts
               </Link>
             )}

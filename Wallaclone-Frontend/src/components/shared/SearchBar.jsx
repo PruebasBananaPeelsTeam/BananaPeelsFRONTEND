@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from '../shared/button.jsx';
-import FormErrorPopup from '../shared/formErrorPopUp.jsx';
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Button from '../shared/button.jsx'
+import FormErrorPopup from '../shared/formErrorPopUp.jsx'
 
 function SearchBar() {
   const [filters, setFilters] = useState({
     name: '',
     priceMin: '',
     priceMax: '',
-  });
+  })
 
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (error) {
@@ -23,76 +23,72 @@ function SearchBar() {
   }, [error])
 
   const handleResetFilters = () => {
-    setFilters({ name: '', priceMin: '', priceMax: '' });
-    setError(null);
-    navigate('/');
-  };
+    setFilters({ name: '', priceMin: '', priceMax: '' })
+    setError(null)
+    navigate('/')
+  }
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     setFilters((prev) => ({
       ...prev,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const trimmedName = filters.name.trim();
-    const min = Number(filters.priceMin);
-    const max = Number(filters.priceMax);
+    const trimmedName = filters.name.trim()
+    const min = Number(filters.priceMin)
+    const max = Number(filters.priceMax)
 
     // ✅ Validations
     if (min && max && min > max) {
       setError({
         code: 'INVALID_PRICE_RANGE',
         message: 'The minimum price cannot be greater than the maximum.',
-      });
-      return;
+      })
+      return
     }
 
     if (!filters.name && !filters.priceMin && !filters.priceMax) {
       setError({
         code: 'EMPTY_FILTERS',
         message: 'You must complete at least one filter.',
-      });
-      return;
+      })
+      return
     }
 
     if (trimmedName && !/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]*$/.test(trimmedName)) {
       setError({
         code: 'INVALID_NAME',
         message: 'The name filter can only contain letters.',
-      });
-      return;
+      })
+      return
     }
 
+    const queryParams = new URLSearchParams()
+    if (filters.name) queryParams.append('name', filters.name)
+    if (filters.priceMin) queryParams.append('priceMin', filters.priceMin)
+    if (filters.priceMax) queryParams.append('priceMax', filters.priceMax)
 
-    const queryParams = new URLSearchParams();
-    if (filters.name) queryParams.append('name', filters.name);
-    if (filters.priceMin) queryParams.append('priceMin', filters.priceMin);
-    if (filters.priceMax) queryParams.append('priceMax', filters.priceMax);
-
-    navigate(`/?${queryParams.toString()}`);
+    navigate(`/?${queryParams.toString()}`)
 
     setTimeout(() => {
-      const element = document.getElementById('adverts-list');
+      const element = document.getElementById('adverts-list')
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: 'smooth' })
       }
-    }, 300);
+    }, 300)
 
-    setFilters({ name: '', priceMin: '', priceMax: '' });
-    setError(null); // clear error when doing valid search
-  };
-
+    setFilters({ name: '', priceMin: '', priceMax: '' })
+    setError(null) // clear error when doing valid search
+  }
 
   return (
-    <div className='flex items-center flex-col'>
-      {error && (
-        <FormErrorPopup error={error} onClose={() => setError(null)} />
-      )}
+    <div className="flex items-center flex-col">
+      {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
 
       <form
         onSubmit={handleSubmit}
@@ -128,7 +124,7 @@ function SearchBar() {
         </Button>
       </form>
     </div>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar

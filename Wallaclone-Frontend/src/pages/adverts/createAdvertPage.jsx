@@ -124,7 +124,7 @@ const CreateAdvertPage = () => {
             Advert created successfully! Redirecting...
           </p>
         )}
-        {loading && <Loader/>}
+        {loading && <Loader />}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField

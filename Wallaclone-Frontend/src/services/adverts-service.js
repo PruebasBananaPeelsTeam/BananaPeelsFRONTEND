@@ -38,7 +38,6 @@ export const getAdvertDetail = async (advertId, slug = '') => {
 }
 
 export const getMyAdverts = async () => {
-  const response = await client.get('/api/myAdverts');
+  const response = await client.get('/api/myAdverts')
   return response.data.results
 }
-

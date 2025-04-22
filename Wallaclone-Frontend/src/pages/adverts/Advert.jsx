@@ -10,11 +10,10 @@ const Advert = ({ advert }) => {
 
   // Renderizar la imagen desde la base de datos, usando buffer en el backend
   const imageUrl = image
-  ? image.startsWith('http')
-    ? image
-    : `data:image/jpeg;base64,${image}`
-  : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
-
+    ? image.startsWith('http')
+      ? image
+      : `data:image/jpeg;base64,${image}`
+    : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
 
   return (
     <Link to={`/adverts/${_id}/${slug}`}>
@@ -34,7 +33,9 @@ const Advert = ({ advert }) => {
             </div>
             <div className="flex items-center justify-center gap-2">
               <p className="text-gray-600">{price}€</p>
-              <p className="text-sm">{type ? 'For sale' : 'For wanted'}</p>
+              <p className="text-sm">
+                {type === 'buy' ? 'Wanted' : 'For Sale'}¨{/* Cambiado para mostrar el tipo de anuncio */}
+              </p>
             </div>
             <p className="text-xs text-gray-500">{owner}</p>
           </div>

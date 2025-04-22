@@ -102,11 +102,11 @@ function LoginPage() {
 
         {/* forgot password */}
         <Link
-  to="/forgot-password"
-  className="text-sm text-blue-600 hover:underline text-center block"
->
-  ¿Olvidaste tu contraseña?
-</Link>
+          to="/forgot-password"
+          className="text-sm text-blue-600 hover:underline text-center block"
+        >
+          ¿Olvidaste tu contraseña?
+        </Link>
 
         {/* welcomming card */}
         <InfoCard

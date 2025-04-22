@@ -14,8 +14,7 @@ export default function Header() {
         </div>
         <Burger />
         {isAuthenticated && <Logout />}
-        
       </div>
     </header>
-  );
+  )
 }

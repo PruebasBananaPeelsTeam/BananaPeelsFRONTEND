@@ -34,16 +34,15 @@ function AdvertDetailPage() {
 
   // Pare renderizar la imagen desde la base de datos, usando buffer en el backend
   const imageUrl = advert?.image
-  ? advert.image.startsWith('http')
-    ? advert.image
-    : `data:image/jpeg;base64,${advert.image}`
-  : 'https://fakeimg.pl/600x400?text=NO+PHOTO';
-
+    ? advert.image.startsWith('http')
+      ? advert.image
+      : `data:image/jpeg;base64,${advert.image}`
+    : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
 
   return (
     <Page>
       {loading ? (
-        <Loader/>
+        <Loader />
       ) : advert ? (
         <>
           <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
@@ -67,8 +66,8 @@ function AdvertDetailPage() {
             </p>
 
             <p>
-              <strong>Tipo:</strong>{' '}
-              {advert.type === 'sell' ? 'En venta' : 'Se busca'}
+              <strong>Type:</strong>{' '}
+              {advert.type === 'buy' ? 'Wanted' : 'For Sale'} {/* Cambiado para mostrar el tipo de anuncio */}
             </p>
 
             <p>
