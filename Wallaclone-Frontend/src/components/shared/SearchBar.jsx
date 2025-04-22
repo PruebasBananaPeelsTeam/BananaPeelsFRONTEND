@@ -39,6 +39,7 @@ function SearchBar() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const trimmedName = filters.name.trim();
     const min = Number(filters.priceMin);
     const max = Number(filters.priceMax);
 
@@ -55,6 +56,14 @@ function SearchBar() {
       setError({
         code: 'EMPTY_FILTERS',
         message: 'You must complete at least one filter.',
+      });
+      return;
+    }
+
+    if (trimmedName && !/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]*$/.test(trimmedName)) {
+      setError({
+        code: 'INVALID_NAME',
+        message: 'The name filter can only contain letters.',
       });
       return;
     }

@@ -3,6 +3,7 @@ import { getAdvertList } from '../../services/adverts-service.js';
 import Advert from './Advert.jsx';
 import Button from '../../components/shared/button.jsx';
 import { useSearchParams } from 'react-router-dom';
+import Loader from '../../components/shared/loader.jsx'
 
 function AdvertsPage() {
   const [adverts, setAdverts] = useState([]);
@@ -33,7 +34,7 @@ function AdvertsPage() {
   }, [currentPage, searchParams]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   const { results } = adverts;
