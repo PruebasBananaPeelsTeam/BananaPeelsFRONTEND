@@ -4,6 +4,7 @@ import { createAdvert, getTags } from '../../services/adverts-service.js'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import Page from '../../components/layout/page.jsx'
+import Loader from '../../components/shared/loader.jsx'
 
 const CreateAdvertPage = () => {
   const [formData, setFormData] = useState({
@@ -51,13 +52,13 @@ const CreateAdvertPage = () => {
   const validateForm = () => {
     const newErrors = {}
 
-    if (!formData.name.trim()) newErrors.name = 'El nombre es obligatorio.'
+    if (!formData.name.trim()) newErrors.name = 'Name is required.'
     if (!formData.description.trim())
-      newErrors.description = 'La descripción es obligatoria.'
+      newErrors.description = 'Description is required.'
     if (!formData.price || Number(formData.price) <= 0)
-      newErrors.price = 'El precio debe ser mayor que 0.'
+      newErrors.price = 'Price must be greater than 0.'
     if (formData.tags.length === 0)
-      newErrors.tags = 'Debes seleccionar al menos una categoría.'
+      newErrors.tags = 'Please select at least one category.'
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -69,7 +70,7 @@ const CreateAdvertPage = () => {
     setSuccess(false)
 
     if (!validateForm()) {
-      setError('Por favor, corrige los errores antes de continuar.')
+      setError('Please, fix errors to continue.')
       return
     }
 
@@ -114,22 +115,20 @@ const CreateAdvertPage = () => {
     <Page>
       <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
         <h2 className="text-2xl font-bold mb-4 text-center">
-          Crear nuevo anuncio
+          Create a new advert
         </h2>
 
         {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
         {success && (
           <p className="text-green-600 text-sm mb-3">
-            ¡Anuncio creado con éxito!
+            Advert created successfully! Redirecting...
           </p>
         )}
-        {loading && (
-          <p className="text-blue-600 text-sm mb-3">Enviando anuncio...</p>
-        )}
+        {loading && <Loader/>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField
-            label="Nombre del producto"
+            label="Product"
             type="text"
             name="name"
             value={formData.name}
@@ -139,7 +138,7 @@ const CreateAdvertPage = () => {
           />
 
           <FormField
-            label="Descripción"
+            label="Description"
             type="text"
             name="description"
             value={formData.description}
@@ -149,7 +148,7 @@ const CreateAdvertPage = () => {
           />
 
           <FormField
-            label="Precio (€)"
+            label="Price (€)"
             type="number"
             name="price"
             value={formData.price}
@@ -160,21 +159,21 @@ const CreateAdvertPage = () => {
 
           <div className="flex flex-col w-full">
             <label className="text-sm font-medium text-gray-700 mb-2">
-              Tipo
+              Type
               <select
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
                 className="flex w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(223,184,13)]"
               >
-                <option value="sell">En venta</option>
-                <option value="wanted">Se busca</option>
+                <option value="sell">On sale</option>
+                <option value="wanted">Wanted</option>
               </select>
             </label>
           </div>
 
           <div className="flex flex-col w-full">
-            <p className="text-sm font-medium text-gray-700 mb-2">Categorías</p>
+            <p className="text-sm font-medium text-gray-700 mb-2">Tags</p>
             <div className="flex flex-wrap gap-4">
               {tagsList.map((tag) => (
                 <label key={tag} className="flex items-center space-x-2">
@@ -203,7 +202,7 @@ const CreateAdvertPage = () => {
 
           <div className="flex flex-col w-full">
             <label className="text-sm font-medium text-gray-700 mb-2">
-              Imagen
+              Image
               <input
                 type="file"
                 name="image"
@@ -229,7 +228,7 @@ const CreateAdvertPage = () => {
           )}
 
           <Button type="submit" disabled={loading}>
-            {loading ? 'Publicando...' : 'Publicar anuncio'}
+            {loading && <Loader />}
           </Button>
         </form>
       </div>
