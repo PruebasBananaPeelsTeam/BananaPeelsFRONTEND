@@ -8,11 +8,13 @@ const Advert = ({ advert }) => {
 
   const baseURL = import.meta.env.VITE_API_URL
 
+  // Renderizar la imagen desde la base de datos, usando buffer en el backend
   const imageUrl = image
-    ? image.startsWith('http://') || image.startsWith('https://')
-      ? image
-      : `${baseURL}/images/${image}`
-    : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
+  ? image.startsWith('http')
+    ? image
+    : `data:image/jpeg;base64,${image}`
+  : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
+
 
   return (
     <Link to={`/adverts/${_id}/${slug}`}>

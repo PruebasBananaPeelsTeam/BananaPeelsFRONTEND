@@ -32,6 +32,14 @@ function AdvertDetailPage() {
     }
   }, [params.advertId, params.slug, navigate])
 
+  // Pare renderizar la imagen desde la base de datos, usando buffer en el backend
+  const imageUrl = advert?.image
+  ? advert.image.startsWith('http')
+    ? advert.image
+    : `data:image/jpeg;base64,${advert.image}`
+  : 'https://fakeimg.pl/600x400?text=NO+PHOTO';
+
+
   return (
     <Page>
       {loading ? (
@@ -44,7 +52,7 @@ function AdvertDetailPage() {
           <div className="text-black">
             {advert.image && (
               <img
-                src={advert.image}
+                src={imageUrl} // Codigo cambiado para renderizar la imagen desde la base de datos
                 alt={advert.name}
                 className="w-full max-h-64 object-cover rounded-xl mb-4"
               />
