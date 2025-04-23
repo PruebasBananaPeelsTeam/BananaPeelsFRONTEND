@@ -24,4 +24,10 @@ const storage = {
   },
 }
 
+export const clearSession = () => {
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+  //aqui se pueden añadir mas cosas que borrar mas adelante (userid de rober, por ejemplo)
+}
+
 export default storage
