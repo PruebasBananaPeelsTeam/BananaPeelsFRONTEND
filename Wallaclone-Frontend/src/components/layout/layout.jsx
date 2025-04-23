@@ -15,10 +15,9 @@ export default function Layout({ children }) {
       style={isHome ? { backgroundImage: "url('/images/background.jpg')" } : {}}
     >
       <Header />
-      <SearchBar />
       <TagFilter />
       <Banner />
-      <main className={`flex-1 py-8 ${isHome ? 'bg-black/30' : 'bg-[rgb(245,245,220)]'}`}>
+      <main className={`flex-1 py-8`}>
         {children}
       </main>
       <Footer />
