@@ -33,11 +33,10 @@ const StyledWrapper = styled.div`
     position: relative;
     overflow: hidden;
     transition-duration: 0.3s;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-    background-color: rgb(255, 65, 65);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: rgba(30, 30, 30, 0.9); /* Elegante oscuro semi-transparente */
   }
 
-  /* plus sign */
   .sign {
     width: 100%;
     transition-duration: 0.3s;
@@ -53,22 +52,23 @@ const StyledWrapper = styled.div`
   .sign svg path {
     fill: white;
   }
-  /* text */
+
   .text {
     position: absolute;
     right: 0%;
     width: 0%;
     opacity: 0;
     color: white;
-    font-size: 1.2em;
-    font-weight: 600;
+    font-size: 1.1em;
+    font-weight: 500;
     transition-duration: 0.3s;
   }
-  /* hover effect on button width */
+
   .Btn:hover {
     width: 125px;
-    border-radius: 40px;
+    border-radius: 12px; /* más fino, estilo pill elegante */
     transition-duration: 0.3s;
+    background-color: rgba(50, 50, 50, 0.95); /* Más visible al hacer hover */
   }
 
   .Btn:hover .sign {
@@ -76,17 +76,17 @@ const StyledWrapper = styled.div`
     transition-duration: 0.3s;
     padding-left: 20px;
   }
-  /* hover effect button's text */
+
   .Btn:hover .text {
     opacity: 1;
     width: 70%;
     transition-duration: 0.3s;
     padding-right: 10px;
   }
-  /* button click effect*/
+
   .Btn:active {
     transform: translate(2px, 2px);
   }
-`
+`;
 
 export default LogoutButton
