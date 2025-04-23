@@ -9,6 +9,8 @@ import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import Page from '../../components/layout/page.jsx'
+import { slugify } from '../../utils/slugify.js'
+import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 
 function UpdateAdvertPage() {
   const [formData, setFormData] = useState({
@@ -45,7 +47,10 @@ function UpdateAdvertPage() {
         })
         setImagePreview(advertDetails.image)
       } catch (err) {
-        setError('Error loading the advert')
+        setError({
+          code: 'Fetch Error',
+          message: 'Error loading the advert.',
+        })
       } finally {
         setLoading(false)
       }
@@ -100,7 +105,10 @@ function UpdateAdvertPage() {
     // Validar el formulario
     const validationErrors = validateForm()
     if (Object.keys(validationErrors).length > 0) {
-      setError('Please correct the errors before proceeding.')
+      setError({
+        code: 'Validation Error',
+        message: 'Please correct the errors before proceeding.',
+      })
       return
     }
 
@@ -122,23 +130,25 @@ function UpdateAdvertPage() {
     try {
       setLoading(true)
       await updateAdvert(advertId, dataToSend)
-      navigate(`/adverts/${advertId}`)
+      const slug = slugify(formData.name)
+      navigate(`/adverts/${advertId}/${slug}`)
     } catch (err) {
-      setError(err.response?.data?.message || 'Error updating the advert.')
+      setError({
+        code: 'Update Error',
+        message: err.response?.data?.message || 'Error updating the advert.',
+      })
     } finally {
       setLoading(false)
     }
   }
 
   if (loading) return <Loader />
-  if (error) return <div>{error}</div>
+  {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
 
   return (
     <Page>
       <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          Update Advert
-        </h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Update Advert</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField

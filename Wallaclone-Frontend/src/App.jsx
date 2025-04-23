@@ -53,7 +53,7 @@ function App() {
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />
-      <Route path="/adverts/:advertId/update" element={UpdateAdvertPage} />
+      <Route path="/adverts/:advertId/update" element={<UpdateAdvertPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
