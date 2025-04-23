@@ -4,15 +4,10 @@ import { getTags } from '../../services/adverts-service.js'
 import FormErrorPopup from './formErrorPopUp.jsx'
 
 const tagImages = {
-  lifestyle: '/images/Decoracion.png',
-  work: '/images/Iluminacion.jpg',
-  motor: '/images/Menaje.png',
-  mobile: '/images/Textil.png',
-  computer: '/images/Menaje.png',
-  home: '/images/Textil.png',
-  garden: '/images/Menaje.png',
-  clothes: '/images/Textil.png',
-  sports: '/images/Textil.png',
+  Decoration: '/images/Decoracion.png',
+  Ilumination: '/images/Iluminacion.jpg',
+  Forniture: '/images/Menaje.png',
+  Garden: '/images/Menaje.png',
 }
 
 function TagFilter() {
