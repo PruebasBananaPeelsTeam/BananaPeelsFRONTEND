@@ -17,8 +17,6 @@ const MyUserPage = () => {
   const [showModal, setShowModal] = useState(false)
 
   const handleDeleteAccount = async () => {
-    
-
     try {
       setLoading(true)
       await deleteUser()
