@@ -87,20 +87,21 @@ function SearchBar() {
   }
 
   return (
-    <div className="flex items-center flex-col">
-      {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
+    <div className='relative max-w-7xl mx-auto flex justify-between items-center'>
+      {error && (
+        <FormErrorPopup error={error} onClose={() => setError(null)} />
+      )}
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-wrap items-center justify-center gap-2 bg-white p-2 rounded-md shadow max-w-xl mx-auto mt-5"
-      >
+        className="flex flex-nowrap items-center gap-2 rounded-md w-full px-2">
         <input
           type="text"
           name="name"
           value={filters.name}
           onChange={handleChange}
           placeholder="🔍"
-          className="w-32 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="w-32 px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
         <input
           type="number"
@@ -108,7 +109,7 @@ function SearchBar() {
           value={filters.priceMin}
           onChange={handleChange}
           placeholder="Min €"
-          className="w-20 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="w-20 px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
         <input
           type="number"
@@ -116,7 +117,7 @@ function SearchBar() {
           value={filters.priceMax}
           onChange={handleChange}
           placeholder="Max €"
-          className="w-20 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="w-20 px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
         <Button type="submit">Search</Button>
         <Button type="button" onClick={handleResetFilters}>
