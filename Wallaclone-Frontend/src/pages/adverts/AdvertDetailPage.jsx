@@ -4,12 +4,15 @@ import { getAdvertDetail } from '../../services/adverts-service'
 import { isApiClientError } from '../../api/client'
 import Page from '../../components/layout/page'
 import Loader from '../../components/shared/loader'
+import { useAuth } from '../../context/AuthContext'
+import ReservedToggleButton from '../../components/shared/reservedToggleButton'
 
 function AdvertDetailPage() {
   const params = useParams()
   const navigate = useNavigate()
   const [advert, setAdvert] = useState(null)
   const [loading, setLoading] = useState(false)
+  const { user } = useAuth()
 
   useEffect(() => {
     if (params.advertId && params.slug) {
@@ -35,7 +38,7 @@ function AdvertDetailPage() {
   return (
     <Page>
       {loading ? (
-        <Loader/>
+        <Loader />
       ) : advert ? (
         <>
           <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
@@ -71,6 +74,15 @@ function AdvertDetailPage() {
               <strong>Vendedor:</strong>{' '}
               {advert.owner?.username || advert.owner}
             </p>
+
+            {user && (advert.owner._id === user._id) &&  advert._id && (
+              <ReservedToggleButton
+                advert={advert}
+                onToggled={(newState) =>
+                  setAdvert((prev) => ({ ...prev, reserved: newState }))
+                }
+              />
+            )}
           </div>
         </>
       ) : (
@@ -81,4 +93,3 @@ function AdvertDetailPage() {
 }
 
 export default AdvertDetailPage
-
