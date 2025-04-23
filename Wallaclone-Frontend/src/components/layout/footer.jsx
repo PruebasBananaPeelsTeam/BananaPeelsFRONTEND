@@ -1,7 +1,36 @@
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
+
 export default function Footer() {
   return (
-    <footer className="bg-white text-center text-gray-700 py-4 border-t border-gray-300">
-      <p className="text-sm">@2025 Wallaclone</p>
+    <footer className="bg-neutral-950 text-gray-300 px-6 py-12">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-sm">
+
+        {/* Izquierda: Nombre y slogan */}
+        <div className="space-y-2">
+          <h3 className="text-white text-xl font-semibold tracking-wide">BananaPeels</h3>
+          <p className="text-gray-400">Diseño y segunda mano con estilo.</p>
+        </div>
+
+        {/* Centro: Navegación */}
+        <div className="flex flex-col space-y-2 text-center md:text-left">
+          <a href="#" className="hover:text-white transition">Inicio</a>
+          <a href="#" className="hover:text-white transition">Explorar</a>
+          <a href="#" className="hover:text-white transition">Sobre Nosotros</a>
+          <a href="#" className="hover:text-white transition">Contacto</a>
+        </div>
+
+        {/* Derecha: Redes sociales */}
+        <div className="flex md:justify-end items-center space-x-5">
+          <a href="#" aria-label="Facebook" className="hover:text-white transition"><FaFacebookF /></a>
+          <a href="#" aria-label="Instagram" className="hover:text-white transition"><FaInstagram /></a>
+          <a href="#" aria-label="Twitter" className="hover:text-white transition"><FaTwitter /></a>
+        </div>
+      </div>
+
+      {/* Línea inferior */}
+      <div className="mt-10 border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
+        &copy; {new Date().getFullYear()} BananaPeels — Todos los derechos reservados.
+      </div>
     </footer>
-  )
+  );
 }
