@@ -7,18 +7,17 @@ import Loader from '../../components/shared/loader.jsx'
 import { deleteUser } from '../../services/auth-service'
 import { clearSession } from '../../utils/storage.js'
 import { useAuth } from '../../context/AuthContext.jsx'
+import ConfirmationModalCard from '../../components/shared/confirmationModalCard.jsx'
 
 const MyUserPage = () => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const { logout } = useAuth()
+  const [showModal, setShowModal] = useState(false)
 
   const handleDeleteAccount = async () => {
-    const confirmDelete = window.confirm(
-      'Are you sure you want to delete your account? This action cannot be undone.',
-    )
-    if (!confirmDelete) return
+    
 
     try {
       setLoading(true)
@@ -52,11 +51,18 @@ const MyUserPage = () => {
             You can permanently delete your account. All your ads will be
             deleted as well.
           </p>
-          <Button onClick={handleDeleteAccount} disabled={loading} danger>
+          <Button onClick={() => setShowModal(true)} disabled={loading} danger>
             Delete Account
           </Button>
         </div>
       </div>
+      {showModal && (
+        <ConfirmationModalCard
+          message="Are you sure you want to delete your account?"
+          onConfirm={handleDeleteAccount}
+          onCancel={() => setShowModal(false)}
+        />
+      )}
     </Page>
   )
 }
