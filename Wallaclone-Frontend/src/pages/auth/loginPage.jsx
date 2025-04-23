@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 
 function LoginPage() {
   const navigate = useNavigate()
-  const { login: authLogin } = useAuth() //Codigo tocado para usar el contexto Auth
+  const { login: authLogin } = useAuth()
   const [input, setInput] = useState({ username: '', password: '' })
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -38,14 +38,13 @@ function LoginPage() {
     event.preventDefault()
     setIsLoading(true)
     try {
-      const userData = await login({
+      const { tokenJWT, user } = await login({
         username: input.username,
         password: input.password,
       })
-      console.log('Datos devueltos por el login:', userData)
-      const token = userData.tokenJWT
-      authLogin(token) // codigo tocado para usar el contexto Auth
-      console.log('TOKEN GUARDADO:', userData.tokenJWT)
+      const token = tokenJWT
+      authLogin(token, user) 
+      console.log('returned data from the login are: TOKEN', tokenJWT, 'and user:', user)
       console.log(`input´s value are ${input.username} - ${input.password}`)
       // remember me ?
 
