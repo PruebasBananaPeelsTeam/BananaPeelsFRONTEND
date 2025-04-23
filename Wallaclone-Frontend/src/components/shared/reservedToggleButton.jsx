@@ -9,7 +9,6 @@ function ReservedToggleButton({ advert, onToggled }) {
   // chek if owner is the advert`s owner
   if (!user || advert.owner._id !== user._id) return null
   const handleClick = async () => {
-  
     try {
       const result = await toggleReserved(advert._id)
       setIsReserved(result.reserved)
@@ -20,7 +19,10 @@ function ReservedToggleButton({ advert, onToggled }) {
   }
 
   return (
-    <button onClick={handleClick} className="bg-yellow-600 text-white hover:bg-yellow-700 mt-2">
+    <button
+      onClick={handleClick}
+      className="bg-yellow-600 text-white hover:bg-yellow-700 mt-2"
+    >
       {isReserved ? 'Unmark Reserved' : 'Mark as Reserved'}
     </button>
   )

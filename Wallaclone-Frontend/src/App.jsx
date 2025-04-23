@@ -37,13 +37,13 @@ function App() {
         }
       />
       <Route
-  path="/my-profile"
-  element={
-    <PrivateRoute>
-      <MyUserPage />
-    </PrivateRoute>
-  }
-/>
+        path="/my-profile"
+        element={
+          <PrivateRoute>
+            <MyUserPage />
+          </PrivateRoute>
+        }
+      />
       <Route
         path="/myAdverts"
         element={

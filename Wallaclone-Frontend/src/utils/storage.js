@@ -4,7 +4,7 @@ const storage = {
     if (!value) {
       return null
     }
-  
+
     try {
       return JSON.parse(value)
     } catch {
@@ -13,7 +13,7 @@ const storage = {
   },
   set(key, value) {
     const valueToStore =
-    typeof value === 'object' ? JSON.stringify(value) : value
+      typeof value === 'object' ? JSON.stringify(value) : value
     localStorage.setItem(key, valueToStore)
   },
   remove(key) {

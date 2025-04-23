@@ -70,7 +70,8 @@ function AdvertDetailPage() {
 
             <p>
               <strong>Type:</strong>{' '}
-              {advert.type === 'buy' ? 'Wanted' : 'For Sale'} {/* Cambiado para mostrar el tipo de anuncio */}
+              {advert.type === 'buy' ? 'Wanted' : 'For Sale'}{' '}
+              {/* Cambiado para mostrar el tipo de anuncio */}
             </p>
 
             <p>
@@ -82,7 +83,7 @@ function AdvertDetailPage() {
               {advert.owner?.username || advert.owner}
             </p>
 
-            {user && (advert.owner._id === user._id) &&  advert._id && (
+            {user && advert.owner._id === user._id && advert._id && (
               <ReservedToggleButton
                 advert={advert}
                 onToggled={(newState) =>

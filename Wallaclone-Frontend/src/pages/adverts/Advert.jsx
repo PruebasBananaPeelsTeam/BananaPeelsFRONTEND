@@ -34,7 +34,8 @@ const Advert = ({ advert }) => {
             <div className="flex items-center justify-center gap-2">
               <p className="text-gray-600">{price}€</p>
               <p className="text-sm">
-                {type === 'buy' ? 'Wanted' : 'For Sale'}¨{/* Cambiado para mostrar el tipo de anuncio */}
+                {type === 'buy' ? 'Wanted' : 'For Sale'}¨
+                {/* Cambiado para mostrar el tipo de anuncio */}
               </p>
             </div>
             <p className="text-xs text-gray-500">{owner}</p>

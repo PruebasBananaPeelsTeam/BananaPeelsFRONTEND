@@ -53,6 +53,8 @@ export const updateAdvert = async (advertId, updatedData) => {
 }
 
 export const toggleReserved = async (advertId) => {
-  const response = await client.patch(`${advertsUrl}/${advertId}/toggle-reserved`)
+  const response = await client.patch(
+    `${advertsUrl}/${advertId}/toggle-reserved`,
+  )
   return response.data
 }
