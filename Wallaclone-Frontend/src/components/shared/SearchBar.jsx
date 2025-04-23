@@ -96,7 +96,8 @@ function SearchBar() {
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-wrap items-center justify-center gap-2 bg-white p-2 rounded-md shadow max-w-xl mx-auto mt-5"
+        className="flex flex-wrap items-center justify-center gap-2 rounded-md max-w-xl mx-auto mt-5"
+
       >
         <input
           type="text"
@@ -104,7 +105,7 @@ function SearchBar() {
           value={filters.name}
           onChange={handleChange}
           placeholder="🔍"
-          className="w-32 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="w-32 px-2 py-1 border border-gray-400 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
         <input
           type="number"
@@ -112,7 +113,7 @@ function SearchBar() {
           value={filters.priceMin}
           onChange={handleChange}
           placeholder="Min €"
-          className="w-20 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="w-20 px-2 py-1 border border-gray-400 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
         <input
           type="number"
@@ -120,7 +121,7 @@ function SearchBar() {
           value={filters.priceMax}
           onChange={handleChange}
           placeholder="Max €"
-          className="w-20 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="w-20 px-2 py-1 border border-gray-400 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
         <Button type="submit">Search</Button>
         <Button type="button" onClick={handleResetFilters}>
