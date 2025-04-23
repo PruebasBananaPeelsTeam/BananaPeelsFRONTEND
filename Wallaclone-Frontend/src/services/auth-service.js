@@ -6,11 +6,11 @@ import {
 
 export const login = async (credentials) => {
   const response = await client.post('/api/login', credentials)
-  const { tokenJWT } = response.data // 👈 tu backend devuelve "tokenJWT"
+  const { tokenJWT, user } = response.data
 
   setAuthorizationHeader(tokenJWT)
 
-  return response.data
+  return { tokenJWT, user }
 }
 
 export const register = async (userData) => {
