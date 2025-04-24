@@ -4,7 +4,7 @@ export default function AdvertStatus({ reserved, iconSize, textSize }) {
   const colorClass = reserved ? 'text-red-600' : 'text-green-600'
 
   return (
-    <p className="flex items-center gap-1 mt-2">
+    <div className="flex items-center gap-1 mt-2">
       <Reserve
         size={iconSize}
         className={`
@@ -15,7 +15,7 @@ export default function AdvertStatus({ reserved, iconSize, textSize }) {
       />
       <p
         className={`
-          font-semibold mt-2 
+          font-semibold 
           transition-colors duration-1000 ease-in-out 
           ${textSize} 
           ${colorClass}
@@ -23,6 +23,6 @@ export default function AdvertStatus({ reserved, iconSize, textSize }) {
       >
         {reserved ? 'Reserved' : 'Available'}
       </p>
-    </p>
+    </div>
   )
 }
