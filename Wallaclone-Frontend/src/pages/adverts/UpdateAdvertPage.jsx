@@ -171,6 +171,9 @@ function UpdateAdvertPage() {
   }
 
   if (loading) return <Loader />
+  {
+    error && <FormErrorPopup error={error} onClose={() => setError(null)} />
+  }
 
   return (
     <Page>

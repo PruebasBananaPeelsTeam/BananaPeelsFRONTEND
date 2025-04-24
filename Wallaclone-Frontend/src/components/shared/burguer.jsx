@@ -53,9 +53,14 @@ export default function Burger() {
           New Advert
         </Link>
         {isAuthenticated && (
-          <Link to="/myAdverts" className="text-white hover:text-yellow-300">
-            My Adverts
-          </Link>
+          <>
+            <Link to="/myAdverts" className="text-white hover:text-yellow-300">
+              My Adverts
+            </Link>
+            <Link to="/my-profile" className="text-white hover:text-yellow-300">
+              My Account
+            </Link>
+          </>
         )}
       </nav>
 

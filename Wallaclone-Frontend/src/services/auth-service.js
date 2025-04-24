@@ -23,3 +23,7 @@ export const logout = () => {
   localStorage.removeItem('token')
   removeAuthorizationHeader()
 }
+
+export const deleteUser = () => {
+  return client.delete('/api/users/me')
+}

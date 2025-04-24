@@ -11,6 +11,7 @@ import PrivateRoute from './components/shared/PrivateRoute.jsx'
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage.jsx'
 import ResetPasswordPage from './pages/auth/resetPasswordPage.jsx'
 import UpdateAdvertPage from './pages/adverts/UpdateAdvertPage.jsx'
+import MyUserPage from './pages/auth/myUserPage.jsx'
 
 function App() {
   return (
@@ -35,7 +36,14 @@ function App() {
           </PrivateRoute>
         }
       />
-
+      <Route
+        path="/my-profile"
+        element={
+          <PrivateRoute>
+            <MyUserPage />
+          </PrivateRoute>
+        }
+      />
       <Route
         path="/myAdverts"
         element={
