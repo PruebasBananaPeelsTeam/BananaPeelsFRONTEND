@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../shared/button.jsx'
 import FormErrorPopup from '../shared/formErrorPopUp.jsx'
+import useTimer from '../../utils/useTimer.js'
 
 function SearchBar() {
   const [filters, setFilters] = useState({
@@ -13,14 +14,7 @@ function SearchBar() {
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (error) {
-      const timer = setTimeout(() => {
-        setError(null)
-      }, 4000)
-      return () => clearTimeout(timer)
-    }
-  }, [error])
+  useTimer(error,() => {setError(null), 5000})
 
   const handleResetFilters = () => {
     setFilters({ name: '', priceMin: '', priceMax: '' })

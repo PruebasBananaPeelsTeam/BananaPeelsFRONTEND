@@ -6,6 +6,7 @@ import FormField from '../../components/shared/formField'
 import Button from '../../components/shared/button'
 import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 import Loader from '../../components/shared/loader.jsx'
+import useTimer from '../../utils/useTimer.js'
 
 function RegisterPage() {
   const [input, setInput] = useState({ email: '', password: '', username: '' })
@@ -18,15 +19,7 @@ function RegisterPage() {
     setInput({ ...input, [event.target.name]: event.target.value })
   }
 
-  // error Timer
-  useEffect(() => {
-    if (error) {
-      const timer = setTimeout(() => {
-        setError(null)
-      }, 4000)
-      return () => clearTimeout(timer)
-    }
-  }, [error])
+  useTimer(error,() => {setError(null), 5000})
 
   const handleSubmit = async (event) => {
     event.preventDefault()
