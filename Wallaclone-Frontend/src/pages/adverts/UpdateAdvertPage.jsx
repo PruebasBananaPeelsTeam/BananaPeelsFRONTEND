@@ -27,6 +27,7 @@ function UpdateAdvertPage() {
   const [imagePreview, setImagePreview] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [fieldErrors, setFieldErrors] = useState({})
   const navigate = useNavigate()
 
   // Fetch advert details
@@ -37,6 +38,11 @@ function UpdateAdvertPage() {
 
       try {
         const advertDetails = await getAdvertDetail(advertId)
+
+        if (!advertDetails || !advertDetails.name) {
+          throw { response: { status: 404 } }
+        }
+
         setFormData({
           name: advertDetails.name,
           description: advertDetails.description,
@@ -47,17 +53,25 @@ function UpdateAdvertPage() {
         })
         setImagePreview(advertDetails.image)
       } catch (err) {
-        setError({
-          code: 'Fetch Error',
-          message: 'Error loading the advert.',
-        })
+        if (err.response?.status === 404) {
+          setError({
+            code: 'Not Found',
+            message: 'The advert you are trying to edit does not exist.',
+          });
+          navigate('/adverts'); 
+        } else {
+          setError({
+            code: 'Fetch Error',
+            message: 'Error loading the advert.',
+          });
+        }
       } finally {
         setLoading(false)
       }
     }
 
     fetchAdvertDetails()
-  }, [advertId])
+  }, [advertId, navigate])
 
   // Fetch available tags
   useEffect(() => {
@@ -105,12 +119,12 @@ function UpdateAdvertPage() {
     // Validar el formulario
     const validationErrors = validateForm()
     if (Object.keys(validationErrors).length > 0) {
-      setError({
-        code: 'Validation Error',
-        message: 'Please correct the errors before proceeding.',
-      })
+      setFieldErrors(validationErrors)
       return
     }
+
+    //Limpiar errores si todo va bien
+    setFieldErrors({})
 
     // Preparar los datos para enviar
     const dataToSend = new FormData()
@@ -143,10 +157,11 @@ function UpdateAdvertPage() {
   }
 
   if (loading) return <Loader />
-  {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
+  
 
   return (
     <Page>
+      {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
       <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
         <h2 className="text-2xl font-bold mb-4 text-center">Update Advert</h2>
 
@@ -157,7 +172,7 @@ function UpdateAdvertPage() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            required
+            error={fieldErrors.name}
           />
           <FormField
             label="Description"
@@ -165,7 +180,7 @@ function UpdateAdvertPage() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            required
+            error={fieldErrors.description}
           />
           <FormField
             label="Price (€)"
@@ -173,7 +188,7 @@ function UpdateAdvertPage() {
             name="price"
             value={formData.price}
             onChange={handleChange}
-            required
+            error={fieldErrors.price}
           />
 
           <div className="flex flex-col w-full">
@@ -193,6 +208,9 @@ function UpdateAdvertPage() {
 
           <div className="flex flex-col w-full">
             <p className="text-sm font-medium text-gray-700 mb-2">Tags</p>
+            {fieldErrors.tags && (
+              <span className="text-sm text-red-500">{fieldErrors.tags}</span>
+            )}
             <div className="flex flex-wrap gap-4">
               {/*  listado de tags disponibles */}
               {tagsList.map((tag) => (
