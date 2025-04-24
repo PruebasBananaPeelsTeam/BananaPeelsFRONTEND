@@ -7,6 +7,7 @@ import Loader from '../../components/shared/loader'
 import { useAuth } from '../../context/AuthContext'
 import ReservedToggleButton from '../../components/shared/reservedToggleButton'
 import AdvertStatus from '../../components/shared/advertStatus'
+import Button from '../../components/shared/button'
 
 function AdvertDetailPage() {
   const params = useParams()
@@ -53,13 +54,17 @@ function AdvertDetailPage() {
             {advert.name}
           </h2>
           <div className="text-black">
-            {advert.image && (
-              <img
-                src={imageUrl} // Codigo cambiado para renderizar la imagen desde la base de datos
-                alt={advert.name}
-                className="w-full max-h-64 object-cover rounded-xl mb-4"
-              />
-            )}
+          <img
+            src={
+              advert?.image
+                ? advert.image.startsWith('http')
+                  ? advert.image
+                  : `data:image/jpeg;base64,${advert.image}`
+                : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
+            }
+            alt={advert?.name || 'No image'}
+            className="w-full max-h-64 object-cover rounded-xl mb-4"
+          />
 
             <p>
               <strong>Descripción:</strong> {advert.description}
@@ -84,21 +89,24 @@ function AdvertDetailPage() {
               {advert.owner?.username || advert.owner}
             </p>
 
-            {/*reserved check*/}
-            <div className="flex justify-between">
-              {user && advert.owner._id === user._id && advert._id && (
-                <ReservedToggleButton
-                  advert={advert}
-                  onToggled={(newState) =>
-                    setAdvert((prev) => ({ ...prev, reserved: newState }))
-                  }
-                />
-              )}
-              
-              {/*reserved mark*/}
-              <AdvertStatus reserved={advert.reserved} iconSize="28" textSize="text-xl"/>
-              
-            </div>
+            <Button onClick={() => navigate('/')} className="mb-4">
+              ← Back
+            </Button>
+
+            {user && advert.owner._id === user._id && advert._id && (
+              <>
+              <Button onClick={() => navigate(`/adverts/${advert._id}/update`)} className="mb-4 ml-4">
+                ✎ Update
+              </Button>
+              <ReservedToggleButton
+                advert={advert}
+                onToggled={(newState) =>
+                  setAdvert((prev) => ({ ...prev, reserved: newState }))
+                }
+              />
+              </>
+
+            )}
           </div>
         </>
       ) : (
