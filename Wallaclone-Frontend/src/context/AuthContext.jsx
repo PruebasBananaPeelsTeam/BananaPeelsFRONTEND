@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const login = (newToken, userData) => {
-    console.log('user data desde el contexto',userData)
+    console.log('user data desde el contexto', userData)
     setToken(newToken)
     storage.set('token', newToken)
     setUser(userData)
@@ -32,7 +32,9 @@ export const AuthProvider = ({ children }) => {
   const isAuthenticated = !!token
 
   return (
-    <AuthContext.Provider value={{ token, user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ token, user, isAuthenticated, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   )

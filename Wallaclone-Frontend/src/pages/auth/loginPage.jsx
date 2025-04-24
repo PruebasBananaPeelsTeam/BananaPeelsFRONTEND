@@ -43,8 +43,13 @@ function LoginPage() {
         password: input.password,
       })
       const token = tokenJWT
-      authLogin(token, user) 
-      console.log('returned data from the login are: TOKEN', tokenJWT, 'and user:', user)
+      authLogin(token, user)
+      console.log(
+        'returned data from the login are: TOKEN',
+        tokenJWT,
+        'and user:',
+        user,
+      )
       console.log(`input´s value are ${input.username} - ${input.password}`)
       // remember me ?
 

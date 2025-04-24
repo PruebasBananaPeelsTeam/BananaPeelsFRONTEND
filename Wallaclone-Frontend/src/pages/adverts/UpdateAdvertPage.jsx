@@ -57,13 +57,13 @@ function UpdateAdvertPage() {
           setError({
             code: 'Not Found',
             message: 'The advert you are trying to edit does not exist.',
-          });
-          navigate('/adverts'); 
+          })
+          navigate('/adverts')
         } else {
           setError({
             code: 'Fetch Error',
             message: 'Error loading the advert.',
-          });
+          })
         }
       } finally {
         setLoading(false)
@@ -157,7 +157,6 @@ function UpdateAdvertPage() {
   }
 
   if (loading) return <Loader />
-  
 
   return (
     <Page>

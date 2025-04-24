@@ -6,6 +6,7 @@ import Page from '../../components/layout/page'
 import Loader from '../../components/shared/loader'
 import { useAuth } from '../../context/AuthContext'
 import ReservedToggleButton from '../../components/shared/reservedToggleButton'
+import Button from '../../components/shared/button'
 
 function AdvertDetailPage() {
   const params = useParams()
@@ -70,7 +71,8 @@ function AdvertDetailPage() {
 
             <p>
               <strong>Type:</strong>{' '}
-              {advert.type === 'buy' ? 'Wanted' : 'For Sale'} {/* Cambiado para mostrar el tipo de anuncio */}
+              {advert.type === 'buy' ? 'Wanted' : 'For Sale'}{' '}
+              {/* Cambiado para mostrar el tipo de anuncio */}
             </p>
 
             <p>
@@ -82,7 +84,11 @@ function AdvertDetailPage() {
               {advert.owner?.username || advert.owner}
             </p>
 
-            {user && (advert.owner._id === user._id) &&  advert._id && (
+            <Button onClick={() => navigate(-1)} className="mb-4">
+              ← Back
+            </Button>
+
+            {user && advert.owner._id === user._id && advert._id && (
               <ReservedToggleButton
                 advert={advert}
                 onToggled={(newState) =>
