@@ -53,13 +53,17 @@ function AdvertDetailPage() {
             {advert.name}
           </h2>
           <div className="text-black">
-            {advert.image && (
-              <img
-                src={imageUrl} // Codigo cambiado para renderizar la imagen desde la base de datos
-                alt={advert.name}
-                className="w-full max-h-64 object-cover rounded-xl mb-4"
-              />
-            )}
+          <img
+            src={
+              advert?.image
+                ? advert.image.startsWith('http')
+                  ? advert.image
+                  : `data:image/jpeg;base64,${advert.image}`
+                : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
+            }
+            alt={advert?.name || 'No image'}
+            className="w-full max-h-64 object-cover rounded-xl mb-4"
+          />
 
             <p>
               <strong>Descripción:</strong> {advert.description}
@@ -84,7 +88,7 @@ function AdvertDetailPage() {
               {advert.owner?.username || advert.owner}
             </p>
 
-            <Button onClick={() => navigate(-1)} className="mb-4">
+            <Button onClick={() => navigate('/')} className="mb-4">
               ← Back
             </Button>
 

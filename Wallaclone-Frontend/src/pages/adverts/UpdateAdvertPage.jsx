@@ -28,6 +28,7 @@ function UpdateAdvertPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [fieldErrors, setFieldErrors] = useState({})
+  const [notFound, setNotFound] = useState(false)
   const navigate = useNavigate()
 
   // Fetch advert details
@@ -63,11 +64,7 @@ function UpdateAdvertPage() {
         
       } catch (err) {
         if (err.response?.status === 404) {
-          setError({
-            code: 'Not Found',
-            message: 'The advert you are trying to edit does not exist.',
-          })
-          navigate('/adverts')
+          setNotFound(true)
         } else {
           setError({
             code: 'Fetch Error',
@@ -81,6 +78,14 @@ function UpdateAdvertPage() {
 
     fetchAdvertDetails()
   }, [advertId, navigate])
+
+  useEffect(() => {
+    if (notFound) {
+      navigate('/adverts')
+    }
+  }, [notFound, navigate])
+
+  if (notFound) return null
 
   // Fetch available tags
   useEffect(() => {
