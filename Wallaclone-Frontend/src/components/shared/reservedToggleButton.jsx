@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { toggleReserved } from '../../services/adverts-service'
+import Button from '../shared/button'
 
 function ReservedToggleButton({ advert, onToggled }) {
   const { user } = useAuth()
@@ -20,9 +21,9 @@ function ReservedToggleButton({ advert, onToggled }) {
   }
 
   return (
-    <button onClick={handleClick} className="bg-yellow-600 text-white hover:bg-yellow-700 mt-2">
-      {isReserved ? 'Unmark Reserved' : 'Mark as Reserved'}
-    </button>
+    <Button onClick={handleClick} className="bg-yellow-600 text-white hover:bg-yellow-700 mt-2">
+      {isReserved ? 'Cancel Reservation' : 'Reserve this item'}
+    </Button>
   )
 }
 
