@@ -89,12 +89,18 @@ function AdvertDetailPage() {
             </Button>
 
             {user && advert.owner._id === user._id && advert._id && (
+              <>
+              <Button onClick={() => navigate(`/adverts/${advert._id}/update`)} className="mb-4 ml-4">
+                ✎ Update
+              </Button>
               <ReservedToggleButton
                 advert={advert}
                 onToggled={(newState) =>
                   setAdvert((prev) => ({ ...prev, reserved: newState }))
                 }
               />
+              </>
+
             )}
           </div>
         </>

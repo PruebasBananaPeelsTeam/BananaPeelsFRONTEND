@@ -51,7 +51,16 @@ function UpdateAdvertPage() {
           image: null,
           tags: advertDetails.tags,
         })
-        setImagePreview(advertDetails.image)
+        setImagePreview(
+          //si es URL se usa directamente, si es base64 se convierte, y si no hay imagen se pone un placeholder
+          advertDetails.image
+            ? advertDetails.image.startsWith('http')
+              ? advertDetails.image
+              : `data:image/jpeg;base64,${advertDetails.image}`
+            : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
+        )
+
+        
       } catch (err) {
         if (err.response?.status === 404) {
           setError({
