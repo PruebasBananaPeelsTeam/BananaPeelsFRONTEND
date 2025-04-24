@@ -54,17 +54,17 @@ function AdvertDetailPage() {
             {advert.name}
           </h2>
           <div className="text-black">
-          <img
-            src={
-              advert?.image
-                ? advert.image.startsWith('http')
-                  ? advert.image
-                  : `data:image/jpeg;base64,${advert.image}`
-                : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
-            }
-            alt={advert?.name || 'No image'}
-            className="w-full max-h-64 object-cover rounded-xl mb-4"
-          />
+            <img
+              src={
+                advert?.image
+                  ? advert.image.startsWith('http')
+                    ? advert.image
+                    : `data:image/jpeg;base64,${advert.image}`
+                  : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
+              }
+              alt={advert?.name || 'No image'}
+              className="w-full max-h-64 object-cover rounded-xl mb-4"
+            />
 
             <p>
               <strong>Descripción:</strong> {advert.description}
@@ -88,25 +88,34 @@ function AdvertDetailPage() {
               <strong>Vendedor:</strong>{' '}
               {advert.owner?.username || advert.owner}
             </p>
-
-            <Button onClick={() => navigate('/')} className="mb-4">
-              ← Back
-            </Button>
-
-            {user && advert.owner._id === user._id && advert._id && (
-              <>
-              <Button onClick={() => navigate(`/adverts/${advert._id}/update`)} className="mb-4 ml-4">
-                ✎ Update
+            <div className="flex justify-between">
+              <Button onClick={() => navigate('/')} className="mb-4">
+                ← Back
               </Button>
-              <ReservedToggleButton
-                advert={advert}
-                onToggled={(newState) =>
-                  setAdvert((prev) => ({ ...prev, reserved: newState }))
-                }
-              />
-              </>
 
-            )}
+              {user && advert.owner._id === user._id && advert._id && (
+                <>
+                  <Button
+                    onClick={() => navigate(`/adverts/${advert._id}/update`)}
+                    className="mb-4 ml-4"
+                  >
+                    ✎ Update
+                  </Button>
+                  <ReservedToggleButton
+                    advert={advert}
+                    onToggled={(newState) =>
+                      setAdvert((prev) => ({ ...prev, reserved: newState }))
+                    }
+                  />
+                </>
+              )}
+              {/*reserved mark*/}
+              <AdvertStatus
+                reserved={advert.reserved}
+                iconSize="28"
+                textSize="text-xl"
+              />
+            </div>
           </div>
         </>
       ) : (

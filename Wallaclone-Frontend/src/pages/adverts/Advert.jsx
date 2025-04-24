@@ -6,8 +6,7 @@ const Advert = ({ advert }) => {
   const { _id, name, description, price, type, image, owner } = advert
 
   const slug = slugify(name)
-  const baseURL = import.meta.env.VITE_API_URL
-
+  
   // Renderizar la imagen desde la base de datos, usando buffer en el backend
   const imageUrl = image
     ? image.startsWith('http')
@@ -51,20 +50,6 @@ const Advert = ({ advert }) => {
               iconSize={14}
               textSize="text-base"
             />
-          </div>
-          <div className="flex flex-col items-center space-y-1 text-center">
-            <div className="flex items-center justify-center gap-2">
-              <p className="text-sm text-gray-600">{name}</p>
-              <p className="text-sm text-gray-600">{description}</p>
-            </div>
-            <div className="flex items-center justify-center gap-2">
-              <p className="text-gray-600">{price}€</p>
-              <p className="text-sm">
-                {type === 'buy' ? 'Wanted' : 'For Sale'}¨
-                {/* Cambiado para mostrar el tipo de anuncio */}
-              </p>
-            </div>
-            <p className="text-xs text-gray-500">{owner}</p>
           </div>
         </div>
       </div>
