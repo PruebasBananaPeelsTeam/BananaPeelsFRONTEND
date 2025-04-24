@@ -9,6 +9,7 @@ import Loader from '../../components/shared/loader.jsx'
 import { InfoCard } from '../../components/shared/infoCard.jsx'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { Link } from 'react-router-dom'
+import useTimer from '../../utils/useTimer.js'
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -24,15 +25,7 @@ function LoginPage() {
     }))
   }, [])
 
-  // error Timer
-  useEffect(() => {
-    if (error) {
-      const timer = setTimeout(() => {
-        setError(null)
-      }, 4000)
-      return () => clearTimeout(timer)
-    }
-  }, [error])
+ useTimer(error,() => {setError(null), 5000})
 
   const handleSubmit = async (event) => {
     event.preventDefault()
