@@ -42,7 +42,7 @@ const Advert = ({ advert }) => {
           </p>
           <p className="text-lg font-semibold text-emerald-300">{price} €</p>
           <p className={`text-sm ${type ? 'text-blue-400' : 'text-rose-400'}`}>
-            {type ? 'For sale' : 'Wanted'}
+            {type === 'sell' ? 'For sale' : 'Wanted'}
           </p>
           <div className="flex items-baseline justify-around ">
             <p className="text-xl text-gray-400 italic truncate">{owner}</p>
