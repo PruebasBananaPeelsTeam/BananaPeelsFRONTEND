@@ -12,6 +12,7 @@ import ForgotPasswordPage from './pages/auth/ForgotPasswordPage.jsx'
 import ResetPasswordPage from './pages/auth/resetPasswordPage.jsx'
 import UpdateAdvertPage from './pages/adverts/UpdateAdvertPage.jsx'
 import MyUserPage from './pages/auth/myUserPage.jsx'
+import UserPage from './pages/adverts/userPage.jsx'
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
         path="/reset-password/:token"
         element={<ResetPasswordPage />}
       ></Route>
+      <Route path="/users/:username" element={<UserPage />} />
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />

@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { slugify } from '../../utils/slugify'
 import AdvertStatus from '../../components/shared/advertStatus'
 
 const Advert = ({ advert }) => {
   const { _id, name, description, price, type, image, owner } = advert
 
+  const navigate = useNavigate()
   const slug = slugify(name)
-  
+
   // Renderizar la imagen desde la base de datos, usando buffer en el backend
   const imageUrl = image
     ? image.startsWith('http')
@@ -20,8 +21,11 @@ const Advert = ({ advert }) => {
     description?.length > 15 ? description.slice(0, 15) + '…' : description
 
   return (
-    <Link to={`/adverts/${_id}/${slug}`} className="perspective">
-      <div className="relative w-[200px] h-[200px] transform-style-preserve-3d transition-transform duration-700 hover:rotate-y-180 cursor-pointer">
+    <div
+      className="perspective cursor-pointer"
+      onClick={() => navigate(`/adverts/${_id}/${slug}`)}
+    >
+      <div className="relative w-[200px] h-[200px] transform-style-preserve-3d transition-transform duration-700 hover:rotate-y-180">
         {/* Frente: Imagen */}
         <div className="absolute w-full h-full backface-hidden rounded-[15px] overflow-hidden border border-gray-300 shadow-lg">
           <img
@@ -43,8 +47,14 @@ const Advert = ({ advert }) => {
           <p className={`text-sm ${type ? 'text-blue-400' : 'text-rose-400'}`}>
             {type === 'sell' ? 'For sale' : 'Wanted'}
           </p>
-          <div className="flex items-baseline justify-around ">
-            <p className="text-xl text-gray-400 italic truncate">{owner}</p>
+          <div className="flex items-baseline justify-around">
+            <Link
+              to={`/users/${owner}`}
+              onClick={(e) => e.stopPropagation()}
+              className="text-xl italic text-indigo-400 hover:underline truncate"
+            >
+              {owner}
+            </Link>
             <AdvertStatus
               reserved={advert.reserved}
               iconSize={14}
@@ -53,7 +63,7 @@ const Advert = ({ advert }) => {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
 
