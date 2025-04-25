@@ -124,7 +124,6 @@ const UserEditForm = () => {
       <FormField
         label="Email"
         type="email"
-        required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />

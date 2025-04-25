@@ -38,68 +38,64 @@ const MyUserPage = () => {
   }
 
   return (
-    <Page title="My Profile">
-      <div className="max-w-4xl mx-auto mt-8 bg-white rounded-xl shadow-lg overflow-hidden">
-        {/* Header banner */}
-        <div className="bg-gradient-to-r from-purple-800 via-red-500 to-red-800 h-32 md:h-40 relative">
-          <div className="absolute bottom-0 left-0 p-6 text-white">
-            <h2 className="text-2xl md:text-3xl font-bold">
-              👤 {user?.username || 'My account'}
-            </h2>
-            {user?.email && (
-              <p className="text-sm mt-1 text-gray-200">{user.email}</p>
-            )}
-          </div>
-        </div>
+    <Page>
+      <div className="p-6 max-w-6xl mx-auto">
+        {/* Header */}
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-800">👤 My Profile</h1>
+          {user?.username && (
+            <p className="text-lg text-gray-600 mt-1">{user.username}</p>
+          )}
+          {user?.email && (
+            <p className="text-md text-gray-500">{user.email}</p>
+          )}
+        </header>
 
-        {/* Profile content */}
-        <div className="p-6">
-          {/* Edit profile form */}
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-2">Edit Profile</h3>
+        {/* Ads */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold mb-2">My Adverts</h2>
+          <p className="text-gray-600 mb-4">
+            Here you'll see the ads you've published.
+          </p>
+          <MyAdvertList />
+        </section>
+
+        {/* Profile management grid */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Edit user form */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Edit Profile</h2>
             <p className="text-gray-600 mb-4">
               You can update your email, username, or password below.
             </p>
             <UserEditForm />
           </div>
 
-          {error && (
-            <FormErrorPopup error={error} onClose={() => setError(null)} />
-          )}
-          {loading && <Loader />}
-
-          {/* Ads section */}
-          <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-2">My Ads</h3>
-            <p className="text-gray-600">
-              Here you'll see the ads you've published.
+          {/* Delete user */}
+          <div className="bg-red-50 border border-red-200 p-6 rounded-xl h-fit">
+            <h2 className="text-lg font-semibold text-red-700 mb-2">
+              ⚠️ Danger Zone
+            </h2>
+            <p className="text-sm text-red-500 mb-4">
+              Deleting your account will remove all your data and ads permanently.
             </p>
-            <MyAdvertList />
-          </div>
-
-          {/* Danger zone */}
-          <div className="mt-10 border-t border-gray-300 pt-6">
-            <h3 className="text-lg font-semibold text-red-600 mb-2">
-              Danger Zone
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              You can permanently delete your account. All your ads will be
-              deleted as well.
-            </p>
-            <Button danger onClick={() => setShowModal(true)}>
+            <Button danger onClick={() => setShowModal(true)} className="w-full">
               Delete Account
             </Button>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {showModal && (
-        <ConfirmationModalCard
-          message="Are you sure you want to delete your account?"
-          onCancel={() => setShowModal(false)}
-          onConfirm={handleDeleteAccount}
-        />
-      )}
+        {/* Modals & feedback */}
+        {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
+        {loading && <Loader />}
+        {showModal && (
+          <ConfirmationModalCard
+            message="Are you sure you want to delete your account?"
+            onCancel={() => setShowModal(false)}
+            onConfirm={handleDeleteAccount}
+          />
+        )}
+      </div>
     </Page>
   )
 }
