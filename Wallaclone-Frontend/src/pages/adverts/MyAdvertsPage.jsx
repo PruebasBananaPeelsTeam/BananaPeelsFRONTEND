@@ -4,14 +4,15 @@ import Advert from './Advert.jsx';
 import { isApiClientError } from '../../api/client';
 import Page from '../../components/layout/page';
 import Loader from '../../components/shared/loader.jsx';
-import FloatingNavButtons from '../../components/shared/FloatingNavButtons.jsx'
+import FloatingNavButtons from '../../components/shared/FloatingNavButtons.jsx';
 
 function MyAdvertsPage() {
   const [adverts, setAdverts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const advertsPerPage = 10;
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 10;
 
   useEffect(() => {
     const fetchMyAdverts = async () => {
@@ -19,8 +20,9 @@ function MyAdvertsPage() {
       setError(null);
 
       try {
-        const myAdverts = await getMyAdverts();
-        setAdverts(myAdverts);
+        const { results = [], totalPages = 1 } = await getMyAdverts(currentPage, limit);
+        setAdverts(results);
+        setTotalPages(totalPages);
       } catch (error) {
         console.error('Error fetching my adverts:', error);
         if (isApiClientError(error)) {
@@ -34,11 +36,7 @@ function MyAdvertsPage() {
     };
 
     fetchMyAdverts();
-  }, []);
-
-  const indexOfLastAdvert = currentPage * advertsPerPage;
-  const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
-  const currentAdverts = adverts.slice(indexOfFirstAdvert, indexOfLastAdvert);
+  }, [currentPage]);
 
   if (loading) {
     return <Loader />;
@@ -55,8 +53,8 @@ function MyAdvertsPage() {
   return (
     <Page title="My Adverts" fullWidth={true}>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
-        {currentAdverts.length > 0 ? (
-          currentAdverts.map((advert) => <Advert key={advert._id} advert={advert} />)
+        {adverts.length > 0 ? (
+          adverts.map((advert) => <Advert key={advert._id} advert={advert} />)
         ) : (
           <p className="text-center w-full col-span-full">
             No adverts created yet.
@@ -67,10 +65,7 @@ function MyAdvertsPage() {
       {/* Botones flotantes para cambiar página */}
       <FloatingNavButtons
         onPrev={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-        onNext={() => {
-          const maxPage = Math.ceil(adverts.length / advertsPerPage);
-          setCurrentPage(prev => Math.min(prev + 1, maxPage));
-        }}
+        onNext={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
       />
     </Page>
   );
