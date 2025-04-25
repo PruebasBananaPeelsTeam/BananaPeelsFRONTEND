@@ -9,6 +9,7 @@ import { deleteUser } from '../../services/auth-service.js'
 import { clearSession } from '../../utils/storage.js'
 import { useAuth } from '../../context/AuthContext.jsx'
 import MyAdvertList from '../../components/shared/myAdvertList.jsx'
+import UserEditForm from '../../components/shared/UserEditForm.jsx'
 
 const MyUserPage = () => {
   const navigate = useNavigate()
@@ -53,6 +54,15 @@ const MyUserPage = () => {
 
         {/* Profile content */}
         <div className="p-6">
+          {/* Edit profile form */}
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold mb-2">Edit Profile</h3>
+            <p className="text-gray-600 mb-4">
+              You can update your email, username, or password below.
+            </p>
+            <UserEditForm />
+          </div>
+
           {error && (
             <FormErrorPopup error={error} onClose={() => setError(null)} />
           )}
