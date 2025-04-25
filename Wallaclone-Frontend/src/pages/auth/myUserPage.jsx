@@ -8,7 +8,7 @@ import ConfirmationModalCard from '../../components/shared/confirmationModalCard
 import { deleteUser } from '../../services/auth-service.js'
 import { clearSession } from '../../utils/storage.js'
 import { useAuth } from '../../context/AuthContext.jsx'
-import MyAdvertList from '../../components/shared/myAdvertList.jsx'
+import MyAdvertsBlock from '../adverts/MyAdvertsPage.jsx'
 import UserEditForm from '../../components/shared/UserEditForm.jsx'
 
 const MyUserPage = () => {
@@ -44,20 +44,16 @@ const MyUserPage = () => {
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-800">👤 My Profile</h1>
           {user?.username && (
-            <p className="text-lg text-gray-600 mt-1">{user.username}</p>
+            <p className="text-lg text-gray-800 mt-1">Username: {user.username}</p>
           )}
           {user?.email && (
-            <p className="text-md text-gray-500">{user.email}</p>
+            <p className="text-md text-gray-800">Email: {user.email}</p>
           )}
         </header>
 
         {/* Ads */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-2">My Adverts</h2>
-          <p className="text-gray-600 mb-4">
-            Here you'll see the ads you've published.
-          </p>
-          <MyAdvertList />
+        <section>
+          <MyAdvertsBlock />
         </section>
 
         {/* Profile management grid */}

@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getMyAdverts } from '../../services/adverts-service.js';
 import Advert from './Advert.jsx';
-import { isApiClientError } from '../../api/client';
-import Page from '../../components/layout/page';
-import Loader from '../../components/shared/loader.jsx';
 import FloatingNavButtons from '../../components/shared/FloatingNavButtons.jsx';
+import Loader from '../../components/shared/loader.jsx';
+import { isApiClientError } from '../../api/client.js';
 
-function MyAdvertsPage() {
+function MyAdvertsBlock() {
   const [adverts, setAdverts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -38,37 +37,35 @@ function MyAdvertsPage() {
     fetchMyAdverts();
   }, [currentPage]);
 
-  if (loading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (adverts.length === 0) {
-    return <div>No adverts found.</div>;
-  }
-
   return (
-    <Page title="My Adverts" fullWidth={true}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
-        {adverts.length > 0 ? (
-          adverts.map((advert) => <Advert key={advert._id} advert={advert} />)
-        ) : (
-          <p className="text-center w-full col-span-full">
-            No adverts created yet.
-          </p>
-        )}
-      </div>
+    <div className="my-12">
+      <h2 className="text-2xl font-semibold mb-4">My Adverts</h2>
 
-      {/* Botones flotantes para cambiar página */}
-      <FloatingNavButtons
-        onPrev={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-        onNext={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-      />
-    </Page>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <p className="text-red-500">{error}</p>
+      ) : (
+        <>
+          {adverts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
+              {adverts.map((advert) => (
+                <Advert key={advert._id} advert={advert} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center w-full col-span-full">
+              No adverts created yet.
+            </p>
+          )}
+          <FloatingNavButtons
+            onPrev={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            onNext={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          />
+        </>
+      )}
+    </div>
   );
 }
 
-export default MyAdvertsPage;
+export default MyAdvertsBlock;
