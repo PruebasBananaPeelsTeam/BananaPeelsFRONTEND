@@ -37,9 +37,14 @@ export const getAdvertDetail = async (advertId, slug = '') => {
   return response.data.results
 }
 
-export const getMyAdverts = async () => {
-  const response = await client.get('/api/myAdverts')
-  return response.data.results
+export const getMyAdverts = async (page = 1, limit = 10) => {
+  const response = await client.get('/api/myAdverts', {
+    params: {
+      page,
+      limit,
+    },
+  });
+  return response.data;
 }
 
 export const updateAdvert = async (advertId, updatedData) => {

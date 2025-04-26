@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Burger from '../shared/burguer.jsx';
 import Logout from '../shared/logout.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import SearchBar from '../shared/SearchBar.jsx'
 export default function Header() {
   const { isAuthenticated } = useAuth();
+  const location = useLocation();
 
   return (
     <header
@@ -15,7 +16,7 @@ export default function Header() {
         <div className="text-[20px] font-extrabold bg-gradient-to-r from-yellow-400 via-green-400 to-orange-400 text-transparent bg-clip-text drop-shadow-2xl">
           <p>BananaPeels</p>
         </div>
-        <SearchBar />
+        {location.pathname === '/' && <SearchBar />}
         <Burger />
         {isAuthenticated && <Logout />}
       </div>

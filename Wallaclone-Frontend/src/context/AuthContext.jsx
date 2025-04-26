@@ -29,11 +29,16 @@ export const AuthProvider = ({ children }) => {
     storage.remove('user')
   }
 
+  const updateUserData = (newUserData) => {
+    setUser(newUserData)
+    storage.set('user', newUserData)
+  }
+
   const isAuthenticated = !!token
 
   return (
     <AuthContext.Provider
-      value={{ token, user, isAuthenticated, login, logout }}
+      value={{ token, user, isAuthenticated, login, logout, updateUserData }}
     >
       {children}
     </AuthContext.Provider>

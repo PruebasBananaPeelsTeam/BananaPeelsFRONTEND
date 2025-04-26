@@ -1,4 +1,4 @@
-function Button({ type = 'button', onClick, children, ...props }) {
+function Button({ type = 'button', onClick, children, danger = false, ...props }) {
   return (
     <button
       type={type}

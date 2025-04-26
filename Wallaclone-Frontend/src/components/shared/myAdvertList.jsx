@@ -1,4 +1,3 @@
-// components/adverts/MyAdvertList.jsx
 import { useEffect, useState } from 'react'
 import { getMyAdverts } from '../../services/adverts-service.js'
 import Advert from '../../pages/adverts/Advert.jsx'
@@ -12,8 +11,8 @@ const MyAdvertList = () => {
   useEffect(() => {
     const fetchMyAdverts = async () => {
       try {
-        const myAdverts = await getMyAdverts()
-        setAdverts(myAdverts)
+        const { results = [] } = await getMyAdverts(); // <-- Solo nos interesa results aquí
+        setAdverts(results)
       } catch (err) {
         setError('Error loading adverts')
         console.error(err)

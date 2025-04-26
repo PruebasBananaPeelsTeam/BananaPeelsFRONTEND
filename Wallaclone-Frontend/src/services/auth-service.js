@@ -27,3 +27,8 @@ export const logout = () => {
 export const deleteUser = () => {
   return client.delete('/api/users/me')
 }
+
+export const updateUser = async (updatedData) => {
+  const response = await client.put('/api/users/me', updatedData)
+  return response.data
+}
