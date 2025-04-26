@@ -8,15 +8,14 @@ export default function Footer() {
         {/* Izquierda: Nombre y slogan */}
         <div className="space-y-2">
           <h3 className="text-white text-xl font-semibold tracking-wide">BananaPeels</h3>
-          <p className="text-gray-400">Diseño y segunda mano con estilo.</p>
+          <p className="text-gray-400">Design and style.</p>
         </div>
 
         {/* Centro: Navegación */}
         <div className="flex flex-col space-y-2 text-center md:text-left">
-          <a href="#" className="hover:text-white transition">Inicio</a>
-          <a href="#" className="hover:text-white transition">Explorar</a>
-          <a href="#" className="hover:text-white transition">Sobre Nosotros</a>
-          <a href="#" className="hover:text-white transition">Contacto</a>
+          <a href="#" className="hover:text-white transition">Explore</a>
+          <a href="#" className="hover:text-white transition">About us</a>
+          <a href="#" className="hover:text-white transition">Contact</a>
         </div>
 
         {/* Derecha: Redes sociales */}
@@ -29,7 +28,8 @@ export default function Footer() {
 
       {/* Línea inferior */}
       <div className="mt-10 border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
-        &copy; {new Date().getFullYear()} BananaPeels — Todos los derechos reservados.
+        &copy; {new Date().getFullYear()} BananaPeels — 
+        All rights reserved.
       </div>
     </footer>
   );
