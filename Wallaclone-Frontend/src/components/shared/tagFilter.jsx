@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { getTags } from '../../services/adverts-service.js'
 import FormErrorPopup from './formErrorPopUp.jsx'
+import Button from '../shared/button.jsx'
 
-// 🖼️ Imagenes de los tags
 const tagImages = {
   Decoration: '/images/Decoracion.png',
   Ilumination: '/images/Iluminacion.jpg',
@@ -12,22 +12,17 @@ const tagImages = {
 }
 
 function TagFilter() {
-  // Estado para guardar todos los tags disponibles
   const [tags, setTags] = useState([])
-
-  // Estado para guardar posibles errores al cargar tags
   const [error, setError] = useState(null)
 
-  const navigate = useNavigate()  // Para cambiar de URL
-  const location = useLocation()  // Para saber qué URL tengo ahora mismo
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  // 🔥 Aquí no guardamos los tags seleccionados en memoria, sino que los sacamos directamente de la URL
   const selectedTags = new URLSearchParams(location.search).getAll('tag')
 
-  // 🚀 Cuando el componente se monta, carga todos los tags desde el backend
   useEffect(() => {
     getTags()
-      .then(setTags) // Guarda los tags que vienen del servidor
+      .then(setTags)
       .catch(() => {
         setError({
           code: 'TAGS_FETCH_ERROR',
@@ -36,36 +31,26 @@ function TagFilter() {
       })
   }, [])
 
-  // 🖱️ Esta función se llama cuando haces click en un tag
   const handleTagClick = (clickedTag) => {
     const searchParams = new URLSearchParams(location.search)
     const currentTags = searchParams.getAll('tag')
 
-    let updated
-    if (currentTags.includes(clickedTag)) {
-      // Si ya estaba seleccionado, lo quitamos
-      updated = currentTags.filter((tag) => tag !== clickedTag)
-    } else {
-      // Si no estaba, lo añadimos
-      updated = [...currentTags, clickedTag]
-    }
+    const updated = currentTags.includes(clickedTag)
+      ? currentTags.filter((tag) => tag !== clickedTag)
+      : [...currentTags, clickedTag]
 
-    // Creamos nuevos parámetros de búsqueda
     const newSearchParams = new URLSearchParams()
     updated.forEach((tag) => newSearchParams.append('tag', tag))
-    newSearchParams.set('page', '1') // Siempre volvemos a la página 1
+    newSearchParams.set('page', '1')
 
-    // Cambiamos la URL
     navigate(`/?${newSearchParams.toString()}`)
   }
 
-  // 🧹 Cuando haces click en "Limpiar filtros", navegas al inicio
   const handleClearFilters = () => {
     navigate('/')
   }
 
-  // 🧠 Cada vez que cambia la URL (tags seleccionados), hacemos scroll suave
-  useEffect(() => {
+useEffect(() => {
     const element = document.getElementById('adverts-list')
     if (element) {
       slowScrollTo(element.offsetTop, 800) // 800ms para hacer scroll despacito
@@ -94,50 +79,66 @@ function TagFilter() {
   }
 
   return (
-    <>
-      {/* 🛑 Mostrar popup de error si no cargan los tags */}
+    <div className="w-full max-w-7xl mx-auto px-4">
       {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
 
-      {/* 🎯 Si hay tags seleccionados, mostramos el aviso y el botón limpiar */}
-      {selectedTags.length > 0 && (
-        <div className="flex flex-wrap justify-center gap-2 p-4">
-          <p className="text-lg text-gray-700">
-            Resultados filtrados por:
+      {/* CONTENEDOR PRINCIPAL */}
+      <div className="p-8 flex flex-col gap-8 items-center mb-1">
+        {/* BLOQUE DE FILTROS ACTIVOS */}
+        {selectedTags.length > 0 && (
+          <div className="flex flex-wrap items-center justify-start gap-4 w-full">
+            <span className="text-gray-800 font-bold text-lg flex items-center">
+              🎯 Filtros aplicados:
+            </span>
             {selectedTags.map((tag) => (
-              <span
+              <img
                 key={tag}
-                className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full mx-1"
-              >
+                src={tagImages[tag]}
+                alt={tag}
+                title={tag}
+                className="w-14 h-14 object-cover rounded-full border-2 border-indigo-400 shadow-sm"
+              />
+            ))}
+          </div>
+        )}
+
+        {/* TAGS FLEXIBLES */}
+        <div className="flex flex-wrap justify-center gap-8 w-full">
+          {tags.map((tag) => (
+            <div
+              key={tag}
+              onClick={() => handleTagClick(tag)}
+              className="flex flex-col items-center cursor-pointer transition-transform hover:scale-105"
+            >
+              <img
+                src={tagImages[tag]}
+                alt={tag}
+                className={`w-48 h-48 object-cover rounded-2xl border-4 transition-all ${
+                  selectedTags.includes(tag)
+                    ? 'border-indigo-500'
+                    : 'border-transparent'
+                }`}
+              />
+              <span className="text-lg mt-2 font-medium text-gray-700 capitalize">
                 {tag}
               </span>
-            ))}
-          </p>
-          {/* Botón para limpiar todos los filtros */}
-          <button
-            onClick={handleClearFilters}
-            className="ml-4 text-red-500 underline hover:text-red-700 transition"
-          >
-            Limpiar filtros
-          </button>
+            </div>
+          ))}
         </div>
-      )}
 
-      {/* 🖼️ Mostramos todas las imágenes de los tags */}
-      <div className="flex flex-wrap justify-center gap-6 p-6">
-        {tags.map((tag) => (
-          <div key={tag} className="flex flex-col items-center">
-            <img
-              src={tagImages[tag]}
-              alt={tag}
-              onClick={() => handleTagClick(tag)}
-              className={`w-24 h-24 object-contain cursor-pointer border-4 rounded-2xl transition 
-                ${selectedTags.includes(tag) ? 'border-gray-800 scale-105' : 'border-transparent'}`}
-            />
-            <span className="text-base mt-2 capitalize">{tag}</span>
+        {/* BOTÓN DE LIMPIAR FILTROS */}
+        {selectedTags.length > 0 && (
+          <div className="flex justify-end w-full">
+            <Button
+              onClick={handleClearFilters}
+            >
+              Limpiar filtros
+            </Button>
           </div>
-        ))}
+        )}
+
       </div>
-    </>
+    </div>
   )
 }
 
