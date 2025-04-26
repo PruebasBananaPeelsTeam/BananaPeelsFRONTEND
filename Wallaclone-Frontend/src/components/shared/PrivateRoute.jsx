@@ -5,7 +5,7 @@ import ProtectedAccessModal from './ProtectedAccessModal'
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth()
 
-  console.log('¿Está autenticado?', isAuthenticated)
+  console.log('Are you authenticated?', isAuthenticated)
 
   if (!isAuthenticated) {
     return <ProtectedAccessModal />
