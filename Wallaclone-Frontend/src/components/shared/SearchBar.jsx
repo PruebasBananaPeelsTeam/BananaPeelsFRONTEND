@@ -94,7 +94,7 @@ function SearchBar() {
           name="name"
           value={filters.name}
           onChange={handleChange}
-          placeholder="🔍"
+          placeholder="🔍 Name"
           className="w-32 px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
         <input
