@@ -35,7 +35,7 @@ export default function Burger() {
       {/* Menú en pantallas grandes */}
       <nav className="hidden md:flex gap-6">
         <Link to="/" className="text-white hover:text-yellow-300">
-          Adverts
+          Home
         </Link>
 
         {!isAuthenticated && (
@@ -49,16 +49,16 @@ export default function Burger() {
           </>
         )}
 
-        <Link to="/adverts/new" className="text-white hover:text-yellow-300">
-          New Advert
-        </Link>
         {isAuthenticated && (
           <>
-            <Link to="/myAdverts" className="text-white hover:text-yellow-300">
-              My Adverts
+            <Link
+              to="/adverts/new"
+              className="text-white hover:text-yellow-300"
+            >
+              Create-Advert
             </Link>
             <Link to="/my-profile" className="text-white hover:text-yellow-300">
-              My Account
+              👤 My Account
             </Link>
           </>
         )}
@@ -73,7 +73,7 @@ export default function Burger() {
               onClick={closeMenu}
               className="text-white hover:text-yellow-300"
             >
-              Adverts
+              Home
             </Link>
 
             {!isAuthenticated && (
@@ -95,20 +95,13 @@ export default function Burger() {
               </>
             )}
 
-            <Link
-              to="/adverts/new"
-              onClick={closeMenu}
-              className="text-white hover:text-yellow-300"
-            >
-              New Advert
-            </Link>
             {isAuthenticated && (
               <Link
-                to="/myAdverts"
+                to="/adverts/new"
                 onClick={closeMenu}
                 className="text-white hover:text-yellow-300"
               >
-                My Adverts
+                Create-Advert
               </Link>
             )}
           </nav>
