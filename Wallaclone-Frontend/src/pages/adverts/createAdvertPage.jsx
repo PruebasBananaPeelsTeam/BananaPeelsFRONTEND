@@ -5,6 +5,7 @@ import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import Page from '../../components/layout/page.jsx'
 import Loader from '../../components/shared/loader.jsx'
+import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 
 const CreateAdvertPage = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const CreateAdvertPage = () => {
   const [success, setSuccess] = useState(false)
   const [imagePreview, setImagePreview] = useState(null)
   const [tagsList, setTagsList] = useState([])
-  const [errors, setErrors] = useState({})
+  const [fieldErrors, setFieldErrors] = useState({})
 
   const navigate = useNavigate()
 
@@ -29,7 +30,6 @@ const CreateAdvertPage = () => {
     const fetchTags = async () => {
       try {
         const tags = await getTags()
-        console.log('tags recibidos', tags)
         setTagsList(tags)
       } catch (err) {
         console.error('Error fetching tags:', err)
@@ -38,11 +38,18 @@ const CreateAdvertPage = () => {
     fetchTags()
   }, [])
 
+  useEffect(() => {
+    if (error) {
+      const timeout = setTimeout(() => setError(null), 5000)
+      return () => clearTimeout(timeout)
+    }
+  }, [error])
+
   const handleChange = (e) => {
     const { name, value, files } = e.target
     if (files) {
       const file = files[0]
-      setFormData((prev) => ({ ...prev, [name]: files[0] }))
+      setFormData((prev) => ({ ...prev, [name]: file }))
       setImagePreview(URL.createObjectURL(file))
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }))
@@ -50,18 +57,14 @@ const CreateAdvertPage = () => {
   }
 
   const validateForm = () => {
-    const newErrors = {}
-
-    if (!formData.name.trim()) newErrors.name = 'Name is required.'
-    if (!formData.description.trim())
-      newErrors.description = 'Description is required.'
+    const errors = {}
+    if (!formData.name.trim()) errors.name = 'Name is required.'
+    if (!formData.description.trim()) errors.description = 'Description is required.'
     if (!formData.price || Number(formData.price) <= 0)
-      newErrors.price = 'Price must be greater than 0.'
+      errors.price = 'Price must be greater than 0.'
     if (formData.tags.length === 0)
-      newErrors.tags = 'Please select at least one category.'
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+      errors.tags = 'Please select at least one category.'
+    return errors
   }
 
   const handleSubmit = async (e) => {
@@ -69,10 +72,13 @@ const CreateAdvertPage = () => {
     setError(null)
     setSuccess(false)
 
-    if (!validateForm()) {
-      setError('Please, fix errors to continue.')
+    const validationErrors = validateForm()
+    if (Object.keys(validationErrors).length > 0) {
+      setFieldErrors(validationErrors)
       return
     }
+
+    setFieldErrors({})
 
     const dataToSend = new FormData()
     dataToSend.append('name', formData.name)
@@ -105,7 +111,10 @@ const CreateAdvertPage = () => {
       navigate('/')
     } catch (err) {
       console.error(err)
-      setError('Error creando el anuncio. Inténtalo de nuevo.')
+      setError({
+        code: 'Create Error',
+        message: 'Error creating the advert. Please try again.',
+      })
     } finally {
       setLoading(false)
     }
@@ -113,12 +122,10 @@ const CreateAdvertPage = () => {
 
   return (
     <Page>
+      {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
       <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          Create a new advert
-        </h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Create a new advert</h2>
 
-        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
         {success && (
           <p className="text-green-600 text-sm mb-3">
             Advert created successfully! Redirecting...
@@ -126,15 +133,14 @@ const CreateAdvertPage = () => {
         )}
         {loading && <Loader />}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
           <FormField
             label="Product"
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            required
-            error={errors.name}
+            error={fieldErrors.name}
           />
 
           <FormField
@@ -143,8 +149,7 @@ const CreateAdvertPage = () => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            required
-            error={errors.description}
+            error={fieldErrors.description}
           />
 
           <FormField
@@ -153,27 +158,28 @@ const CreateAdvertPage = () => {
             name="price"
             value={formData.price}
             onChange={handleChange}
-            required
-            error={errors.price}
+            error={fieldErrors.price}
+            min="0.01"
           />
 
           <div className="flex flex-col w-full">
-            <label className="text-sm font-medium text-gray-700 mb-2">
-              Type
-              <select
-                name="type"
-                value={formData.type}
-                onChange={handleChange}
-                className="flex w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[rgb(223,184,13)]"
-              >
-                <option value="sell">On sale</option>
-                <option value="buy">Wanted</option>
-              </select>
-            </label>
+            <label className="text-sm font-medium text-gray-700 mb-2">Type</label>
+            <select
+              name="type"
+              value={formData.type}
+              onChange={handleChange}
+              className="flex w-full border border-gray-300 rounded-xl px-4 py-2"
+            >
+              <option value="sell">On sale</option>
+              <option value="buy">Wanted</option>
+            </select>
           </div>
 
           <div className="flex flex-col w-full">
             <p className="text-sm font-medium text-gray-700 mb-2">Tags</p>
+            {fieldErrors.tags && (
+              <span className="text-sm text-red-500">{fieldErrors.tags}</span>
+            )}
             <div className="flex flex-wrap gap-4">
               {tagsList.map((tag) => (
                 <label key={tag} className="flex items-center space-x-2">
@@ -195,30 +201,22 @@ const CreateAdvertPage = () => {
                 </label>
               ))}
             </div>
-            {errors.tags && (
-              <p className="text-red-500 text-sm mt-1">{errors.tags}</p>
-            )}
           </div>
 
           <div className="flex flex-col w-full">
-            <label className="text-sm font-medium text-gray-700 mb-2">
-              Image
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                onChange={handleChange}
-                className="flex w-full border border-gray-300 rounded-xl px-4 py-2"
-              />
-            </label>
-            {errors.image && (
-              <p className="text-red-500 text-sm">{errors.image}</p>
-            )}
+            <label className="text-sm font-medium text-gray-700 mb-2">Image</label>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleChange}
+              className="flex w-full border border-gray-300 rounded-xl px-4 py-2"
+            />
           </div>
 
           {imagePreview && (
             <div className="mt-2">
-              <p className="text-sm text-gray-500 mb-1">Vista previa:</p>
+              <p className="text-sm text-gray-500 mb-1">Preview:</p>
               <img
                 src={imagePreview}
                 alt="Vista previa"
@@ -228,7 +226,7 @@ const CreateAdvertPage = () => {
           )}
 
           <Button type="submit" disabled={loading}>
-            {loading && <Loader />}Submit
+            {loading ? 'Creating...' : 'Submit'}
           </Button>
         </form>
       </div>
