@@ -50,10 +50,10 @@ function TagFilter() {
     navigate('/')
   }
 
-useEffect(() => {
+  useEffect(() => {
     const element = document.getElementById('adverts-list')
     if (element) {
-      slowScrollTo(element.offsetTop, 800) // 800ms para hacer scroll despacito
+      slowScrollTo(element.offsetTop, 800) // Scroll lento
     }
   }, [location.search])
 
@@ -79,15 +79,16 @@ useEffect(() => {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4">
+    <div className="w-full max-w-5xl mx-auto px-2">
       {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
 
       {/* CONTENEDOR PRINCIPAL */}
-      <div className="p-8 flex flex-col gap-8 items-center mb-1">
+      <div className="p-4 flex flex-col gap-6 items-center mt-8 mb-1">
+        
         {/* BLOQUE DE FILTROS ACTIVOS */}
         {selectedTags.length > 0 && (
-          <div className="flex flex-wrap items-center justify-start gap-4 w-full">
-            <span className="text-gray-800 font-bold text-lg flex items-center">
+          <div className="flex flex-wrap items-center justify-start gap-3 w-full">
+            <span className="text-gray-800 font-bold text-md flex items-center">
               🎯 Filtros aplicados:
             </span>
             {selectedTags.map((tag) => (
@@ -96,14 +97,14 @@ useEffect(() => {
                 src={tagImages[tag]}
                 alt={tag}
                 title={tag}
-                className="w-14 h-14 object-cover rounded-full border-2 border-indigo-400 shadow-sm"
+                className="w-10 h-10 object-cover rounded-full border-2 border-indigo-400 shadow-sm"
               />
             ))}
           </div>
         )}
 
         {/* TAGS FLEXIBLES */}
-        <div className="flex flex-wrap justify-center gap-8 w-full">
+        <div className="flex flex-wrap justify-center gap-6 w-full">
           {tags.map((tag) => (
             <div
               key={tag}
@@ -113,13 +114,13 @@ useEffect(() => {
               <img
                 src={tagImages[tag]}
                 alt={tag}
-                className={`w-48 h-48 object-cover rounded-2xl border-4 transition-all ${
+                className={`w-32 h-32 object-cover rounded-2xl border-4 transition-all ${
                   selectedTags.includes(tag)
                     ? 'border-indigo-500'
                     : 'border-transparent'
                 }`}
               />
-              <span className="text-lg mt-2 font-medium text-gray-700 capitalize">
+              <span className="text-base mt-2 font-semibold text-gray-700 capitalize">
                 {tag}
               </span>
             </div>
@@ -129,14 +130,11 @@ useEffect(() => {
         {/* BOTÓN DE LIMPIAR FILTROS */}
         {selectedTags.length > 0 && (
           <div className="flex justify-end w-full">
-            <Button
-              onClick={handleClearFilters}
-            >
+            <Button onClick={handleClearFilters}>
               Limpiar filtros
             </Button>
           </div>
         )}
-
       </div>
     </div>
   )
