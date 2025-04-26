@@ -63,3 +63,8 @@ export const toggleReserved = async (advertId) => {
   )
   return response.data
 }
+
+export const toggleSoldAdvert = async (advertId) => {
+  const { data } = await client.patch(`/api/adverts/${advertId}/toggle-sold`)
+  return data
+}
