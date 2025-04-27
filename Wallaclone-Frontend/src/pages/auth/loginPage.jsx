@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../../services/auth-service.js';
 import { useAuth } from '../../context/AuthContext.jsx';
@@ -81,6 +81,14 @@ function LoginPage() {
         >
           {isLoading ? <Loader /> : 'Login'}
         </Button>
+
+        {/* Forgot Password */}
+        <Link
+          to="/forgot-password"
+          className="text-sm text-blue-600 hover:underline text-center mt-4"
+        >
+          Forgot your password?
+        </Link>
 
         <FormErrorPopup error={error} onClose={() => setError(null)} />
       </form>

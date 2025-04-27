@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../../services/auth-service';
 import { isApiClientError } from '../../api/client';
