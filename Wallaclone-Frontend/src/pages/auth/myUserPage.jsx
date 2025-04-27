@@ -38,7 +38,7 @@ const MyUserPage = () => {
   }
 
   return (
-    <Page title="My Profile" fullWidth>
+    <Page fullWidth>
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">👤 My Profile</h1>
         {user?.username && (
