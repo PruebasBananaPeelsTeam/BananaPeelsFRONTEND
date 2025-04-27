@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../../services/auth-service.js';
 import { useAuth } from '../../context/AuthContext.jsx';
@@ -22,9 +22,7 @@ function LoginPage() {
     }));
   }, []);
 
-  useTimer(error, () => {
-    setError(null);
-  }, 5000);
+  useTimer(error, () => { setError(null); }, 5000);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,19 +36,23 @@ function LoginPage() {
       navigate('/');
     } catch (error) {
       setError(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-6">
+    <div
+      className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center p-6"
+      style={{ backgroundImage: "url('/images/background.jpg')" }}
+    >
       {/* Login Form */}
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-md flex flex-col gap-6"
+        className="bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 p-8 rounded-2xl shadow-2xl w-full max-w-md flex flex-col gap-6"
       >
-        <h2 className="text-3xl font-bold text-center text-white">Sign In</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800">Welcome Back!</h2>
 
         <FormField
           label="Username"
@@ -61,6 +63,7 @@ function LoginPage() {
           value={input.username}
           onChange={handleInputChange}
         />
+
         <FormField
           label="Password"
           type="password"
@@ -79,24 +82,17 @@ function LoginPage() {
           {isLoading ? <Loader /> : 'Login'}
         </Button>
 
-        <Link
-          to="/forgot-password"
-          className="text-sm text-blue-400 hover:text-blue-300 text-center mt-4 transition"
-        >
-          Forgot your password?
-        </Link>
-
         <FormErrorPopup error={error} onClose={() => setError(null)} />
       </form>
 
       {/* Register Invitation */}
-      <div className="mt-8 bg-gray-800 p-6 rounded-2xl shadow-lg w-full max-w-md text-center flex flex-col gap-4">
-        <p className="text-gray-300">Don't have an account?</p>
+      <div className="mt-8 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 p-6 rounded-2xl shadow-lg w-full max-w-md text-center flex flex-col gap-4">
+        <p className="text-gray-700">Don't have an account yet?</p>
         <Link
           to="/register"
-          className="inline-block px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
+          className="cursor-pointer px-4 py-1.5 min-w-[90px] text-sm font-medium rounded-lg bg-[#1e1e1e]/90 text-white hover:bg-[#1e3a8a] transition-all duration-200"
         >
-          Create Account
+          Register
         </Link>
       </div>
     </div>
