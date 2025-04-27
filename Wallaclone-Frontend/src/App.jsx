@@ -12,6 +12,7 @@ import ForgotPasswordPage from './pages/auth/ForgotPasswordPage.jsx'
 import ResetPasswordPage from './pages/auth/resetPasswordPage.jsx'
 import UpdateAdvertPage from './pages/adverts/UpdateAdvertPage.jsx'
 import MyUserPage from './pages/auth/myUserPage.jsx'
+import ChatRoom from './pages/chat/ChatRoom'
 
 function App() {
   return (
@@ -62,6 +63,14 @@ function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />
       <Route path="/adverts/:advertId/update" element={<UpdateAdvertPage />} />
+      <Route
+        path="/chat/:advertId"
+        element={
+          <PrivateRoute>
+            <ChatRoom />
+          </PrivateRoute>
+        }
+      />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )

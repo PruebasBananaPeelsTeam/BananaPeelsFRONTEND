@@ -1,6 +1,6 @@
 import { client } from '../api/client.js';
 
-baseChatUrl = '/api/chat/'
+const baseChatUrl = '/api/chat/'
 
 // Obtener un chat existente o crear un chat asociado al anuncio
 export const getOrCreateChat = async (advertId) => {
