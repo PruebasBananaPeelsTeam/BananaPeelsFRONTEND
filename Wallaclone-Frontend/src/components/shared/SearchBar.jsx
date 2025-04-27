@@ -14,7 +14,9 @@ function SearchBar() {
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
-  useTimer(error,() => {setError(null), 5000})
+  useTimer(error, () => {
+    setError(null), 5000
+  })
 
   const handleResetFilters = () => {
     setFilters({ name: '', priceMin: '', priceMax: '' })
@@ -81,21 +83,20 @@ function SearchBar() {
   }
 
   return (
-    <div className='relative max-w-7xl mx-auto flex justify-between items-center'>
-      {error && (
-        <FormErrorPopup error={error} onClose={() => setError(null)} />
-      )}
+    <div className="relative mx-auto flex justify-between items-center">
+      {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-nowrap items-center gap-2 rounded-md w-full px-2">
+        className="flex flex-wrap gap-2 w-full justify-center items-center px-2"
+      >
         <input
           type="text"
           name="name"
           value={filters.name}
           onChange={handleChange}
           placeholder="🔍 Name"
-          className="w-32 px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="flex-1 min-w-[120px] px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
         <input
           type="number"
@@ -103,7 +104,7 @@ function SearchBar() {
           value={filters.priceMin}
           onChange={handleChange}
           placeholder="Min €"
-          className="w-20 px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="flex-1 min-w-[80px] px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
         <input
           type="number"
@@ -111,10 +112,16 @@ function SearchBar() {
           value={filters.priceMax}
           onChange={handleChange}
           placeholder="Max €"
-          className="w-20 px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="flex-1 min-w-[80px] px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
         />
-        <Button type="submit">Search</Button>
-        <Button type="button" onClick={handleResetFilters}>
+        <Button type="submit" className="flex-shrink-0">
+          Search
+        </Button>
+        <Button
+          type="button"
+          onClick={handleResetFilters}
+          className="flex-shrink-0"
+        >
           Reset
         </Button>
       </form>
