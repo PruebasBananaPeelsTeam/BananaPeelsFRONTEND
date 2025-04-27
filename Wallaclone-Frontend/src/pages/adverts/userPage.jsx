@@ -26,15 +26,15 @@ const UserPage = () => {
   }, [username]);
 
   if (loading) return <Loader />;
-  if (error) return <Page title="User"><p>{error}</p></Page>;
+  if (error) return <Page title="User" fullWidth><p>{error}</p></Page>;
 
   return (
-    <Page title={`Ads from ${username}`}>
+    <Page title={`Ads from ${username}`} fullWidth>
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold">👤 {username}</h2>
         <p className="text-gray-500">Latest ads published by this user</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative z-0 overflow-visible">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
         {adverts.length > 0 ? (
           adverts.map((advert) => (
             <Advert key={advert._id} advert={advert} />

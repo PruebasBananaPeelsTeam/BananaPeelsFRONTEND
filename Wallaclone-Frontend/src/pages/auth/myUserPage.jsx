@@ -38,60 +38,57 @@ const MyUserPage = () => {
   }
 
   return (
-    <Page>
-      <div className="p-6 max-w-6xl mx-auto">
-        {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">👤 My Profile</h1>
-          {user?.username && (
-            <p className="text-lg text-gray-800 mt-1">Username: {user.username}</p>
-          )}
-          {user?.email && (
-            <p className="text-md text-gray-800">Email: {user.email}</p>
-          )}
-        </header>
-
-        {/* Ads */}
-        <section>
-          <MyAdvertsBlock />
-        </section>
-
-        {/* Profile management grid */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Edit user form */}
-          <div>
-            <h2 className="text-xl font-semibold mb-2">Edit Profile</h2>
-            <p className="text-gray-600 mb-4">
-              You can update your email, username, or password below.
-            </p>
-            <UserEditForm />
-          </div>
-
-          {/* Delete user */}
-          <div className="bg-red-50 border border-red-200 p-6 rounded-xl h-fit">
-            <h2 className="text-lg font-semibold text-red-700 mb-2">
-              ⚠️ Danger Zone
-            </h2>
-            <p className="text-sm text-red-500 mb-4">
-              Deleting your account will remove all your data and ads permanently.
-            </p>
-            <Button danger onClick={() => setShowModal(true)} className="w-full">
-              Delete Account
-            </Button>
-          </div>
-        </section>
-
-        {/* Modals & feedback */}
-        {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
-        {loading && <Loader />}
-        {showModal && (
-          <ConfirmationModalCard
-            message="Are you sure you want to delete your account?"
-            onCancel={() => setShowModal(false)}
-            onConfirm={handleDeleteAccount}
-          />
+    <Page title="My Profile" fullWidth>
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-gray-800">👤 My Profile</h1>
+        {user?.username && (
+          <p className="text-lg text-gray-800 mt-1">Username: {user.username}</p>
+        )}
+        {user?.email && (
+          <p className="text-md text-gray-800">Email: {user.email}</p>
         )}
       </div>
+
+      {/* Ads */}
+      <section>
+        <MyAdvertsBlock />
+      </section>
+
+      {/* Profile management grid */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        {/* Edit user form */}
+        <div>
+          <h2 className="text-xl font-semibold mb-2">Edit Profile</h2>
+          <p className="text-gray-600 mb-4">
+            You can update your email, username, or password below.
+          </p>
+          <UserEditForm />
+        </div>
+
+        {/* Delete user */}
+        <div className="bg-red-50 border border-red-200 p-6 rounded-xl h-fit">
+          <h2 className="text-lg font-semibold text-red-700 mb-2">
+            ⚠️ Danger Zone
+          </h2>
+          <p className="text-sm text-red-500 mb-4">
+            Deleting your account will remove all your data and ads permanently.
+          </p>
+          <Button danger onClick={() => setShowModal(true)} className="w-full">
+            Delete Account
+          </Button>
+        </div>
+      </section>
+
+      {/* Modals & feedback */}
+      {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
+      {loading && <Loader />}
+      {showModal && (
+        <ConfirmationModalCard
+          message="Are you sure you want to delete your account?"
+          onCancel={() => setShowModal(false)}
+          onConfirm={handleDeleteAccount}
+        />
+      )}
     </Page>
   )
 }

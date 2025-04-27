@@ -10,7 +10,7 @@ export default function Page({ title, children, fullWidth = false }) {
       <Header />
 
       <main className="flex-1 px-4 py-8 flex justify-center items-start">
-        <div>
+        <div className={`${fullWidth ? 'w-full' : 'max-w-6xl'} p-6 mx-auto`}>
           {title && (
             <h2 className="text-2xl font-extrabold bg-gradient-to-r from-yellow-400 via-green-400 to-orange-400 text-transparent bg-clip-text drop-shadow-2xl mb-6 text-center">
               {title}
@@ -19,6 +19,7 @@ export default function Page({ title, children, fullWidth = false }) {
           {children}
         </div>
       </main>
+
       <Footer />
     </div>
   )
