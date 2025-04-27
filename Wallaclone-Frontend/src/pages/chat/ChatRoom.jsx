@@ -7,6 +7,7 @@ import {
 } from '../../services/chat-service'
 import { useParams } from 'react-router-dom'
 import ChatLoader from '../../components/shared/chatLoader'
+import { useAuth } from '../../context/AuthContext';
 
 const socket = io('http://localhost:4444') // cambia puerto si hace falta
 
@@ -17,6 +18,7 @@ function ChatRoom() {
   const [inputMessage, setInputMessage] = useState('')
   const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
+  const { user } = useAuth();
 
   useEffect(() => {
     async function initializeChat() {
@@ -66,6 +68,7 @@ function ChatRoom() {
     setSending(true)
     try {
       const newMessage = await sendChatMessage(chatId, inputMessage)
+      newMessage.sender = { _id: user._id, username: user.username }; // Añadimos el username manualmente
       setMessages((prevMessages) => [...prevMessages, newMessage])
       socket.emit('sendMessage', { chatId, message: newMessage }) // reenvía
       setInputMessage('')
@@ -89,7 +92,7 @@ function ChatRoom() {
       <div className="h-96 overflow-y-auto border rounded p-4 mb-4">
         {messages.map((message) => (
           <div key={message._id} className="mb-2">
-            <strong>{message.sender?.username || 'Unknown'}:</strong>{' '}
+            <strong>{message.sender?._id === user._id ? 'You' : message.sender?.username || 'Unknown'}:</strong>{' '}
             {message.text}
           </div>
         ))}

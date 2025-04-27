@@ -93,6 +93,16 @@ function AdvertDetailPage() {
                 ← Back
               </Button>
 
+              {/* chat button */}
+              {user && advert.owner._id !== user._id && (
+                <div className="flex justify-center my-4">
+                  <Button onClick={() => navigate(`/chat/${advert.id}`)}>
+                    💬 Chat
+                  </Button>
+                </div>
+              )}
+
+              {/* Update button */}
               {user && advert.owner._id === user._id && advert._id && (
                 <>
                   <Button
