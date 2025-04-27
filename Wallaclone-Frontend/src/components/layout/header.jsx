@@ -1,24 +1,21 @@
-import { useLocation, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
-import SearchBar from '../shared/SearchBar.jsx';
 import Burger from '../shared/burguer.jsx';
 import Logout from '../shared/logout.jsx';
-import { ShoppingCart } from 'lucide-react';
 
 export default function Header() {
   const { isAuthenticated } = useAuth();
-  const location = useLocation();
 
   return (
     <header className="sticky top-0 z-999 w-full shadow-md bg-center bg-cover bg-no-repeat" style={{ backgroundImage: "url('/images/header3.jpg')" }}>
       {/* Overlay blanco encima de la imagen */}
-      <div className="absolute inset-0 bg-white/70 backdrop-brightness-95"></div>
+      <div className="absolute inset-0 bg-white/20 backdrop-brightness-95"></div>
 
       <div className="relative max-w-7xl mx-auto flex items-center justify-between p-4 md:p-6">
 
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <p className="text-2xl font-extrabold text-gray-800 drop-shadow-md">
+          <p className="text-3xl font-extrabold text-gray-800 drop-shadow-md">
             BananaPeels
           </p>
         </div>
@@ -44,7 +41,6 @@ export default function Header() {
 
         {/* Iconos carrito y burger */}
         <div className="flex items-center gap-4">
-          <ShoppingCart className="w-6 h-6 text-gray-800 hover:text-green-600 cursor-pointer" />
           <div className="hidden md:flex">
             {isAuthenticated && <Logout />}
           </div>

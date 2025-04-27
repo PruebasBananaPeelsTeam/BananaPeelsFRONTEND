@@ -17,7 +17,7 @@ export default function Layout({ children }) {
       <Header />
       {/* Searchbar en Home */}
       {location.pathname === '/' && (
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:pb-2 py-4 bg-white px-4">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:pb-2 py-4 px-4">
           <SearchBar />
         </div>
       )}
