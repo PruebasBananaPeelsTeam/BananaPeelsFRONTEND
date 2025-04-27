@@ -19,3 +19,9 @@ export const sendChatMessage = async (chatId, text) => {
   const response = await client.post(`${baseChatUrl}${chatId}/message`, { text });
   return response.data.message; // devuelve el mensaje recién creado
 };
+
+// Obtener todos los chats en los que participa el usuario autenticado
+export const getMyChats = async () => {
+  const response = await client.get(`${baseChatUrl}/myChats`);
+  return response.data.chats; // Devuelve un array con todos los chats del usuario autenticado
+};
