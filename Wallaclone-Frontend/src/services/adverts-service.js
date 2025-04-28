@@ -63,3 +63,9 @@ export const toggleReserved = async (advertId) => {
   )
   return response.data
 }
+
+export const deleteAdvert = async (advertId) => {
+  const url = `${advertsUrl}/${advertId}`
+  const response = await client.delete(url)
+  return response.data
+}
