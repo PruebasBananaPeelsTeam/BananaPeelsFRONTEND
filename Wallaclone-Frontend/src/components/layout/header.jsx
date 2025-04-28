@@ -3,6 +3,7 @@ import Burger from '../shared/burguer.jsx';
 import Logout from '../shared/logout.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import SearchBar from '../shared/SearchBar.jsx'
+import MyChatsButton from '../shared/MyChatsButton.jsx';
 export default function Header() {
   const { isAuthenticated } = useAuth();
 
@@ -17,6 +18,7 @@ export default function Header() {
         </div>
         <SearchBar />
         <Burger />
+        {isAuthenticated && <MyChatsButton />}
         {isAuthenticated && <Logout />}
       </div>
     </header>
