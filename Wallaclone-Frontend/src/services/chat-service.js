@@ -25,3 +25,11 @@ export const getMyChats = async () => {
   const response = await client.get(`${baseChatUrl}/myChats`);
   return response.data.chats; // Devuelve un array con todos los chats del usuario autenticado
 };
+
+export const checkChatByAdvert = async (advertId) => {
+  const response = await client.get(`${baseChatUrl}advert/${advertId}/check`);
+  if (response.data.success) {
+    return response.data.chat;
+  }
+  return null;
+};

@@ -35,8 +35,8 @@ function MyChatsPage() {
         <div className="space-y-4">
           {chats.map((chat) => {
             const otherUser = chat.participants.find(p => p._id !== user._id);
-            const advertName = chat.advertId?.name || 'Anuncio desconocido';
-            const isNew = chat.lastMessageSender !== user._id;
+            const advertName = chat.advertId?.name || 'Unknown chat';
+            const haveNewMessage = chat.lastMessageSender !== user._id; //si el ultimo mensaje no es tuyo es que tienes un mensaje nuevo
 
             return (
               <div
