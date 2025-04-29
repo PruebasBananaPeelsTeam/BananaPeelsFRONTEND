@@ -4,8 +4,7 @@ import { getAdvertDetail, deleteAdvert } from '../../services/adverts-service'
 import Button from '../../components/shared/button.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import Page from '../../components/layout/page.jsx'
-import ConfirmationModalCard from './confirmationModalCard.jsx'
-
+import ConfirmationModalCard from '../../components/shared/confirmationModalCard.jsx'
 function DeleteAdvertPage() {
   const { advertId } = useParams()
   const navigate = useNavigate()
@@ -47,7 +46,7 @@ function DeleteAdvertPage() {
     try {
       // Llamada al servicio para eliminar el anuncio
       await deleteAdvert(advertId) 
-      navigate('/adverts') 
+      navigate('/my-profile') 
     } catch (err) {
       setError('An error occurred while deleting the advert.') 
     } finally {
