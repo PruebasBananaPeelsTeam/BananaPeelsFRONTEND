@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import Burger from '../shared/burguer.jsx';
 import Logout from '../shared/logout.jsx';
+import LanguageSelector from '../shared/languageSelector.jsx';
 
 export default function Header() {
   const { isAuthenticated } = useAuth();
@@ -43,6 +44,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           <div className="hidden md:flex">
             {isAuthenticated && <Logout />}
+            <LanguageSelector />
           </div>
           <div className="md:hidden">
             <Burger />
