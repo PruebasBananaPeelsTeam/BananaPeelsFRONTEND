@@ -13,6 +13,7 @@ import ResetPasswordPage from './pages/auth/resetPasswordPage.jsx'
 import UpdateAdvertPage from './pages/adverts/UpdateAdvertPage.jsx'
 import MyUserPage from './pages/auth/myUserPage.jsx'
 import UserPage from './pages/adverts/userPage.jsx'
+import DeleteAdvertPage from './pages/adverts/DeleteAdvertPage.jsx'
 
 function App() {
   return (
@@ -54,6 +55,23 @@ function App() {
         }
       />
 
+      <Route
+        path="/adverts/:advertId/update"
+        element={
+          <PrivateRoute>
+            <UpdateAdvertPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/adverts/:advertId/delete"
+        element={
+          <PrivateRoute>
+            <DeleteAdvertPage />
+          </PrivateRoute>
+        }
+      />
+
       <Route path="/forgot-password" element={<ForgotPasswordPage />}></Route>
       <Route
         path="/reset-password/:token"
@@ -63,7 +81,6 @@ function App() {
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />
-      <Route path="/adverts/:advertId/update" element={<UpdateAdvertPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
