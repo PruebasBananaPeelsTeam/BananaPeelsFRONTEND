@@ -9,6 +9,7 @@ import ReservedToggleButton from '../../components/shared/reservedToggleButton'
 import AdvertStatus from '../../components/shared/advertStatus'
 import Button from '../../components/shared/button'
 import { toggleSoldAdvert } from '../../services/adverts-service'
+import { FaCheckCircle } from 'react-icons/fa'
 
 function AdvertDetailPage() {
   const params = useParams()
@@ -129,6 +130,12 @@ function AdvertDetailPage() {
                 iconSize="28"
                 textSize="text-xl"
               />
+              {advert.sold && (
+                <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow ml-4">
+                  <FaCheckCircle size={16} />
+                  Sold
+                </div>
+              )}
             </div>
           </div>
         </>
