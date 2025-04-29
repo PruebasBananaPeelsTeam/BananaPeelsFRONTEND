@@ -6,8 +6,10 @@ import Button from '../../components/shared/button.jsx'
 import Page from '../../components/layout/page.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
+import { useTranslation } from 'react-i18next'
 
 const CreateAdvertPage = () => {
+  const  { t } = useTranslation() // hook de i18next para traducir el texto
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -124,18 +126,18 @@ const CreateAdvertPage = () => {
     <Page>
       {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
       <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-        <h2 className="text-2xl font-bold mb-4 text-center">Create a new advert</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">{t('createAdvert.title')}</h2>
 
         {success && (
           <p className="text-green-600 text-sm mb-3">
-            Advert created successfully! Redirecting...
+            {t('createAdvert.successMessage')}
           </p>
         )}
         {loading && <Loader />}
 
         <form onSubmit={handleSubmit} className="space-y-4" noValidate>
           <FormField
-            label="Product"
+            label={t('createAdvert.productLabel')}
             type="text"
             name="name"
             value={formData.name}
@@ -144,7 +146,7 @@ const CreateAdvertPage = () => {
           />
 
           <FormField
-            label="Description"
+            label={t('createAdvert.descriptionLabel')}
             type="text"
             name="description"
             value={formData.description}
@@ -153,7 +155,7 @@ const CreateAdvertPage = () => {
           />
 
           <FormField
-            label="Price (€)"
+            label={t('createAdvert.priceLabel')}
             type="number"
             name="price"
             value={formData.price}
@@ -163,20 +165,20 @@ const CreateAdvertPage = () => {
           />
 
           <div className="flex flex-col w-full">
-            <label className="text-sm font-medium text-gray-700 mb-2">Type</label>
+            <label className="text-sm font-medium text-gray-700 mb-2">{t('createAdvert.typeLabel')}</label>
             <select
               name="type"
               value={formData.type}
               onChange={handleChange}
               className="flex w-full border border-gray-300 rounded-xl px-4 py-2"
             >
-              <option value="sell">On sale</option>
-              <option value="buy">Wanted</option>
+              <option value="sell">{t('createAdvert.typeSell')}</option>
+              <option value="buy">{t('createAdvert.typeBuy')}</option>
             </select>
           </div>
 
           <div className="flex flex-col w-full">
-            <p className="text-sm font-medium text-gray-700 mb-2">Tags</p>
+            <p className="text-sm font-medium text-gray-700 mb-2">{t('createAdvert.tagsLabel')}</p>
             {fieldErrors.tags && (
               <span className="text-sm text-red-500">{fieldErrors.tags}</span>
             )}
@@ -204,7 +206,7 @@ const CreateAdvertPage = () => {
           </div>
 
           <div className="flex flex-col w-full">
-            <label className="text-sm font-medium text-gray-700 mb-2">Image</label>
+            <label className="text-sm font-medium text-gray-700 mb-2">{t('createAdvert.imageLabel')}</label>
             <input
               type="file"
               name="image"
@@ -216,7 +218,7 @@ const CreateAdvertPage = () => {
 
           {imagePreview && (
             <div className="mt-2">
-              <p className="text-sm text-gray-500 mb-1">Preview:</p>
+              <p className="text-sm text-gray-500 mb-1">{t('createAdvert.previewLabel')}</p>
               <img
                 src={imagePreview}
                 alt="Vista previa"
@@ -226,7 +228,7 @@ const CreateAdvertPage = () => {
           )}
 
           <Button type="submit" disabled={loading}>
-            {loading ? 'Creating...' : 'Submit'}
+            {loading ? t('createAdvert.creatingButton') : t('createAdvert.submitButton')}
           </Button>
         </form>
       </div>

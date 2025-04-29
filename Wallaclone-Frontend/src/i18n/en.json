@@ -1,0 +1,18 @@
+{
+    "createAdvert": {
+      "title": "Create a new advert",
+      "successMessage": "Advert created successfully! Redirecting...",
+      "productLabel": "Product",
+      "descriptionLabel": "Description",
+      "priceLabel": "Price (€)",
+      "typeLabel": "Type",
+      "typeSell": "On sale",
+      "typeBuy": "Wanted",
+      "tagsLabel": "Categories",
+      "imageLabel": "Image",
+      "previewLabel": "Preview:",
+      "submitButton": "Submit",
+      "creatingButton": "Creating..."
+    }
+  }
+  
