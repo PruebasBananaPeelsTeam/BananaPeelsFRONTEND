@@ -70,10 +70,10 @@ function DeleteAdvertPage() {
   }
 
   return (
-    <Page>
+    
         <div>  
             <Button onClick={openConfirmationModal} disabled={loading} >
-              Delete Advert 
+            🗑 Delete
               {loading && <Loader />}
             </Button>
 
@@ -86,7 +86,7 @@ function DeleteAdvertPage() {
                 />    
             )}
         </div>
-    </Page>
+    
   )
 }
 

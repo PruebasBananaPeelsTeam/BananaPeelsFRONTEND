@@ -8,6 +8,7 @@ import { useAuth } from '../../context/AuthContext'
 import ReservedToggleButton from '../../components/shared/reservedToggleButton'
 import AdvertStatus from '../../components/shared/advertStatus'
 import Button from '../../components/shared/button'
+import DeleteAdvertPage from './DeleteAdvertPage'
 
 function AdvertDetailPage() {
   const params = useParams()
@@ -102,13 +103,8 @@ function AdvertDetailPage() {
                     ✎ Update
                   </Button>
 
-                  <Button
-                    onClick={() => navigate(`/adverts/${advert._id}/delete`)}
-                    className="mb-4 ml-4"
-                  >
-                     🗑 Delete
-                  </Button>
-
+                  <DeleteAdvertPage/>
+                  
                   <ReservedToggleButton
                     advert={advert}
                     onToggled={(newState) =>
