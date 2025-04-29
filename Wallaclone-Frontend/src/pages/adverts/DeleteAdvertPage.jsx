@@ -73,14 +73,18 @@ function DeleteAdvertPage() {
   return (
     <Page>
         <div>  
-            <Button onClick={openConfirmationModal}>Delete Advert</Button>
+            <Button onClick={openConfirmationModal} disabled={loading} >
+              Delete Advert 
+              {loading && <Loader />}
+            </Button>
+
             {/* Modal de confirmación */}
             {showConfirmation && (
                 <ConfirmationModalCard
-                message="Are you sure you want to delete this advert?" // Mensaje del modal
-                onConfirm={handleDelete} // Acción cuando se confirme la eliminación
-                onCancel={closeConfirmationModal} // Acción cuando se cancele la eliminación
-                />
+                  message="Are you sure you want to delete this advert?" 
+                  onConfirm={handleDelete} 
+                  onCancel={closeConfirmationModal} 
+                />    
             )}
         </div>
     </Page>
