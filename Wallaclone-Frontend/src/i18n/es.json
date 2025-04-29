@@ -1,18 +1,31 @@
 {
-    "createAdvert": {
-      "title": "Crear un nuevo anuncio",
-      "successMessage": "¡Anuncio creado con éxito! Redirigiendo...",
-      "productLabel": "Producto",
-      "descriptionLabel": "Descripción",
-      "priceLabel": "Precio (€)",
-      "typeLabel": "Tipo",
-      "typeSell": "En venta",
-      "typeBuy": "Se busca",
-      "tagsLabel": "Categorías",
-      "imageLabel": "Imagen",
-      "previewLabel": "Vista previa:",
-      "submitButton": "Enviar",
-      "creatingButton": "Creando..."
-    }
+  "createAdvert": {
+    "title": "Crear un nuevo anuncio",
+    "successMessage": "¡Anuncio creado con éxito! Redirigiendo...",
+    "productLabel": "Producto",
+    "descriptionLabel": "Descripción",
+    "priceLabel": "Precio (€)",
+    "typeLabel": "Tipo",
+    "typeSell": "En venta",
+    "typeBuy": "Se busca",
+    "tagsLabel": "Categorías",
+    "imageLabel": "Imagen",
+    "previewLabel": "Vista previa:",
+    "submitButton": "Enviar",
+    "creatingButton": "Creando..."
+  },
+
+  "advertDetail": {
+    "noImage": "Sin imagen",
+    "description": "Descripción",
+    "price": "Precio",
+    "type": "Tipo",
+    "typeWanted": "Se busca",
+    "typeForSale": "En venta",
+    "categories": "Categorías",
+    "seller": "Vendedor",
+    "backButton": "← Volver",
+    "updateButton": "✎ Editar",
+    "notFound": "No se encontró el anuncio."
   }
-  
+}
