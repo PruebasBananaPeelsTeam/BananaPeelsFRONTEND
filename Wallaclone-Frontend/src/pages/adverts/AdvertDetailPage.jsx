@@ -8,6 +8,7 @@ import { useAuth } from '../../context/AuthContext'
 import ReservedToggleButton from '../../components/shared/reservedToggleButton'
 import AdvertStatus from '../../components/shared/advertStatus'
 import Button from '../../components/shared/button'
+import { toggleSoldAdvert } from '../../services/adverts-service'
 
 function AdvertDetailPage() {
   const params = useParams()
@@ -100,6 +101,19 @@ function AdvertDetailPage() {
                     className="mb-4 ml-4"
                   >
                     ✎ Update
+                  </Button>
+                  <Button
+                    onClick={async () => {
+                      try {
+                        const result = await toggleSoldAdvert(advert._id)
+                        setAdvert((prev) => ({ ...prev, sold: result.sold }))
+                      } catch (error) {
+                        console.error('Error toggling sold status:', error)
+                      }
+                    }}
+                    className="mb-4 ml-4"
+                  >
+                    {advert?.sold ? '✔ Mark as Unsold' : '💰 Mark as Sold'}
                   </Button>
                   <ReservedToggleButton
                     advert={advert}
