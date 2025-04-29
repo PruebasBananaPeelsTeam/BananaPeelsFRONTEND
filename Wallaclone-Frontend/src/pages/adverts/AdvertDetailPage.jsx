@@ -101,6 +101,14 @@ function AdvertDetailPage() {
                   >
                     ✎ Update
                   </Button>
+
+                  <Button
+                    onClick={() => navigate(`/adverts/${advert._id}/delete`)}
+                    className="mb-4 ml-4"
+                  >
+                     🗑 Delete
+                  </Button>
+
                   <ReservedToggleButton
                     advert={advert}
                     onToggled={(newState) =>
