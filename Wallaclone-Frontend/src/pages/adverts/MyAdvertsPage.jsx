@@ -45,7 +45,7 @@ function MyAdvertsBlock() {
   };
 
   return (
-    <div className="bg-white shadow-md border border-gray-200 rounded-xl p-6">
+    <div className="shadow-md border border-gray-500 rounded-xl p-6">
       <h2 className="text-2xl font-bold text-center mb-6"> My Adverts </h2>
 
       {loading ? (
