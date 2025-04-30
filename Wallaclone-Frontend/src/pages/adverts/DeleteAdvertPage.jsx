@@ -72,21 +72,27 @@ function DeleteAdvertPage() {
   }
 
   return (
-    <div>
-      <Button onClick={openConfirmationModal} disabled={loading}>
-        🗑 Delete
-        {loading && <Loader />}
-      </Button>
+    
+    <> 
+            <Button 
+              onClick={openConfirmationModal} 
+              disabled={loading} 
+              className="w-full md:w-auto"
+              >
+            🗑 Delete
+              {loading && <Loader />}
+            </Button>
 
-      {/* Modal de confirmación */}
-      {showConfirmation && (
-        <ConfirmationModalCard
-          message="Are you sure you want to delete this advert?"
-          onConfirm={handleDelete}
-          onCancel={closeConfirmationModal}
-        />
-      )}
-    </div>
+            {/* Modal de confirmación */}
+            {showConfirmation && (
+                <ConfirmationModalCard
+                  message="Are you sure you want to delete this advert?" 
+                  onConfirm={handleDelete} 
+                  onCancel={closeConfirmationModal} 
+                />    
+            )}
+    </>
+    
   )
 }
 
