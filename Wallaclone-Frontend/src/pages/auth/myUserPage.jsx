@@ -51,11 +51,11 @@ const MyUserPage = () => {
       </div>
 
       {/* Ads */}
-      <section>
+      <section className="mb-12">
         <MyAdvertsBlock />
       </section>
 
-      <section>
+      <section className="mb-12">
         <FavoritesPage />
       </section>
 
