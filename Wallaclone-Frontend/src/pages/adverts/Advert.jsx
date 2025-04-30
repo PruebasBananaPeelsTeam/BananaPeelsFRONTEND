@@ -1,8 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { slugify } from '../../utils/slugify'
 import AdvertStatus from '../../components/shared/advertStatus'
+import { FaCheckCircle } from 'react-icons/fa'
+import { toggleSoldAdvert } from '../../services/adverts-service'
 
 const Advert = ({ advert }) => {
+ 
   const { _id, name, description, price, type, image, owner } = advert
   const navigate = useNavigate()
   const slug = slugify(name)
@@ -27,9 +30,13 @@ const Advert = ({ advert }) => {
         {/* Cara frontal */}
         <div className="absolute w-full h-full backface-hidden rounded-lg overflow-hidden border border-gray-300 shadow-md">
           <img
+           
             src={imageUrl}
+           
             alt={name}
+           
             className="w-full h-full object-cover"
+         
           />
         </div>
 
@@ -37,7 +44,9 @@ const Advert = ({ advert }) => {
         <div className="absolute w-full h-full rotate-y-180 backface-hidden rounded-lg p-5 shadow-lg border border-gray-400 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 text-white flex flex-col justify-between text-center">
           <h3 className="text-lg font-bold truncate">{shortName}</h3>
           <p className="text-sm text-gray-300 line-clamp-3">
+            
             {shortDescription}
+          
           </p>
           <p className="text-xl font-semibold text-emerald-400">{price} €</p>
           <p
@@ -54,10 +63,20 @@ const Advert = ({ advert }) => {
               {owner}
             </Link>
             <AdvertStatus
+             
               reserved={advert.reserved}
+             
               iconSize={16}
+             
               textSize="text-sm"
+           
             />
+            {advert.sold && (
+              <div className="absolute top-2 left-2 flex items-center gap-1 bg-red-700 text-white px-2 py-1 rounded text-xs font-semibold shadow">
+                <FaCheckCircle size={12} />
+                Sold
+              </div>
+            )}
           </div>
         </div>
       </div>

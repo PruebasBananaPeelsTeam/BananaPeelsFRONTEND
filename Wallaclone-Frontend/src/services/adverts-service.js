@@ -69,3 +69,8 @@ export const deleteAdvert = async (advertId) => {
   const response = await client.delete(url)
   return response.data
 }
+
+export const toggleSoldAdvert = async (advertId) => {
+  const { data } = await client.patch(`/api/adverts/${advertId}/toggle-sold`)
+  return data
+}

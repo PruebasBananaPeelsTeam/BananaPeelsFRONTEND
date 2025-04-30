@@ -10,6 +10,8 @@ import AdvertStatus from '../../components/shared/advertStatus'
 import Button from '../../components/shared/button'
 import DeleteAdvertPage from './DeleteAdvertPage'
 import { checkChatByAdvert, getOrCreateChat } from '../../services/chat-service'
+import { toggleSoldAdvert } from '../../services/adverts-service'
+import { FaCheckCircle } from 'react-icons/fa'
 
 function AdvertDetailPage() {
   const params = useParams()
@@ -130,6 +132,19 @@ function AdvertDetailPage() {
 
                   <DeleteAdvertPage />
 
+                  <Button
+                    onClick={async () => {
+                      try {
+                        const result = await toggleSoldAdvert(advert._id)
+                        setAdvert((prev) => ({ ...prev, sold: result.sold }))
+                      } catch (error) {
+                        console.error('Error toggling sold status:', error)
+                      }
+                    }}
+                    className="mb-4 ml-4"
+                  >
+                    {advert?.sold ? '✔ Mark as Unsold' : '💰 Mark as Sold'}
+                  </Button>
                   <ReservedToggleButton
                     advert={advert}
                     onToggled={(newState) =>
@@ -144,6 +159,12 @@ function AdvertDetailPage() {
                 iconSize="28"
                 textSize="text-xl"
               />
+              {advert.sold && (
+                <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow ml-4">
+                  <FaCheckCircle size={16} />
+                  Sold
+                </div>
+              )}
             </div>
           </div>
         </>
