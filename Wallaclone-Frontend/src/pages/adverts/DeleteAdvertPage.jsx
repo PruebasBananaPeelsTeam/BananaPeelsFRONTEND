@@ -71,8 +71,12 @@ function DeleteAdvertPage() {
 
   return (
     
-        <div>  
-            <Button onClick={openConfirmationModal} disabled={loading} >
+    <> 
+            <Button 
+              onClick={openConfirmationModal} 
+              disabled={loading} 
+              className="w-full md:w-auto"
+              >
             🗑 Delete
               {loading && <Loader />}
             </Button>
@@ -85,7 +89,7 @@ function DeleteAdvertPage() {
                   onCancel={closeConfirmationModal} 
                 />    
             )}
-        </div>
+    </>
     
   )
 }

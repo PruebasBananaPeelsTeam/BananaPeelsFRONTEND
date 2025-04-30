@@ -68,57 +68,81 @@ function AdvertDetailPage() {
             />
 
             <p>
-              <strong>Descripción:</strong> {advert.description}
+              <strong>Description:</strong> {advert.description}
             </p>
 
             <p>
-              <strong>Precio:</strong> {advert.price} €
+              <strong>Price:</strong> {advert.price} €
             </p>
 
             <p>
               <strong>Type:</strong>{' '}
               {advert.type === 'buy' ? 'Wanted' : 'For Sale'}{' '}
-              {/* Cambiado para mostrar el tipo de anuncio */}
+              {/* Mostrar el tipo de anuncio */}
             </p>
 
             <p>
-              <strong>Categorías:</strong> {advert.tags.join(', ')}
+              <strong>Tags:</strong> {advert.tags.join(', ')}
             </p>
 
             <p>
-              <strong>Vendedor:</strong>{' '}
+              <strong>Owner:</strong>{' '}
               {advert.owner?.username || advert.owner}
             </p>
-            <div className="flex justify-between">
-              <Button onClick={() => navigate('/')} className="mb-4">
-                ← Back
-              </Button>
 
+            {/* Botones y estado */}
+
+            <div className="flex flex-col md:flex-row flex-wrap gap-2 mt-6">
+
+              {/* Botón Back */}
+              <div>  
+                <Button 
+                  onClick={() => navigate('/')} 
+                  className="w-full md:w-auto"
+                >
+                  ← Back
+                </Button>
+              </div>
+              
+              {/* Condición para mostrar los botones de actualización, eliminación y reserva */}
               {user && advert.owner._id === user._id && advert._id && (
-                <>
-                  <Button
-                    onClick={() => navigate(`/adverts/${advert._id}/update`)}
-                    className="mb-4 ml-4"
-                  >
-                    ✎ Update
-                  </Button>
-
-                  <DeleteAdvertPage/>
+                <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
                   
-                  <ReservedToggleButton
-                    advert={advert}
-                    onToggled={(newState) =>
-                      setAdvert((prev) => ({ ...prev, reserved: newState }))
-                    }
-                  />
-                </>
+                    <div>
+                      <Button
+                        onClick={() => navigate(`/adverts/${advert._id}/update`) }
+                        className="w-full md:w-auto"
+                        
+                      >
+                        ✎ Update
+                      </Button>
+                    </div>
+                      
+                      
+                      <div className="w-full md:w-auto">
+                        <DeleteAdvertPage />
+                      </div>
+                      
+                      
+                      <ReservedToggleButton
+                        advert={advert}
+                        className="w-full md:w-auto"
+                        onToggled={(newState) =>
+                          setAdvert((prev) => ({ ...prev, reserved: newState }))
+                        }
+                      />
+
+                   
+                </div>
               )}
               {/*reserved mark*/}
-              <AdvertStatus
-                reserved={advert.reserved}
-                iconSize="28"
-                textSize="text-xl"
-              />
+              <div className="w-full md:w-auto">
+                <AdvertStatus
+                  reserved={advert.reserved}
+                  iconSize="28"
+                  textSize="text-xl"
+                />
+              </div>
             </div>
           </div>
         </>
