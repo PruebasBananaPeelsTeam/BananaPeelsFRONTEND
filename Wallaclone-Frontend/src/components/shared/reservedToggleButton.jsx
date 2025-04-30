@@ -20,7 +20,10 @@ function ReservedToggleButton({ advert, onToggled }) {
   }
 
   return (
-    <Button onClick={handleClick} className="bg-yellow-600 text-white hover:bg-yellow-700 mt-2">
+    <Button
+      onClick={handleClick}
+      className="bg-yellow-600 text-white hover:bg-yellow-700 mt-2"
+    >
       {isReserved ? 'Cancel Reservation' : 'Reserve this item'}
     </Button>
   )

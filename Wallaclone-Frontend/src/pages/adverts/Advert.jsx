@@ -1,20 +1,21 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { slugify } from '../../utils/slugify';
-import AdvertStatus from '../../components/shared/advertStatus';
+import { Link, useNavigate } from 'react-router-dom'
+import { slugify } from '../../utils/slugify'
+import AdvertStatus from '../../components/shared/advertStatus'
 
 const Advert = ({ advert }) => {
-  const { _id, name, description, price, type, image, owner } = advert;
-  const navigate = useNavigate();
-  const slug = slugify(name);
+  const { _id, name, description, price, type, image, owner } = advert
+  const navigate = useNavigate()
+  const slug = slugify(name)
 
   const imageUrl = image
     ? image.startsWith('http')
       ? image
       : `data:image/jpeg;base64,${image}`
-    : 'https://fakeimg.pl/600x400?text=NO+PHOTO';
+    : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
 
-  const shortName = name?.length > 20 ? name.slice(0, 20) + '…' : name;
-  const shortDescription = description?.length > 40 ? description.slice(0, 40) + '…' : description;
+  const shortName = name?.length > 20 ? name.slice(0, 20) + '…' : name
+  const shortDescription =
+    description?.length > 40 ? description.slice(0, 40) + '…' : description
 
   return (
     <div
@@ -25,15 +26,23 @@ const Advert = ({ advert }) => {
       <div className="relative w-full h-[340px] transform-style-preserve-3d transition-transform duration-700 hover:rotate-y-180">
         {/* Cara frontal */}
         <div className="absolute w-full h-full backface-hidden rounded-lg overflow-hidden border border-gray-300 shadow-md">
-          <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
+          <img
+            src={imageUrl}
+            alt={name}
+            className="w-full h-full object-cover"
+          />
         </div>
 
         {/* Cara trasera */}
         <div className="absolute w-full h-full rotate-y-180 backface-hidden rounded-lg p-5 shadow-lg border border-gray-400 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 text-white flex flex-col justify-between text-center">
           <h3 className="text-lg font-bold truncate">{shortName}</h3>
-          <p className="text-sm text-gray-300 line-clamp-3">{shortDescription}</p>
+          <p className="text-sm text-gray-300 line-clamp-3">
+            {shortDescription}
+          </p>
           <p className="text-xl font-semibold text-emerald-400">{price} €</p>
-          <p className={`text-sm ${type === 'sell' ? 'text-blue-400' : 'text-rose-400'}`}>
+          <p
+            className={`text-sm ${type === 'sell' ? 'text-blue-400' : 'text-rose-400'}`}
+          >
             {type === 'sell' ? 'For sale' : 'Wanted'}
           </p>
           <div className="flex items-center justify-around mt-2">
@@ -44,12 +53,16 @@ const Advert = ({ advert }) => {
             >
               {owner}
             </Link>
-            <AdvertStatus reserved={advert.reserved} iconSize={16} textSize="text-sm" />
+            <AdvertStatus
+              reserved={advert.reserved}
+              iconSize={16}
+              textSize="text-sm"
+            />
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Advert;
+export default Advert

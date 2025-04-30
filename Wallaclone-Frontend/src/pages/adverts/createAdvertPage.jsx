@@ -59,7 +59,8 @@ const CreateAdvertPage = () => {
   const validateForm = () => {
     const errors = {}
     if (!formData.name.trim()) errors.name = 'Name is required.'
-    if (!formData.description.trim()) errors.description = 'Description is required.'
+    if (!formData.description.trim())
+      errors.description = 'Description is required.'
     if (!formData.price || Number(formData.price) <= 0)
       errors.price = 'Price must be greater than 0.'
     if (formData.tags.length === 0)
@@ -124,7 +125,9 @@ const CreateAdvertPage = () => {
     <Page>
       {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
       <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-        <h2 className="text-2xl font-bold mb-4 text-center">Create a new advert</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          Create a new advert
+        </h2>
 
         {success && (
           <p className="text-green-600 text-sm mb-3">
@@ -163,7 +166,9 @@ const CreateAdvertPage = () => {
           />
 
           <div className="flex flex-col w-full">
-            <label className="text-sm font-medium text-gray-700 mb-2">Type</label>
+            <label className="text-sm font-medium text-gray-700 mb-2">
+              Type
+            </label>
             <select
               name="type"
               value={formData.type}
@@ -204,7 +209,9 @@ const CreateAdvertPage = () => {
           </div>
 
           <div className="flex flex-col w-full">
-            <label className="text-sm font-medium text-gray-700 mb-2">Image</label>
+            <label className="text-sm font-medium text-gray-700 mb-2">
+              Image
+            </label>
             <input
               type="file"
               name="image"

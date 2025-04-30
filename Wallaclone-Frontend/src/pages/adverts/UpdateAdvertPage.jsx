@@ -58,10 +58,8 @@ function UpdateAdvertPage() {
             ? advertDetails.image.startsWith('http')
               ? advertDetails.image
               : `data:image/jpeg;base64,${advertDetails.image}`
-            : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
+            : 'https://fakeimg.pl/600x400?text=NO+PHOTO',
         )
-
-        
       } catch (err) {
         if (err.response?.status === 404) {
           setNotFound(true)

@@ -35,7 +35,8 @@ const UserEditForm = () => {
     // 🛠️ Comparamos con los valores originales
     const updatedData = {}
     if (email.trim() !== originalUser.email) updatedData.email = email.trim()
-    if (username.trim() !== originalUser.username) updatedData.username = username.trim()
+    if (username.trim() !== originalUser.username)
+      updatedData.username = username.trim()
     if (password.trim().length > 0) updatedData.password = password.trim()
 
     // ❌ Si no hay cambios, mostramos error
@@ -47,7 +48,10 @@ const UserEditForm = () => {
     }
 
     // 🔍 Validaciones frontend
-    if (updatedData.email && (!updatedData.email.includes('@') || !updatedData.email.includes('.'))) {
+    if (
+      updatedData.email &&
+      (!updatedData.email.includes('@') || !updatedData.email.includes('.'))
+    ) {
       return setError({
         code: 'INVALID_EMAIL',
         message: 'Please enter a valid email address.',
@@ -164,9 +168,7 @@ const UserEditForm = () => {
       )}
 
       {/* Popup de error */}
-      {error && (
-        <FormErrorPopup error={error} onClose={() => setError(null)} />
-      )}
+      {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
     </form>
   )
 }

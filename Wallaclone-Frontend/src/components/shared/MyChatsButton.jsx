@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const MyChatsButton = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <StyledWrapper>
@@ -14,8 +14,8 @@ const MyChatsButton = () => {
         </li>
       </ul>
     </StyledWrapper>
-  );
-};
+  )
+}
 
 const StyledWrapper = styled.div`
   ul {
@@ -25,8 +25,8 @@ const StyledWrapper = styled.div`
   }
 
   ul li {
-    --i: #56CCF2;
-    --j: #2F80ED;
+    --i: #56ccf2;
+    --j: #2f80ed;
     position: relative;
     list-style: none;
     width: 36px; /* 40% de 60px = 36px */
@@ -47,7 +47,7 @@ const StyledWrapper = styled.div`
   }
 
   ul li::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     border-radius: 36px;
@@ -61,7 +61,7 @@ const StyledWrapper = styled.div`
   }
 
   ul li::after {
-    content: "";
+    content: '';
     position: relative;
     top: 6px;
     width: 100%;
@@ -157,6 +157,6 @@ const StyledWrapper = styled.div`
       font-size: 0.65em;
     }
   }
-`;
+`
 
-export default MyChatsButton;
+export default MyChatsButton

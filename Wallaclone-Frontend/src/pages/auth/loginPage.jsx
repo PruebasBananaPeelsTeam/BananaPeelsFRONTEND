@@ -1,46 +1,52 @@
-import { useState, useCallback } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { login } from '../../services/auth-service.js';
-import { useAuth } from '../../context/AuthContext.jsx';
-import FormField from '../../components/shared/formField.jsx';
-import Button from '../../components/shared/button.jsx';
-import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx';
-import Loader from '../../components/shared/loader.jsx';
-import useTimer from '../../utils/useTimer.js';
+import { useState, useCallback } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { login } from '../../services/auth-service.js'
+import { useAuth } from '../../context/AuthContext.jsx'
+import FormField from '../../components/shared/formField.jsx'
+import Button from '../../components/shared/button.jsx'
+import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
+import Loader from '../../components/shared/loader.jsx'
+import useTimer from '../../utils/useTimer.js'
 
 function LoginPage() {
-  const navigate = useNavigate();
-  const { login: authLogin } = useAuth();
-  const [input, setInput] = useState({ username: '', password: '' });
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
+  const { login: authLogin } = useAuth()
+  const [input, setInput] = useState({ username: '', password: '' })
+  const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleInputChange = useCallback((event) => {
     setInput((prevInput) => ({
       ...prevInput,
       [event.target.name]: event.target.value,
-    }));
-  }, []);
+    }))
+  }, [])
 
-  useTimer(error, () => { setError(null); }, 5000);
+  useTimer(
+    error,
+    () => {
+      setError(null)
+    },
+    5000,
+  )
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
+    event.preventDefault()
+    setIsLoading(true)
     try {
       const { tokenJWT, user } = await login({
         username: input.username,
         password: input.password,
-      });
-      authLogin(tokenJWT, user);
-      navigate('/');
+      })
+      authLogin(tokenJWT, user)
+      navigate('/')
     } catch (error) {
-      setError(error);
-      console.error(error);
+      setError(error)
+      console.error(error)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <div
@@ -52,7 +58,9 @@ function LoginPage() {
         onSubmit={handleSubmit}
         className="bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 p-8 rounded-2xl shadow-2xl w-full max-w-md flex flex-col gap-6"
       >
-        <h2 className="text-3xl font-bold text-center text-gray-800">Welcome Back!</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800">
+          Welcome Back!
+        </h2>
 
         <FormField
           label="Username"
@@ -104,7 +112,7 @@ function LoginPage() {
         </Link>
       </div>
     </div>
-  );
+  )
 }
 
-export default LoginPage;
+export default LoginPage

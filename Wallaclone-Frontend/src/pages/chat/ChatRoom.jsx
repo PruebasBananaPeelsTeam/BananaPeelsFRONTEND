@@ -100,17 +100,20 @@ function ChatRoom() {
       <div className="p-4 bg-gradient-to-r  from-yellow-200 to-slate-300 border rounded">
         {/*container de cada uno de los mensajes */}
         <div className="max-h-96 overflow-y-auto border rounded p-4  flex flex-col gap-2">
-        <h3 className='text-center text-red-500'>Messages will be automatically deleted 7 days after sending.</h3>
+          <h3 className="text-center text-red-500">
+            Messages will be automatically deleted 7 days after sending.
+          </h3>
           {messages.map((message) => {
             const isMe = message.sender?._id === user._id
             const createdAt = new Date(message.createdAt)
-            const formattedTime = createdAt.toLocaleTimeString([], {
-              day: '2-digit',
-              month: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })
-            .replace(',', '')
+            const formattedTime = createdAt
+              .toLocaleTimeString([], {
+                day: '2-digit',
+                month: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              })
+              .replace(',', '')
 
             return (
               <div
@@ -121,11 +124,13 @@ function ChatRoom() {
                   <div
                     className={`max-w-xs pb-2 pr-2 pl-2 rounded-xl text-sm ${
                       isMe
-                      ? 'bg-yellow-300 text-right text-gray-500'
-                      : 'bg-gray-300 text-left text-yellow-600'
+                        ? 'bg-yellow-300 text-right text-gray-500'
+                        : 'bg-gray-300 text-left text-yellow-600'
                     }`}
                   >
-                    <span className="" style={{ fontSize: '0.60rem' }}>sent at {formattedTime}</span>
+                    <span className="" style={{ fontSize: '0.60rem' }}>
+                      sent at {formattedTime}
+                    </span>
                     <strong className="block mb-1 text-xs text-gray-600">
                       {isMe ? 'You' : message.sender?.username || 'Unknown'}
                     </strong>

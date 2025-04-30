@@ -9,7 +9,7 @@ import ReservedToggleButton from '../../components/shared/reservedToggleButton'
 import AdvertStatus from '../../components/shared/advertStatus'
 import Button from '../../components/shared/button'
 import DeleteAdvertPage from './DeleteAdvertPage'
-import { checkChatByAdvert, getOrCreateChat } from '../../services/chat-service';
+import { checkChatByAdvert, getOrCreateChat } from '../../services/chat-service'
 
 function AdvertDetailPage() {
   const params = useParams()
@@ -42,18 +42,18 @@ function AdvertDetailPage() {
   // inicializador de chats
   const handleStartChat = async () => {
     try {
-      const existingChat = await checkChatByAdvert(advert._id); // O advert.id si no es _id
-  
+      const existingChat = await checkChatByAdvert(advert._id) // O advert.id si no es _id
+
       if (existingChat) {
-        navigate(`/chat/room/${existingChat._id}`);
+        navigate(`/chat/room/${existingChat._id}`)
       } else {
-        const newChat = await getOrCreateChat(advert._id); 
-        navigate(`/chat/room/${newChat._id}`);
+        const newChat = await getOrCreateChat(advert._id)
+        navigate(`/chat/room/${newChat._id}`)
       }
     } catch (error) {
-      console.error('Error al iniciar o encontrar chat:', error);
+      console.error('Error al iniciar o encontrar chat:', error)
     }
-  };
+  }
 
   // Pare renderizar la imagen desde la base de datos, usando buffer en el backend
   const imageUrl = advert?.image
@@ -114,9 +114,7 @@ function AdvertDetailPage() {
               {/* chat button */}
               {user && advert.owner._id !== user._id && (
                 <div className="flex justify-center my-4">
-                  <Button onClick={handleStartChat}>
-                    💬 Chat
-                  </Button>
+                  <Button onClick={handleStartChat}>💬 Chat</Button>
                 </div>
               )}
 
@@ -130,8 +128,8 @@ function AdvertDetailPage() {
                     ✎ Update
                   </Button>
 
-                  <DeleteAdvertPage/>
-                  
+                  <DeleteAdvertPage />
+
                   <ReservedToggleButton
                     advert={advert}
                     onToggled={(newState) =>

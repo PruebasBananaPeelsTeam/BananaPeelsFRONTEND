@@ -34,7 +34,12 @@ const StyledWrapper = styled.div`
     overflow: hidden;
     transition-duration: 0.3s;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    background-color: rgba(30, 30, 30, 0.9); /* Elegante oscuro semi-transparente */
+    background-color: rgba(
+      30,
+      30,
+      30,
+      0.9
+    ); /* Elegante oscuro semi-transparente */
   }
 
   .sign {
@@ -87,6 +92,6 @@ const StyledWrapper = styled.div`
   .Btn:active {
     transform: translate(2px, 2px);
   }
-`;
+`
 
 export default LogoutButton

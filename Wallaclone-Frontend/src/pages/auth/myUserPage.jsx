@@ -42,7 +42,9 @@ const MyUserPage = () => {
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">👤 My Profile</h1>
         {user?.username && (
-          <p className="text-lg text-gray-800 mt-1">Username: {user.username}</p>
+          <p className="text-lg text-gray-800 mt-1">
+            Username: {user.username}
+          </p>
         )}
         {user?.email && (
           <p className="text-md text-gray-800">Email: {user.email}</p>

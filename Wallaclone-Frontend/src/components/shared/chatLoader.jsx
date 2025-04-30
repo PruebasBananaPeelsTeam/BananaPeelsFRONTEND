@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const ChatLoader = () => {
   return (
     <StyledWrapper>
       <div className="loader" />
     </StyledWrapper>
-  );
+  )
 }
 
 const StyledWrapper = styled.div`
@@ -51,7 +51,7 @@ const StyledWrapper = styled.div`
     }
 
     50% {
-      transform: translateY(18px) scale(1, .9) rotate(45deg);
+      transform: translateY(18px) scale(1, 0.9) rotate(45deg);
       border-bottom-right-radius: 40px;
     }
 
@@ -65,15 +65,15 @@ const StyledWrapper = styled.div`
   }
 
   @keyframes shadow324 {
-
     0%,
-      100% {
+    100% {
       transform: scale(1, 1);
     }
 
     50% {
       transform: scale(1.2, 1);
     }
-  }`;
+  }
+`
 
-export default ChatLoader;
+export default ChatLoader

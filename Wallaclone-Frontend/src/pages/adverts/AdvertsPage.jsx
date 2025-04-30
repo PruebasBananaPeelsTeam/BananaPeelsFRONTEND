@@ -10,7 +10,7 @@ function AdvertsPage() {
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams()
   const limit = 10
 
   useEffect(() => {
@@ -19,8 +19,8 @@ function AdvertsPage() {
       try {
         const filters = Object.fromEntries(searchParams.entries())
         filters.tag = searchParams.getAll('tag')
-        const pageFromUrl = parseInt(searchParams.get('page')) || 1;
-        setCurrentPage(pageFromUrl);
+        const pageFromUrl = parseInt(searchParams.get('page')) || 1
+        setCurrentPage(pageFromUrl)
 
         const response = await getAdvertList(pageFromUrl, limit, filters)
         setAdverts(response)
@@ -43,19 +43,19 @@ function AdvertsPage() {
 
   const goToNextPage = () => {
     if (currentPage < totalPages) {
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set('page', currentPage + 1);
-      setSearchParams(newParams);
+      const newParams = new URLSearchParams(searchParams)
+      newParams.set('page', currentPage + 1)
+      setSearchParams(newParams)
     }
-  };
-  
+  }
+
   const goToPreviousPage = () => {
     if (currentPage > 1) {
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set('page', currentPage - 1);
-      setSearchParams(newParams);
+      const newParams = new URLSearchParams(searchParams)
+      newParams.set('page', currentPage - 1)
+      setSearchParams(newParams)
     }
-  };
+  }
 
   return (
     <>

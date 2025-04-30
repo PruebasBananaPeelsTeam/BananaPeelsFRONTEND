@@ -84,7 +84,6 @@ function TagFilter() {
 
       {/* CONTENEDOR PRINCIPAL */}
       <div className="p-4 flex flex-col gap-6 items-center mt-8 mb-1">
-        
         {/* BLOQUE DE FILTROS ACTIVOS */}
         {selectedTags.length > 0 && (
           <div className="flex flex-wrap items-center justify-start gap-3 w-full">
@@ -130,9 +129,7 @@ function TagFilter() {
         {/* BOTÓN DE LIMPIAR FILTROS */}
         {selectedTags.length > 0 && (
           <div className="flex justify-end w-full">
-            <Button onClick={handleClearFilters}>
-              Limpiar filtros
-            </Button>
+            <Button onClick={handleClearFilters}>Limpiar filtros</Button>
           </div>
         )}
       </div>

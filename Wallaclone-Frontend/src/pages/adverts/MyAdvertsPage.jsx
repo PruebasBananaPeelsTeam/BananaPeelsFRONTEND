@@ -1,41 +1,44 @@
-import { useEffect, useState } from 'react';
-import { getMyAdverts } from '../../services/adverts-service.js';
-import Advert from './Advert.jsx';
-import FloatingNavButtons from '../../components/shared/FloatingNavButtons.jsx';
-import Loader from '../../components/shared/loader.jsx';
-import { isApiClientError } from '../../api/client.js';
+import { useEffect, useState } from 'react'
+import { getMyAdverts } from '../../services/adverts-service.js'
+import Advert from './Advert.jsx'
+import FloatingNavButtons from '../../components/shared/FloatingNavButtons.jsx'
+import Loader from '../../components/shared/loader.jsx'
+import { isApiClientError } from '../../api/client.js'
 
 function MyAdvertsBlock() {
-  const [adverts, setAdverts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const limit = 10;
+  const [adverts, setAdverts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const limit = 10
 
   useEffect(() => {
     const fetchMyAdverts = async () => {
-      setLoading(true);
-      setError(null);
+      setLoading(true)
+      setError(null)
 
       try {
-        const { results = [], totalPages = 1 } = await getMyAdverts(currentPage, limit);
-        setAdverts(results);
-        setTotalPages(totalPages);
+        const { results = [], totalPages = 1 } = await getMyAdverts(
+          currentPage,
+          limit,
+        )
+        setAdverts(results)
+        setTotalPages(totalPages)
       } catch (error) {
-        console.error('Error fetching my adverts:', error);
+        console.error('Error fetching my adverts:', error)
         if (isApiClientError(error)) {
-          setError(error.response?.data?.error || 'Error loading adverts');
+          setError(error.response?.data?.error || 'Error loading adverts')
         } else {
-          setError('Unknown error');
+          setError('Unknown error')
         }
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchMyAdverts();
-  }, [currentPage]);
+    fetchMyAdverts()
+  }, [currentPage])
 
   return (
     <div className="my-12">
@@ -60,12 +63,14 @@ function MyAdvertsBlock() {
           )}
           <FloatingNavButtons
             onPrev={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            onNext={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            onNext={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
           />
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default MyAdvertsBlock;
+export default MyAdvertsBlock

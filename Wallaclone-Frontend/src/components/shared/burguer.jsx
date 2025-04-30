@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext.jsx';
-import Logout from '../shared/logout.jsx';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext.jsx'
+import Logout from '../shared/logout.jsx'
 
 export default function Burger() {
-  const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const [isOpen, setIsOpen] = useState(false)
+  const { isAuthenticated } = useAuth()
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
+  const toggleMenu = () => setIsOpen(!isOpen)
+  const closeMenu = () => setIsOpen(false)
 
   return (
     <div className="relative">
@@ -28,16 +28,28 @@ export default function Burger() {
       {/* Menú desplegable */}
       {isOpen && (
         <div className="absolute right-0 mt-2 bg-white rounded-xl shadow-lg p-6 space-y-4 z-500 min-w-[170px] animate-slideDown">
-          <Link to="/" onClick={closeMenu} className="block text-gray-800 hover:text-green-600 font-semibold">
+          <Link
+            to="/"
+            onClick={closeMenu}
+            className="block text-gray-800 hover:text-green-600 font-semibold"
+          >
             Home
           </Link>
 
           {!isAuthenticated && (
             <>
-              <Link to="/login" onClick={closeMenu} className="block text-gray-800 hover:text-green-600 font-semibold">
+              <Link
+                to="/login"
+                onClick={closeMenu}
+                className="block text-gray-800 hover:text-green-600 font-semibold"
+              >
                 Login
               </Link>
-              <Link to="/register" onClick={closeMenu} className="block text-gray-800 hover:text-green-600 font-semibold">
+              <Link
+                to="/register"
+                onClick={closeMenu}
+                className="block text-gray-800 hover:text-green-600 font-semibold"
+              >
                 Register
               </Link>
             </>
@@ -45,10 +57,18 @@ export default function Burger() {
 
           {isAuthenticated && (
             <>
-              <Link to="/adverts/new" onClick={closeMenu} className="block text-gray-800 hover:text-green-600 font-semibold">
+              <Link
+                to="/adverts/new"
+                onClick={closeMenu}
+                className="block text-gray-800 hover:text-green-600 font-semibold"
+              >
                 Create-Advert
               </Link>
-              <Link to="/my-profile" onClick={closeMenu} className="block text-gray-800 hover:text-green-600 font-semibold">
+              <Link
+                to="/my-profile"
+                onClick={closeMenu}
+                className="block text-gray-800 hover:text-green-600 font-semibold"
+              >
                 👤 My Account
               </Link>
               <div className="pt-2">
@@ -59,5 +79,5 @@ export default function Burger() {
         </div>
       )}
     </div>
-  );
+  )
 }

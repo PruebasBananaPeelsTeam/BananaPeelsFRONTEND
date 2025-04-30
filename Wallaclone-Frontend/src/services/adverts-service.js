@@ -43,8 +43,8 @@ export const getMyAdverts = async (page = 1, limit = 10) => {
       page,
       limit,
     },
-  });
-  return response.data;
+  })
+  return response.data
 }
 
 export const updateAdvert = async (advertId, updatedData) => {

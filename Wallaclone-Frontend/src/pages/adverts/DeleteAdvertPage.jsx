@@ -17,76 +17,76 @@ function DeleteAdvertPage() {
 
   // useEffect para cargar los detalles del anuncio cuando se monta el componente
   useEffect(() => {
-
     const fetchAdvertDetails = async () => {
-      setLoading(true) 
-      setError(null) 
+      setLoading(true)
+      setError(null)
 
       try {
         // Llamada al servicio para obtener los detalles
-        const advertDetails = await getAdvertDetail(advertId) 
+        const advertDetails = await getAdvertDetail(advertId)
         // Guardar los detalles del anuncio
-        setAdvert(advertDetails) 
+        setAdvert(advertDetails)
       } catch (err) {
         setError('An error occurred while fetching the advert details.')
       } finally {
-        setLoading(false) 
+        setLoading(false)
       }
     }
 
     // Llamada a la función para cargar los detalles
-    fetchAdvertDetails() 
-  }, [advertId]) 
-
+    fetchAdvertDetails()
+  }, [advertId])
 
   // Función que maneja la eliminación del anuncio
   const handleDelete = async () => {
-    setLoading(true) 
+    setLoading(true)
 
     try {
       // Llamada al servicio para eliminar el anuncio
-      await deleteAdvert(advertId) 
-      navigate('/my-profile') 
+      await deleteAdvert(advertId)
+      navigate('/my-profile')
     } catch (err) {
-      setError('An error occurred while deleting the advert.') 
+      setError('An error occurred while deleting the advert.')
     } finally {
-      setLoading(false) 
-      setShowConfirmation(false) 
+      setLoading(false)
+      setShowConfirmation(false)
     }
   }
 
   // Funciones para abrir y cerrar el modal de confirmación
-  const openConfirmationModal = () => { setShowConfirmation(true) }
-  const closeConfirmationModal = () => { setShowConfirmation(false) }
+  const openConfirmationModal = () => {
+    setShowConfirmation(true)
+  }
+  const closeConfirmationModal = () => {
+    setShowConfirmation(false)
+  }
 
   // Si el anuncio aún se está cargando, mostrar un loader
   if (loading) {
-    return <Loader /> 
+    return <Loader />
   }
 
   // Si hay un error al cargar los detalles del anuncio, mostrar un mensaje de error
   if (error) {
-    return <div>{error}</div> 
+    return <div>{error}</div>
   }
 
   return (
-    
-        <div>  
-            <Button onClick={openConfirmationModal} disabled={loading} >
-            🗑 Delete
-              {loading && <Loader />}
-            </Button>
+    <div>
+      <Button onClick={openConfirmationModal} disabled={loading}>
+        🗑 Delete
+        {loading && <Loader />}
+      </Button>
 
-            {/* Modal de confirmación */}
-            {showConfirmation && (
-                <ConfirmationModalCard
-                  message="Are you sure you want to delete this advert?" 
-                  onConfirm={handleDelete} 
-                  onCancel={closeConfirmationModal} 
-                />    
-            )}
-        </div>
-    
+      {/* Modal de confirmación */}
+      {showConfirmation && (
+        <ConfirmationModalCard
+          message="Are you sure you want to delete this advert?"
+          onConfirm={handleDelete}
+          onCancel={closeConfirmationModal}
+        />
+      )}
+    </div>
   )
 }
 
