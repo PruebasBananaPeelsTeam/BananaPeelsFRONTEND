@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { getMyChats } from '../../services/chat-service';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/shared/button';
+import Page from '../../components/layout/page';
 
 function MyChatsPage() {
   const [chats, setChats] = useState([]);
@@ -26,8 +28,9 @@ function MyChatsPage() {
   };
 
   return (
+    <Page>
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">My Chats</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Your Chats</h1>
 
       {chats.length === 0 ? (
         <p>you have no chats</p>
@@ -36,7 +39,7 @@ function MyChatsPage() {
           {chats.map((chat) => {
             const otherUser = chat.participants.find(p => p._id !== user._id);
             const advertName = chat.advertId?.name || 'Unknown chat';
-            const haveNewMessage = chat.lastMessageSender !== user._id; //si el ultimo mensaje no es tuyo es que tienes un mensaje nuevo
+            //const haveNewMessage = chat.lastMessageSender !== user._id; //si el ultimo mensaje no es tuyo es que tienes un mensaje nuevo
 
             return (
               <div
@@ -44,18 +47,16 @@ function MyChatsPage() {
                 className="border rounded p-4 flex flex-col sm:flex-row justify-between items-center"
               >
                 <div className="flex flex-col text-center sm:text-left">
-                  <span className="font-semibold">{advertName}</span>
-                  <span className="text-gray-600">{otherUser?.username || 'Comprador desconocido'}</span>
-                  {/* Aquí pondremos el NEW más adelante */}
+                  <span className="font-semibold">About ➡️ {advertName}</span>
+                  <span className="text-blue-700">Chat with 👉 {otherUser?.username || 'Unknown'}</span>
                 </div>
 
-                <div className="mt-2 sm:mt-0">
-                  <button
+                <div className="">
+                  <Button
                     onClick={() => handleViewChat(chat._id)}
-                    className="bg-[rgb(223,184,13)] hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
-                  >
-                    See Chat
-                  </button>
+                    >
+                    Open Chat
+                    </Button>
                 </div>
               </div>
             );
@@ -63,6 +64,7 @@ function MyChatsPage() {
         </div>
       )}
     </div>
+    </Page>
   );
 }
 
