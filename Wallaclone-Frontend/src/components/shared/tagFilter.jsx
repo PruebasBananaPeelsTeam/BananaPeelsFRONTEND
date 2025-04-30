@@ -89,7 +89,7 @@ function TagFilter() {
         {selectedTags.length > 0 && (
           <div className="flex flex-wrap items-center justify-start gap-3 w-full">
             <span className="text-gray-800 font-bold text-md flex items-center">
-              🎯 Filtros aplicados:
+              🎯 Filters applied:
             </span>
             {selectedTags.map((tag) => (
               <img
@@ -131,7 +131,7 @@ function TagFilter() {
         {selectedTags.length > 0 && (
           <div className="flex justify-end w-full">
             <Button onClick={handleClearFilters}>
-              Limpiar filtros
+              Clean filters
             </Button>
           </div>
         )}

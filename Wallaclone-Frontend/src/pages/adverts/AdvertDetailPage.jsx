@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getAdvertDetail } from '../../services/adverts-service'
+import { getAdvertDetail, addFavorite, removeFavorite } from '../../services/adverts-service'
 import { isApiClientError } from '../../api/client'
 import Page from '../../components/layout/page'
 import Loader from '../../components/shared/loader'
@@ -9,36 +9,69 @@ import ReservedToggleButton from '../../components/shared/reservedToggleButton'
 import AdvertStatus from '../../components/shared/advertStatus'
 import Button from '../../components/shared/button'
 import DeleteAdvertPage from './DeleteAdvertPage'
+import { Heart, HeartOff } from 'lucide-react'
 
 function AdvertDetailPage() {
   const params = useParams()
   const navigate = useNavigate()
   const [advert, setAdvert] = useState(null)
   const [loading, setLoading] = useState(false)
-  const { user } = useAuth()
+  const { user, updateUserData } = useAuth()
+  const [isFavorite, setIsFavorite] = useState(false)
 
+  // Obtener anuncio
   useEffect(() => {
     if (params.advertId && params.slug) {
       setLoading(true)
-
       getAdvertDetail(params.advertId, params.slug)
-        .then((advert) => {
+        .then(advert => {
+          advert._id = advert._id.toString() // 👈 aseguramos el formato
           setAdvert(advert)
+
+          // Comprobamos si está en favoritos
+          const fav = user?.favorites?.some(
+            favId => favId.toString() === advert._id
+          )
+          setIsFavorite(fav)
+
           setLoading(false)
         })
-
-        .catch((error) => {
+        .catch(error => {
           setLoading(false)
-          if (isApiClientError(error)) {
-            if (error.code === 'NOT_FOUND') {
-              navigate('/404')
-            }
+          if (isApiClientError(error) && error.code === 'NOT_FOUND') {
+            navigate('/404')
           }
         })
     }
-  }, [params.advertId, params.slug, navigate])
+  }, [params.advertId, params.slug, navigate, user])
 
-  // Pare renderizar la imagen desde la base de datos, usando buffer en el backend
+  // Añadir o quitar favorito
+  const handleFavoriteToggle = async () => {
+    try {
+      let updatedFavorites
+
+      if (isFavorite) {
+        await removeFavorite(advert._id)
+        updatedFavorites = user.favorites.filter(
+          id => id.toString() !== advert._id.toString()
+        )
+      } else {
+        await addFavorite(advert._id)
+        updatedFavorites = [...(user.favorites || []), advert._id.toString()]
+      }
+
+      updateUserData({ ...user, favorites: updatedFavorites })
+      setIsFavorite(!isFavorite)
+
+      // Depuración
+      console.log('✅ Favorito actualizado:', !isFavorite)
+      console.log('🧠 updatedFavorites:', updatedFavorites)
+      console.log('🆔 advert._id:', advert._id.toString())
+    } catch (error) {
+      console.error('❌ Error actualizando favorito:', error)
+    }
+  }
+
   const imageUrl = advert?.image
     ? advert.image.startsWith('http')
       ? advert.image
@@ -56,64 +89,54 @@ function AdvertDetailPage() {
           </h2>
           <div className="text-black">
             <img
-              src={
-                advert?.image
-                  ? advert.image.startsWith('http')
-                    ? advert.image
-                    : `data:image/jpeg;base64,${advert.image}`
-                  : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
-              }
+              src={imageUrl}
               alt={advert?.name || 'No image'}
               className="w-full max-h-64 object-cover rounded-xl mb-4"
             />
 
-            <p>
-              <strong>Descripción:</strong> {advert.description}
-            </p>
+            <p><strong>Description:</strong> {advert.description}</p>
+            <p><strong>Price:</strong> {advert.price} €</p>
+            <p><strong>Tipe:</strong> {advert.type === 'buy' ? 'Wanted' : 'For Sale'}</p>
+            <p><strong>Tags:</strong> {advert.tags.join(', ')}</p>
+            <p><strong>Seller:</strong> {advert.owner?.username || advert.owner}</p>
 
-            <p>
-              <strong>Precio:</strong> {advert.price} €
-            </p>
+            <div className="flex flex-wrap gap-4 mt-6">
+              <Button onClick={() => navigate('/')} className="mb-4">← Back</Button>
 
-            <p>
-              <strong>Type:</strong>{' '}
-              {advert.type === 'buy' ? 'Wanted' : 'For Sale'}{' '}
-              {/* Cambiado para mostrar el tipo de anuncio */}
-            </p>
-
-            <p>
-              <strong>Categorías:</strong> {advert.tags.join(', ')}
-            </p>
-
-            <p>
-              <strong>Vendedor:</strong>{' '}
-              {advert.owner?.username || advert.owner}
-            </p>
-            <div className="flex justify-between">
-              <Button onClick={() => navigate('/')} className="mb-4">
-                ← Back
-              </Button>
-
-              {user && advert.owner._id === user._id && advert._id && (
+              {user && advert.owner._id === user._id && (
                 <>
                   <Button
                     onClick={() => navigate(`/adverts/${advert._id}/update`)}
-                    className="mb-4 ml-4"
+                    className="mb-4 ml-2"
                   >
                     ✎ Update
                   </Button>
 
-                  <DeleteAdvertPage/>
-                  
+                  <DeleteAdvertPage />
+
                   <ReservedToggleButton
                     advert={advert}
                     onToggled={(newState) =>
-                      setAdvert((prev) => ({ ...prev, reserved: newState }))
+                      setAdvert(prev => ({ ...prev, reserved: newState }))
                     }
                   />
                 </>
               )}
-              {/*reserved mark*/}
+
+              {user && advert._id && (
+                <Button onClick={handleFavoriteToggle} className="mb-4 ml-2">
+                  {isFavorite ? (
+                    <span className="flex items-center gap-2 text-red-500">
+                      <HeartOff size={18} /> Quitar de favoritos
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2 text-green-600">
+                      <Heart size={18} /> Añadir a favoritos
+                    </span>
+                  )}
+                </Button>
+              )}
+
               <AdvertStatus
                 reserved={advert.reserved}
                 iconSize="28"

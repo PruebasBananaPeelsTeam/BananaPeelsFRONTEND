@@ -10,6 +10,7 @@ import { clearSession } from '../../utils/storage.js'
 import { useAuth } from '../../context/AuthContext.jsx'
 import MyAdvertsBlock from '../adverts/MyAdvertsPage.jsx'
 import UserEditForm from '../../components/shared/UserEditForm.jsx'
+import FavoritesPage from '../adverts/FavoritesPage.jsx'
 
 const MyUserPage = () => {
   const navigate = useNavigate()
@@ -52,6 +53,10 @@ const MyUserPage = () => {
       {/* Ads */}
       <section>
         <MyAdvertsBlock />
+      </section>
+
+      <section>
+        <FavoritesPage />
       </section>
 
       {/* Profile management grid */}

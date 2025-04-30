@@ -69,3 +69,24 @@ export const deleteAdvert = async (advertId) => {
   const response = await client.delete(url)
   return response.data
 }
+
+export const getFavorites = async (page = 1, limit = 10, sortDirection = 'desc') => {
+  const response = await client.get('/api/favorites', {
+    params: {
+      page,
+      limit,
+      sortDirection,
+    },
+  });
+  return response.data;
+};
+
+export const addFavorite = async (advertId) => {
+  const response = await client.post(`/api/favorites/${advertId}`);
+  return response.data;
+};
+
+export const removeFavorite = async (advertId) => {
+  const response = await client.delete(`/api/favorites/${advertId}`);
+  return response.data;
+};

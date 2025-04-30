@@ -14,6 +14,7 @@ import UpdateAdvertPage from './pages/adverts/UpdateAdvertPage.jsx'
 import MyUserPage from './pages/auth/myUserPage.jsx'
 import UserPage from './pages/adverts/userPage.jsx'
 import DeleteAdvertPage from './pages/adverts/DeleteAdvertPage.jsx'
+import FavoritesPage from './pages/adverts/FavoritesPage'
 
 function App() {
   return (
@@ -51,6 +52,15 @@ function App() {
         element={
           <PrivateRoute>
             <MyAdvertsPage />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/favorites"
+        element={
+          <PrivateRoute>
+            <FavoritesPage />
           </PrivateRoute>
         }
       />
