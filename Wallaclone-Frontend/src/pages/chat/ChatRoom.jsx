@@ -97,73 +97,66 @@ function ChatRoom() {
 
   return (
     <Page>
-      <div className="p-4 bg-gradient-to-r  from-yellow-200 to-slate-300 border rounded">
-        {/*container de cada uno de los mensajes */}
-        <div className="max-h-96 overflow-y-auto border rounded p-4  flex flex-col gap-2">
-          <h3 className="text-center text-red-500">
-            Messages will be automatically deleted 7 days after sending.
-          </h3>
-          {messages.map((message) => {
-            const isMe = message.sender?._id === user._id
-            const createdAt = new Date(message.createdAt)
-            const formattedTime = createdAt
-              .toLocaleTimeString([], {
-                day: '2-digit',
-                month: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-              })
-              .replace(',', '')
+    <div className="p-4 max-w-3xl mx-auto backdrop-blur-md bg-gradient-to-tr from-[#fdfbfb] to-[#ebedee] rounded-xl shadow-2xl border border-white/30">
+      <div className="max-h-[400px] overflow-y-auto p-4 rounded-lg bg-white/50 backdrop-blur-sm shadow-inner flex flex-col gap-3 scroll-smooth">
+        <h3 className="text-center text-sm text-red-500 italic">
+          Messages are auto-deleted after 7 days
+        </h3>
 
-            return (
-              <div
-                key={message._id}
-                className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}
-              >
-                <div className="flex flex-col items-end text-xs  mr-1 ml-1 mb-1">
-                  <div
-                    className={`max-w-xs pb-2 pr-2 pl-2 rounded-xl text-sm ${
-                      isMe
-                        ? 'bg-yellow-300 text-right text-gray-500'
-                        : 'bg-gray-300 text-left text-yellow-600'
-                    }`}
-                  >
-                    <span className="" style={{ fontSize: '0.60rem' }}>
-                      sent at {formattedTime}
-                    </span>
-                    <strong className="block mb-1 text-xs text-gray-600">
-                      {isMe ? 'You' : message.sender?.username || 'Unknown'}
-                    </strong>
-                    <span className="break-words">{message.text}</span>
-                  </div>
-                </div>
+        {messages.map((message) => {
+          const isMe = message.sender?._id === user._id
+          const createdAt = new Date(message.createdAt)
+          const formattedTime = createdAt.toLocaleTimeString([], {
+            day: '2-digit',
+            month: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+          }).replace(',', '')
+
+          return (
+            <div
+              key={message._id}
+              className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}
+            >
+              <div className={`max-w-xs px-4 py-2 rounded-2xl shadow-md text-sm ${isMe
+                  ? 'bg-gradient-to-br from-yellow-300 to-yellow-200 text-gray-800'
+                  : 'bg-gradient-to-br from-gray-200 to-gray-100 text-yellow-700'
+                }`}>
+                <p className="text-[0.6rem] text-right italic opacity-70">
+                  {formattedTime}
+                </p>
+                <p className="text-xs font-semibold">
+                  {isMe ? 'You' : message.sender?.username || 'Unknown'}
+                </p>
+                <p className="break-words">{message.text}</p>
               </div>
-            )
-          })}
+            </div>
+          )
+        })}
 
-          <div ref={messagesEndRef} />
-        </div>
-
-        <form onSubmit={handleSubmit} className="flex">
-          <input
-            className="flex-grow border rounded-l p-2 text-gray-600"
-            type="text"
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-            placeholder="Write here... 150 chars max"
-            disabled={sending}
-            maxLength={150}
-          />
-          <button
-            type="submit"
-            className="bg-[rgb(223,184,13)] text-white px-4 py-2 rounded-r flex items-center cursor-pointer"
-            disabled={sending}
-          >
-            {sending ? <ChatLoader small /> : 'Send'}
-          </button>
-        </form>
+        <div ref={messagesEndRef} />
       </div>
-    </Page>
+
+      <form onSubmit={handleSubmit} className="mt-4 flex bg-white/70 backdrop-blur-md rounded-full shadow-lg overflow-hidden">
+        <input
+          className="flex-grow p-3 bg-transparent text-gray-700 placeholder-gray-500 focus:outline-none"
+          type="text"
+          value={inputMessage}
+          onChange={(e) => setInputMessage(e.target.value)}
+          placeholder="Type your message..."
+          disabled={sending}
+          maxLength={150}
+        />
+        <button
+          type="submit"
+          className="px-6 py-2 bg-yellow-400 hover:bg-yellow-500 transition-all duration-200 text-white font-bold"
+          disabled={sending}
+        >
+          {sending ? <ChatLoader small /> : 'Send'}
+        </button>
+      </form>
+    </div>
+  </Page>
   )
 }
 

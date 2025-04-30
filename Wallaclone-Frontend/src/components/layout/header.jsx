@@ -48,6 +48,7 @@ export default function Header() {
               <Link to="/my-profile" className="hover:text-green-600">
                 👤 My Account
               </Link>
+              {isAuthenticated && <MyChatsButton />}
             </>
           )}
         </nav>
@@ -57,7 +58,6 @@ export default function Header() {
           <div className="hidden md:flex">{isAuthenticated && <Logout />}</div>
           <div className="md:hidden">
             <Burger />
-            {isAuthenticated && <MyChatsButton />}
           </div>
         </div>
       </div>
