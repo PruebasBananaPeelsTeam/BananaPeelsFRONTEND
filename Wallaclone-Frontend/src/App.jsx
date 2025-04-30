@@ -14,6 +14,8 @@ import UpdateAdvertPage from './pages/adverts/UpdateAdvertPage.jsx'
 import MyUserPage from './pages/auth/myUserPage.jsx'
 import UserPage from './pages/adverts/userPage.jsx'
 import DeleteAdvertPage from './pages/adverts/DeleteAdvertPage.jsx'
+import ChatRoom from './pages/chat/ChatRoom'
+import MyChatsPage from './pages/chat/MyChatsPage'
 
 function App() {
   return (
@@ -81,6 +83,35 @@ function App() {
       <Route path="/adverts" element={<AdvertsPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/adverts/:advertId/:slug" element={<AdvertDetailPage />} />
+      <Route path="/adverts/:advertId/update" element={<UpdateAdvertPage />} />
+
+      <Route
+        path="/chat/advert/:advertId"
+        element={
+          <PrivateRoute>
+            <ChatRoom />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/chat/room/:chatId"
+        element={
+          <PrivateRoute>
+            <ChatRoom />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/my-chats"
+        element={
+          <PrivateRoute>
+            <MyChatsPage />
+          </PrivateRoute>
+        }
+      />
+
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
