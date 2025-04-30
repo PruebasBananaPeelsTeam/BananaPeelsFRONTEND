@@ -7,43 +7,43 @@ import Advert from './Advert'
 import FloatingNavButtons from '../../components/shared/FloatingNavButtons'
 
 const UserPage = () => {
-  const { username } = useParams();
-  const [adverts, setAdverts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const limit = 10;
+  const { username } = useParams()
+  const [adverts, setAdverts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const limit = 10
 
   useEffect(() => {
     const fetchUserAdverts = async () => {
-      setLoading(true);
-      setError(null);
+      setLoading(true)
+      setError(null)
 
       try {
         const response = await client.get(`/api/users/${username}/adverts`, {
           params: { page: currentPage, limit },
-        });
-        setAdverts(response.data.results || []);
-        setTotalPages(response.data.totalPages || 1);
+        })
+        setAdverts(response.data.results || [])
+        setTotalPages(response.data.totalPages || 1)
       } catch (err) {
-        setError('Error loading adverts');
+        setError('Error loading adverts')
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchUserAdverts();
-  }, [username, currentPage]);
+    fetchUserAdverts()
+  }, [username, currentPage])
 
-  if (loading) return <Loader />;
+  if (loading) return <Loader />
 
   if (error)
     return (
       <Page title="User" fullWidth>
         <p>{error}</p>
       </Page>
-    );
+    )
 
   return (
     <Page title={`Ads from ${username}`} fullWidth>
@@ -65,7 +65,7 @@ const UserPage = () => {
         onNext={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
       />
     </Page>
-  );
-};
+  )
+}
 
-export default UserPage;
+export default UserPage
