@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { checkChatByAdvert, getOrCreateChat } from '../../services/chat-service'
 import { toggleSoldAdvert } from '../../services/adverts-service'
 import { FaCheckCircle } from 'react-icons/fa'
-import DeleteAdvertPage from './DeleteAdvertPage'; // Asegúrate de que la ruta sea correcta
+import DeleteAdvertPage from './DeleteAdvertPage'; 
 import { Heart, HeartOff } from 'lucide-react'
 
 function AdvertDetailPage() {
@@ -116,7 +116,7 @@ function AdvertDetailPage() {
             <img
               src={imageUrl}
               alt={advert?.name || t('advertDetail.noImage')} // 👈 Traducción
-              className="w-full max-h-64 object-cover rounded-xl mb-4"
+              className="w-full max-h-[300px] object-scale-down rounded-xl mb-2 mx-auto"
             />
             
           <div className="max-w-2xl mx-auto text-justify space-y-2 bg-gray-100 p-4 rounded-xl shadow">
