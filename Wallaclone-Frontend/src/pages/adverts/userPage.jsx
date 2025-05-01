@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom'
 import { client } from '../../api/client'
 import Page from '../../components/layout/page'
 import Loader from '../../components/shared/loader'
-import Advert from './Advert'
-import FloatingNavButtons from '../../components/shared/FloatingNavButtons'
+import AdvertsGrid from '../../components/shared/AdvertsGrid' // ✅ Grid con paginación integrada
 
 const UserPage = () => {
   const { username } = useParams()
@@ -45,6 +44,14 @@ const UserPage = () => {
       </Page>
     )
 
+  const goToPreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1)
+  }
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1)
+  }
+
   return (
     <Page title={`Ads from ${username}`} fullWidth>
       <div className="text-center mb-6">
@@ -52,17 +59,12 @@ const UserPage = () => {
         <p className="text-gray-500">Latest ads published by this user</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
-        {adverts.length > 0 ? (
-          adverts.map((advert) => <Advert key={advert._id} advert={advert} />)
-        ) : (
-          <p className="col-span-full text-center">No ads found.</p>
-        )}
-      </div>
-
-      <FloatingNavButtons
-        onPrev={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-        onNext={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+      <AdvertsGrid
+        adverts={adverts}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPrev={goToPreviousPage}
+        onNext={goToNextPage}
       />
     </Page>
   )

@@ -69,6 +69,34 @@ function AdvertDetailPage() {
     }
   }
 
+  // Añadir o quitar favorito
+  const handleFavoriteToggle = async () => {
+    try {
+      let updatedFavorites
+
+      if (isFavorite) {
+        await removeFavorite(advert._id)
+        updatedFavorites = user.favorites.filter(
+          id => id.toString() !== advert._id.toString()
+        )
+      } else {
+        await addFavorite(advert._id)
+        updatedFavorites = [...(user.favorites || []), advert._id.toString()]
+      }
+
+      updateUserData({ ...user, favorites: updatedFavorites })
+      setIsFavorite(!isFavorite)
+
+      // Depuración
+      console.log('✅ Favorito actualizado:', !isFavorite)
+      console.log('🧠 updatedFavorites:', updatedFavorites)
+      console.log('🆔 advert._id:', advert._id.toString())
+    } catch (error) {
+      console.error('❌ Error actualizando favorito:', error)
+    }
+  }
+
+
   const imageUrl = advert?.image
     ? advert.image.startsWith('http')
       ? advert.image

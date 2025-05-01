@@ -2,7 +2,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { slugify } from '../../utils/slugify'
 import AdvertStatus from '../../components/shared/advertStatus'
 import { FaCheckCircle } from 'react-icons/fa'
-import { toggleSoldAdvert } from '../../services/adverts-service'
+import { useAuth } from '../../context/AuthContext'
+import { Heart } from 'lucide-react'
 
 const Advert = ({ advert }) => {
   const { _id, name, description, price, type, image, owner } = advert
