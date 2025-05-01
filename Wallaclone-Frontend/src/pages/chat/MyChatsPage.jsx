@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { getMyChats } from '../../services/chat-service'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import Button from '../../components/shared/button'
 import Page from '../../components/layout/page'
 
 function MyChatsPage() {

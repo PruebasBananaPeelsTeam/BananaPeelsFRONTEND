@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import socket from '../../socket' // Asegúrate de que la ruta sea correcta
+import socket from '../../socket' 
 import {
   getOrCreateChat,
   getChatMessages,
