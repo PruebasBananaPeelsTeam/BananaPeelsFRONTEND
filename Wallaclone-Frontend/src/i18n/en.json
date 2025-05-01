@@ -1,0 +1,31 @@
+{
+  "createAdvert": {
+    "title": "Create a new advert",
+    "successMessage": "Advert created successfully! Redirecting...",
+    "productLabel": "Product",
+    "descriptionLabel": "Description",
+    "priceLabel": "Price (€)",
+    "typeLabel": "Type",
+    "typeSell": "On sale",
+    "typeBuy": "Wanted",
+    "tagsLabel": "Categories",
+    "imageLabel": "Image",
+    "previewLabel": "Preview:",
+    "submitButton": "Submit",
+    "creatingButton": "Creating..."
+  },
+
+  "advertDetail": {
+    "noImage": "No image",
+    "description": "Description",
+    "price": "Price",
+    "type": "Type",
+    "typeWanted": "Wanted",
+    "typeForSale": "For Sale",
+    "categories": "Categories",
+    "seller": "Seller",
+    "backButton": "← Back",
+    "updateButton": "✎ Update",
+    "notFound": "Advert not found."
+  }
+}
