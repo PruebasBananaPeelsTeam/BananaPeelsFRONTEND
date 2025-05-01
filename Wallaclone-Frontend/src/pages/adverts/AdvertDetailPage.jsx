@@ -118,8 +118,9 @@ function AdvertDetailPage() {
               alt={advert?.name || t('advertDetail.noImage')} // 👈 Traducción
               className="w-full max-h-64 object-cover rounded-xl mb-4"
             />
-
-            <p>
+            
+          <div className="max-w-2xl mx-auto text-justify space-y-2 bg-gray-100 p-4 rounded-xl shadow">
+            <p >
               <strong>{t('advertDetail.description')}:</strong> {advert.description}
             </p>
 
@@ -142,6 +143,7 @@ function AdvertDetailPage() {
               <strong>{t('advertDetail.seller')}:</strong>{' '}
               {advert.owner?.username || advert.owner}
             </p>
+          </div>
 
             {/* Botones y estado */}
 
