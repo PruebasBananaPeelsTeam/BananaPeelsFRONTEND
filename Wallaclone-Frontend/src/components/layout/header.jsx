@@ -3,6 +3,8 @@ import { useAuth } from '../../context/AuthContext.jsx';
 import Burger from '../shared/burguer.jsx';
 import Logout from '../shared/logout.jsx';
 import LanguageSelector from '../shared/languageSelector.jsx';
+import MyChatsButton from '../shared/MyChatsButton.jsx'
+
 
 export default function Header() {
   const { isAuthenticated } = useAuth()

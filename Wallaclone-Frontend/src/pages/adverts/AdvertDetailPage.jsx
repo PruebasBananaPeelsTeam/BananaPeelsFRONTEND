@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { checkChatByAdvert, getOrCreateChat } from '../../services/chat-service'
 import { toggleSoldAdvert } from '../../services/adverts-service'
 import { FaCheckCircle } from 'react-icons/fa'
+import DeleteAdvertPage from './DeleteAdvertPage'; // Asegúrate de que la ruta sea correcta
 
 function AdvertDetailPage() {
   const { t } = useTranslation(); //  Hook de traducción
@@ -135,7 +136,7 @@ function AdvertDetailPage() {
                         className="w-full md:w-auto"
                         
                       >
-                        ✎ Update
+                        {t('advertDetail.updateButton')}
                       </Button>
                     </div>
                       
@@ -166,7 +167,6 @@ function AdvertDetailPage() {
                         }
                       />
 
-                   
                 </div>
               )}
               {/*reserved mark*/}
