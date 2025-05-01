@@ -10,6 +10,7 @@ import { clearSession } from '../../utils/storage.js'
 import { useAuth } from '../../context/AuthContext.jsx'
 import MyAdvertsBlock from '../adverts/MyAdvertsPage.jsx'
 import UserEditForm from '../../components/shared/UserEditForm.jsx'
+import FavoritesPage from '../adverts/FavoritesPage.jsx'
 
 const MyUserPage = () => {
   const navigate = useNavigate()
@@ -52,17 +53,23 @@ const MyUserPage = () => {
       </div>
 
       {/* Ads */}
-      <section>
+      <section className="mb-12">
         <MyAdvertsBlock />
+      </section>
+
+      <section className="mb-12">
+        <FavoritesPage />
       </section>
 
       {/* Profile management grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
         {/* Edit user form */}
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Edit Profile</h2>
-          <p className="text-gray-600 mb-4">
-            You can update your email, username, or password below.
+        <div className="bg-white/800 backdrop-blur-md border border-gray-300 p-6 rounded-2xl shadow-lg transition-transform hover:scale-[1.01]">
+          <h2 className="text-xl font-semibold text-gray-800 mb-2 flex items-center gap-2">
+            🛠️ Edit Profile
+          </h2>
+          <p className="text-sm text-gray-500 mb-4">
+            Update your personal information below.
           </p>
           <UserEditForm />
         </div>

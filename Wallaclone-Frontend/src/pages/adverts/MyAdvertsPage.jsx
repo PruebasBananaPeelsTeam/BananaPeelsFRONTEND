@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
-import { getMyAdverts } from '../../services/adverts-service.js'
-import Advert from './Advert.jsx'
-import FloatingNavButtons from '../../components/shared/FloatingNavButtons.jsx'
-import Loader from '../../components/shared/loader.jsx'
-import { isApiClientError } from '../../api/client.js'
+import { useEffect, useState } from 'react';
+import { getMyAdverts } from '../../services/adverts-service.js';
+import Loader from '../../components/shared/loader.jsx';
+import { isApiClientError } from '../../api/client.js';
+import AdvertsGrid from '../../components/shared/AdvertsGrid.jsx';
 
 function MyAdvertsBlock() {
   const [adverts, setAdverts] = useState([])
@@ -37,37 +36,33 @@ function MyAdvertsBlock() {
       }
     }
 
-    fetchMyAdverts()
-  }, [currentPage])
+    fetchMyAdverts();
+  }, [currentPage]);
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
 
   return (
-    <div className="my-12">
-      <h2 className="text-2xl font-semibold mb-4">My Adverts</h2>
+    <div className="shadow-md border border-gray-500 rounded-xl p-6">
+      <h2 className="text-2xl font-bold text-center mb-6"> My Adverts </h2>
 
       {loading ? (
         <Loader />
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (
-        <>
-          {adverts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
-              {adverts.map((advert) => (
-                <Advert key={advert._id} advert={advert} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-center w-full col-span-full">
-              No adverts created yet.
-            </p>
-          )}
-          <FloatingNavButtons
-            onPrev={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            onNext={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-          />
-        </>
+        <AdvertsGrid
+          adverts={adverts}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPrev={goToPreviousPage}
+          onNext={goToNextPage}
+        />
       )}
     </div>
   )

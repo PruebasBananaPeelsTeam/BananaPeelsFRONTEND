@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAdvertDetail } from '../../services/adverts-service';
+import { getAdvertDetail, addFavorite, removeFavorite } from '../../services/adverts-service';
 import { isApiClientError } from '../../api/client';
 import Page from '../../components/layout/page';
 import Loader from '../../components/shared/loader';
@@ -13,6 +13,7 @@ import { checkChatByAdvert, getOrCreateChat } from '../../services/chat-service'
 import { toggleSoldAdvert } from '../../services/adverts-service'
 import { FaCheckCircle } from 'react-icons/fa'
 import DeleteAdvertPage from './DeleteAdvertPage'; // Asegúrate de que la ruta sea correcta
+import { Heart, HeartOff } from 'lucide-react'
 
 function AdvertDetailPage() {
   const { t } = useTranslation(); //  Hook de traducción
@@ -20,16 +21,26 @@ function AdvertDetailPage() {
   const navigate = useNavigate();
   const [advert, setAdvert] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+  const { user, updateUserData } = useAuth();
+  const [isFavorite, setIsFavorite] = useState(false)
 
+  // Obtener anuncio
   useEffect(() => {
     if (params.advertId && params.slug) {
       setLoading(true);
 
       getAdvertDetail(params.advertId, params.slug)
-        .then((advert) => {
-          setAdvert(advert);
-          setLoading(false);
+        .then(advert => {
+          advert._id = advert._id.toString() // 👈 aseguramos el formato
+          setAdvert(advert)
+
+          // Comprobamos si está en favoritos
+          const fav = user?.favorites?.some(
+            favId => favId.toString() === advert._id
+          )
+          setIsFavorite(fav)
+
+          setLoading(false)
         })
         .catch((error) => {
           setLoading(false);
@@ -40,7 +51,7 @@ function AdvertDetailPage() {
           }
         });
     }
-  }, [params.advertId, params.slug, navigate])
+  }, [params.advertId, params.slug, navigate, user])
 
   // inicializador de chats
   const handleStartChat = async () => {
@@ -169,7 +180,21 @@ function AdvertDetailPage() {
 
                 </div>
               )}
-              {/*reserved mark*/}
+
+              {user && advert._id && (
+                <Button onClick={handleFavoriteToggle} className="mb-4 ml-2">
+                  {isFavorite ? (
+                    <span className="flex items-center gap-2 text-red-500">
+                      <HeartOff size={18} /> Quitar de favoritos
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2 text-green-600">
+                      <Heart size={18} /> Añadir a favoritos
+                    </span>
+                  )}
+                </Button>
+              )}
+
               <div className="w-full md:w-auto">
                 <AdvertStatus
                   reserved={advert.reserved}

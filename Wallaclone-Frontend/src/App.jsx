@@ -16,6 +16,7 @@ import UserPage from './pages/adverts/userPage.jsx'
 import DeleteAdvertPage from './pages/adverts/DeleteAdvertPage.jsx'
 import ChatRoom from './pages/chat/ChatRoom'
 import MyChatsPage from './pages/chat/MyChatsPage'
+import FavoritesPage from './pages/adverts/FavoritesPage'
 
 function App() {
   return (
@@ -53,6 +54,15 @@ function App() {
         element={
           <PrivateRoute>
             <MyAdvertsPage />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/favorites"
+        element={
+          <PrivateRoute>
+            <FavoritesPage />
           </PrivateRoute>
         }
       />

@@ -119,11 +119,9 @@ const UserEditForm = () => {
   // 📄 Renderizamos el formulario
   return (
     <form
-      className="space-y-4 max-w-md mt-6 bg-white p-4 rounded-xl shadow-md"
+      className="space-y-4 w-full bg-white p-4 rounded-xl shadow-inner"
       onSubmit={handleSubmit}
     >
-      <h3 className="text-lg font-semibold text-gray-800">Edit profile</h3>
-
       {/* Email (requerido) */}
       <FormField
         label="Email"
