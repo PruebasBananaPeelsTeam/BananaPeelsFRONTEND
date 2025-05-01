@@ -83,10 +83,11 @@ function AdvertDetailPage() {
                   : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
               }
               alt={advert?.name || 'No image'}
-              className="w-full max-h-64 object-cover rounded-xl mb-4"
+              className="w-full max-h-[300px] object-scale-down rounded-xl mb-2 mx-auto"
             />
-
-            <p>
+            
+          <div className="max-w-2xl mx-auto text-justify space-y-2 bg-gray-100 p-4 rounded-xl shadow">
+            <p >
               <strong>Description:</strong> {advert.description}
             </p>
 
@@ -108,6 +109,7 @@ function AdvertDetailPage() {
               <strong>Owner:</strong>{' '}
               {advert.owner?.username || advert.owner}
             </p>
+          </div>
 
             {/* Botones y estado */}
 
