@@ -2,11 +2,13 @@ import { useState } from 'react'
 import { client } from '../../api/client'
 import FormField from '../../components/shared/formField'
 import Button from '../../components/shared/button'
-import Page from '../../components/layout/page'
 import Loader from '../../components/shared/loader'
 import FormErrorPopup from '../../components/shared/formErrorPopUp'
+import LanguageSelector from '../../components/shared/languageSelector'
+import { useTranslation } from 'react-i18next'
 
 function ForgotPasswordPage() {
+  const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [successMessage, setSuccessMessage] = useState(null)
@@ -24,17 +26,34 @@ function ForgotPasswordPage() {
     } catch (err) {
       setError({
         code: err.code || 'ERROR',
-        message: err.message || 'An error occurred. Please try again later.',
+        message: err.message || t('forgotPasswordPage.defaultError'),
       })
     } finally {
       setLoading(false)
     }
   }
+
   return (
-    <Page title="¿Olvidaste tu contraseña?">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div
+      className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center p-6 relative"
+      style={{ backgroundImage: "url('/images/background.jpg')" }}
+    >
+      {/* Language Selector */}
+      <div className="absolute top-4 right-4">
+        <LanguageSelector />
+      </div>
+
+      {/* Forgot Password Form */}
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 p-8 rounded-2xl shadow-2xl w-full max-w-md flex flex-col gap-6"
+      >
+        <h2 className="text-3xl font-bold text-center text-gray-800">
+          {t('forgotPasswordPage.title')}
+        </h2>
+
         <FormField
-          label="Introduce tu correo electrónico"
+          label={t('forgotPasswordPage.emailLabel')}
           type="email"
           name="email"
           value={email}
@@ -43,7 +62,7 @@ function ForgotPasswordPage() {
         />
 
         <Button type="submit" disabled={loading || !email}>
-          {loading ? <Loader /> : 'Enviar instrucciones'}
+          {loading ? <Loader /> : t('forgotPasswordPage.submitButton')}
         </Button>
 
         {successMessage && (
@@ -56,7 +75,7 @@ function ForgotPasswordPage() {
           <FormErrorPopup error={error} onClose={() => setError(null)} />
         )}
       </form>
-    </Page>
+    </div>
   )
 }
 

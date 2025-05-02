@@ -98,7 +98,14 @@
   "forgotPassword": "Forgot your password?",
   "noAccount": "Don't have an account yet?",
   "registerButton": "Register"
+},
+"forgotPasswordPage": {
+  "title": "Forgot your password?",
+  "emailLabel": "Enter your email address",
+  "submitButton": "Send instructions",
+  "defaultError": "An error occurred. Please try again later."
 }
+
 
 
 
