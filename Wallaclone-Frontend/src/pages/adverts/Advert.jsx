@@ -12,7 +12,9 @@ const Advert = ({ advert }) => {
   const { user } = useAuth()
 
   // Verificar si el anuncio está en favoritos
-  const isFavorite = user?.favorites?.some(id => id.toString() === _id.toString())
+  const isFavorite = user?.favorites?.some(
+    (id) => id.toString() === _id.toString(),
+  )
 
   const imageUrl = image
     ? image.startsWith('http')
@@ -31,10 +33,16 @@ const Advert = ({ advert }) => {
       onClick={() => navigate(`/adverts/${_id}/${slug}`)}
     >
       <div className="relative w-full h-[340px] transform-style-preserve-3d transition-transform duration-700 hover:rotate-y-180">
-
         {/* Cara frontal */}
         <div className="absolute w-full h-full backface-hidden rounded-lg overflow-hidden border border-gray-300 shadow-md">
-          <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
+          <img
+            src={imageUrl}
+            alt={name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute bottom-2 left-2 text-white font-bold text-3xl drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+            {shortName}
+          </div>
 
           {/* Corazón de favorito con animación */}
           {isFavorite && (
@@ -77,7 +85,6 @@ const Advert = ({ advert }) => {
             )}
           </div>
         </div>
-
       </div>
     </div>
   )
