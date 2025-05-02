@@ -79,7 +79,18 @@
   "dangerMessage": "Eliminar tu cuenta borrará permanentemente todos tus datos y anuncios.",
   "deleteButton": "Eliminar cuenta",
   "confirmDelete": "¿Estás seguro de que deseas eliminar tu cuenta?"
+},
+"registerPage": {
+  "title": "Crear cuenta",
+  "emailLabel": "Correo electrónico",
+  "usernameLabel": "Nombre de usuario",
+  "passwordLabel": "Contraseña",
+  "registerButton": "Registrarse",
+  "loginPrompt": "¿Ya tienes una cuenta?",
+  "loginButton": "Iniciar sesión",
+  "unknownError": "Ocurrió un error inesperado durante el registro."
 }
+
 
 
 

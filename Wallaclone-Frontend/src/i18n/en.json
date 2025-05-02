@@ -79,7 +79,18 @@
   "dangerMessage": "Deleting your account will remove all your data and ads permanently.",
   "deleteButton": "Delete Account",
   "confirmDelete": "Are you sure you want to delete your account?"
+},
+"registerPage": {
+  "title": "Create Account",
+  "emailLabel": "Email",
+  "usernameLabel": "Username",
+  "passwordLabel": "Password",
+  "registerButton": "Register",
+  "loginPrompt": "Already have an account?",
+  "loginButton": "Login",
+  "unknownError": "An unexpected error occurred during registration."
 }
+
 
 
 
