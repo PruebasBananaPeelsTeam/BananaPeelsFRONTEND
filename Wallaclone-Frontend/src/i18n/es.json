@@ -104,7 +104,17 @@
   "emailLabel": "Introduce tu correo electrónico",
   "submitButton": "Enviar instrucciones",
   "defaultError": "Ha ocurrido un error. Por favor, inténtalo más tarde."
+},
+"resetPasswordPage": {
+  "title": "Restablecer contraseña",
+  "newPasswordLabel": "Nueva contraseña",
+  "confirmPasswordLabel": "Confirmar contraseña",
+  "submitButton": "Restablecer",
+  "errorMismatch": "Las contraseñas no coinciden",
+  "defaultError": "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
+  "successMessageRedirect": "Contraseña restablecida correctamente. Redirigiendo al login..."
 }
+
 
 
 

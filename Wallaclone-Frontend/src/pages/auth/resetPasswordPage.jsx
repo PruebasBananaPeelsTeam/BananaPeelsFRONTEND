@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { client } from '../../api/client'
-import Page from '../../components/layout/page.jsx'
 import FormField from '../../components/shared/formField.jsx'
 import Button from '../../components/shared/button.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
+import LanguageSelector from '../../components/shared/languageSelector.jsx'
+import { useTranslation } from 'react-i18next'
 
 function ResetPasswordPage() {
+  const { t } = useTranslation()
   const { token } = useParams()
   const navigate = useNavigate()
 
@@ -22,20 +24,21 @@ function ResetPasswordPage() {
     setError(null)
 
     if (password !== confirmPassword) {
-      return setError({ message: 'Passwords do not match' })
+      return setError({ message: t('resetPasswordPage.errorMismatch') })
     }
+
     try {
       setLoading(true)
       const response = await client.post('/api/auth/reset-password', {
         token,
         password,
       })
-      setSuccessMessage(response.data.message)
+      setSuccessMessage(t('resetPasswordPage.successMessageRedirect'))
       setTimeout(() => navigate('/login'), 3000)
     } catch (err) {
       setError({
         code: err.code || 'ERROR',
-        message: err.message || 'An error occurred. Please try again.',
+        message: err.message || t('resetPasswordPage.defaultError'),
       })
     } finally {
       setLoading(false)
@@ -43,10 +46,24 @@ function ResetPasswordPage() {
   }
 
   return (
-    <Page title="Restablecer contraseña">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div
+      className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center p-6 relative"
+      style={{ backgroundImage: "url('/images/background.jpg')" }}
+    >
+      <div className="absolute top-4 right-4">
+        <LanguageSelector />
+      </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 p-8 rounded-2xl shadow-2xl w-full max-w-md flex flex-col gap-6"
+      >
+        <h2 className="text-3xl font-bold text-center text-gray-800">
+          {t('resetPasswordPage.title')}
+        </h2>
+
         <FormField
-          label="Nueva contraseña"
+          label={t('resetPasswordPage.newPasswordLabel')}
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -54,7 +71,7 @@ function ResetPasswordPage() {
         />
 
         <FormField
-          label="Confirmar contraseña"
+          label={t('resetPasswordPage.confirmPasswordLabel')}
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -62,12 +79,12 @@ function ResetPasswordPage() {
         />
 
         <Button type="submit" disabled={loading}>
-          {loading ? <Loader /> : 'Restablecer'}
+          {loading ? <Loader /> : t('resetPasswordPage.submitButton')}
         </Button>
 
         {successMessage && (
           <p className="text-green-600 text-sm text-center">
-            {successMessage} Redirigiendo al login...
+            {successMessage}
           </p>
         )}
 
@@ -75,7 +92,7 @@ function ResetPasswordPage() {
           <FormErrorPopup error={error} onClose={() => setError(null)} />
         )}
       </form>
-    </Page>
+    </div>
   )
 }
 

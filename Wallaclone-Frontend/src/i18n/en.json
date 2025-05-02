@@ -104,7 +104,17 @@
   "emailLabel": "Enter your email address",
   "submitButton": "Send instructions",
   "defaultError": "An error occurred. Please try again later."
+},
+"resetPasswordPage": {
+  "title": "Reset your password",
+  "newPasswordLabel": "New password",
+  "confirmPasswordLabel": "Confirm password",
+  "submitButton": "Reset",
+  "errorMismatch": "Passwords do not match",
+  "defaultError": "An error occurred. Please try again.",
+  "successMessageRedirect": "Password reset successfully. Redirecting to login..."
 }
+
 
 
 
