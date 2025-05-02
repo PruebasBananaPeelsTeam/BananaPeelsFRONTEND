@@ -62,7 +62,14 @@
   "previewLabel": "Preview:",
   "submitButton": "Update advert",
   "updatingButton": "Updating..."
+},
+"userPage": {
+  "title": "User",
+  "adsFrom": "Ads from {{username}}",
+  "latestAds": "Latest ads published by this user",
+  "errorLoading": "Error loading adverts"
 }
+
 
 
 }

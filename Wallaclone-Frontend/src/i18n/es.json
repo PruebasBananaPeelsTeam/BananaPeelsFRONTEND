@@ -62,7 +62,14 @@
   "previewLabel": "Vista previa:",
   "submitButton": "Actualizar anuncio",
   "updatingButton": "Actualizando..."
+},
+"userPage": {
+  "title": "Usuario",
+  "adsFrom": "Anuncios de {{username}}",
+  "latestAds": "Últimos anuncios publicados por este usuario",
+  "errorLoading": "Error al cargar los anuncios"
 }
+
 
 
 }
