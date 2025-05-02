@@ -68,7 +68,19 @@
   "adsFrom": "Anuncios de {{username}}",
   "latestAds": "Últimos anuncios publicados por este usuario",
   "errorLoading": "Error al cargar los anuncios"
+},
+"myUserPage": {
+  "title": "👤 Mi Perfil",
+  "username": "Usuario:",
+  "email": "Correo electrónico:",
+  "editTitle": "🛠️ Editar Perfil",
+  "editSubtitle": "Actualiza tu información personal a continuación.",
+  "dangerZone": "⚠️ Zona de peligro",
+  "dangerMessage": "Eliminar tu cuenta borrará permanentemente todos tus datos y anuncios.",
+  "deleteButton": "Eliminar cuenta",
+  "confirmDelete": "¿Estás seguro de que deseas eliminar tu cuenta?"
 }
+
 
 
 

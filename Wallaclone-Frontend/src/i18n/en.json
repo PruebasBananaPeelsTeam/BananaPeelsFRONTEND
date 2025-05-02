@@ -68,7 +68,19 @@
   "adsFrom": "Ads from {{username}}",
   "latestAds": "Latest ads published by this user",
   "errorLoading": "Error loading adverts"
+},
+"myUserPage": {
+  "title": "👤 My Profile",
+  "username": "Username:",
+  "email": "Email:",
+  "editTitle": "🛠️ Edit Profile",
+  "editSubtitle": "Update your personal information below.",
+  "dangerZone": "⚠️ Danger Zone",
+  "dangerMessage": "Deleting your account will remove all your data and ads permanently.",
+  "deleteButton": "Delete Account",
+  "confirmDelete": "Are you sure you want to delete your account?"
 }
+
 
 
 
