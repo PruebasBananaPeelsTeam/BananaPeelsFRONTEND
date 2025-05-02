@@ -7,8 +7,11 @@ import Button from '../../components/shared/button.jsx'
 import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import useTimer from '../../utils/useTimer.js'
+import { useTranslation } from 'react-i18next'
+import LanguageSelector from '../../components/shared/languageSelector.jsx'
 
 function LoginPage() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { login: authLogin } = useAuth()
   const [input, setInput] = useState({ username: '', password: '' })
@@ -53,17 +56,19 @@ function LoginPage() {
       className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center p-6"
       style={{ backgroundImage: "url('/images/background.jpg')" }}
     >
-      {/* Login Form */}
+      <div className="absolute top-4 right-4">
+        <LanguageSelector />
+      </div>
       <form
         onSubmit={handleSubmit}
         className="bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 p-8 rounded-2xl shadow-2xl w-full max-w-md flex flex-col gap-6"
       >
         <h2 className="text-3xl font-bold text-center text-gray-800">
-          Welcome Back!
+          {t('loginPage.title')}
         </h2>
 
         <FormField
-          label="Username"
+          label={t('loginPage.usernameLabel')}
           type="text"
           id="username"
           name="username"
@@ -73,7 +78,7 @@ function LoginPage() {
         />
 
         <FormField
-          label="Password"
+          label={t('loginPage.passwordLabel')}
           type="password"
           id="password"
           name="password"
@@ -87,28 +92,26 @@ function LoginPage() {
           disabled={isLoading}
           className="mt-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-2 rounded-lg transition duration-300 w-full"
         >
-          {isLoading ? <Loader /> : 'Login'}
+          {isLoading ? <Loader /> : t('loginPage.loginButton')}
         </Button>
 
-        {/* Forgot Password */}
         <Link
           to="/forgot-password"
           className="text-sm text-blue-600 hover:underline text-center mt-4"
         >
-          Forgot your password?
+          {t('loginPage.forgotPassword')}
         </Link>
 
         <FormErrorPopup error={error} onClose={() => setError(null)} />
       </form>
 
-      {/* Register Invitation */}
       <div className="mt-8 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 p-6 rounded-2xl shadow-lg w-full max-w-md text-center flex flex-col gap-4">
-        <p className="text-gray-700">Don't have an account yet?</p>
+        <p className="text-gray-700">{t('loginPage.noAccount')}</p>
         <Link
           to="/register"
           className="cursor-pointer px-4 py-1.5 min-w-[90px] text-sm font-medium rounded-lg bg-[#1e1e1e]/90 text-white hover:bg-[#1e3a8a] transition-all duration-200"
         >
-          Register
+          {t('loginPage.registerButton')}
         </Link>
       </div>
     </div>

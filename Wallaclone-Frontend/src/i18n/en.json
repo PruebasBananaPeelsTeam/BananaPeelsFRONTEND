@@ -89,7 +89,17 @@
   "loginPrompt": "Already have an account?",
   "loginButton": "Login",
   "unknownError": "An unexpected error occurred during registration."
+},
+"loginPage": {
+  "title": "Welcome Back!",
+  "usernameLabel": "Username",
+  "passwordLabel": "Password",
+  "loginButton": "Login",
+  "forgotPassword": "Forgot your password?",
+  "noAccount": "Don't have an account yet?",
+  "registerButton": "Register"
 }
+
 
 
 

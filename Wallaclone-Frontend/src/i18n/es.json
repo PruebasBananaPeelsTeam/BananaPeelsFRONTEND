@@ -89,7 +89,17 @@
   "loginPrompt": "¿Ya tienes una cuenta?",
   "loginButton": "Iniciar sesión",
   "unknownError": "Ocurrió un error inesperado durante el registro."
+},
+"loginPage": {
+  "title": "¡Bienvenido de nuevo!",
+  "usernameLabel": "Nombre de usuario",
+  "passwordLabel": "Contraseña",
+  "loginButton": "Iniciar sesión",
+  "forgotPassword": "¿Olvidaste tu contraseña?",
+  "noAccount": "¿No tienes una cuenta?",
+  "registerButton": "Registrarse"
 }
+
 
 
 

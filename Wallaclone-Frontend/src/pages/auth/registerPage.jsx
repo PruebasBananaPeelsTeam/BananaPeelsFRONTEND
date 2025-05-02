@@ -8,6 +8,7 @@ import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import useTimer from '../../utils/useTimer.js'
 import { useTranslation } from 'react-i18next'
+import LanguageSelector from '../../components/shared/languageSelector.jsx'
 
 function RegisterPage() {
   const { t } = useTranslation()
@@ -63,6 +64,9 @@ function RegisterPage() {
       className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center p-6"
       style={{ backgroundImage: "url('/images/background.jpg')" }}
     >
+      <div className="absolute top-4 right-4">
+        <LanguageSelector />
+      </div>
       {/* Register Form */}
       <form
         onSubmit={handleSubmit}
