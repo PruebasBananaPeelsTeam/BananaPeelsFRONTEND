@@ -26,17 +26,126 @@
     "seller": "Seller",
     "backButton": "← Back",
     "updateButton": "✎ Update",
-    "notFound": "Advert not found."
+    "notFound": "Advert not found.",
+    "chatButton": "💬 Chat",
+    "markAsSold": "💰 Mark as Sold",
+    "markAsUnsold": "✔ Mark as Unsold",
+    "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites",
+    "sold": "Sold"
   },
 
   "errors": {
-  "Name is required": "Name is required",
-  "Description is required": "Description is required",
-  "Price must be a positive number": "Price must be a positive number",
-  "Type must be either \"buy\" or \"sell\"": "Type must be either \"buy\" or \"sell\"",
-  "At least one tag is required": "At least one tag is required",
-  "Image type is not allowed": "Image type is not allowed",
-  "Image exceeds the allowed size (10MB)": "Image exceeds the allowed size (10MB)"
+    "Name is required": "Name is required",
+    "Description is required": "Description is required",
+    "Price must be a positive number": "Price must be a positive number",
+    "Type must be either \"buy\" or \"sell\"": "Type must be either \"buy\" or \"sell\"",
+    "At least one tag is required": "At least one tag is required",
+    "Image type is not allowed": "Image type is not allowed",
+    "Image exceeds the allowed size (10MB)": "Image exceeds the allowed size (10MB)"
+  },
+  "advertCard": {
+  "forSale": "For sale",
+  "wanted": "Wanted",
+  "sold": "Sold"
+},
+"updateAdvert": {
+  "title": "Update Advert",
+  "productLabel": "Product",
+  "descriptionLabel": "Description",
+  "priceLabel": "Price (€)",
+  "typeLabel": "Type",
+  "typeSell": "On sale",
+  "typeBuy": "Wanted",
+  "tagsLabel": "Categories",
+  "imageLabel": "Image",
+  "previewLabel": "Preview:",
+  "submitButton": "Update advert",
+  "updatingButton": "Updating..."
+},
+"userPage": {
+  "title": "User",
+  "adsFrom": "Ads from {{username}}",
+  "latestAds": "Latest ads published by this user",
+  "errorLoading": "Error loading adverts"
+},
+"myUserPage": {
+  "title": "👤 My Profile",
+  "username": "Username:",
+  "email": "Email:",
+  "editTitle": "🛠️ Edit Profile",
+  "editSubtitle": "Update your personal information below.",
+  "dangerZone": "⚠️ Danger Zone",
+  "dangerMessage": "Deleting your account will remove all your data and ads permanently.",
+  "deleteButton": "Delete Account",
+  "confirmDelete": "Are you sure you want to delete your account?"
+},
+"registerPage": {
+  "title": "Create Account",
+  "emailLabel": "Email",
+  "usernameLabel": "Username",
+  "passwordLabel": "Password",
+  "registerButton": "Register",
+  "loginPrompt": "Already have an account?",
+  "loginButton": "Login",
+  "unknownError": "An unexpected error occurred during registration."
+},
+"loginPage": {
+  "title": "Welcome Back!",
+  "usernameLabel": "Username",
+  "passwordLabel": "Password",
+  "loginButton": "Login",
+  "forgotPassword": "Forgot your password?",
+  "noAccount": "Don't have an account yet?",
+  "registerButton": "Register"
+},
+"forgotPasswordPage": {
+  "title": "Forgot your password?",
+  "emailLabel": "Enter your email address",
+  "submitButton": "Send instructions",
+  "defaultError": "An error occurred. Please try again later."
+},
+"resetPasswordPage": {
+  "title": "Reset your password",
+  "newPasswordLabel": "New password",
+  "confirmPasswordLabel": "Confirm password",
+  "submitButton": "Reset",
+  "errorMismatch": "Passwords do not match",
+  "defaultError": "An error occurred. Please try again.",
+  "successMessageRedirect": "Password reset successfully. Redirecting to login..."
+},
+"myAdvertsPage": {
+  "title": "My Adverts",
+  "errorLoading": "Error loading adverts",
+  "unknownError": "Unknown error"
+},
+"banner": {
+  "welcome": "Welcome to BananaPeels"
+},
+"header": {
+  "home": "Home",
+  "login": "Login",
+  "register": "Register",
+  "createAdvert": "Create advert",
+  "myAccount": "👤 My Account"
+},
+"protectedModal": {
+  "title": "Restricted Access",
+  "message": "This section is reserved for registered users. Please log in to continue or go back to the home page.",
+  "loginButton": "Log In",
+  "homeButton": "Home"
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

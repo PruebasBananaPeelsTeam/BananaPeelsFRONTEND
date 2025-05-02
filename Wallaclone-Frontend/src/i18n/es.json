@@ -26,17 +26,125 @@
     "seller": "Vendedor",
     "backButton": "← Volver",
     "updateButton": "✎ Editar",
-    "notFound": "No se encontró el anuncio."
+    "notFound": "No se encontró el anuncio.",
+    "chatButton": "💬 Chatear",
+    "markAsSold": "💰 Marcar como vendido",
+    "markAsUnsold": "✔ Marcar como disponible",
+    "addToFavorites": "Añadir a favoritos",
+    "removeFromFavorites": "Quitar de favoritos",
+    "sold": "Vendido"
   },
 
   "errors": {
-  "Name is required": "El nombre es obligatorio",
-  "Description is required": "La descripción es obligatoria",
-  "Price must be a positive number": "El precio debe ser un número positivo",
-  "Type must be either \"buy\" or \"sell\"": "El tipo debe ser \"buy\" o \"sell\"",
-  "At least one tag is required": "Al menos un tag es obligatorio",
-  "Image type is not allowed": "El tipo de imagen no es válido",
-  "Image exceeds the allowed size (10MB)": "La imagen supera el tamaño permitido (10MB)"
+    "Name is required": "El nombre es obligatorio",
+    "Description is required": "La descripción es obligatoria",
+    "Price must be a positive number": "El precio debe ser un número positivo",
+    "Type must be either \"buy\" or \"sell\"": "El tipo debe ser \"buy\" o \"sell\"",
+    "At least one tag is required": "Al menos un tag es obligatorio",
+    "Image type is not allowed": "El tipo de imagen no es válido",
+    "Image exceeds the allowed size (10MB)": "La imagen supera el tamaño permitido (10MB)"
+  },
+  "advertCard": {
+  "forSale": "En venta",
+  "wanted": "Se busca",
+  "sold": "Vendido"
+},
+"updateAdvert": {
+  "title": "Editar Anuncio",
+  "productLabel": "Producto",
+  "descriptionLabel": "Descripción",
+  "priceLabel": "Precio (€)",
+  "typeLabel": "Tipo",
+  "typeSell": "En venta",
+  "typeBuy": "Se busca",
+  "tagsLabel": "Categorías",
+  "imageLabel": "Imagen",
+  "previewLabel": "Vista previa:",
+  "submitButton": "Actualizar anuncio",
+  "updatingButton": "Actualizando..."
+},
+"userPage": {
+  "title": "Usuario",
+  "adsFrom": "Anuncios de {{username}}",
+  "latestAds": "Últimos anuncios publicados por este usuario",
+  "errorLoading": "Error al cargar los anuncios"
+},
+"myUserPage": {
+  "title": "👤 Mi Perfil",
+  "username": "Usuario:",
+  "email": "Correo electrónico:",
+  "editTitle": "🛠️ Editar Perfil",
+  "editSubtitle": "Actualiza tu información personal a continuación.",
+  "dangerZone": "⚠️ Zona de peligro",
+  "dangerMessage": "Eliminar tu cuenta borrará permanentemente todos tus datos y anuncios.",
+  "deleteButton": "Eliminar cuenta",
+  "confirmDelete": "¿Estás seguro de que deseas eliminar tu cuenta?"
+},
+"registerPage": {
+  "title": "Crear cuenta",
+  "emailLabel": "Correo electrónico",
+  "usernameLabel": "Nombre de usuario",
+  "passwordLabel": "Contraseña",
+  "registerButton": "Registrarse",
+  "loginPrompt": "¿Ya tienes una cuenta?",
+  "loginButton": "Iniciar sesión",
+  "unknownError": "Ocurrió un error inesperado durante el registro."
+},
+"loginPage": {
+  "title": "¡Bienvenido de nuevo!",
+  "usernameLabel": "Nombre de usuario",
+  "passwordLabel": "Contraseña",
+  "loginButton": "Iniciar sesión",
+  "forgotPassword": "¿Olvidaste tu contraseña?",
+  "noAccount": "¿No tienes una cuenta?",
+  "registerButton": "Registrarse"
+},
+"forgotPasswordPage": {
+  "title": "¿Olvidaste tu contraseña?",
+  "emailLabel": "Introduce tu correo electrónico",
+  "submitButton": "Enviar instrucciones",
+  "defaultError": "Ha ocurrido un error. Por favor, inténtalo más tarde."
+},
+"resetPasswordPage": {
+  "title": "Restablecer contraseña",
+  "newPasswordLabel": "Nueva contraseña",
+  "confirmPasswordLabel": "Confirmar contraseña",
+  "submitButton": "Restablecer",
+  "errorMismatch": "Las contraseñas no coinciden",
+  "defaultError": "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
+  "successMessageRedirect": "Contraseña restablecida correctamente. Redirigiendo al login..."
+},
+"myAdvertsPage": {
+  "title": "Mis anuncios",
+  "errorLoading": "Error al cargar tus anuncios",
+  "unknownError": "Error desconocido"
+},
+"banner": {
+  "welcome": "Bienvenido a BananaPeels"
+},
+"header": {
+  "home": "Inicio",
+  "login": "Iniciar sesión",
+  "register": "Registrarse",
+  "createAdvert": "Crear anuncio",
+  "myAccount": "👤 Mi perfil"
+},
+"protectedModal": {
+  "title": "Acceso restringido",
+  "message": "Esta sección está reservada para usuarios registrados. Por favor, inicia sesión o vuelve a la página de inicio.",
+  "loginButton": "Iniciar sesión",
+  "homeButton": "Inicio"
 }
+
+
+
+
+
+
+
+
+
+
+
 
 }

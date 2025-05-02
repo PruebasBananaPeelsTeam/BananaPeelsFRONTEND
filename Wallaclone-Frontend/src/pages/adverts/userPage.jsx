@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom'
 import { client } from '../../api/client'
 import Page from '../../components/layout/page'
 import Loader from '../../components/shared/loader'
-import AdvertsGrid from '../../components/shared/AdvertsGrid' // ✅ Grid con paginación integrada
+import AdvertsGrid from '../../components/shared/AdvertsGrid'
+import { useTranslation } from 'react-i18next'
 
 const UserPage = () => {
+  const { t } = useTranslation()
   const { username } = useParams()
   const [adverts, setAdverts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -26,20 +28,20 @@ const UserPage = () => {
         setAdverts(response.data.results || [])
         setTotalPages(response.data.totalPages || 1)
       } catch (err) {
-        setError('Error loading adverts')
+        setError(t('userPage.errorLoading'))
       } finally {
         setLoading(false)
       }
     }
 
     fetchUserAdverts()
-  }, [username, currentPage])
+  }, [username, currentPage, t])
 
   if (loading) return <Loader />
 
   if (error)
     return (
-      <Page title="User" fullWidth>
+      <Page title={t('userPage.title')} fullWidth>
         <p>{error}</p>
       </Page>
     )
@@ -53,10 +55,10 @@ const UserPage = () => {
   }
 
   return (
-    <Page title={`Ads from ${username}`} fullWidth>
+    <Page title={t('userPage.adsFrom', { username })} fullWidth>
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold">👤 {username}</h2>
-        <p className="text-gray-500">Latest ads published by this user</p>
+        <p className="text-gray-500">{t('userPage.latestAds')}</p>
       </div>
 
       <AdvertsGrid

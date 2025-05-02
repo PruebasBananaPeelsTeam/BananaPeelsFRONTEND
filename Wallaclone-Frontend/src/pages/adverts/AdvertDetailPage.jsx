@@ -1,9 +1,11 @@
+// AdvertDetailPage.jsx
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {
   getAdvertDetail,
   addFavorite,
   removeFavorite,
+  toggleSoldAdvert,
 } from '../../services/adverts-service'
 import { isApiClientError } from '../../api/client'
 import Page from '../../components/layout/page'
@@ -14,14 +16,12 @@ import AdvertStatus from '../../components/shared/advertStatus'
 import Button from '../../components/shared/button'
 import { useTranslation } from 'react-i18next'
 import { checkChatByAdvert, getOrCreateChat } from '../../services/chat-service'
-import { toggleSoldAdvert } from '../../services/adverts-service'
 import { FaCheckCircle } from 'react-icons/fa'
 import DeleteAdvertPage from './DeleteAdvertPage'
 import { Heart, HeartOff } from 'lucide-react'
 
-
 function AdvertDetailPage() {
-  const { t } = useTranslation() //  Hook de traducción
+  const { t } = useTranslation()
   const params = useParams()
   const navigate = useNavigate()
   const [advert, setAdvert] = useState(null)
@@ -29,22 +29,17 @@ function AdvertDetailPage() {
   const { user, updateUserData } = useAuth()
   const [isFavorite, setIsFavorite] = useState(false)
 
-  // Obtener anuncio
   useEffect(() => {
     if (params.advertId && params.slug) {
       setLoading(true)
-
       getAdvertDetail(params.advertId, params.slug)
         .then((advert) => {
-          advert._id = advert._id.toString() // 👈 aseguramos el formato
+          advert._id = advert._id.toString()
           setAdvert(advert)
-
-          // Comprobamos si está en favoritos
           const fav = user?.favorites?.some(
             (favId) => favId.toString() === advert._id,
           )
           setIsFavorite(fav)
-
           setLoading(false)
         })
         .catch((error) => {
@@ -58,27 +53,19 @@ function AdvertDetailPage() {
     }
   }, [params.advertId, params.slug, navigate, user])
 
-  // inicializador de chats
   const handleStartChat = async () => {
     try {
-      const existingChat = await checkChatByAdvert(advert._id) // O advert.id si no es _id
-
-      if (existingChat) {
-        navigate(`/chat/room/${existingChat._id}`)
-      } else {
-        const newChat = await getOrCreateChat(advert._id)
-        navigate(`/chat/room/${newChat._id}`)
-      }
+      const existingChat = await checkChatByAdvert(advert._id)
+      const chat = existingChat || (await getOrCreateChat(advert._id))
+      navigate(`/chat/room/${chat._id}`)
     } catch (error) {
       console.error('Error al iniciar o encontrar chat:', error)
     }
   }
 
-  // Añadir o quitar favorito
   const handleFavoriteToggle = async () => {
     try {
       let updatedFavorites
-
       if (isFavorite) {
         await removeFavorite(advert._id)
         updatedFavorites = user.favorites.filter(
@@ -88,14 +75,8 @@ function AdvertDetailPage() {
         await addFavorite(advert._id)
         updatedFavorites = [...(user.favorites || []), advert._id.toString()]
       }
-
       updateUserData({ ...user, favorites: updatedFavorites })
       setIsFavorite(!isFavorite)
-
-      // Depuración
-      console.log('✅ Favorito actualizado:', !isFavorite)
-      console.log('🧠 updatedFavorites:', updatedFavorites)
-      console.log('🆔 advert._id:', advert._id.toString())
     } catch (error) {
       console.error('❌ Error actualizando favorito:', error)
     }

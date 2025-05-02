@@ -7,8 +7,11 @@ import Button from '../../components/shared/button'
 import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import useTimer from '../../utils/useTimer.js'
+import { useTranslation } from 'react-i18next'
+import LanguageSelector from '../../components/shared/languageSelector.jsx'
 
 function RegisterPage() {
+  const { t } = useTranslation()
   const [input, setInput] = useState({ email: '', password: '', username: '' })
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +50,7 @@ function RegisterPage() {
       } else {
         setError({
           code: 'UNKNOWN_ERROR',
-          message: 'An unexpected error occurred during registration.',
+          message: t('registerPage.unknownError'),
         })
       }
       console.error(err)
@@ -61,31 +64,34 @@ function RegisterPage() {
       className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center p-6"
       style={{ backgroundImage: "url('/images/background.jpg')" }}
     >
+      <div className="absolute top-4 right-4">
+        <LanguageSelector />
+      </div>
       {/* Register Form */}
       <form
         onSubmit={handleSubmit}
         className="bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 p-8 rounded-2xl shadow-2xl w-full max-w-md flex flex-col gap-6"
       >
         <h2 className="text-3xl font-bold text-center text-gray-800">
-          Create Account
+          {t('registerPage.title')}
         </h2>
 
         <FormField
-          label="Email"
+          label={t('registerPage.emailLabel')}
           type="email"
           name="email"
           value={input.email}
           onChange={handleInputChange}
         />
         <FormField
-          label="Username"
+          label={t('registerPage.usernameLabel')}
           type="text"
           name="username"
           value={input.username}
           onChange={handleInputChange}
         />
         <FormField
-          label="Password"
+          label={t('registerPage.passwordLabel')}
           type="password"
           name="password"
           value={input.password}
@@ -99,7 +105,7 @@ function RegisterPage() {
           }
           className="mt-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-2 rounded-lg transition duration-300 w-full"
         >
-          {isLoading ? <Loader /> : 'Register'}
+          {isLoading ? <Loader /> : t('registerPage.registerButton')}
         </Button>
 
         <FormErrorPopup error={error} onClose={() => setError(null)} />
@@ -107,12 +113,12 @@ function RegisterPage() {
 
       {/* Login Invitation */}
       <div className="mt-8 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 p-6 rounded-2xl shadow-lg w-full max-w-md text-center flex flex-col gap-4">
-        <p className="text-gray-700">Already have an account?</p>
+        <p className="text-gray-700">{t('registerPage.loginPrompt')}</p>
         <Link
           to="/login"
           className="cursor-pointer px-4 py-1.5 min-w-[90px] text-sm font-medium rounded-lg bg-[#1e1e1e]/90 text-white hover:bg-[#1e3a8a] transition-all duration-200"
         >
-          Login
+          {t('registerPage.loginButton')}
         </Link>
       </div>
     </div>
