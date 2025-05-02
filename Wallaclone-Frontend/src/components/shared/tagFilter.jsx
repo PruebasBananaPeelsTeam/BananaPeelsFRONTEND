@@ -8,7 +8,7 @@ const tagImages = {
   Decoration: '/images/Decoracion.png',
   Ilumination: '/images/Iluminacion.jpg',
   Forniture: '/images/Menaje.png',
-  Garden: '/images/Menaje.png',
+  Garden: '/images/planta.webp',
 }
 
 function TagFilter() {
@@ -80,6 +80,9 @@ function TagFilter() {
 
   return (
     <div className="w-full max-w-5xl mx-auto px-2">
+      <h2 className="text-xl font-bold text-center text-gray-700 mt-10">
+        Elige una categoría para comenzar tu búsqueda:
+      </h2>
       {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
 
       {/* CONTENEDOR PRINCIPAL */}
@@ -129,9 +132,7 @@ function TagFilter() {
         {/* BOTÓN DE LIMPIAR FILTROS */}
         {selectedTags.length > 0 && (
           <div className="flex justify-end w-full">
-            <Button onClick={handleClearFilters}>
-              Clean filters
-            </Button>
+            <Button onClick={handleClearFilters}>Clean filters</Button>
           </div>
         )}
       </div>

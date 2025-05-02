@@ -5,11 +5,16 @@ import { Pagination, Autoplay } from 'swiper/modules'
 
 export default function Banner() {
   return (
-    <section className="relative w-full mb-6 mt-6">
-      {/* Texto centrado y por encima del carrusel */}
-      <div className="absolute inset-0 flex justify-center items-center z-20 px-4">
-        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-center bg-gradient-to-r from-yellow-400 via-green-400 to-orange-400 text-transparent bg-clip-text px-4 sm:px-6 py-2 sm:py-1 rounded-xl border border-white/10 backdrop-blur-sm bg-white/10">
-          Welcome to BananaPeels
+    <section className="relative w-full mb-6 mt-20">
+      {/* Texto motivador alineado abajo a la izquierda */}
+      <div className="absolute bottom-12 left-8 z-20 text-left max-w-xl">
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] leading-tight">
+
+          Convierte tu casa en el hogar de tus sueños.
+        </h2>
+        <p className="mt-4 text-xl sm:text-2xl text-white font-semibold drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
+
+          Descubre piezas únicas y dale vida a tus espacios.
         </p>
       </div>
 
@@ -19,7 +24,7 @@ export default function Banner() {
         autoplay={{ delay: 4000 }}
         pagination={{ clickable: true }}
         loop={true}
-        className="w-full h-[400px] rounded-xl overflow-hidden"
+        className="w-full h-[600px] overflow-hidden"
       >
         <SwiperSlide>
           <img

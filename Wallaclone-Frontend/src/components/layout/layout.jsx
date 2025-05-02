@@ -15,6 +15,15 @@ export default function Layout({ children }) {
       style={isHome ? { backgroundImage: "url('/images/background.jpg')" } : {}}
     >
       <Header />
+      <div className="text-center my-6 px-4">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 drop-shadow-sm mt-15">
+          ¿Qué pieza de decoración buscas hoy?
+        </h1>
+        <p className="text-lg text-gray-600 mt-2">
+          Encuentra artículos únicos para tu hogar, directo de otros amantes del
+          diseño como tú.
+        </p>
+      </div>
       {/* Searchbar en Home */}
       {location.pathname === '/' && (
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:pb-2 py-4 px-4">
