@@ -118,7 +118,11 @@
   "title": "My Adverts",
   "errorLoading": "Error loading adverts",
   "unknownError": "Unknown error"
+},
+"banner": {
+  "welcome": "Welcome to BananaPeels"
 }
+
 
 
 

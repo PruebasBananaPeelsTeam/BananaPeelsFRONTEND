@@ -118,7 +118,11 @@
   "title": "Mis anuncios",
   "errorLoading": "Error al cargar tus anuncios",
   "unknownError": "Error desconocido"
+},
+"banner": {
+  "welcome": "Bienvenido a BananaPeels"
 }
+
 
 
 
