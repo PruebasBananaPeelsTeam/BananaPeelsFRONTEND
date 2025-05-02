@@ -48,6 +48,21 @@
   "forSale": "En venta",
   "wanted": "Se busca",
   "sold": "Vendido"
+},
+"updateAdvert": {
+  "title": "Editar Anuncio",
+  "productLabel": "Producto",
+  "descriptionLabel": "Descripción",
+  "priceLabel": "Precio (€)",
+  "typeLabel": "Tipo",
+  "typeSell": "En venta",
+  "typeBuy": "Se busca",
+  "tagsLabel": "Categorías",
+  "imageLabel": "Imagen",
+  "previewLabel": "Vista previa:",
+  "submitButton": "Actualizar anuncio",
+  "updatingButton": "Actualizando..."
 }
+
 
 }

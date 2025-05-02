@@ -48,6 +48,21 @@
   "forSale": "For sale",
   "wanted": "Wanted",
   "sold": "Sold"
+},
+"updateAdvert": {
+  "title": "Update Advert",
+  "productLabel": "Product",
+  "descriptionLabel": "Description",
+  "priceLabel": "Price (€)",
+  "typeLabel": "Type",
+  "typeSell": "On sale",
+  "typeBuy": "Wanted",
+  "tagsLabel": "Categories",
+  "imageLabel": "Image",
+  "previewLabel": "Preview:",
+  "submitButton": "Update advert",
+  "updatingButton": "Updating..."
 }
+
 
 }

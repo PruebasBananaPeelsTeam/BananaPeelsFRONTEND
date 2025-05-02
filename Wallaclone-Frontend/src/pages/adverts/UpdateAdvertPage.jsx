@@ -11,8 +11,10 @@ import Loader from '../../components/shared/loader.jsx'
 import Page from '../../components/layout/page.jsx'
 import { slugify } from '../../utils/slugify.js'
 import FormErrorPopup from '../../components/shared/formErrorPopUp.jsx'
+import { useTranslation } from 'react-i18next'
 
 function UpdateAdvertPage() {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -31,19 +33,15 @@ function UpdateAdvertPage() {
   const [notFound, setNotFound] = useState(false)
   const navigate = useNavigate()
 
-  // Fetch advert details
   useEffect(() => {
     const fetchAdvertDetails = async () => {
       setLoading(true)
       setError(null)
-
       try {
         const advertDetails = await getAdvertDetail(advertId)
-
         if (!advertDetails || !advertDetails.name) {
           throw { response: { status: 404 } }
         }
-
         setFormData({
           name: advertDetails.name,
           description: advertDetails.description,
@@ -53,12 +51,11 @@ function UpdateAdvertPage() {
           tags: advertDetails.tags,
         })
         setImagePreview(
-          //si es URL se usa directamente, si es base64 se convierte, y si no hay imagen se pone un placeholder
           advertDetails.image
             ? advertDetails.image.startsWith('http')
               ? advertDetails.image
               : `data:image/jpeg;base64,${advertDetails.image}`
-            : 'https://fakeimg.pl/600x400?text=NO+PHOTO',
+            : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
         )
       } catch (err) {
         if (err.response?.status === 404) {
@@ -83,9 +80,6 @@ function UpdateAdvertPage() {
     }
   }, [notFound, navigate])
 
-  if (notFound) return null
-
-  // Fetch available tags
   useEffect(() => {
     const fetchTags = async () => {
       try {
@@ -99,7 +93,6 @@ function UpdateAdvertPage() {
     fetchTags()
   }, [])
 
-  // Manejar los cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value, files } = e.target
     if (files) {
@@ -111,44 +104,33 @@ function UpdateAdvertPage() {
     }
   }
 
-  // Validar el formulario
   const validateForm = () => {
     const errors = {}
-    if (!formData.name.trim()) errors.name = 'Name is required.'
-    if (!formData.description.trim())
-      errors.description = 'Description is required.'
-    if (!formData.price || formData.price <= 0)
-      errors.price = 'Price must be greater than 0.'
-    if (formData.tags.length === 0)
-      errors.tags = 'You must select at least one category.'
+    if (!formData.name.trim()) errors.name = t('errors.Name is required')
+    if (!formData.description.trim()) errors.description = t('errors.Description is required')
+    if (!formData.price || formData.price <= 0) errors.price = t('errors.Price must be a positive number')
+    if (formData.tags.length === 0) errors.tags = t('errors.At least one tag is required')
     return errors
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError(null)
-
-    // Validar el formulario
     const validationErrors = validateForm()
     if (Object.keys(validationErrors).length > 0) {
       setFieldErrors(validationErrors)
       return
     }
 
-    //Limpiar errores si todo va bien
     setFieldErrors({})
-
-    // Preparar los datos para enviar
     const dataToSend = new FormData()
     dataToSend.append('name', formData.name)
     dataToSend.append('description', formData.description)
     dataToSend.append('price', formData.price)
     dataToSend.append('type', formData.type)
-
     formData.tags.forEach((tag) => {
       dataToSend.append('tags', tag)
     })
-
     if (formData.image) {
       dataToSend.append('image', formData.image)
     }
@@ -169,19 +151,16 @@ function UpdateAdvertPage() {
   }
 
   if (loading) return <Loader />
-  {
-    error && <FormErrorPopup error={error} onClose={() => setError(null)} />
-  }
 
   return (
     <Page>
       {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
       <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-        <h2 className="text-2xl font-bold mb-4 text-center">Update Advert</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">{t('updateAdvert.title')}</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField
-            label="Product"
+            label={t('updateAdvert.productLabel')}
             type="text"
             name="name"
             value={formData.name}
@@ -189,7 +168,7 @@ function UpdateAdvertPage() {
             error={fieldErrors.name}
           />
           <FormField
-            label="Description"
+            label={t('updateAdvert.descriptionLabel')}
             type="text"
             name="description"
             value={formData.description}
@@ -197,7 +176,7 @@ function UpdateAdvertPage() {
             error={fieldErrors.description}
           />
           <FormField
-            label="Price (€)"
+            label={t('updateAdvert.priceLabel')}
             type="number"
             name="price"
             value={formData.price}
@@ -207,7 +186,7 @@ function UpdateAdvertPage() {
 
           <div className="flex flex-col w-full">
             <label className="text-sm font-medium text-gray-700 mb-2">
-              Type
+              {t('updateAdvert.typeLabel')}
             </label>
             <select
               name="type"
@@ -215,18 +194,17 @@ function UpdateAdvertPage() {
               onChange={handleChange}
               className="flex w-full border border-gray-300 rounded-xl px-4 py-2"
             >
-              <option value="sell">On sale</option>
-              <option value="wanted">Wanted</option>
+              <option value="sell">{t('updateAdvert.typeSell')}</option>
+              <option value="buy">{t('updateAdvert.typeBuy')}</option>
             </select>
           </div>
 
           <div className="flex flex-col w-full">
-            <p className="text-sm font-medium text-gray-700 mb-2">Tags</p>
+            <p className="text-sm font-medium text-gray-700 mb-2">{t('updateAdvert.tagsLabel')}</p>
             {fieldErrors.tags && (
               <span className="text-sm text-red-500">{fieldErrors.tags}</span>
             )}
             <div className="flex flex-wrap gap-4">
-              {/*  listado de tags disponibles */}
               {tagsList.map((tag) => (
                 <label key={tag} className="flex items-center space-x-2">
                   <input
@@ -251,7 +229,7 @@ function UpdateAdvertPage() {
 
           <div className="flex flex-col w-full">
             <label className="text-sm font-medium text-gray-700 mb-2">
-              Image
+              {t('updateAdvert.imageLabel')}
             </label>
             <input
               type="file"
@@ -264,17 +242,17 @@ function UpdateAdvertPage() {
 
           {imagePreview && (
             <div className="mt-2">
-              <p className="text-sm text-gray-500 mb-1">Preview:</p>
+              <p className="text-sm text-gray-500 mb-1">{t('updateAdvert.previewLabel')}</p>
               <img
                 src={imagePreview}
-                alt="Vista previa"
+                alt="preview"
                 className="w-32 h-32 object-cover rounded border"
               />
             </div>
           )}
 
           <Button type="submit" disabled={loading}>
-            {loading ? 'Updating...' : 'Update advert'}
+            {loading ? t('updateAdvert.updatingButton') : t('updateAdvert.submitButton')}
           </Button>
         </form>
       </div>
