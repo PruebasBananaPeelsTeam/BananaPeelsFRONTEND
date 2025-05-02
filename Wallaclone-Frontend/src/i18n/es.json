@@ -113,7 +113,13 @@
   "errorMismatch": "Las contraseñas no coinciden",
   "defaultError": "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
   "successMessageRedirect": "Contraseña restablecida correctamente. Redirigiendo al login..."
+},
+"myAdvertsPage": {
+  "title": "Mis anuncios",
+  "errorLoading": "Error al cargar tus anuncios",
+  "unknownError": "Error desconocido"
 }
+
 
 
 

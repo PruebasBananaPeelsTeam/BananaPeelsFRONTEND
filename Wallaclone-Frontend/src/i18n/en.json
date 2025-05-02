@@ -113,7 +113,13 @@
   "errorMismatch": "Passwords do not match",
   "defaultError": "An error occurred. Please try again.",
   "successMessageRedirect": "Password reset successfully. Redirecting to login..."
+},
+"myAdvertsPage": {
+  "title": "My Adverts",
+  "errorLoading": "Error loading adverts",
+  "unknownError": "Unknown error"
 }
+
 
 
 
