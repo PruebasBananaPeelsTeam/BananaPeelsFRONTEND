@@ -128,7 +128,14 @@
   "register": "Registrarse",
   "createAdvert": "Crear anuncio",
   "myAccount": "👤 Mi perfil"
+},
+"protectedModal": {
+  "title": "Acceso restringido",
+  "message": "Esta sección está reservada para usuarios registrados. Por favor, inicia sesión o vuelve a la página de inicio.",
+  "loginButton": "Iniciar sesión",
+  "homeButton": "Inicio"
 }
+
 
 
 

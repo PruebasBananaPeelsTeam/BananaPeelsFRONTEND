@@ -128,7 +128,14 @@
   "register": "Register",
   "createAdvert": "Create advert",
   "myAccount": "👤 My Account"
+},
+"protectedModal": {
+  "title": "Restricted Access",
+  "message": "This section is reserved for registered users. Please log in to continue or go back to the home page.",
+  "loginButton": "Log In",
+  "homeButton": "Home"
 }
+
 
 
 
