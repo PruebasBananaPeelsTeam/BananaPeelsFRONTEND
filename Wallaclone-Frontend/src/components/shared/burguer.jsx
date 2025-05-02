@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import Logout from '../shared/logout.jsx'
 import LanguageSelector from '../shared/languageSelector.jsx'
+import { useTranslation } from 'react-i18next'
 
 export default function Burger() {
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const { isAuthenticated } = useAuth()
 
@@ -34,7 +36,7 @@ export default function Burger() {
             onClick={closeMenu}
             className="block text-gray-800 hover:text-green-600 font-semibold"
           >
-            Home
+            {t('header.home')}
           </Link>
 
           {!isAuthenticated && (
@@ -44,14 +46,14 @@ export default function Burger() {
                 onClick={closeMenu}
                 className="block text-gray-800 hover:text-green-600 font-semibold"
               >
-                Login
+                {t('header.login')}
               </Link>
               <Link
                 to="/register"
                 onClick={closeMenu}
                 className="block text-gray-800 hover:text-green-600 font-semibold"
               >
-                Register
+                {t('header.register')}
               </Link>
             </>
           )}
@@ -63,14 +65,14 @@ export default function Burger() {
                 onClick={closeMenu}
                 className="block text-gray-800 hover:text-green-600 font-semibold"
               >
-                Create-Advert
+                {t('header.createAdvert')}
               </Link>
               <Link
                 to="/my-profile"
                 onClick={closeMenu}
                 className="block text-gray-800 hover:text-green-600 font-semibold"
               >
-                👤 My Account
+                {t('header.myAccount')}
               </Link>
               <div className="pt-2">
                 <Logout />
