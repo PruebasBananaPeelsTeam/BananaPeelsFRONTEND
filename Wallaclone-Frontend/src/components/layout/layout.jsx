@@ -32,6 +32,19 @@ export default function Layout({ children }) {
       )}
       <TagFilter />
       <Banner />
+      <div className="relative text-right p-8 mt-10 bg-black/50 backdrop-blur-md shadow-xl">
+        <img
+          src="/images/jardin.jpg"
+          alt="Decoración"
+          className="absolute inset-0 w-full h-full object-cover opacity-10 -z-10 rounded-2xl"
+        />
+        <h2 className="text-5xl font-extrabold text-white leading-tight drop-shadow-lg">
+          Transforma tu hogar <br /> con estilo y personalidad
+        </h2>
+        <p className="mt-4 text-2xl text-white font-medium drop-shadow-sm">
+          Encuentra productos únicos entre cientos de anuncios.
+        </p>
+      </div>
       <main className={`flex-1 py-8`}>{children}</main>
       <Footer />
     </div>

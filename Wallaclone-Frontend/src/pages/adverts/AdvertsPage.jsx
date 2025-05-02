@@ -1,9 +1,9 @@
+// pages/adverts/AdvertsPage.jsx
 import { useEffect, useState } from 'react'
 import { getAdvertList } from '../../services/adverts-service.js'
-import Advert from './Advert.jsx'
-import Button from '../../components/shared/button.jsx'
 import { useSearchParams } from 'react-router-dom'
 import Loader from '../../components/shared/loader.jsx'
+import AdvertsGrid from '../../components/shared/AdvertsGrid.jsx'
 
 function AdvertsPage() {
   const [adverts, setAdverts] = useState([])
@@ -23,7 +23,7 @@ function AdvertsPage() {
         setCurrentPage(pageFromUrl)
 
         const response = await getAdvertList(pageFromUrl, limit, filters)
-        setAdverts(response)
+        setAdverts(response.results)
         setTotalPages(response.totalPages)
       } catch (error) {
         console.error('Error fetching adverts:', error)
@@ -34,12 +34,6 @@ function AdvertsPage() {
 
     fetchAdverts()
   }, [searchParams])
-
-  if (loading) {
-    return <Loader />
-  }
-
-  const { results } = adverts
 
   const goToNextPage = () => {
     if (currentPage < totalPages) {
@@ -57,31 +51,18 @@ function AdvertsPage() {
     }
   }
 
-  return (
-    <>
-      <div
-        id="adverts-list"
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4"
-      >
-        {results?.length > 0 ? (
-          results.map((advert) => <Advert key={advert._id} advert={advert} />)
-        ) : (
-          <p>No adverts available</p>
-        )}
-      </div>
+  if (loading) return <Loader />
 
-      <div className="flex justify-center mt-4">
-        <Button onClick={goToPreviousPage} disabled={currentPage === 1}>
-          Previous
-        </Button>
-        <span className="mx-4">
-          Page {currentPage} of {totalPages}
-        </span>
-        <Button onClick={goToNextPage} disabled={currentPage === totalPages}>
-          Next
-        </Button>
-      </div>
-    </>
+  return (
+    <div className="p-6 ml-10 mr-10 mt-10 mb-10">
+      <AdvertsGrid
+        adverts={adverts}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPrev={goToPreviousPage}
+        onNext={goToNextPage}
+      />
+    </div>
   )
 }
 

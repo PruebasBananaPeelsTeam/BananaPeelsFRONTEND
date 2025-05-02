@@ -13,7 +13,7 @@ const AdvertsGrid = ({ adverts, currentPage, totalPages, onPrev, onNext }) => {
             ))}
           </div>
 
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-10">
             <Button onClick={onPrev} disabled={currentPage === 1}>
               Previous
             </Button>
