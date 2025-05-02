@@ -43,5 +43,11 @@
     "At least one tag is required": "At least one tag is required",
     "Image type is not allowed": "Image type is not allowed",
     "Image exceeds the allowed size (10MB)": "Image exceeds the allowed size (10MB)"
-  }
+  },
+  "advertCard": {
+  "forSale": "For sale",
+  "wanted": "Wanted",
+  "sold": "Sold"
+}
+
 }

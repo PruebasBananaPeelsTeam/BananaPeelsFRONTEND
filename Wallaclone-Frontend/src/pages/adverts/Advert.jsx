@@ -4,14 +4,15 @@ import AdvertStatus from '../../components/shared/advertStatus'
 import { FaCheckCircle } from 'react-icons/fa'
 import { useAuth } from '../../context/AuthContext'
 import { Heart } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 const Advert = ({ advert }) => {
+  const { t } = useTranslation()
   const { _id, name, description, price, type, image, owner } = advert
   const navigate = useNavigate()
   const slug = slugify(name)
   const { user } = useAuth()
 
-  // Verificar si el anuncio está en favoritos
   const isFavorite = user?.favorites?.some(id => id.toString() === _id.toString())
 
   const imageUrl = image
@@ -51,10 +52,10 @@ const Advert = ({ advert }) => {
             {shortDescription}
           </p>
           <p className="text-xl font-semibold text-emerald-400">{price} €</p>
-          <p
-            className={`text-sm ${type === 'sell' ? 'text-blue-400' : 'text-rose-400'}`}
-          >
-            {type === 'sell' ? 'For sale' : 'Wanted'}
+          <p className={`text-sm ${type === 'sell' ? 'text-blue-400' : 'text-rose-400'}`}>
+            {type === 'sell'
+              ? t('advertCard.forSale')
+              : t('advertCard.wanted')}
           </p>
           <div className="flex items-center justify-around mt-2">
             <Link
@@ -72,7 +73,7 @@ const Advert = ({ advert }) => {
             {advert.sold && (
               <div className="absolute top-2 left-2 flex items-center gap-1 bg-red-700 text-white px-2 py-1 rounded text-xs font-semibold shadow">
                 <FaCheckCircle size={12} />
-                Sold
+                {t('advertCard.sold')}
               </div>
             )}
           </div>
