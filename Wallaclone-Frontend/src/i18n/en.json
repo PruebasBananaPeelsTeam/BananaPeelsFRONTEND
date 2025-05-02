@@ -121,7 +121,15 @@
 },
 "banner": {
   "welcome": "Welcome to BananaPeels"
+},
+"header": {
+  "home": "Home",
+  "login": "Login",
+  "register": "Register",
+  "createAdvert": "Create advert",
+  "myAccount": "👤 My Account"
 }
+
 
 
 
