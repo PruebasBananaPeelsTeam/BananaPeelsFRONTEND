@@ -27,5 +27,16 @@
     "backButton": "← Back",
     "updateButton": "✎ Update",
     "notFound": "Advert not found."
-  }
+  },
+
+  "errors": {
+  "Name is required": "Name is required",
+  "Description is required": "Description is required",
+  "Price must be a positive number": "Price must be a positive number",
+  "Type must be either \"buy\" or \"sell\"": "Type must be either \"buy\" or \"sell\"",
+  "At least one tag is required": "At least one tag is required",
+  "Image type is not allowed": "Image type is not allowed",
+  "Image exceeds the allowed size (10MB)": "Image exceeds the allowed size (10MB)"
+}
+
 }

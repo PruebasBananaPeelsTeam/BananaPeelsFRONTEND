@@ -27,5 +27,16 @@
     "backButton": "← Volver",
     "updateButton": "✎ Editar",
     "notFound": "No se encontró el anuncio."
-  }
+  },
+
+  "errors": {
+  "Name is required": "El nombre es obligatorio",
+  "Description is required": "La descripción es obligatoria",
+  "Price must be a positive number": "El precio debe ser un número positivo",
+  "Type must be either \"buy\" or \"sell\"": "El tipo debe ser \"buy\" o \"sell\"",
+  "At least one tag is required": "Al menos un tag es obligatorio",
+  "Image type is not allowed": "El tipo de imagen no es válido",
+  "Image exceeds the allowed size (10MB)": "La imagen supera el tamaño permitido (10MB)"
+}
+
 }
