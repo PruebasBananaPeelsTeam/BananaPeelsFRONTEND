@@ -107,150 +107,133 @@ function AdvertDetailPage() {
       : `data:image/jpeg;base64,${advert.image}`
     : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
 
-  return (
-    <Page>
-      {loading ? (
-        <Loader />
-      ) : advert ? (
-        <>
-          <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
-            {advert.name}
-          </h2>
-          <div className="text-black">
-            <img
-              src={imageUrl}
-              alt={advert?.name || t('advertDetail.noImage')} // 👈 Traducción
-              className="w-full max-h-[300px] object-scale-down rounded-xl mb-2 mx-auto"
-            />
-
-            <div className="max-w-2xl mx-auto text-justify space-y-2 bg-gray-100 p-4 rounded-xl shadow">
-              <p>
-                <strong>{t('advertDetail.description')}:</strong>{' '}
-                {advert.description}
-              </p>
-
-              <p>
-                <strong>{t('advertDetail.price')}:</strong> {advert.price} €
-              </p>
-
-              <p>
-                <strong>{t('advertDetail.type')}:</strong>{' '}
-                {advert.type === 'buy'
-                  ? t('advertDetail.typeWanted')
-                  : t('advertDetail.typeForSale')}
-              </p>
-
-              <p>
-                <strong>{t('advertDetail.categories')}:</strong>{' '}
-                {advert.tags.join(', ')}
-              </p>
-
-              <p>
-                <strong>{t('advertDetail.seller')}:</strong>{' '}
-                <Link
-                  to={`/users/${advert.owner?.username || advert.owner}`}
-                  className="text-indigo-600 underline"
-                >
-                  {advert.owner?.username || advert.owner}
-                </Link>
-              </p>
-            </div>
-
-            {/* Botones y estado */}
-
-            <div className="flex flex-col md:flex-row flex-wrap gap-2 mt-6">
-              {/* Botón Back */}
-              <div>
-                <Button
-                  onClick={() => navigate('/')}
-                  className="w-full md:w-auto"
-                >
-                  ← Back
-                </Button>
+    return (
+      <Page>
+        {loading ? (
+          <Loader />
+        ) : advert ? (
+          <>
+            <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
+              {advert.name}
+            </h2>
+    
+            <div className="text-black">
+              <img
+                src={imageUrl}
+                alt={advert?.name || t('advertDetail.noImage')}
+                className="w-full max-h-[300px] object-scale-down rounded-xl mb-2 mx-auto"
+              />
+    
+              <div className="max-w-2xl mx-auto text-justify space-y-2 bg-gray-100 p-4 rounded-xl shadow">
+                <p><strong>{t('advertDetail.description')}:</strong> {advert.description}</p>
+                <p><strong>{t('advertDetail.price')}:</strong> {advert.price} €</p>
+                <p><strong>{t('advertDetail.type')}:</strong> {advert.type === 'buy' ? t('advertDetail.typeWanted') : t('advertDetail.typeForSale')}</p>
+                <p><strong>{t('advertDetail.categories')}:</strong> {advert.tags.join(', ')}</p>
+                <p><strong>{t('advertDetail.seller')}:</strong> {advert.owner?.username || advert.owner}</p>
               </div>
-
-              {/* Condición para mostrar los botones de actualización, eliminación y reserva */}
-              {/* chat button */}
-              {user && advert.owner._id !== user._id && (
-                <div className="flex justify-center my-4">
-                  <Button onClick={handleStartChat}>💬 Chat</Button>
-                </div>
-              )}
-
-              {/* Update button */}
-              {user && advert.owner._id === user._id && advert._id && (
-                <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
-                  <div>
-                    <Button
-                      onClick={() => navigate(`/adverts/${advert._id}/update`)}
-                      className="w-full md:w-auto"
-                    >
-                      {t('advertDetail.updateButton')}
+    
+              <div className="flex flex-col gap-4 mt-6 items-center">
+    
+                {/* PRIMERA FILA */}
+                <div className="flex flex-col md:flex-row flex-wrap gap-2 w-full justify-center">
+                  <div className="w-full md:w-auto">
+                    <Button onClick={() => navigate(-1)} className="w-full md:w-auto">
+                      ← Back
                     </Button>
                   </div>
-
-                  <div className="w-full md:w-auto">
-                    <DeleteAdvertPage />
-                  </div>
-
-                  <Button
-                    onClick={async () => {
-                      try {
-                        const result = await toggleSoldAdvert(advert._id)
-                        setAdvert((prev) => ({ ...prev, sold: result.sold }))
-                      } catch (error) {
-                        console.error('Error toggling sold status:', error)
-                      }
-                    }}
-                    className="mb-4 ml-4"
-                  >
-                    {advert?.sold ? '✔ Mark as Unsold' : '💰 Mark as Sold'}
-                  </Button>
-                  <ReservedToggleButton
-                    advert={advert}
-                    className="w-full md:w-auto"
-                    onToggled={(newState) =>
-                      setAdvert((prev) => ({ ...prev, reserved: newState }))
-                    }
-                  />
-                </div>
-              )}
-
-              {user && advert._id && (
-                <Button onClick={handleFavoriteToggle} className="mb-4 ml-2">
-                  {isFavorite ? (
-                    <span className="flex items-center gap-2 text-red-500">
-                      <HeartOff size={18} /> Quitar de favoritos
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2 text-green-600">
-                      <Heart size={18} /> Añadir a favoritos
-                    </span>
+    
+                  {user && advert.owner._id === user._id && (
+                    <>
+                      <div className="w-full md:w-auto">
+                        <Button onClick={() => navigate(`/adverts/${advert._id}/update`)} className="w-full md:w-auto">
+                          {t('advertDetail.updateButton')}
+                        </Button>
+                      </div>
+    
+                      <div className="w-full md:w-auto">
+                        <DeleteAdvertPage />
+                      </div>
+                    </>
                   )}
-                </Button>
-              )}
-
-              <div className="w-full md:w-auto">
-                <AdvertStatus
-                  reserved={advert.reserved}
-                  iconSize="28"
-                  textSize="text-xl"
-                />
-              </div>
-              {advert.sold && (
-                <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow ml-4">
-                  <FaCheckCircle size={16} />
-                  Sold
+    
+                  {user && advert.owner._id !== user._id && (
+                    <>
+                      <div className="w-full md:w-auto">
+                        <Button onClick={handleStartChat} className="w-full md:w-auto">
+                          💬 Chat
+                        </Button>
+                      </div>
+    
+                      <div className="w-full md:w-auto">
+                        <Button onClick={handleFavoriteToggle} className="w-full md:w-auto">
+                          {isFavorite ? (
+                            <span className="flex items-center gap-2 text-pink-300">
+                              <HeartOff size={18} /> Quitar de favoritos
+                            </span>
+                          ) : (
+                            <span className="flex items-center gap-2 text-pink-300">
+                              <Heart size={18} /> Añadir a favoritos
+                            </span>
+                          )}
+                        </Button>
+                      </div>
+                    </>
+                  )}
                 </div>
-              )}
+    
+                {/* SEGUNDA FILA */}
+                {user && advert.owner._id === user._id && advert._id && (
+                  <div className="flex flex-col md:flex-row flex-wrap gap-2 w-full justify-center">
+                    <div className="w-full md:w-auto">
+                      <Button
+                        onClick={async () => {
+                          try {
+                            const result = await toggleSoldAdvert(advert._id)
+                            setAdvert((prev) => ({ ...prev, sold: result.sold }))
+                          } catch (error) {
+                            console.error('Error toggling sold status:', error)
+                          }
+                        }}
+                        className="w-full md:w-auto"
+                      >
+                        {advert?.sold ? '✔ Mark as Unsold' : '💰 Mark as Sold'}
+                      </Button>
+                    </div>
+    
+                    <div className="w-full md:w-auto">
+                      <ReservedToggleButton
+                        advert={advert}
+                        className="w-full md:w-auto"
+                        onToggled={(newState) =>
+                          setAdvert((prev) => ({ ...prev, reserved: newState }))
+                        }
+                      />
+                    </div>
+    
+                    <div className="w-full md:w-auto flex items-center justify-center">
+                      <AdvertStatus
+                        reserved={advert.reserved}
+                        iconSize="20"
+                        textSize="text-xl"
+                      />
+                    </div>
+    
+                    {advert.sold && (
+                      <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow w-full md:w-auto justify-center">
+                        <FaCheckCircle size={16} />
+                        Sold
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </>
-      ) : (
-        <p className="text-red-600">{t('advertDetail.notFound')}</p>
-      )}
-    </Page>
-  )
+          </>
+        ) : (
+          <p className="text-red-600">{t('advertDetail.notFound')}</p>
+        )}
+      </Page>
+    );
 }
 
 export default AdvertDetailPage
