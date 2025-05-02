@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import Logout from '../shared/logout.jsx'
+import LanguageSelector from '../shared/languageSelector.jsx'
 
 export default function Burger() {
   const [isOpen, setIsOpen] = useState(false)
@@ -76,6 +77,9 @@ export default function Burger() {
               </div>
             </>
           )}
+          <div className="border-t border-gray-200 pt-4">
+            <LanguageSelector />
+          </div>
         </div>
       )}
     </div>
