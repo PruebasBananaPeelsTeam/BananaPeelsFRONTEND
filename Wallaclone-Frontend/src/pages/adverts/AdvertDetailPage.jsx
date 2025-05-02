@@ -18,7 +18,7 @@ import { toggleSoldAdvert } from '../../services/adverts-service'
 import { FaCheckCircle } from 'react-icons/fa'
 import DeleteAdvertPage from './DeleteAdvertPage'
 import { Heart, HeartOff } from 'lucide-react'
-
+import MarkAsSoldButton from '../../components/shared/MarkAsSoldButton'
 
 function AdvertDetailPage() {
   const { t } = useTranslation() //  Hook de traducción
@@ -181,12 +181,10 @@ function AdvertDetailPage() {
               {user && advert.owner._id === user._id && advert._id && (
                 <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
                   <div>
-                    <Button
-                      onClick={() => navigate(`/adverts/${advert._id}/update`)}
-                      className="w-full md:w-auto"
-                    >
-                      {t('advertDetail.updateButton')}
-                    </Button>
+                    <MarkAsSoldButton
+                      advert={advert}
+                      onToggle={(updatedAdvert) => setAdvert(updatedAdvert)}
+                    />
                   </div>
 
                   <div className="w-full md:w-auto">
