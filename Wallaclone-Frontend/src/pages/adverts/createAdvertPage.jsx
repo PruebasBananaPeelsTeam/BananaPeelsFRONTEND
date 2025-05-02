@@ -113,11 +113,21 @@ const CreateAdvertPage = () => {
       setImagePreview(null)
       navigate('/')
     } catch (err) {
-      console.error(err)
-      setError({
-        code: 'Create Error',
-        message: 'Error creating the advert. Please try again.',
-      })
+      const backendErrors = err.response?.data?.errors 
+      if (backendErrors) {
+        const fieldErrors = {}
+        backendErrors.forEach(({ field, message }) => {
+          const key = `errors.${message}`
+          fieldErrors[field] = t(key) || message
+        })
+        setFieldErrors(fieldErrors)
+      } else {
+        setError({
+          code: 'Create Error',
+          message: 'An error occurred while creating the advert. Please try again later.',
+        })
+      }
+     
     } finally {
       setLoading(false)
     }
