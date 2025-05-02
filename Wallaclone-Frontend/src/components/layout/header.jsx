@@ -3,11 +3,12 @@ import { useAuth } from '../../context/AuthContext.jsx';
 import Burger from '../shared/burguer.jsx';
 import Logout from '../shared/logout.jsx';
 import LanguageSelector from '../shared/languageSelector.jsx';
-import MyChatsButton from '../shared/MyChatsButton.jsx'
-
+import MyChatsButton from '../shared/MyChatsButton.jsx';
+import { useTranslation } from 'react-i18next';
 
 export default function Header() {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated } = useAuth();
+  const { t } = useTranslation();
 
   return (
     <header
@@ -28,16 +29,16 @@ export default function Header() {
         {/* Links visibles en escritorio */}
         <nav className="hidden md:flex items-center gap-6 font-semibold text-gray-800">
           <Link to="/" className="hover:text-green-600">
-            Home
+            {t('header.home')}
           </Link>
 
           {!isAuthenticated && (
             <>
               <Link to="/login" className="hover:text-green-600">
-                Login
+                {t('header.login')}
               </Link>
               <Link to="/register" className="hover:text-green-600">
-                Register
+                {t('header.register')}
               </Link>
             </>
           )}
@@ -45,12 +46,12 @@ export default function Header() {
           {isAuthenticated && (
             <>
               <Link to="/adverts/new" className="hover:text-green-600">
-                Create-Advert
+                {t('header.createAdvert')}
               </Link>
               <Link to="/my-profile" className="hover:text-green-600">
-                👤 My Account
+                {t('header.myAccount')}
               </Link>
-              {isAuthenticated && <MyChatsButton />}
+              <MyChatsButton />
             </>
           )}
         </nav>
@@ -67,5 +68,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }
