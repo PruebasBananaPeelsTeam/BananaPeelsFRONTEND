@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const login = (newToken, userData) => {
-    console.log('user data desde el contexto', userData)
     setToken(newToken)
     storage.set('token', newToken)
     setUser(userData)
@@ -29,16 +28,31 @@ export const AuthProvider = ({ children }) => {
     storage.remove('user')
   }
 
-  const updateUserData = (newUserData) => {
-    setUser(newUserData)
-    storage.set('user', newUserData)
+  // ✅ Esta es la función que faltaba
+  const toggleFavorite = (advertId, isAdding) => {
+    setUser(prevUser => {
+      if (!prevUser) return prevUser
+
+      const currentFavorites = prevUser.favorites || []
+
+      const updatedFavorites = isAdding
+        ? [...currentFavorites, advertId]
+        : currentFavorites.filter(id => id !== advertId)
+
+      const updatedUser = { ...prevUser, favorites: updatedFavorites }
+
+      // Actualiza también en localStorage
+      storage.set('user', updatedUser)
+
+      return updatedUser
+    })
   }
 
   const isAuthenticated = !!token
 
   return (
     <AuthContext.Provider
-      value={{ token, user, isAuthenticated, login, logout, updateUserData }}
+      value={{ token, user, isAuthenticated, login, logout, toggleFavorite }}
     >
       {children}
     </AuthContext.Provider>

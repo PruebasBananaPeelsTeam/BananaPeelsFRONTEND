@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext.jsx'
 import Logout from '../shared/logout.jsx'
 import LanguageSelector from '../shared/languageSelector.jsx'
 import { useTranslation } from 'react-i18next'
+import MyChatsButton from './MyChatsButton.jsx'
 
 export default function Burger() {
   const { t } = useTranslation()
@@ -30,7 +31,7 @@ export default function Burger() {
 
       {/* Menú desplegable */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 bg-white rounded-xl shadow-lg p-6 space-y-4 z-500 min-w-[170px] animate-slideDown">
+        <div className="absolute right-0 mt-2 bg-emerald-600 rounded-xl shadow-lg p-6 space-y-4 z-500 min-w-[170px] animate-slideDown">
           <Link
             to="/"
             onClick={closeMenu}
@@ -75,6 +76,7 @@ export default function Burger() {
                 {t('header.myAccount')}
               </Link>
               <div className="pt-2">
+                <MyChatsButton />
                 <Logout />
               </div>
             </>

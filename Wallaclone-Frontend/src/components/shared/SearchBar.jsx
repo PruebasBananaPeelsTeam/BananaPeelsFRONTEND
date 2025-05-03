@@ -83,20 +83,21 @@ function SearchBar() {
   }
 
   return (
-    <div className="relative mx-auto flex justify-between items-center">
+    <div className="relative mx-auto flex justify-between items-center mt-2 mb-6">
       {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-wrap gap-2 w-full justify-center items-center px-2"
+        className="flex flex-wrap md:flex-nowrap gap-3 w-full max-w-4xl justify-center items-center bg-white/70 p-4 rounded-3xl shadow-lg backdrop-blur-sm"
       >
         <input
           type="text"
           name="name"
           value={filters.name}
           onChange={handleChange}
-          placeholder="🔍 Name"
-          className="flex-1 min-w-[120px] px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          placeholder="🔍 Buscar por nombre del producto..."
+          className="flex-grow px-4 py-2 rounded-full border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition-all text-sm"
+
         />
         <input
           type="number"
@@ -104,7 +105,7 @@ function SearchBar() {
           value={filters.priceMin}
           onChange={handleChange}
           placeholder="Min €"
-          className="flex-1 min-w-[80px] px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="flex-1 min-w-[80px] px-4 py-2 rounded-full border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition-all text-sm"
         />
         <input
           type="number"
@@ -112,15 +113,18 @@ function SearchBar() {
           value={filters.priceMax}
           onChange={handleChange}
           placeholder="Max €"
-          className="flex-1 min-w-[80px] px-2 py-1 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm"
+          className="flex-1 min-w-[80px] px-4 py-2 rounded-full border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition-all text-sm"
         />
-        <Button type="submit" className="flex-shrink-0">
+        <Button
+          type="submit"
+          className="rounded-full px-6 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold transition-all shadow-md"
+        >
           Search
         </Button>
         <Button
           type="button"
           onClick={handleResetFilters}
-          className="flex-shrink-0"
+          className="rounded-full px-6 py-2 bg-gray-500 hover:bg-green-300 text-gray-700 font-semibold transition-all shadow-md"
         >
           Reset
         </Button>
