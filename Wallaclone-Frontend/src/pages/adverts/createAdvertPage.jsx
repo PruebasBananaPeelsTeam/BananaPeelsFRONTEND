@@ -240,6 +240,7 @@ const CreateAdvertPage = () => {
 
           <Button type="submit" disabled={loading}>
             {loading ? t('createAdvert.creatingButton') : t('createAdvert.submitButton')}
+            
           </Button>
         </form>
       </div>

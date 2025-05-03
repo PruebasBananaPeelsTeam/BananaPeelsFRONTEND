@@ -153,6 +153,17 @@
 "tagFilter": {
   "title": "Elige una categoría para comenzar tu búsqueda:",
   "title2": "🎯 Filtros aplicados:"
+},
+"deleteAdvertPage":{
+  "deleteButton":" 🗑 Eliminar"
+},
+"reservedToggleButton":{
+  "reserve": "Reservar",
+  "cancel": "Cancelar reserva"
+},
+"advertStatus":{
+  "reserved": "Reservado",
+  "available": "Disponible"
 }
 
 

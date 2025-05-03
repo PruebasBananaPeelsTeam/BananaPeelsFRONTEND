@@ -5,7 +5,10 @@ import Button from '../../components/shared/button.jsx'
 import Loader from '../../components/shared/loader.jsx'
 import Page from '../../components/layout/page.jsx'
 import ConfirmationModalCard from '../../components/shared/confirmationModalCard.jsx'
+import { useTranslation } from 'react-i18next'
+
 function DeleteAdvertPage() {
+  const { t } = useTranslation()
   const { advertId } = useParams()
   const navigate = useNavigate()
 
@@ -14,6 +17,7 @@ function DeleteAdvertPage() {
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [error, setError] = useState(null)
   const [advert, setAdvert] = useState(null)
+  
 
   // useEffect para cargar los detalles del anuncio cuando se monta el componente
   useEffect(() => {
@@ -79,7 +83,7 @@ function DeleteAdvertPage() {
               disabled={loading} 
               className="w-full md:w-auto"
               >
-            🗑 Delete
+            {t("deleteAdvertPage.deleteButton")}
               {loading && <Loader />}
             </Button>
 

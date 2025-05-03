@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { toggleReserved } from '../../services/adverts-service'
 import Button from '../shared/button'
+import { useTranslation } from 'react-i18next'
 
 function ReservedToggleButton({ advert, onToggled, className = '' }) {
+  const { t } = useTranslation()
   const { user } = useAuth()
 
   const [isReserved, setIsReserved] = useState(advert.reserved)
@@ -22,7 +24,7 @@ function ReservedToggleButton({ advert, onToggled, className = '' }) {
   return (
     <Button onClick={handleClick} 
       className={`bg-yellow-600 text-white hover:bg-yellow-700 ${className}`}>
-      {isReserved ? 'Cancel Reservation' : 'Reserve this item'}
+      {isReserved ? t('reservedToggleButton.cancel') : t('reservedToggleButton.reserve')}
     </Button>
   )
 }

@@ -1,8 +1,9 @@
 import { Reserve } from 'iconsax-reactjs'
+import { useTranslation } from 'react-i18next'
 
 export default function AdvertStatus({ reserved, iconSize, textSize }) {
   const colorClass = reserved ? 'text-red-600' : 'text-green-600'
-
+  const { t } = useTranslation()
   return (
     <div className="flex items-center gap-1 mt-2">
       <Reserve
@@ -21,7 +22,7 @@ export default function AdvertStatus({ reserved, iconSize, textSize }) {
           ${colorClass}
         `}
       >
-        {reserved ? 'Reserved' : 'Available'}
+        {reserved ? t("advertStatus.reserved") :  t("advertStatus.available")}
       </p>
     </div>
   )

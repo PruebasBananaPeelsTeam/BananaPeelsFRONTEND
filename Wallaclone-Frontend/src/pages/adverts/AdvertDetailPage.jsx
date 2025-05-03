@@ -125,7 +125,7 @@ function AdvertDetailPage() {
                 <div className="flex flex-col md:flex-row flex-wrap gap-2 w-full justify-center">
                   <div className="w-full md:w-auto">
                     <Button onClick={() => navigate(-1)} className="w-full md:w-auto">
-                      ← Back
+                      {t("advertDetail.backButton")}
                     </Button>
                   </div>
     
@@ -183,7 +183,7 @@ function AdvertDetailPage() {
                         }}
                         className="w-full md:w-auto"
                       >
-                        {advert?.sold ? '✔ Mark as Unsold' : '💰 Mark as Sold'}
+                        {advert?.sold ? t("advertDetail.markAsUnsold") : t("advertDetail.markAsSold")}
                       </Button>
                     </div>
     

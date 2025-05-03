@@ -55,7 +55,7 @@ const UserPage = () => {
   }
 
   return (
-    <Page title={t('userPage.adsFrom', { username })} fullWidth>
+    <Page fullWidth>
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold">👤 {username}</h2>
         <p className="text-gray-500">{t('userPage.latestAds')}</p>
