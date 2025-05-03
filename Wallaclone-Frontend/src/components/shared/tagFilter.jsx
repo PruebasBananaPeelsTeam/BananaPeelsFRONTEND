@@ -116,7 +116,7 @@ function TagFilter() {
               <img
                 src={tagImages[tag]}
                 alt={tag}
-                className={`w-32 h-32 object-cover rounded-2xl border-4 transition-all ${
+                className={`w-52 h-42 object-cover rounded-2xl border-4 transition-all ${
                   selectedTags.includes(tag)
                     ? 'border-indigo-500'
                     : 'border-transparent'

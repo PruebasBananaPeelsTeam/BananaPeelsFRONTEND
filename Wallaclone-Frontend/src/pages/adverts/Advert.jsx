@@ -53,36 +53,54 @@ const Advert = ({ advert }) => {
         </div>
 
         {/* Cara trasera */}
-        <div className="absolute w-full h-full rotate-y-180 backface-hidden rounded-lg p-5 shadow-lg border border-gray-400 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 text-white flex flex-col justify-between text-center">
-          <h3 className="text-lg font-bold truncate">{shortName}</h3>
-          <p className="text-sm text-gray-300 line-clamp-3">
-            {shortDescription}
-          </p>
-          <p className="text-xl font-semibold text-emerald-400">{price} €</p>
-          <p
-            className={`text-sm ${type === 'sell' ? 'text-blue-400' : 'text-rose-400'}`}
-          >
-            {type === 'sell' ? 'For sale' : 'Wanted'}
-          </p>
-          <div className="flex items-center justify-around mt-2">
+        <div className="w-full h-full rotate-y-180 backface-hidden rounded-lg p-5 shadow-xl border flex flex-col justify-between relative overflow-hidden">
+          {/* Header */}
+          <div className="mb-2">
+            <h3 className="text-2xl font-extrabold text-gray-900 truncate">
+              {shortName}
+            </h3>
+            <p className="text-lg text-gray-800 line-clamp-2 mt-1">
+              {shortDescription}
+            </p>
+          </div>
+          {/* Precio + Tipo */}
+          <div className="flex flex-col items-center my-3">
+            <span className="text-3xl font-bold text-emerald-600">
+              {price} €
+            </span>
+            <span
+              className={`mt-1 text-xs font-medium px-2 py-1 rounded-full shadow-sm ${
+                type === 'sell'
+                  ? 'bg-blue-100 text-blue-600'
+                  : 'bg-rose-100 text-rose-600'
+              }`}
+            >
+              {type === 'sell' ? 'For sale' : 'Wanted'}
+            </span>
+          </div>
+          {/* Footer: Dueño + Estado */}
+          <div className="flex items-center justify-between text-lg text-gray-600 mt-3 border-t pt-2">
             <Link
               to={`/users/${owner}`}
               onClick={(e) => e.stopPropagation()}
-              className="text-sm italic text-indigo-300 hover:underline truncate"
+              className="hover:underline text-indigo-500 font-medium truncate"
             >
-              {owner}
+              @{owner}
             </Link>
-            <AdvertStatus
-              reserved={advert.reserved}
-              iconSize={16}
-              textSize="text-sm"
-            />
-            {advert.sold && (
-              <div className="absolute top-2 left-2 flex items-center gap-1 bg-red-700 text-white px-2 py-1 rounded text-xs font-semibold shadow">
-                <FaCheckCircle size={12} />
-                Sold
-              </div>
-            )}
+
+            <div className="flex items-center gap-2">
+              <AdvertStatus
+                reserved={advert.reserved}
+                iconSize={14}
+                textSize="text-lg"
+              />
+              {advert.sold && (
+                <span className="inline-flex items-center gap-1 bg-red-600 text-white px-2 py-0.5 rounded-full shadow text-[10px] font-semibold">
+                  <FaCheckCircle size={10} />
+                  Sold
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>

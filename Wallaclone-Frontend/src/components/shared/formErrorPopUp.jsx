@@ -4,7 +4,7 @@ function FormErrorPopup({ error, onClose }) {
   if (!error) return null
 
   return (
-    <div className="relative">
+    <div className="relative z-50">
       <div className="forms-Errors-Pop-up" onClick={onClose}>
         <div className="text-red-500 mr-2">{error.code}</div>
         {error.message}
