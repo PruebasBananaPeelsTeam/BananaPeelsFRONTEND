@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { getTags } from '../../services/adverts-service.js'
 import FormErrorPopup from './formErrorPopUp.jsx'
 import Button from '../shared/button.jsx'
+import { useTranslation } from 'react-i18next'
+
 
 const tagImages = {
   Decoration: '/images/Decoracion.png',
@@ -12,6 +14,7 @@ const tagImages = {
 }
 
 function TagFilter() {
+  const { t } = useTranslation()
   const [tags, setTags] = useState([])
   const [error, setError] = useState(null)
 
@@ -81,7 +84,7 @@ function TagFilter() {
   return (
     <div className="w-full max-w-5xl mx-auto px-2">
       <h2 className="text-xl font-bold text-center text-gray-700 mt-10">
-        Elige una categoría para comenzar tu búsqueda:
+        {t("tagFilter.title")}
       </h2>
       {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
 
@@ -91,7 +94,7 @@ function TagFilter() {
         {selectedTags.length > 0 && (
           <div className="flex flex-wrap items-center justify-start gap-3 w-full">
             <span className="text-gray-800 font-bold text-md flex items-center">
-              🎯 Filters applied:
+              {t("tagFilter.title2")}
             </span>
             {selectedTags.map((tag) => (
               <img

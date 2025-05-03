@@ -4,8 +4,10 @@ import Footer from './footer'
 import Banner from './banner'
 import TagFilter from '../shared/tagFilter'
 import SearchBar from '../shared/SearchBar'
+import { useTranslation } from 'react-i18next'
 
 export default function Layout({ children }) {
+  const { t } = useTranslation()
   const location = useLocation()
   const isHome = location.pathname === '/'
 
@@ -17,11 +19,10 @@ export default function Layout({ children }) {
       <Header />
       <div className="text-center my-6 px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 drop-shadow-sm mt-15">
-          ¿Qué pieza de decoración buscas hoy?
+          {t("layout.question")}
         </h1>
         <p className="text-lg text-gray-600 mt-2">
-          Encuentra artículos únicos para tu hogar, directo de otros amantes del
-          diseño como tú.
+          {t("layout.request")}
         </p>
       </div>
       {/* Searchbar en Home */}
@@ -39,10 +40,10 @@ export default function Layout({ children }) {
           className="absolute inset-0 w-full h-full object-cover opacity-10 -z-10 rounded-2xl"
         />
         <h2 className="text-5xl font-extrabold text-white leading-tight drop-shadow-lg">
-          Transforma tu hogar <br /> con estilo y personalidad
+          {t("layout.title")} <br /> {t("layout.title2")}
         </h2>
         <p className="mt-4 text-2xl text-white font-medium drop-shadow-sm">
-          Encuentra productos únicos entre cientos de anuncios.
+          {t("layout.title3")}
         </p>
       </div>
       <main className={`flex-1 py-8`}>{children}</main>

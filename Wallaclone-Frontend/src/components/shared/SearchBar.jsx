@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../shared/button.jsx'
 import FormErrorPopup from '../shared/formErrorPopUp.jsx'
 import useTimer from '../../utils/useTimer.js'
+import { useTranslation } from 'react-i18next'
 
 function SearchBar() {
+  const { t } = useTranslation()
   const [filters, setFilters] = useState({
     name: '',
     priceMin: '',
@@ -95,7 +97,7 @@ function SearchBar() {
           name="name"
           value={filters.name}
           onChange={handleChange}
-          placeholder="🔍 Buscar por nombre del producto..."
+          placeholder={t("SearchBar.title")}
           className="flex-grow px-4 py-2 rounded-full border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition-all text-sm"
 
         />

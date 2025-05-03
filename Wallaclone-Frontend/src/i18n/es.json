@@ -120,7 +120,15 @@
   "unknownError": "Error desconocido"
 },
 "banner": {
-  "welcome": "Bienvenido a BananaPeels"
+  "welcome": "Convierte tu casa en el hogar de tus sueños",
+  "welcome2": "Descubre piezas únicas y dale vida a tus espacios"
+},
+"layout": {
+  "question": "¿Qué pieza de decoración buscas hoy?",
+  "request": "Encuentra artículos únicos para tu hogar, directo de otros amantes del diseño como tú",
+  "title": "Transforma tu hogar",
+  "title2": "con estilo y personalidad",
+  "title3": "Encuentra productos únicos entre cientos de anuncios."
 },
 "header": {
   "home": "Inicio",
@@ -134,7 +142,19 @@
   "message": "Esta sección está reservada para usuarios registrados. Por favor, inicia sesión o vuelve a la página de inicio.",
   "loginButton": "Iniciar sesión",
   "homeButton": "Inicio"
+},
+"AdvertsPage": {
+  "title": "Ultimos anuncios:"
+},
+
+"SearchBar": {
+  "title": "🔍 Buscar por nombre del producto..."
+},
+"tagFilter": {
+  "title": "Elige una categoría para comenzar tu búsqueda:",
+  "title2": "🎯 Filtros aplicados:"
 }
+
 
 
 

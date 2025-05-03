@@ -28,7 +28,7 @@ export default function Header() {
         {/* Links visibles en escritorio */}
         <nav className="hidden text-2xl md:flex items-center gap-6 font-semibold text-white">
           <Link to="/" className="hover:text-black">
-            Home
+          {t('header.home')}
           </Link>
 
           {!isAuthenticated && (
@@ -45,7 +45,7 @@ export default function Header() {
           {isAuthenticated && (
             <>
               <Link to="/adverts/new" className="hover:text-black">
-                New-Advert
+                {t('header.createAdvert')}
               </Link>
               <Link to="/my-profile" className="hover:text-black">
                 {t('header.myAccount')}
