@@ -35,3 +35,14 @@ export const checkChatByAdvert = async (advertId) => {
   }
   return null
 }
+
+export const hasUnreadMessages = async () => {
+  try {
+    const response = await client.get('/api/chat/unread')
+    console.log('📡 Respuesta de API (desde servicio):', response)
+    return !!response.data.hasUnreadMessages
+  } catch (error) {
+    console.error('❌ Error en hasUnreadMessages:', error.message)
+    return false
+  }
+}

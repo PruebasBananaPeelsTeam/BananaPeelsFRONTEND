@@ -1,14 +1,34 @@
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext.jsx';
-import Burger from '../shared/burguer.jsx';
-import Logout from '../shared/logout.jsx';
-import LanguageSelector from '../shared/languageSelector.jsx';
-import MyChatsButton from '../shared/MyChatsButton.jsx';
-import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext.jsx'
+import Burger from '../shared/burguer.jsx'
+import Logout from '../shared/logout.jsx'
+import LanguageSelector from '../shared/languageSelector.jsx'
+import MyChatsButton from '../shared/MyChatsButton.jsx'
+import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
+import { hasUnreadMessages as fetchUnreadMessages } from '../../services/chat-service.js'
 
 export default function Header() {
-  const { isAuthenticated } = useAuth();
-  const { t } = useTranslation();
+  const { isAuthenticated, user } = useAuth()
+  const { t } = useTranslation()
+  const [hasUnreadMessages, setHasUnreadMessages] = useState(false)
+
+  useEffect(() => {
+    if (!isAuthenticated) return
+    if (!user?._id) return
+  
+    checkUnread()
+  }, [isAuthenticated, user])
+
+  const checkUnread = async () => {
+    try {
+      const unread = await fetchUnreadMessages()
+      console.log('Valor recibido en header:', unread)
+      setHasUnreadMessages(Boolean(unread))
+    } catch (error) {
+      console.error('Error checking unread messages:', error)
+    }
+  }
 
   return (
     <header
@@ -51,7 +71,7 @@ export default function Header() {
               <Link to="/my-profile" className="hover:text-green-600">
                 {t('header.myAccount')}
               </Link>
-              <MyChatsButton />
+                <MyChatsButton hasUnreadMessages={hasUnreadMessages} />
             </>
           )}
         </nav>
@@ -68,5 +88,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }

@@ -2,14 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
-const MyChatsButton = () => {
+const MyChatsButton = ({hasUnreadMessages}) => {
   const navigate = useNavigate()
-
+  console.log('MyChatsButton recibió:', hasUnreadMessages)
   return (
     <StyledWrapper>
       <ul>
         <li onClick={() => navigate('/my-chats')}>
           <span className="icon">💬</span>
+          {hasUnreadMessages && <span className="notification-dot" />}
           <span className="title">My chats</span>
         </li>
       </ul>
@@ -19,6 +20,17 @@ const MyChatsButton = () => {
 
 const StyledWrapper = styled.div`
   ul {
+    .notification-dot {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
     position: relative;
     display: flex;
     gap: 25px;
