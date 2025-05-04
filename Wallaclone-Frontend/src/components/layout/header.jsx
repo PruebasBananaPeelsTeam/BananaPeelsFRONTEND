@@ -6,29 +6,12 @@ import LanguageSelector from '../shared/languageSelector.jsx'
 import MyChatsButton from '../shared/MyChatsButton.jsx'
 import { useTranslation } from 'react-i18next'
 import { Bell } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { getNotifications } from '../../services/Notifications-service.js'
+import { useNotifications } from '../../context/NotificationContext.jsx'
 
 export default function Header() {
   const { isAuthenticated } = useAuth()
   const { t } = useTranslation()
-  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false)
-
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const response = await getNotifications()
-        const unread = response.results?.some((n) => !n.read)
-        setHasUnreadNotifications(unread)
-      } catch (error) {
-        console.error('🔴 Error fetching notifications:', error)
-      }
-    }
-
-    if (isAuthenticated) {
-      fetchNotifications()
-    }
-  }, [isAuthenticated])
+  const { unreadCount } = useNotifications()
 
   return (
     <header
@@ -72,8 +55,11 @@ export default function Header() {
               </Link>
               <Link to="/my-profile" className="hover:text-black relative">
                 <Bell className="inline-block mr-1 w-6 h-6" />
-                {hasUnreadNotifications && (
-                  <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                {unreadCount > 0 && (
+                  <>
+                    <span className="absolute top-0 right-0 inline-flex items-center justify-center w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                    <span className="absolute top-0 right-0 inline-flex items-center justify-center w-2 h-2 bg-red-500 rounded-full"></span>
+                  </>
                 )}
                 {t('header.myAccount')}
               </Link>
@@ -82,7 +68,7 @@ export default function Header() {
           )}
         </nav>
 
-        {/* Iconos carrito y burger */}
+        {/* Iconos logout, idioma y menú */}
         <div className="flex items-center gap-4">
           <div className="hidden md:flex">
             {isAuthenticated && <Logout />}
