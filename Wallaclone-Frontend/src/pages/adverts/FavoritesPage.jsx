@@ -1,39 +1,39 @@
-import { useEffect, useState } from 'react';
-import { getFavorites } from '../../services/adverts-service';
-import Loader from '../../components/shared/loader.jsx';
-import AdvertsGrid from '../../components/shared/AdvertsGrid.jsx';
+import { useEffect, useState } from 'react'
+import { getFavorites } from '../../services/adverts-service'
+import Loader from '../../components/shared/loader.jsx'
+import AdvertsGrid from '../../components/shared/AdvertsGrid.jsx'
 
 const FavoritesPage = () => {
-  const [favorites, setFavorites] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const limit = 10;
+  const [favorites, setFavorites] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const limit = 10
 
   useEffect(() => {
     const fetchFavorites = async () => {
-      setLoading(true);
+      setLoading(true)
       try {
-        const response = await getFavorites(currentPage, limit, 'desc');
-        setFavorites(response.results);
-        setTotalPages(response.totalPages);
+        const response = await getFavorites(currentPage, limit, 'desc')
+        setFavorites(response.results)
+        setTotalPages(response.totalPages)
       } catch (error) {
-        console.error('Error fetching favorites:', error);
+        console.error('Error fetching favorites:', error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchFavorites();
-  }, [currentPage]);
+    fetchFavorites()
+  }, [currentPage])
 
   const goToPreviousPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
+    if (currentPage > 1) setCurrentPage(currentPage - 1)
+  }
 
   const goToNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1)
+  }
 
   return (
     <div className="shadow-md border border-gray-500 rounded-xl p-6">
@@ -51,7 +51,7 @@ const FavoritesPage = () => {
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default FavoritesPage;
+export default FavoritesPage

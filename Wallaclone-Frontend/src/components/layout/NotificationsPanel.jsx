@@ -64,10 +64,9 @@ export default function NotificationsPanel() {
         <ul className="space-y-4">
           {notifications.map((notif) => {
             const advert = notif.advertId
-            const advertSlug = advert?.name ? slugify(advert.name) : ''
-            const advertUrl = advert?._id
-              ? `/adverts/${advert._id}/${advertSlug}`
-              : null
+            const slug = advert?.name ? slugify(advert.name) : ''
+            const advertUrl =
+              advert?._id && slug ? `/adverts/${advert._id}/${slug}` : null
 
             return (
               <li
@@ -92,7 +91,7 @@ export default function NotificationsPanel() {
                           {advert?.name}
                         </Link>
                       ) : (
-                        <span className="italic text-gray-400">
+                        <span className="text-gray-400 italic">
                           {t('notifications.unknownAdvert')}
                         </span>
                       )}

@@ -11,11 +11,11 @@ export default function Banner() {
     <section className="relative w-full mb-6 mt-20">
       {/* Texto motivador alineado abajo a la izquierda */}
       <div className="absolute bottom-12 left-8 z-20 text-left max-w-xl">
-      <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] leading-tight">
-      {t('banner.welcome')}
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] leading-tight">
+          {t('banner.welcome')}
         </h2>
         <p className="mt-4 text-xl sm:text-2xl text-white font-semibold drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
-        {t('banner.welcome2')}
+          {t('banner.welcome2')}
         </p>
       </div>
 

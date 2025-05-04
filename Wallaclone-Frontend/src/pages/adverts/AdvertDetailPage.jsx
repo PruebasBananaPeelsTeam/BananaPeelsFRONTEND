@@ -14,10 +14,7 @@ import ReservedToggleButton from '../../components/shared/reservedToggleButton'
 import AdvertStatus from '../../components/shared/advertStatus'
 import Button from '../../components/shared/button'
 import { useTranslation } from 'react-i18next'
-import {
-  checkChatByAdvert,
-  getOrCreateChat,
-} from '../../services/chat-service'
+import { checkChatByAdvert, getOrCreateChat } from '../../services/chat-service'
 import { FaCheckCircle } from 'react-icons/fa'
 import DeleteAdvertPage from './DeleteAdvertPage'
 import { Heart, HeartOff } from 'lucide-react'
@@ -37,12 +34,12 @@ function AdvertDetailPage() {
       setLoading(true)
 
       getAdvertDetail(params.advertId, params.slug)
-        .then(advert => {
+        .then((advert) => {
           advert._id = advert._id.toString()
           setAdvert(advert)
           setLoading(false)
         })
-        .catch(error => {
+        .catch((error) => {
           setLoading(false)
           if (isApiClientError(error) && error.code === 'NOT_FOUND') {
             navigate('/404')
@@ -55,7 +52,7 @@ function AdvertDetailPage() {
   useEffect(() => {
     if (advert && user?.favorites) {
       const fav = user.favorites.some(
-        favId => favId.toString() === advert._id
+        (favId) => favId.toString() === advert._id,
       )
       setIsFavorite(fav)
     }
@@ -94,133 +91,164 @@ function AdvertDetailPage() {
       : `data:image/jpeg;base64,${advert.image}`
     : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
 
-    return (
-      <Page>
-        {loading ? (
-          <Loader />
-        ) : advert ? (
-          <>
-            <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
-              {advert.name}
-            </h2>
-    
-            <div className="text-black">
-              <img
-                src={imageUrl}
-                alt={advert?.name || t('advertDetail.noImage')}
-                className="w-full max-h-[300px] object-scale-down rounded-xl mb-2 mx-auto"
-              />
-    
-              <div className="max-w-2xl mx-auto text-justify space-y-2 bg-gray-100 p-4 rounded-xl shadow">
-                <p><strong>{t('advertDetail.description')}:</strong> {advert.description}</p>
-                <p><strong>{t('advertDetail.price')}:</strong> {advert.price} €</p>
-                <p><strong>{t('advertDetail.type')}:</strong> {advert.type === 'buy' ? t('advertDetail.typeWanted') : t('advertDetail.typeForSale')}</p>
-                <p><strong>{t('advertDetail.categories')}:</strong> {advert.tags.join(', ')}</p>
-                <p><strong>{t('advertDetail.seller')}:</strong> {advert.owner?.username || advert.owner}</p>
-              </div>
-    
-              <div className="flex flex-col gap-4 mt-6 items-center">
-    
-                {/* PRIMERA FILA */}
-                <div className="flex flex-col md:flex-row flex-wrap gap-2 w-full justify-center">
-                  <div className="w-full md:w-auto">
-                    <Button onClick={() => navigate(-1)} className="w-full md:w-auto">
-                      {t("advertDetail.backButton")}
-                    </Button>
-                  </div>
-    
-                  {user && advert.owner._id === user._id && (
-                    <>
-                      <div className="w-full md:w-auto">
-                        <Button onClick={() => navigate(`/adverts/${advert._id}/update`)} className="w-full md:w-auto">
-                          {t('advertDetail.updateButton')}
-                        </Button>
-                      </div>
-    
-                      <div className="w-full md:w-auto">
-                        <DeleteAdvertPage />
-                      </div>
-                    </>
-                  )}
-    
-                  {user && advert.owner._id !== user._id && (
-                    <>
-                      <div className="w-full md:w-auto">
-                        <Button onClick={handleStartChat} className="w-full md:w-auto">
-                          💬 Chat
-                        </Button>
-                      </div>
-    
-                      <div className="w-full md:w-auto">
-                        <Button onClick={handleFavoriteToggle} className="w-full md:w-auto">
-                          {isFavorite ? (
-                            <span className="flex items-center gap-2 text-pink-300">
-                              <HeartOff size={18} /> Quitar de favoritos
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-2 text-pink-300">
-                              <Heart size={18} /> Añadir a favoritos
-                            </span>
-                          )}
-                        </Button>
-                      </div>
-                    </>
-                  )}
+  return (
+    <Page>
+      {loading ? (
+        <Loader />
+      ) : advert ? (
+        <>
+          <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
+            {advert.name}
+          </h2>
+
+          <div className="text-black">
+            <img
+              src={imageUrl}
+              alt={advert?.name || t('advertDetail.noImage')}
+              className="w-full max-h-[300px] object-scale-down rounded-xl mb-2 mx-auto"
+            />
+
+            <div className="max-w-2xl mx-auto text-justify space-y-2 bg-gray-100 p-4 rounded-xl shadow">
+              <p>
+                <strong>{t('advertDetail.description')}:</strong>{' '}
+                {advert.description}
+              </p>
+              <p>
+                <strong>{t('advertDetail.price')}:</strong> {advert.price} €
+              </p>
+              <p>
+                <strong>{t('advertDetail.type')}:</strong>{' '}
+                {advert.type === 'buy'
+                  ? t('advertDetail.typeWanted')
+                  : t('advertDetail.typeForSale')}
+              </p>
+              <p>
+                <strong>{t('advertDetail.categories')}:</strong>{' '}
+                {advert.tags.join(', ')}
+              </p>
+              <p>
+                <strong>{t('advertDetail.seller')}:</strong>{' '}
+                {advert.owner?.username || advert.owner}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 mt-6 items-center">
+              {/* PRIMERA FILA */}
+              <div className="flex flex-col md:flex-row flex-wrap gap-2 w-full justify-center">
+                <div className="w-full md:w-auto">
+                  <Button
+                    onClick={() => navigate(-1)}
+                    className="w-full md:w-auto"
+                  >
+                    {t('advertDetail.backButton')}
+                  </Button>
                 </div>
-    
-                {/* SEGUNDA FILA */}
-                {user && advert.owner._id === user._id && advert._id && (
-                  <div className="flex flex-col md:flex-row flex-wrap gap-2 w-full justify-center">
+
+                {user && advert.owner._id === user._id && (
+                  <>
                     <div className="w-full md:w-auto">
                       <Button
-                        onClick={async () => {
-                          try {
-                            const result = await toggleSoldAdvert(advert._id)
-                            setAdvert((prev) => ({ ...prev, sold: result.sold }))
-                          } catch (error) {
-                            console.error('Error toggling sold status:', error)
-                          }
-                        }}
+                        onClick={() =>
+                          navigate(`/adverts/${advert._id}/update`)
+                        }
                         className="w-full md:w-auto"
                       >
-                        {advert?.sold ? t("advertDetail.markAsUnsold") : t("advertDetail.markAsSold")}
+                        {t('advertDetail.updateButton')}
                       </Button>
                     </div>
-    
+
                     <div className="w-full md:w-auto">
-                      <ReservedToggleButton
-                        advert={advert}
+                      <DeleteAdvertPage />
+                    </div>
+                  </>
+                )}
+
+                {user && advert.owner._id !== user._id && (
+                  <>
+                    <div className="w-full md:w-auto">
+                      <Button
+                        onClick={handleStartChat}
                         className="w-full md:w-auto"
-                        onToggled={(newState) =>
-                          setAdvert((prev) => ({ ...prev, reserved: newState }))
-                        }
-                      />
+                      >
+                        💬 Chat
+                      </Button>
                     </div>
-    
-                    <div className="w-full md:w-auto flex items-center justify-center">
-                      <AdvertStatus
-                        reserved={advert.reserved}
-                        iconSize="20"
-                        textSize="text-xl"
-                      />
+
+                    <div className="w-full md:w-auto">
+                      <Button
+                        onClick={handleFavoriteToggle}
+                        className="w-full md:w-auto"
+                      >
+                        {isFavorite ? (
+                          <span className="flex items-center gap-2 text-pink-300">
+                            <HeartOff size={18} /> Quitar de favoritos
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-2 text-pink-300">
+                            <Heart size={18} /> Añadir a favoritos
+                          </span>
+                        )}
+                      </Button>
                     </div>
-    
-                    {advert.sold && (
-                      <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow w-full md:w-auto justify-center">
-                        <FaCheckCircle size={16} />
-                        Sold
-                      </div>
-                    )}
-                  </div>
+                  </>
                 )}
               </div>
+
+              {/* SEGUNDA FILA */}
+              {user && advert.owner._id === user._id && advert._id && (
+                <div className="flex flex-col md:flex-row flex-wrap gap-2 w-full justify-center">
+                  <div className="w-full md:w-auto">
+                    <Button
+                      onClick={async () => {
+                        try {
+                          const result = await toggleSoldAdvert(advert._id)
+                          setAdvert((prev) => ({ ...prev, sold: result.sold }))
+                        } catch (error) {
+                          console.error('Error toggling sold status:', error)
+                        }
+                      }}
+                      className="w-full md:w-auto"
+                    >
+                      {advert?.sold
+                        ? t('advertDetail.markAsUnsold')
+                        : t('advertDetail.markAsSold')}
+                    </Button>
+                  </div>
+
+                  <div className="w-full md:w-auto">
+                    <ReservedToggleButton
+                      advert={advert}
+                      className="w-full md:w-auto"
+                      onToggled={(newState) =>
+                        setAdvert((prev) => ({ ...prev, reserved: newState }))
+                      }
+                    />
+                  </div>
+
+                  <div className="w-full md:w-auto flex items-center justify-center">
+                    <AdvertStatus
+                      reserved={advert.reserved}
+                      iconSize="20"
+                      textSize="text-xl"
+                    />
+                  </div>
+
+                  {advert.sold && (
+                    <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow w-full md:w-auto justify-center">
+                      <FaCheckCircle size={16} />
+                      Sold
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
-          </>
-        ) : (
-          <p className="text-red-600">{t('advertDetail.notFound')}</p>
-        )}
-      </Page>
-    );
+          </div>
+        </>
+      ) : (
+        <p className="text-red-600">{t('advertDetail.notFound')}</p>
+      )}
+    </Page>
+  )
 }
 
 export default AdvertDetailPage

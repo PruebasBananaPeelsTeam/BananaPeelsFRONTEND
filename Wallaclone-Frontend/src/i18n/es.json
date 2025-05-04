@@ -164,6 +164,13 @@
 "advertStatus":{
   "reserved": "Reservado",
   "available": "Disponible"
+},
+"notifications": {
+  "title": "🔔 Notificaciones",
+  "loading": "Cargando notificaciones...",
+  "none": "Aún no tienes notificaciones.",
+  "markAsRead": "Marcar como leída",
+  "unknownAdvert": "Anuncio desconocido"
 }
 
 

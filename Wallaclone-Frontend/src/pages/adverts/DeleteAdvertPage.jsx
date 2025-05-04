@@ -17,7 +17,6 @@ function DeleteAdvertPage() {
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [error, setError] = useState(null)
   const [advert, setAdvert] = useState(null)
-  
 
   // useEffect para cargar los detalles del anuncio cuando se monta el componente
   useEffect(() => {
@@ -76,27 +75,25 @@ function DeleteAdvertPage() {
   }
 
   return (
-    
-    <> 
-            <Button 
-              onClick={openConfirmationModal} 
-              disabled={loading} 
-              className="w-full md:w-auto"
-              >
-            {t("deleteAdvertPage.deleteButton")}
-              {loading && <Loader />}
-            </Button>
+    <>
+      <Button
+        onClick={openConfirmationModal}
+        disabled={loading}
+        className="w-full md:w-auto"
+      >
+        {t('deleteAdvertPage.deleteButton')}
+        {loading && <Loader />}
+      </Button>
 
-            {/* Modal de confirmación */}
-            {showConfirmation && (
-                <ConfirmationModalCard
-                  message="Are you sure you want to delete this advert?" 
-                  onConfirm={handleDelete} 
-                  onCancel={closeConfirmationModal} 
-                />    
-            )}
+      {/* Modal de confirmación */}
+      {showConfirmation && (
+        <ConfirmationModalCard
+          message="Are you sure you want to delete this advert?"
+          onConfirm={handleDelete}
+          onCancel={closeConfirmationModal}
+        />
+      )}
     </>
-    
   )
 }
 

@@ -58,7 +58,7 @@ function AdvertsPage() {
   return (
     <div className="p-6 ml-10 mr-10 mt-10 mb-10">
       <h1 className="text-3xl sm:text-4xl font-extrabold text-black drop-shadow-[2px_2px_4px_rgba(0,0,0,0.8)] mb-10 ml-2">
-        {t("AdvertsPage.title")}
+        {t('AdvertsPage.title')}
       </h1>
       <AdvertsGrid
         adverts={adverts}

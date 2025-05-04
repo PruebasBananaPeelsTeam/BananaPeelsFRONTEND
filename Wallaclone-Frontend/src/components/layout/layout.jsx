@@ -19,11 +19,9 @@ export default function Layout({ children }) {
       <Header />
       <div className="text-center my-6 px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 drop-shadow-sm mt-15">
-          {t("layout.question")}
+          {t('layout.question')}
         </h1>
-        <p className="text-lg text-gray-600 mt-2">
-          {t("layout.request")}
-        </p>
+        <p className="text-lg text-gray-600 mt-2">{t('layout.request')}</p>
       </div>
       {/* Searchbar en Home */}
       {location.pathname === '/' && (
@@ -40,10 +38,10 @@ export default function Layout({ children }) {
           className="absolute inset-0 w-full h-full object-cover opacity-10 -z-10 rounded-2xl"
         />
         <h2 className="text-5xl font-extrabold text-white leading-tight drop-shadow-lg">
-          {t("layout.title")} <br /> {t("layout.title2")}
+          {t('layout.title')} <br /> {t('layout.title2')}
         </h2>
         <p className="mt-4 text-2xl text-white font-medium drop-shadow-sm">
-          {t("layout.title3")}
+          {t('layout.title3')}
         </p>
       </div>
       <main className={`flex-1 py-8`}>{children}</main>

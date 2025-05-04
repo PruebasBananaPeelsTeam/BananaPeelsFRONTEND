@@ -22,7 +22,7 @@ export default function AdvertStatus({ reserved, iconSize, textSize }) {
           ${colorClass}
         `}
       >
-        {reserved ? t("advertStatus.reserved") :  t("advertStatus.available")}
+        {reserved ? t('advertStatus.reserved') : t('advertStatus.available')}
       </p>
     </div>
   )

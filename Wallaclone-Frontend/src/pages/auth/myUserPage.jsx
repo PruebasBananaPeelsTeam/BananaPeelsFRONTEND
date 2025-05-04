@@ -43,7 +43,9 @@ const MyUserPage = () => {
   return (
     <Page fullWidth>
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">{t('myUserPage.title')}</h1>
+        <h1 className="text-3xl font-bold text-gray-800">
+          {t('myUserPage.title')}
+        </h1>
         {user?.username && (
           <p className="text-lg text-gray-800 mt-1">
             {t('myUserPage.username')} {user.username}

@@ -163,7 +163,14 @@
 "advertStatus":{
   "reserved": "Reserved",
   "available": "Available"
+},
+"notifications": {
+  "title": "🔔 Notifications",
+  "loading": "Loading notifications...",
+  "none": "You don't have any notifications yet.",
+  "markAsRead": "Mark as read"
 }
+
 
 
 

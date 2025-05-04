@@ -83,9 +83,7 @@ function ResetPasswordPage() {
         </Button>
 
         {successMessage && (
-          <p className="text-green-600 text-sm text-center">
-            {successMessage}
-          </p>
+          <p className="text-green-600 text-sm text-center">{successMessage}</p>
         )}
 
         {error && (

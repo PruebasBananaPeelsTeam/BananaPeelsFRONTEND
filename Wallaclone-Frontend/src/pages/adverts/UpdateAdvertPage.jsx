@@ -55,7 +55,7 @@ function UpdateAdvertPage() {
             ? advertDetails.image.startsWith('http')
               ? advertDetails.image
               : `data:image/jpeg;base64,${advertDetails.image}`
-            : 'https://fakeimg.pl/600x400?text=NO+PHOTO'
+            : 'https://fakeimg.pl/600x400?text=NO+PHOTO',
         )
       } catch (err) {
         if (err.response?.status === 404) {
@@ -107,9 +107,12 @@ function UpdateAdvertPage() {
   const validateForm = () => {
     const errors = {}
     if (!formData.name.trim()) errors.name = t('errors.Name is required')
-    if (!formData.description.trim()) errors.description = t('errors.Description is required')
-    if (!formData.price || formData.price <= 0) errors.price = t('errors.Price must be a positive number')
-    if (formData.tags.length === 0) errors.tags = t('errors.At least one tag is required')
+    if (!formData.description.trim())
+      errors.description = t('errors.Description is required')
+    if (!formData.price || formData.price <= 0)
+      errors.price = t('errors.Price must be a positive number')
+    if (formData.tags.length === 0)
+      errors.tags = t('errors.At least one tag is required')
     return errors
   }
 
@@ -156,7 +159,9 @@ function UpdateAdvertPage() {
     <Page>
       {error && <FormErrorPopup error={error} onClose={() => setError(null)} />}
       <div className="max-w-xl mx-auto mt-10 p-4 shadow-md bg-white rounded-xl">
-        <h2 className="text-2xl font-bold mb-4 text-center">{t('updateAdvert.title')}</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          {t('updateAdvert.title')}
+        </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField
@@ -200,7 +205,9 @@ function UpdateAdvertPage() {
           </div>
 
           <div className="flex flex-col w-full">
-            <p className="text-sm font-medium text-gray-700 mb-2">{t('updateAdvert.tagsLabel')}</p>
+            <p className="text-sm font-medium text-gray-700 mb-2">
+              {t('updateAdvert.tagsLabel')}
+            </p>
             {fieldErrors.tags && (
               <span className="text-sm text-red-500">{fieldErrors.tags}</span>
             )}
@@ -242,7 +249,9 @@ function UpdateAdvertPage() {
 
           {imagePreview && (
             <div className="mt-2">
-              <p className="text-sm text-gray-500 mb-1">{t('updateAdvert.previewLabel')}</p>
+              <p className="text-sm text-gray-500 mb-1">
+                {t('updateAdvert.previewLabel')}
+              </p>
               <img
                 src={imagePreview}
                 alt="preview"
@@ -252,7 +261,9 @@ function UpdateAdvertPage() {
           )}
 
           <Button type="submit" disabled={loading}>
-            {loading ? t('updateAdvert.updatingButton') : t('updateAdvert.submitButton')}
+            {loading
+              ? t('updateAdvert.updatingButton')
+              : t('updateAdvert.submitButton')}
           </Button>
         </form>
       </div>

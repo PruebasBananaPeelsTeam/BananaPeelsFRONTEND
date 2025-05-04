@@ -30,14 +30,14 @@ export const AuthProvider = ({ children }) => {
 
   // ✅ Esta es la función que faltaba
   const toggleFavorite = (advertId, isAdding) => {
-    setUser(prevUser => {
+    setUser((prevUser) => {
       if (!prevUser) return prevUser
 
       const currentFavorites = prevUser.favorites || []
 
       const updatedFavorites = isAdding
         ? [...currentFavorites, advertId]
-        : currentFavorites.filter(id => id !== advertId)
+        : currentFavorites.filter((id) => id !== advertId)
 
       const updatedUser = { ...prevUser, favorites: updatedFavorites }
 
