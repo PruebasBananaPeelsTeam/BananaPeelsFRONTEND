@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {
   getAdvertDetail,
@@ -122,7 +122,15 @@ function AdvertDetailPage() {
                   <p><strong>{t('advertDetail.price')}:</strong> {advert.price} €</p>
                   <p><strong>{t('advertDetail.type')}:</strong> {advert.type === 'buy' ? t('advertDetail.typeWanted') : t('advertDetail.typeForSale')}</p>
                   <p><strong>{t('advertDetail.categories')}:</strong> {advert.tags.join(', ')}</p>
-                  <p><strong>{t('advertDetail.seller')}:</strong> {advert.owner?.username || advert.owner}</p>
+                  <p><strong>{t('advertDetail.seller')}:</strong>{' '}
+                    <Link
+                      to={`/users/${advert.owner.username}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="hover:underline text-indigo-500 font-medium truncate"
+                    >
+                      @{advert.owner.username}
+                    </Link>
+                  </p>                    
                 </div>
 
                 {/* BOTONES */}
