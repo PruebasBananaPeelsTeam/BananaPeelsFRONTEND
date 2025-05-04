@@ -101,20 +101,20 @@ function AdvertDetailPage() {
         ) : advert ? (
           <>
             
-
-            <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md overflow-hidden flex flex-col md:flex-row border border-black p-10">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 p-2 md:p-4">
+            
               {/* IMAGEN */}
-              <div className="md:w-1/2 bg-gray-50 flex items-center justify-center p-4">
+              <div className="md:w-1/2 w-full flex items-center justify-center">
                 <img
                   src={imageUrl}
                   alt={advert?.name || t('advertDetail.noImage')}
-                  className="w-full h-auto object-contain max-h-[400px] rounded-lg"
+                  className="w-full h-auto max-h-[500px] object-contain rounded-lg"
                 />
               </div>
 
               {/* DETALLES Y BOTONES */}
               <div className="md:w-1/2 p-6 flex flex-col justify-between space-y-4">
-                <h2 className="text-2xl font-bold mb-4 text-left text-[rgb(223,184,13)] font-serif">
+                <h2 className="text-2xl font-bold mb-4 text-left text-[rgb(13,31,15)] font-serif">
                 {advert.name}
                 </h2>
                 <div className="space-y-2 text-gray-800 text-justify">
