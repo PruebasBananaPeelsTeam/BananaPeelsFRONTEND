@@ -7,6 +7,7 @@ import App from './App.jsx'
 import { setAuthorizationHeader } from './api/client.js'
 import { AuthProvider } from './context/AuthContext.jsx'
 import storage from './utils/storage.js'
+import { NotificationProvider } from './context/NotificationContext.jsx'
 
 const token = storage.get('token')
 if (token) {
@@ -16,9 +17,11 @@ if (token) {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <NotificationProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </NotificationProvider>
     </AuthProvider>
   </StrictMode>,
 )
