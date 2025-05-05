@@ -15,6 +15,10 @@ import { useTranslation } from 'react-i18next'
 
 function UpdateAdvertPage() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
+  const { advertId } = useParams()
+
+  // Estado inicial del formulario
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -24,24 +28,29 @@ function UpdateAdvertPage() {
     tags: [],
   })
 
-  const { advertId } = useParams()
   const [tagsList, setTagsList] = useState([])
   const [imagePreview, setImagePreview] = useState(null)
+
+  // Estados para manejar carga, errores y errores de validación por campo
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [fieldErrors, setFieldErrors] = useState({})
-  const [notFound, setNotFound] = useState(false)
-  const navigate = useNavigate()
-
+  
+  // Cargar detalles del anuncio al montar el componente
   useEffect(() => {
     const fetchAdvertDetails = async () => {
       setLoading(true)
       setError(null)
+
       try {
         const advertDetails = await getAdvertDetail(advertId)
+
+        // Si el anuncio no existe, lanzar un error 404
         if (!advertDetails || !advertDetails.name) {
           throw { response: { status: 404 } }
         }
+
+        // Cargar datos en el formulario
         setFormData({
           name: advertDetails.name,
           description: advertDetails.description,
@@ -50,6 +59,8 @@ function UpdateAdvertPage() {
           image: null,
           tags: advertDetails.tags,
         })
+
+        // Mostrar la imagen previa si existe
         setImagePreview(
           advertDetails.image
             ? advertDetails.image.startsWith('http')
@@ -74,12 +85,7 @@ function UpdateAdvertPage() {
     fetchAdvertDetails()
   }, [advertId, navigate])
 
-  useEffect(() => {
-    if (notFound) {
-      navigate('/adverts')
-    }
-  }, [notFound, navigate])
-
+  // Cargar lista de tags al montar el componente
   useEffect(() => {
     const fetchTags = async () => {
       try {
@@ -93,17 +99,22 @@ function UpdateAdvertPage() {
     fetchTags()
   }, [])
 
+  // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value, files } = e.target
+
+    // Si se está seleccionando una imagen
     if (files) {
       const file = files[0]
       setFormData((prev) => ({ ...prev, [name]: file }))
       setImagePreview(URL.createObjectURL(file))
     } else {
+      //Para campos de texto, números...
       setFormData((prev) => ({ ...prev, [name]: value }))
     }
   }
 
+  // Validación de los datos antes de enviar el formulario
   const validateForm = () => {
     const errors = {}
     if (!formData.name.trim()) errors.name = t('errors.Name is required')
@@ -113,9 +124,12 @@ function UpdateAdvertPage() {
     return errors
   }
 
+   // Manejar envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError(null)
+
+    // Validar datos
     const validationErrors = validateForm()
     if (Object.keys(validationErrors).length > 0) {
       setFieldErrors(validationErrors)
@@ -123,6 +137,8 @@ function UpdateAdvertPage() {
     }
 
     setFieldErrors({})
+
+    //Construir FormData para enviar incluyendo imagen y tags
     const dataToSend = new FormData()
     dataToSend.append('name', formData.name)
     dataToSend.append('description', formData.description)
@@ -135,6 +151,7 @@ function UpdateAdvertPage() {
       dataToSend.append('image', formData.image)
     }
 
+    //Enviar los datos actualizados a la API
     try {
       setLoading(true)
       await updateAdvert(advertId, dataToSend)
