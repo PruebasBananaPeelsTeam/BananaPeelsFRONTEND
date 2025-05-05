@@ -49,30 +49,41 @@ function ChatRoom() {
   useEffect(() => {
     if (!chatId) return
 
+  // Función para unirse a la sala de chat y marcar mensajes como leídos
     const joinRoom = () => {
       console.log('📡 Joining room:', chatId)
+      // 🟢 Unirse al canal de WebSocket correspondiente al chat
       socket.emit('joinChat', chatId)
+      // Marcar mensajes como leídos al entrar, si el usuario está definido
+      if (user?._id) {
+        socket.emit('markAsRead', {
+          chatId,
+          userId: user._id,
+        })
+      }
     }
-
+    // Conectar el socket si aún no está conectado
     if (!socket.connected) {
       socket.connect()
+      // Espera a que el socket esté conectado antes de unirse a la sala
       socket.once('connect', joinRoom) // Espera a que se conecte el socket
     } else {
       joinRoom()
     }
-
+    // Escuchar nuevos mensajes entrantes mientras se está en el chat
     const handleNewMessage = (message) => {
       console.log('📩 NEW MESSAGE RECEIVED:', message)
+      // Añadir el mensaje al estado para que se renderice en pantalla
       setMessages((prev) => [...prev, message])
     }
 
     socket.on('newMessage', handleNewMessage)
-
+    // Cleanup: dejar de escuchar eventos cuando se desmonta el componente
     return () => {
       socket.off('connect', joinRoom)
       socket.off('newMessage', handleNewMessage)
     }
-  }, [chatId])
+  }, [chatId, user])
 
   // Auto scroll para que se vea el último mensaje
   useEffect(() => {
