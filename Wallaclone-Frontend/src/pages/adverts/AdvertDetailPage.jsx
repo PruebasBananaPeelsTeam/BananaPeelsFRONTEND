@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {
   getAdvertDetail,
@@ -100,58 +100,61 @@ function AdvertDetailPage() {
           <Loader />
         ) : advert ? (
           <>
-            <h2 className="text-2xl font-bold mb-4 text-center text-[rgb(223,184,13)] font-serif">
-              {advert.name}
-            </h2>
-    
-            <div className="text-black">
-              <img
-                src={imageUrl}
-                alt={advert?.name || t('advertDetail.noImage')}
-                className="w-full max-h-[300px] object-scale-down rounded-xl mb-2 mx-auto"
-              />
-    
-              <div className="max-w-2xl mx-auto text-justify space-y-2 bg-gray-100 p-4 rounded-xl shadow">
-                <p><strong>{t('advertDetail.description')}:</strong> {advert.description}</p>
-                <p><strong>{t('advertDetail.price')}:</strong> {advert.price} €</p>
-                <p><strong>{t('advertDetail.type')}:</strong> {advert.type === 'buy' ? t('advertDetail.typeWanted') : t('advertDetail.typeForSale')}</p>
-                <p><strong>{t('advertDetail.categories')}:</strong> {advert.tags.join(', ')}</p>
-                <p><strong>{t('advertDetail.seller')}:</strong> {advert.owner?.username || advert.owner}</p>
+            
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 p-2 md:p-4">
+            
+              {/* IMAGEN */}
+              <div className="md:w-1/2 w-full flex items-center justify-center">
+                <img
+                  src={imageUrl}
+                  alt={advert?.name || t('advertDetail.noImage')}
+                  className="w-full h-auto max-h-[500px] object-contain rounded-lg"
+                />
               </div>
-    
-              <div className="flex flex-col gap-4 mt-6 items-center">
-    
-                {/* PRIMERA FILA */}
-                <div className="flex flex-col md:flex-row flex-wrap gap-2 w-full justify-center">
-                  <div className="w-full md:w-auto">
+
+              {/* DETALLES Y BOTONES */}
+              <div className="md:w-1/2 p-6 flex flex-col justify-between space-y-4">
+                <h2 className="text-2xl font-bold mb-4 text-left text-[rgb(13,31,15)] font-serif">
+                {advert.name}
+                </h2>
+                <div className="space-y-2 text-gray-800 text-justify">
+                  <p><strong>{t('advertDetail.description')}:</strong> {advert.description}</p>
+                  <p><strong>{t('advertDetail.price')}:</strong> {advert.price} €</p>
+                  <p><strong>{t('advertDetail.type')}:</strong> {advert.type === 'buy' ? t('advertDetail.typeWanted') : t('advertDetail.typeForSale')}</p>
+                  <p><strong>{t('advertDetail.categories')}:</strong> {advert.tags.join(', ')}</p>
+                  <p><strong>{t('advertDetail.seller')}:</strong>{' '}
+                    <Link
+                      to={`/users/${advert.owner.username}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="hover:underline text-indigo-500 font-medium truncate"
+                    >
+                      @{advert.owner.username}
+                    </Link>
+                  </p>                    
+                </div>
+
+                {/* BOTONES */}
+                <div className="flex flex-col gap-4">
+                  {/* Primera fila */}
+                  <div className="flex flex-col md:flex-row gap-2">
                     <Button onClick={() => navigate(-1)} className="w-full md:w-auto">
                       {t("advertDetail.backButton")}
                     </Button>
-                  </div>
-    
-                  {user && advert.owner._id === user._id && (
-                    <>
-                      <div className="w-full md:w-auto">
+
+                    {user && advert.owner._id === user._id && (
+                      <>
                         <Button onClick={() => navigate(`/adverts/${advert._id}/update`)} className="w-full md:w-auto">
                           {t('advertDetail.updateButton')}
                         </Button>
-                      </div>
-    
-                      <div className="w-full md:w-auto">
                         <DeleteAdvertPage />
-                      </div>
-                    </>
-                  )}
-    
-                  {user && advert.owner._id !== user._id && (
-                    <>
-                      <div className="w-full md:w-auto">
+                      </>
+                    )}
+
+                    {user && advert.owner._id !== user._id && (
+                      <>
                         <Button onClick={handleStartChat} className="w-full md:w-auto">
                           💬 Chat
                         </Button>
-                      </div>
-    
-                      <div className="w-full md:w-auto">
                         <Button onClick={handleFavoriteToggle} className="w-full md:w-auto">
                           {isFavorite ? (
                             <span className="flex items-center gap-2 text-pink-300">
@@ -163,15 +166,13 @@ function AdvertDetailPage() {
                             </span>
                           )}
                         </Button>
-                      </div>
-                    </>
-                  )}
-                </div>
-    
-                {/* SEGUNDA FILA */}
-                {user && advert.owner._id === user._id && advert._id && (
-                  <div className="flex flex-col md:flex-row flex-wrap gap-2 w-full justify-center">
-                    <div className="w-full md:w-auto">
+                      </>
+                    )}
+                  </div>
+
+                  {/* Segunda fila (solo para propietario) */}
+                  {user && advert.owner._id === user._id && (
+                    <div className="flex flex-col md:flex-row gap-2">
                       <Button
                         onClick={async () => {
                           try {
@@ -185,9 +186,7 @@ function AdvertDetailPage() {
                       >
                         {advert?.sold ? t("advertDetail.markAsUnsold") : t("advertDetail.markAsSold")}
                       </Button>
-                    </div>
-    
-                    <div className="w-full md:w-auto">
+
                       <ReservedToggleButton
                         advert={advert}
                         className="w-full md:w-auto"
@@ -195,31 +194,30 @@ function AdvertDetailPage() {
                           setAdvert((prev) => ({ ...prev, reserved: newState }))
                         }
                       />
-                    </div>
-    
-                    <div className="w-full md:w-auto flex items-center justify-center">
+
                       <AdvertStatus
                         reserved={advert.reserved}
                         iconSize="20"
                         textSize="text-xl"
                       />
+
+                      {advert.sold && (
+                        <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow w-full md:w-auto justify-center">
+                          <FaCheckCircle size={16} />
+                          Sold
+                        </div>
+                      )}
                     </div>
-    
-                    {advert.sold && (
-                      <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow w-full md:w-auto justify-center">
-                        <FaCheckCircle size={16} />
-                        Sold
-                      </div>
-                    )}
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </>
         ) : (
           <p className="text-red-600">{t('advertDetail.notFound')}</p>
         )}
-      </Page>
+</Page>
+
     );
 }
 
