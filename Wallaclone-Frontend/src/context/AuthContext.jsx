@@ -28,6 +28,12 @@ export const AuthProvider = ({ children }) => {
     storage.remove('user')
   }
 
+  
+  const updateUserData = (updatedUser) => {
+    setUser(updatedUser)
+    storage.set('user', updatedUser)
+  };
+
   // ✅ Esta es la función que faltaba
   const toggleFavorite = (advertId, isAdding) => {
     setUser(prevUser => {
@@ -45,14 +51,14 @@ export const AuthProvider = ({ children }) => {
       storage.set('user', updatedUser)
 
       return updatedUser
-    })
+    });
   }
 
   const isAuthenticated = !!token
 
   return (
     <AuthContext.Provider
-      value={{ token, user, isAuthenticated, login, logout, toggleFavorite }}
+      value={{ token, user, isAuthenticated, login, logout, toggleFavorite, updateUserData }}
     >
       {children}
     </AuthContext.Provider>
