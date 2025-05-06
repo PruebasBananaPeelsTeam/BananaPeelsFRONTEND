@@ -2,14 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
-const MyChatsButton = () => {
+const MyChatsButton = ({ hasUnread }) => {
   const navigate = useNavigate()
-
+  console.log("es leido en el boton¿¿",hasUnread) 
   return (
     <StyledWrapper>
       <ul>
         <li onClick={() => navigate('/my-chats')}>
           <span className="icon">💬</span>
+          {hasUnread && (
+            <span className="absolute top-[-4px] right-[-4px] w-3 h-3 rounded-full bg-green-500 z-10 border border-white"></span>
+          )}
           <span className="title">My chats</span>
         </li>
       </ul>

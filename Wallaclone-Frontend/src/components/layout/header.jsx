@@ -5,10 +5,18 @@ import Logout from '../shared/logout.jsx';
 import LanguageSelector from '../shared/languageSelector.jsx';
 import MyChatsButton from '../shared/MyChatsButton.jsx';
 import { useTranslation } from 'react-i18next';
+import { useChatPolling } from '../../hooks/useChatPolling.js'
+import { useState } from 'react';
+
 
 export default function Header() {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
+  const [hasUnread, setHasUnread] = useState(false)
+
+  useChatPolling((unreadChats) => {
+    setHasUnread(unreadChats.length > 0)
+  })
 
   return (
     <header
@@ -50,7 +58,7 @@ export default function Header() {
               <Link to="/my-profile" className="hover:text-black">
                 {t('header.myAccount')}
               </Link>
-              <MyChatsButton />
+              <MyChatsButton hasUnread={hasUnread} />
             </>
           )}
         </nav>
