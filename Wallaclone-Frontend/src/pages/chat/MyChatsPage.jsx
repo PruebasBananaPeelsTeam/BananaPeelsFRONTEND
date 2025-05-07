@@ -3,8 +3,10 @@ import { getMyChats } from '../../services/chat-service'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import Page from '../../components/layout/page'
+import { useTranslation } from 'react-i18next'
 
 function MyChatsPage() {
+  const { t } = useTranslation()
   const [chats, setChats] = useState([])
   const { user } = useAuth()
   const navigate = useNavigate()
@@ -30,11 +32,11 @@ function MyChatsPage() {
     <Page>
     <div className="p-6 max-w-5xl mx-auto bg-white/10 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border border-white/20">
       <h1 className="text-4xl font-extrabold mb-8 text-center text-white drop-shadow-md tracking-wide">
-        💬 Your Conversations
+        {t("chat.title2")}
       </h1>
 
       {chats.length === 0 ? (
-        <p className="text-center text-gray-300 italic">No active chats yet</p>
+        <p className="text-center text-gray-300 italic">{t("chat.title3")}</p>
       ) : (
         <div className="space-y-6">
           {chats.map((chat) => {
@@ -53,7 +55,7 @@ function MyChatsPage() {
                     🟡 {advertName}
                   </h3>
                   <p className="text-sm text-gray-700">
-                    Chat with <span className="text-blue-300 font-semibold">{otherUser?.username || 'Unknown'}</span>
+                  {t("chat.with")} <span className="text-blue-300 font-semibold">{otherUser?.username || 'Unknown'}</span>
                   </p>
                 </div>
 
@@ -62,7 +64,7 @@ function MyChatsPage() {
                     onClick={() => handleViewChat(chat._id)}
                     className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-4 py-2 rounded-full shadow-md transition duration-300"
                   >
-                    Open Chat
+                    {t("chat.open")}
                   </button>
                 </div>
 

@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { getFavorites } from '../../services/adverts-service';
 import Loader from '../../components/shared/loader.jsx';
 import AdvertsGrid from '../../components/shared/AdvertsGrid.jsx';
+import { useTranslation } from 'react-i18next';
 
 const FavoritesPage = () => {
+  const { t } = useTranslation()
   const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -37,7 +39,7 @@ const FavoritesPage = () => {
 
   return (
     <div className="shadow-md border border-gray-500 rounded-xl p-6">
-      <h2 className="text-2xl font-bold text-center mb-6">⭐ My Favorites</h2>
+      <h2 className="text-2xl font-bold text-center mb-6">{t("favorites.title")}</h2>
 
       {loading ? (
         <Loader />

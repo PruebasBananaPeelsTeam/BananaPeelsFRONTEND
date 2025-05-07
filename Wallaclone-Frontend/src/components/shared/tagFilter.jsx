@@ -135,7 +135,7 @@ function TagFilter() {
         {/* BOTÓN DE LIMPIAR FILTROS */}
         {selectedTags.length > 0 && (
           <div className="flex justify-end w-full">
-            <Button onClick={handleClearFilters}>Clean filters</Button>
+            <Button onClick={handleClearFilters}>{t("tagFilter.clean")}</Button>
           </div>
         )}
       </div>

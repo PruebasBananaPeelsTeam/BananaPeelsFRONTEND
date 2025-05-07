@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const MyChatsButton = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   return (
@@ -10,7 +12,7 @@ const MyChatsButton = () => {
       <ul>
         <li onClick={() => navigate('/my-chats')}>
           <span className="icon">💬</span>
-          <span className="title">My chats</span>
+          <span className="title">{t("chat.mis")}</span>
         </li>
       </ul>
     </StyledWrapper>

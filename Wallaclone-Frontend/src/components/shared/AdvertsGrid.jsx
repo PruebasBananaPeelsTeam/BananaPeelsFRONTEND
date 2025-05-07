@@ -1,8 +1,10 @@
 // components/shared/AdvertsGrid.jsx
 import Advert from '../../pages/adverts/Advert.jsx';
 import Button from './button.jsx';
+import { useTranslation } from 'react-i18next'
 
 const AdvertsGrid = ({ adverts, currentPage, totalPages, onPrev, onNext }) => {
+  const { t } = useTranslation()
   return (
     <>
       {adverts.length > 0 ? (
@@ -15,13 +17,13 @@ const AdvertsGrid = ({ adverts, currentPage, totalPages, onPrev, onNext }) => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center mt-10 gap-2 sm:gap-4 text-center">
             <Button onClick={onPrev} disabled={currentPage === 1}>
-              Previous
+            {t("AdvertsGrid.paginationBack")}
             </Button>
             <span className="mx-4 text-gray-800">
-              Page {currentPage} of {totalPages}
+            {t("AdvertsGrid.pagination")} {currentPage} {t("AdvertsGrid.pagination1")} {totalPages}
             </span>
             <Button onClick={onNext} disabled={currentPage === totalPages}>
-              Next
+            {t("AdvertsGrid.paginationNext")}
             </Button>
           </div>
         </>

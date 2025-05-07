@@ -3,8 +3,10 @@ import { useAuth } from '../../context/AuthContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import LogoutButton from '../shared/logoutButton.jsx'
 import ConfirmationModalCard from './confirmationModalCard.jsx'
+import { useTranslation } from 'react-i18next'
 
 function Logout() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
   const { logout: authLogout } = useAuth()
@@ -19,7 +21,7 @@ function Logout() {
       <LogoutButton onClick={() => setShowModal(true)} />
       {showModal && (
         <ConfirmationModalCard
-          message={'Sure you want to leave?'}
+          message={t("confirmationModal.question")}
           onConfirm={handleLogout}
           onCancel={() => setShowModal(false)}
         />

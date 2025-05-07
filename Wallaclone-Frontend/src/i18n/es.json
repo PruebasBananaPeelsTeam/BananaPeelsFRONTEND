@@ -78,7 +78,9 @@
   "dangerZone": "⚠️ Zona de peligro",
   "dangerMessage": "Eliminar tu cuenta borrará permanentemente todos tus datos y anuncios.",
   "deleteButton": "Eliminar cuenta",
-  "confirmDelete": "¿Estás seguro de que deseas eliminar tu cuenta?"
+  "confirmDelete": "¿Estás seguro de que deseas eliminar tu cuenta?",
+  "confirmUpdate": "✅ Perfil actualizado correctamente!",
+  "saveButton": "Guardar cambios"
 },
 "registerPage": {
   "title": "Crear cuenta",
@@ -148,11 +150,14 @@
 },
 
 "SearchBar": {
-  "title": "🔍 Buscar por nombre del producto..."
+  "title": "🔍 Buscar por nombre del producto...",
+  "searchButton": "Buscar",
+  "resetButton": "Limpiar"
 },
 "tagFilter": {
   "title": "Elige una categoría para comenzar tu búsqueda:",
-  "title2": "🎯 Filtros aplicados:"
+  "title2": "🎯 Filtros aplicados:",
+  "clean": "Limpiar Filtros"
 },
 "deleteAdvertPage":{
   "deleteButton":" 🗑 Eliminar"
@@ -164,8 +169,34 @@
 "advertStatus":{
   "reserved": "Reservado",
   "available": "Disponible"
+},
+"favorites":{
+  "title": "⭐ Mis Favoritos"
+},
+"chat":{
+  "title": "Los mensajes se eliminan automáticamente después de 7 días.",
+  "title2": "💬 Tus mensajes",
+  "title3": "No tienens ningun chat",
+  "button": "Enviar",
+  "input": "Escribe tu mensaje",
+  "with": "Chat con",
+  "open": "Abrir Chat",
+  "mis": "Mis chats"
+},
+"logout":{
+  "logoutButton": "Cerrar sesion"
+},
+"AdvertsGrid":{
+  "pagination": "Pagina",
+  "pagination1": "de",
+  "paginationNext": "Siguiente",
+  "paginationBack": "Anterior"
+},
+"confirmationModal":{
+  "confirm": "Confirmar",
+  "cancel": "Cancelar",
+  "question": "Seguro que quieres salir?"
 }
-
 
 
 
