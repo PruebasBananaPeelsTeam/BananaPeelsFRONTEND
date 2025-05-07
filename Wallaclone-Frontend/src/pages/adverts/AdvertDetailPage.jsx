@@ -124,11 +124,11 @@ function AdvertDetailPage() {
                   <p><strong>{t('advertDetail.categories')}:</strong> {advert.tags.join(', ')}</p>
                   <p><strong>{t('advertDetail.seller')}:</strong>{' '}
                     <Link
-                      to={`/users/${advert.owner.username}`}
+                      to={`/users/${advert.owner}`}
                       onClick={(e) => e.stopPropagation()}
                       className="hover:underline text-indigo-500 font-medium truncate"
                     >
-                      @{advert.owner.username}
+                      @{advert.owner}
                     </Link>
                   </p>                    
                 </div>
