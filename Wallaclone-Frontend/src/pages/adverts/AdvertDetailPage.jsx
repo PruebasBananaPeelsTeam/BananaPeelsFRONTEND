@@ -141,7 +141,7 @@ function AdvertDetailPage() {
                       {t("advertDetail.backButton")}
                     </Button>
 
-                    {user && advert.owner._id === user._id && (
+                    {user && advert.owner === user.username && (
                       <>
                         <Button onClick={() => navigate(`/adverts/${advert._id}/update`)} className="w-full md:w-auto">
                           {t('advertDetail.updateButton')}
@@ -150,7 +150,7 @@ function AdvertDetailPage() {
                       </>
                     )}
 
-                    {user && advert.owner._id !== user._id && (
+                    {user && advert.owner !== user.username && (
                       <>
                         <Button onClick={handleStartChat} className="w-full md:w-auto">
                           💬 Chat
@@ -171,7 +171,7 @@ function AdvertDetailPage() {
                   </div>
 
                   {/* Segunda fila (solo para propietario) */}
-                  {user && advert.owner._id === user._id && (
+                  {user && advert.owner === user.username && (
                     <div className="flex flex-col md:flex-row gap-2">
                       <Button
                         onClick={async () => {
@@ -204,7 +204,7 @@ function AdvertDetailPage() {
                       {advert.sold && (
                         <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow w-full md:w-auto justify-center">
                           <FaCheckCircle size={16} />
-                          {t('advertDetail.removeFromFavorites')}
+                          {t('advertDetail.sold')}
                         </div>
                       )}
                     </div>
