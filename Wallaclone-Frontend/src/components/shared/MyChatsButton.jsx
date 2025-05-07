@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 
 const MyChatsButton = ({ hasUnread }) => {
   const navigate = useNavigate()
-  console.log("es leido en el boton¿¿",hasUnread) 
   return (
     <StyledWrapper>
       <ul>

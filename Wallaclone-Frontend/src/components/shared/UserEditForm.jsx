@@ -76,7 +76,6 @@ const UserEditForm = () => {
       setLoading(true)
 
       // 🚀 Enviamos los cambios al backend
-      console.log('🧪 Enviando al backend:', updatedData)
       await updateUser(updatedData)
 
       // 🧠 Actualizamos el usuario en el contexto y localStorage
