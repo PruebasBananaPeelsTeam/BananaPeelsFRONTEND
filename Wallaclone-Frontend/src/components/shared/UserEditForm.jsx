@@ -5,9 +5,10 @@ import Button from '../shared/button'
 import FormErrorPopup from '../shared/formErrorPopUp'
 import { updateUser } from '../../services/auth-service'
 import Loader from './loader'
+import { useTranslation } from 'react-i18next'
 
 const UserEditForm = () => {
-  // 🔐 Traemos el usuario actual y la función para actualizarlo
+  const { t } = useTranslation()
   const { user, updateUserData } = useAuth()
 
   // 🧾 Guardamos los datos originales al cargar el componente
@@ -153,14 +154,14 @@ const UserEditForm = () => {
             <Loader /> Updating...
           </>
         ) : (
-          'Save changes'
+          t("myUserPage.saveButton")
         )}
       </Button>
 
       {/* Mensaje de éxito */}
       {success && (
         <div className="text-green-600 font-semibold">
-          ✅ Profile updated successfully!
+          {t("myUserPage.confirmUpdate")}
         </div>
       )}
 

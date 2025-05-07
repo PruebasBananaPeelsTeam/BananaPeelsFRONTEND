@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 
 const ConfirmationModalCard = ({ message, onConfirm, onCancel }) => {
+  const { t } = useTranslation()
   return (
     <StyledWrapper>
       <div className="card">
@@ -10,11 +12,10 @@ const ConfirmationModalCard = ({ message, onConfirm, onCancel }) => {
         </div>
         <div className="card-button-wrapper">
           <button className="card-button secondary" onClick={onCancel}>
-            {' '}
-            Cancel
+            {t("confirmationModal.cancel")}
           </button>
           <button className="card-button primary" onClick={onConfirm}>
-            Confirm
+          {t("confirmationModal.confirm")}
           </button>
         </div>
         <button className="exit-button" onClick={onCancel}>

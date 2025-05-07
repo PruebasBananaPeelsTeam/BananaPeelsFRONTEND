@@ -158,11 +158,11 @@ function AdvertDetailPage() {
                         <Button onClick={handleFavoriteToggle} className="w-full md:w-auto">
                           {isFavorite ? (
                             <span className="flex items-center gap-2 text-pink-300">
-                              <HeartOff size={18} /> Quitar de favoritos
+                              <HeartOff size={18} /> {t('advertDetail.removeFromFavorites')}
                             </span>
                           ) : (
                             <span className="flex items-center gap-2 text-pink-300">
-                              <Heart size={18} /> Añadir a favoritos
+                              <Heart size={18} /> {t('advertDetail.addToFavorites')}
                             </span>
                           )}
                         </Button>
@@ -204,7 +204,7 @@ function AdvertDetailPage() {
                       {advert.sold && (
                         <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow w-full md:w-auto justify-center">
                           <FaCheckCircle size={16} />
-                          Sold
+                          {t('advertDetail.removeFromFavorites')}
                         </div>
                       )}
                     </div>

@@ -121,14 +121,14 @@ function SearchBar() {
           type="submit"
           className="rounded-full px-6 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold transition-all shadow-md"
         >
-          Search
+          {t("SearchBar.searchButton")}
         </Button>
         <Button
           type="button"
           onClick={handleResetFilters}
           className="rounded-full px-6 py-2 bg-gray-500 hover:bg-green-300 text-gray-700 font-semibold transition-all shadow-md"
         >
-          Reset
+          {t("SearchBar.resetButton")}
         </Button>
       </form>
     </div>

@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const MyChatsButton = ({ hasUnread }) => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   return (
     <StyledWrapper>
@@ -12,7 +14,7 @@ const MyChatsButton = ({ hasUnread }) => {
           {hasUnread && (
             <span className="absolute top-[-4px] right-[-4px] w-3 h-3 rounded-full bg-green-500 z-10 border border-white"></span>
           )}
-          <span className="title">My chats</span>
+          <span className="title">{t("chat.mis")}</span>
         </li>
       </ul>
     </StyledWrapper>

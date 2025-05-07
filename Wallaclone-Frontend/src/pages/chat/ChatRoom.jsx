@@ -9,8 +9,10 @@ import { useParams, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import ChatLoader from '../../components/shared/chatLoader'
 import Page from '../../components/layout/page'
+import { useTranslation } from 'react-i18next'
 
 function ChatRoom() {
+  const { t } = useTranslation()
   const { advertId, chatId: urlChatId } = useParams()
   const [chatId, setChatId] = useState(urlChatId || null)
   const [messages, setMessages] = useState([])
@@ -109,7 +111,7 @@ function ChatRoom() {
       <div className="p-4 max-w-3xl mx-auto backdrop-blur-md bg-gradient-to-tr from-[#fdfbfb] to-[#ebedee] rounded-xl shadow-2xl border border-white/30">
         <div className="max-h-[400px] overflow-y-auto p-4 rounded-lg bg-white/50 backdrop-blur-sm shadow-inner flex flex-col gap-3 scroll-smooth">
           <h3 className="text-center text-sm text-red-500 italic">
-            Messages are auto-deleted after 7 days
+            {t("chat.title")}
           </h3>
           {messages.map((message) => {
             const isMe = message.sender?._id === user._id
@@ -157,7 +159,7 @@ function ChatRoom() {
             type="text"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            placeholder="Type your message..."
+            placeholder={t("chat.input")}
             disabled={sending}
             maxLength={150}
           />
@@ -166,7 +168,7 @@ function ChatRoom() {
             className="px-6 py-2 bg-yellow-400 hover:bg-yellow-500 transition-all duration-200 text-white font-bold"
             disabled={sending}
           >
-            {sending ? <ChatLoader small /> : 'Send'}
+            {sending ? <ChatLoader small /> : t("chat.button")}
           </button>
         </form>
       </div>

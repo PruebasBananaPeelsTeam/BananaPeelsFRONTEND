@@ -78,7 +78,9 @@
   "dangerZone": "⚠️ Danger Zone",
   "dangerMessage": "Deleting your account will remove all your data and ads permanently.",
   "deleteButton": "Delete Account",
-  "confirmDelete": "Are you sure you want to delete your account?"
+  "confirmDelete": "Are you sure you want to delete your account?",
+  "confirmUpdate": "✅ Profile updated successfully!",
+  "saveButton": "Save changes"
 },
 "registerPage": {
   "title": "Create Account",
@@ -147,14 +149,18 @@
   "title": "Latest Adverts:"
 },
 "SearchBar": {
-  "title": "🔍 Search by product name..."
+  "title": "🔍 Search by product name...",
+  "searchButton": "Search",
+  "resetButton": "Reset"
 },
 "tagFilter": {
   "title": "Choose a category to start your search:",
-  "title2": "🎯 Filters applied:"
+  "title2": "🎯 Filters applied:",
+  "clean": "Clean Filters"
 },
 "deleteAdvertPage":{
-  "deleteButton":" 🗑 Delete"
+  "deleteButton":" 🗑 Delete",
+  "title": "Are you sure you want to delete this advert?"
 },
 "reservedToggleButton":{
   "reserve": "Reserve this item",
@@ -163,7 +169,35 @@
 "advertStatus":{
   "reserved": "Reserved",
   "available": "Available"
+},
+"favorites":{
+  "title": "⭐ My Favorites"
+},
+"chat":{
+  "title": "Messages are auto-deleted after 7 days",
+  "title2": "💬 Your Conversations",
+  "title3": "No active chats yet",
+  "button": "Send",
+  "input": "Type your message...",
+  "with": "Chat with",
+  "open": "Open Chat",
+  "mis": "My chats"
+},
+"logout":{
+  "logoutButton": "Logout"
+},
+"AdvertsGrid":{
+  "pagination": "Page",
+  "pagination1": "of",
+  "paginationNext": "Next",
+  "paginationBack": "Previous"
+},
+"confirmationModal":{
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "question": "Sure you want to leave?"
 }
+
 
 
 
