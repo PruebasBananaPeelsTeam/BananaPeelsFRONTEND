@@ -6,7 +6,7 @@ import LanguageSelector from '../shared/languageSelector.jsx';
 import MyChatsButton from '../shared/MyChatsButton.jsx';
 import { useTranslation } from 'react-i18next';
 import { useChatPolling } from '../../hooks/useChatPolling.js'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 export default function Header() {
@@ -14,9 +14,17 @@ export default function Header() {
   const { t } = useTranslation();
   const [hasUnread, setHasUnread] = useState(false)
 
-  useChatPolling((unreadChats) => {
+  const polling = useChatPolling((unreadChats) => {
     setHasUnread(unreadChats.length > 0)
   })
+
+  useEffect(() => {
+    const match = location.pathname.match(/^\/chat\/room\/(.+)$/)
+    if (match) {
+      const chatId = match[1]
+      polling.markChatAsSeen(chatId) // Solo se ejecuta cuando estás en una room
+    }
+  }, [location.pathname])
 
   return (
     <header

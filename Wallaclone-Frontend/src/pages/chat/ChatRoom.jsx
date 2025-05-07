@@ -50,7 +50,6 @@ function ChatRoom() {
     if (!chatId) return
 
     const joinRoom = () => {
-      console.log('📡 Joining room:', chatId)
       socket.emit('joinChat', chatId)
     }
 
@@ -62,7 +61,6 @@ function ChatRoom() {
     }
 
     const handleNewMessage = (message) => {
-      console.log('📩 NEW MESSAGE RECEIVED:', message)
       setMessages((prev) => [...prev, message])
     }
 
