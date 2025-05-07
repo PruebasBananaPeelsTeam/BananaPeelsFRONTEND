@@ -204,7 +204,7 @@ function AdvertDetailPage() {
                       {advert.sold && (
                         <div className="flex items-center gap-2 bg-red-700 text-white px-3 py-1 rounded text-sm font-semibold shadow w-full md:w-auto justify-center">
                           <FaCheckCircle size={16} />
-                          {t('advertDetail.sold')}
+                          {t('advertDetail.removeFromFavorites')}
                         </div>
                       )}
                     </div>

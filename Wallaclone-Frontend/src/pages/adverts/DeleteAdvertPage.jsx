@@ -87,7 +87,7 @@ function DeleteAdvertPage() {
       {/* Modal de confirmación */}
       {showConfirmation && (
         <ConfirmationModalCard
-          message="Are you sure you want to delete this advert?"
+          message={t("deleteAdvertPage.title")}
           onConfirm={handleDelete}
           onCancel={closeConfirmationModal}
         />

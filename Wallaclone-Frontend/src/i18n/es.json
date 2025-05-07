@@ -160,7 +160,8 @@
   "clean": "Limpiar Filtros"
 },
 "deleteAdvertPage":{
-  "deleteButton":" 🗑 Eliminar"
+  "deleteButton":" 🗑 Eliminar",
+  "title": "Estas seguro que quieres eliminar este anuncio?"
 },
 "reservedToggleButton":{
   "reserve": "Reservar",
